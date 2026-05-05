@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>薛伯輝基金會 Love Hope Foundation｜雜誌編輯版</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brand:#8C0A0A;
+    --brand-dark:#5C0606;
+    --brand-tint:#FBEEEE;
+    --ink:#111111;
+    --body:#333333;
+    --muted:#9A9A9A;
+    --line:#E8E8E8;
+    --line-soft:#F2F2F2;
+    --bg:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--body);font-family:"Noto Sans TC",-apple-system,sans-serif;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4,h5{color:var(--ink);font-weight:700;line-height:1.3;font-family:"Noto Sans TC",sans-serif}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  button{cursor:pointer;font-family:inherit;border:none;background:none;color:inherit}
+
+  .lat{font-family:"Archivo",sans-serif}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+
+  /* ====== TOP STRIP ====== */
+  .topstrip{border-bottom:1px solid var(--line);background:#fff}
+  .topstrip-row{display:flex;justify-content:space-between;align-items:center;height:40px;padding:0 40px;font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:1.4px;color:var(--muted);text-transform:uppercase}
+  .topstrip-row .left{display:flex;gap:18px;align-items:center}
+  .topstrip-row .left a{transition:color .2s}
+  .topstrip-row .left a:hover{color:var(--brand)}
+  .topstrip-row .right{display:flex;gap:14px;align-items:center}
+  .topstrip-row .right .ico{width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);transition:color .2s}
+  .topstrip-row .right .ico:hover{color:var(--brand)}
+  .topstrip-row .right .sep{width:1px;height:14px;background:var(--line);margin:0 4px}
+  .topstrip-row .right .lang{color:var(--ink);font-weight:500}
+  .topstrip-row .right .lang:hover{color:var(--brand)}
+
+  /* ====== HEADER (logo + utility) ====== */
+  .header{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:50}
+  .header-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px 40px;gap:32px}
+  .header-left{display:flex;align-items:center;gap:18px}
+  .header-left .menubtn{display:flex;align-items:center;gap:8px;font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);font-weight:600}
+  .header-left .menubtn .bars{display:inline-flex;flex-direction:column;gap:3px}
+  .header-left .menubtn .bars i{width:18px;height:1.5px;background:var(--ink);display:block}
+  .header-left .search{display:flex;align-items:center;gap:7px;color:var(--ink);font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;border-left:1px solid var(--line);padding-left:18px}
+  .logo{display:flex;flex-direction:column;align-items:center;line-height:1;justify-self:center}
+  .logo .zh{font-weight:900;color:var(--brand);font-size:28px;letter-spacing:8px;padding-left:8px}
+  .logo .en{font-family:"Archivo",sans-serif;font-weight:500;color:var(--ink);font-size:10px;letter-spacing:4px;margin-top:8px;text-transform:uppercase}
+  .header-right{display:flex;justify-content:flex-end;align-items:center;gap:18px}
+  .header-right .small{font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);font-weight:600}
+  .donate-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;background:var(--brand);color:#fff;font-family:"Noto Sans TC",sans-serif;font-size:13px;letter-spacing:3px;font-weight:500;transition:background .2s}
+  .donate-btn::after{content:"→";font-family:"Archivo",sans-serif;font-weight:400}
+  .donate-btn:hover{background:var(--brand-dark)}
+
+  /* ====== PRIMARY NAV ====== */
+  .nav{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:73px;z-index:49}
+  .nav-row{display:flex;justify-content:center;align-items:stretch;height:54px}
+  .nav-row a{display:flex;align-items:center;padding:0 22px;font-size:14px;font-weight:500;color:var(--ink);position:relative;letter-spacing:2px;transition:color .15s}
+  .nav-row a:not(:last-child)::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:14px;background:var(--line)}
+  .nav-row a:hover{color:var(--brand)}
+  .nav-row a.active{color:var(--brand)}
+
+  /* ====== HERO CAROUSEL ====== */
+  .hero{padding:32px 40px 0;background:#fff}
+  .hero-stage{position:relative;max-width:1320px;margin:0 auto;aspect-ratio:16/8;background:#0a0a0a;overflow:hidden}
+  .hero-slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:60px 64px;color:#fff;opacity:0;transition:opacity .6s}
+  .hero-slide.on{opacity:1}
+  .hero-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.7) 100%);pointer-events:none;z-index:1}
+  .hero-slide .bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.25);font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase}
+  .hero-slide .h-meta{position:relative;z-index:2;font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#fff;margin-bottom:18px;display:flex;align-items:center;gap:14px}
+  .hero-slide .h-meta .cat{background:var(--brand);padding:6px 12px;font-weight:600}
+  .hero-slide .h-meta .date{opacity:.85}
+  .hero-slide h2.h-title{position:relative;z-index:2;font-size:54px;line-height:1.25;font-weight:900;color:#fff;letter-spacing:3px;max-width:780px;margin-bottom:20px}
+  .hero-slide .h-sub{position:relative;z-index:2;font-size:15px;line-height:1.9;color:rgba(255,255,255,.9);max-width:560px;margin-bottom:28px}
+  .hero-slide .h-cta{position:relative;z-index:2;display:inline-flex;align-items:center;gap:10px;font-family:"Archivo",sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#fff;font-weight:600;padding-bottom:6px;border-bottom:1px solid #fff;width:fit-content}
+  .hero-slide-1{background:linear-gradient(135deg,#5a0808 0%,#1a0202 100%)}
+  .hero-slide-2{background:linear-gradient(135deg,#2a2a2a 0%,#0a0a0a 100%)}
+  .hero-slide-3{background:linear-gradient(135deg,#3a1818 0%,#1a0808 100%)}
+
+  .hero-dots{display:flex;justify-content:center;gap:10px;margin-top:18px}
+  .hero-dots button{width:32px;height:2px;background:var(--line);transition:background .2s}
+  .hero-dots button.on{background:var(--brand)}
+
+  .hero-strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:48px;background:#fff}
+  .hero-strip-item{padding:22px 28px;display:flex;align-items:center;gap:18px;border-right:1px solid var(--line);transition:background .2s;cursor:pointer}
+  .hero-strip-item:last-child{border-right:none}
+  .hero-strip-item:hover{background:var(--line-soft)}
+  .hero-strip-item .num{font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:2px;color:var(--brand);font-weight:600}
+  .hero-strip-item .ttl{font-size:14px;color:var(--ink);font-weight:500;letter-spacing:1px;line-height:1.5}
+
+  /* ====== SECTION GENERIC ====== */
+  section.s{padding:80px 40px}
+  .s-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;border-bottom:1px solid var(--ink);padding-bottom:18px}
+  .s-head .left{display:flex;align-items:baseline;gap:20px}
+  .s-label{font-family:"Archivo",sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--brand);font-weight:700}
+  .s-title{font-size:32px;font-weight:700;color:var(--ink);letter-spacing:4px}
+  .s-more{font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);font-weight:600;display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid var(--ink);padding-bottom:4px;transition:color .2s,border-color .2s}
+  .s-more:hover{color:var(--brand);border-color:var(--brand)}
+
+  /* ====== LATEST: featured + list ====== */
+  .latest-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:48px}
+  .featured{cursor:pointer}
+  .featured .img{aspect-ratio:4/3;background:linear-gradient(135deg,#3a1818,#8C0A0A);position:relative;overflow:hidden;margin-bottom:22px}
+  .featured .img .lbl{position:absolute;bottom:14px;right:14px;font-family:"Archivo",sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.6)}
+  .featured .img .tag{position:absolute;top:18px;left:18px;background:#fff;color:var(--brand);font-family:"Archivo",sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;padding:6px 12px;font-weight:700}
+  .featured .meta{font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;gap:16px}
+  .featured .meta .cat{color:var(--brand);font-weight:700}
+  .featured h3{font-size:30px;line-height:1.4;letter-spacing:1.5px;margin-bottom:14px;font-weight:700;transition:color .2s}
+  .featured:hover h3{color:var(--brand)}
+  .featured p{font-size:14px;color:var(--body);line-height:1.9}
+
+  .latest-list{display:flex;flex-direction:column}
+  .lt-item{display:grid;grid-template-columns:140px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--line);cursor:pointer;align-items:center}
+  .lt-item:first-child{padding-top:0}
+  .lt-item:last-child{border-bottom:none}
+  .lt-item .img{aspect-ratio:4/3;background:linear-gradient(135deg,#d4d4d4,#888)}
+  .lt-item .img.b{background:linear-gradient(135deg,#a89070,#604530)}
+  .lt-item .img.c{background:linear-gradient(135deg,#888,#3a3a3a)}
+  .lt-item .img.d{background:linear-gradient(135deg,#c4a880,#704830)}
+  .lt-item .meta{font-family:"Archivo",sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:flex;gap:12px}
+  .lt-item .meta .cat{color:var(--brand);font-weight:700}
+  .lt-item h4{font-size:15px;line-height:1.55;letter-spacing:.5px;font-weight:500;color:var(--ink);transition:color .2s}
+  .lt-item:hover h4{color:var(--brand)}
+
+  /* ====== TRENDING numbered ====== */
+  .s-trending{background:#fff}
+  .trend-grid{display:grid;grid-template-columns:repeat(2,1fr);column-gap:80px;row-gap:0}
+  .tr-item{display:grid;grid-template-columns:64px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--line);align-items:center;cursor:pointer}
+  .tr-item .num{font-family:"Archivo",sans-serif;font-size:46px;font-weight:800;color:var(--ink);line-height:1;letter-spacing:-1px;transition:color .2s}
+  .tr-item:hover .num{color:var(--brand)}
+  .tr-item .body .meta{font-family:"Archivo",sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:flex;gap:12px}
+  .tr-item .body .meta .cat{color:var(--brand);font-weight:700}
+  .tr-item .body h4{font-size:16px;line-height:1.55;font-weight:500;color:var(--ink);letter-spacing:.5px;transition:color .2s}
+  .tr-item:hover .body h4{color:var(--brand)}
+
+  /* ====== SPECIAL ISSUE 5 actions ====== */
+  .s-special{background:var(--line-soft);padding:80px 0}
+  .s-special .wrap{padding:0 40px}
+  .actions-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .act{background:#fff;padding:0;cursor:pointer;transition:background .25s;display:flex;flex-direction:column}
+  .act:hover{background:var(--brand-tint)}
+  .act .img{aspect-ratio:4/5;position:relative;overflow:hidden;background:linear-gradient(180deg,#5a0808,#1a0202)}
+  .act .img .num{position:absolute;top:18px;left:18px;font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:2.5px;color:rgba(255,255,255,.85);font-weight:600}
+  .act .img .lbl{position:absolute;bottom:14px;right:14px;font-family:"Archivo",sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.55)}
+  .act .body{padding:22px 24px 28px;flex:1;display:flex;flex-direction:column}
+  .act .cat{font-family:"Archivo",sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:10px}
+  .act h4{font-size:18px;letter-spacing:2px;line-height:1.5;margin-bottom:10px;font-weight:700;color:var(--ink)}
+  .act p{font-size:13px;color:var(--muted);line-height:1.8;flex:1}
+  .act .arr{margin-top:14px;font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:2px;color:var(--ink);font-weight:600;text-transform:uppercase}
+  .act .arr::after{content:" →"}
+
+  /* style each action with different gradient */
+  .act:nth-child(2) .img{background:linear-gradient(180deg,#3a3a3a,#0a0a0a)}
+  .act:nth-child(3) .img{background:linear-gradient(180deg,#704830,#2a1808)}
+  .act:nth-child(4) .img{background:linear-gradient(180deg,#5a3a2a,#2a1a0a)}
+  .act:nth-child(5) .img{background:linear-gradient(180deg,#3a1818,#1a0808)}
+
+  /* ====== SPOTLIGHT 真愛多多 ====== */
+  .s-spot{background:#fff;padding:0}
+  .spot-band{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+  .spot-img{background:linear-gradient(135deg,#5a0808 0%,#1a0202 100%);position:relative;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase}
+  .spot-img::before{content:"▶";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:88px;height:88px;border-radius:50%;background:rgba(255,255,255,.1);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.4);color:#fff;font-size:24px;display:flex;align-items:center;justify-content:center;padding-left:6px}
+  .spot-img .meta{position:absolute;top:32px;left:32px;font-family:"Archivo",sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#fff;display:flex;gap:14px;align-items:center}
+  .spot-img .meta .cat{background:var(--brand);padding:6px 12px;font-weight:700}
+  .spot-img .lnk{position:absolute;bottom:32px;left:32px;font-family:"Archivo",sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.6)}
+  .spot-text{padding:84px 80px;display:flex;flex-direction:column;justify-content:center}
+  .spot-text .label{font-family:"Archivo",sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:14px}
+  .spot-text .label::before{content:"";width:32px;height:1px;background:var(--brand)}
+  .spot-text h2{font-size:42px;line-height:1.35;font-weight:700;letter-spacing:3px;margin-bottom:24px;color:var(--ink)}
+  .spot-text .quote{font-size:18px;line-height:1.9;color:var(--ink);font-weight:500;border-left:2px solid var(--brand);padding-left:20px;margin-bottom:24px;letter-spacing:.5px}
+  .spot-text p{font-size:14px;color:var(--body);line-height:1.95;margin-bottom:32px}
+  .spot-text .ctas{display:flex;gap:18px}
+  .spot-text .btn-r{display:inline-flex;align-items:center;gap:10px;padding:13px 24px;background:var(--brand);color:#fff;font-size:13px;letter-spacing:2.5px;font-weight:500;transition:background .2s}
+  .spot-text .btn-r::after{content:"→"}
+  .spot-text .btn-r:hover{background:var(--brand-dark)}
+  .spot-text .btn-l{display:inline-flex;align-items:center;gap:10px;padding:13px 24px;border:1px solid var(--ink);color:var(--ink);font-size:13px;letter-spacing:2.5px;font-weight:500;transition:all .2s}
+  .spot-text .btn-l:hover{background:var(--ink);color:#fff}
+
+  /* ====== STORIES 雙人物 ====== */
+  .s-stories{background:#fff}
+  .stories-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+  .story{position:relative;aspect-ratio:5/4;overflow:hidden;cursor:pointer;background:linear-gradient(160deg,#3a3a3a,#0a0a0a)}
+  .story:nth-child(2){background:linear-gradient(160deg,#5a3a28,#1a0808)}
+  .story::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.85));pointer-events:none}
+  .story .body{position:absolute;left:0;right:0;bottom:0;padding:36px 40px;color:#fff;z-index:2}
+  .story .label{font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#f4d8d8;margin-bottom:10px;font-weight:600}
+  .story h3{font-size:28px;color:#fff;letter-spacing:2px;line-height:1.4;margin-bottom:8px;font-weight:700}
+  .story .sub{font-size:13px;color:rgba(255,255,255,.8);letter-spacing:1.5px;margin-bottom:18px}
+  .story .more{font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#fff;font-weight:600;border-bottom:1px solid #fff;padding-bottom:4px;display:inline-flex;gap:8px}
+  .story .lbl{position:absolute;top:18px;right:18px;font-family:"Archivo",sans-serif;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.4);text-transform:uppercase;z-index:2}
+
+  /* ====== SUPPORT ====== */
+  .s-support{background:#fff}
+  .support-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  .sup{cursor:pointer}
+  .sup .img{aspect-ratio:5/4;margin-bottom:18px;background:linear-gradient(135deg,#888,#3a3a3a);position:relative;overflow:hidden}
+  .sup:nth-child(2) .img{background:linear-gradient(135deg,#c8a880,#704830)}
+  .sup:nth-child(3) .img{background:linear-gradient(135deg,#b8a890,#5a4830)}
+  .sup .img .lbl{position:absolute;bottom:14px;right:14px;font-family:"Archivo",sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.6)}
+  .sup .img .num{position:absolute;top:18px;left:18px;font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:2.5px;color:rgba(255,255,255,.85);font-weight:600}
+  .sup .meta{font-family:"Archivo",sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:8px}
+  .sup h4{font-size:22px;letter-spacing:2px;margin-bottom:10px;font-weight:700;color:var(--ink);transition:color .2s}
+  .sup:hover h4{color:var(--brand)}
+  .sup p{font-size:14px;color:var(--body);line-height:1.9;margin-bottom:14px}
+  .sup .more{font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink);font-weight:600;border-bottom:1px solid var(--ink);padding-bottom:3px}
+
+  /* ====== ABOUT ====== */
+  .s-about{background:#fff}
+  .about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:center}
+  .about-img{aspect-ratio:4/5;background:linear-gradient(160deg,#5a0808,#1a0202);position:relative}
+  .about-img .lbl{position:absolute;bottom:18px;left:18px;font-family:"Archivo",sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5)}
+  .about-img .since{position:absolute;top:30px;left:30px;color:#fff}
+  .about-img .since .y{font-family:"Archivo",sans-serif;font-size:60px;font-weight:800;letter-spacing:-1px;line-height:1}
+  .about-img .since .t{font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:8px;opacity:.85}
+  .about-text .label{font-family:"Archivo",sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:14px}
+  .about-text .label::before{content:"";width:32px;height:1px;background:var(--brand)}
+  .about-text h2{font-size:38px;letter-spacing:4px;line-height:1.4;margin-bottom:24px;font-weight:700}
+  .about-text .lead{font-size:18px;line-height:1.95;color:var(--ink);font-weight:500;margin-bottom:24px;letter-spacing:.5px}
+  .about-text p{font-size:14px;line-height:1.95;color:var(--body);margin-bottom:18px}
+  .about-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:36px}
+  .about-meta .cell{padding:22px;background:#fff}
+  .about-meta .y{font-family:"Archivo",sans-serif;font-size:28px;font-weight:800;color:var(--brand);letter-spacing:1px;line-height:1}
+  .about-meta .t{font-size:13px;color:var(--ink);margin-top:10px;letter-spacing:1px;line-height:1.5}
+
+  /* ====== DONATE BAND ====== */
+  .donate-band{background:var(--brand);color:#fff;padding:0}
+  .donate-grid{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
+  .donate-text{padding:88px 64px;display:flex;flex-direction:column;justify-content:center}
+  .donate-text .label{font-family:"Archivo",sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#f4d8d8;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:14px}
+  .donate-text .label::before{content:"";width:32px;height:1px;background:#f4d8d8}
+  .donate-text h2{font-size:48px;color:#fff;letter-spacing:6px;line-height:1.4;margin-bottom:22px;font-weight:900}
+  .donate-text p{font-size:15px;color:rgba(255,255,255,.85);line-height:2;margin-bottom:32px}
+  .donate-text .actions{display:flex;gap:16px;flex-wrap:wrap}
+  .donate-text .btn-w{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;background:#fff;color:var(--brand);font-size:13px;letter-spacing:2.5px;font-weight:600;transition:background .2s}
+  .donate-text .btn-w::after{content:"→"}
+  .donate-text .btn-w:hover{background:#f4d8d8}
+  .donate-text .btn-wo{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border:1px solid rgba(255,255,255,.6);color:#fff;font-size:13px;letter-spacing:2.5px;font-weight:500;transition:all .2s}
+  .donate-text .btn-wo:hover{background:rgba(255,255,255,.12);border-color:#fff}
+  .donate-side{background:#1a0202;display:grid;grid-template-rows:1fr 1fr 1fr;border-left:1px solid rgba(255,255,255,.1)}
+  .donate-fact{padding:36px 48px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;justify-content:center}
+  .donate-fact:last-child{border-bottom:none}
+  .donate-fact .n{font-family:"Archivo",sans-serif;font-size:42px;font-weight:800;color:#fff;letter-spacing:1px;line-height:1}
+  .donate-fact .t{font-size:13px;color:rgba(255,255,255,.7);margin-top:10px;letter-spacing:1.5px}
+
+  /* ====== FOOTER ====== */
+  footer.site{background:#fff;border-top:1px solid var(--line);padding:64px 40px 32px}
+  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;max-width:1320px;margin:0 auto;padding-bottom:48px;border-bottom:1px solid var(--line)}
+  .foot-top .foot-logo .zh{font-weight:900;color:var(--brand);font-size:22px;letter-spacing:6px;display:block;margin-bottom:8px}
+  .foot-top .foot-logo .en{font-family:"Archivo",sans-serif;font-weight:500;color:var(--ink);font-size:11px;letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:24px}
+  .foot-top p{font-size:13px;color:var(--body);line-height:1.9}
+  .foot-top h5{font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:18px}
+  .foot-top a{display:block;font-size:13px;color:var(--ink);margin-bottom:8px;transition:color .2s}
+  .foot-top a:hover{color:var(--brand)}
+  .foot-bottom{max-width:1320px;margin:24px auto 0;display:flex;justify-content:space-between;align-items:center;font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+  .foot-bottom .socials{display:flex;gap:14px}
+  .foot-bottom .socials a{color:var(--ink);transition:color .2s}
+  .foot-bottom .socials a:hover{color:var(--brand)}
+
+  /* ====== COOKIE ====== */
+  .cookie{position:fixed;bottom:24px;left:24px;right:24px;max-width:680px;margin:0 auto;background:#fff;padding:18px 24px;display:flex;align-items:center;gap:24px;font-size:13px;color:var(--body);box-shadow:0 12px 40px rgba(0,0,0,.12);border-top:3px solid var(--brand);z-index:99}
+  .cookie .ctext{flex:1;line-height:1.7}
+  .cookie .ctext strong{display:block;color:var(--ink);font-size:14px;margin-bottom:4px;letter-spacing:1px;font-weight:700}
+  .cookie .ctext a{color:var(--brand);text-decoration:underline;text-underline-offset:2px}
+  .cookie button{padding:9px 18px;font-size:12px;letter-spacing:2px;background:var(--brand);color:#fff;font-weight:500}
+  .cookie button:hover{background:var(--brand-dark)}
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 1100px){
+    .hero-strip{grid-template-columns:1fr}
+    .hero-strip-item{border-right:none;border-bottom:1px solid var(--line)}
+    .latest-grid{grid-template-columns:1fr;gap:32px}
+    .actions-grid{grid-template-columns:repeat(2,1fr)}
+    .trend-grid{grid-template-columns:1fr;column-gap:0}
+    .spot-band,.about-grid,.donate-grid,.stories-grid,.support-grid{grid-template-columns:1fr}
+    .spot-text{padding:48px 32px}
+    .donate-text{padding:48px 32px}
+    .donate-side{grid-template-rows:none;grid-template-columns:repeat(3,1fr);border-left:none;border-top:1px solid rgba(255,255,255,.1)}
+    .donate-fact{border-bottom:none;border-right:1px solid rgba(255,255,255,.08);padding:24px}
+    .donate-fact:last-child{border-right:none}
+    .foot-top{grid-template-columns:1fr 1fr;gap:32px}
+    .nav{position:static}
+    .header{position:static}
+  }
+  @media (max-width: 720px){
+    .topstrip-row,.header-row,.nav-row,.hero,.s,.s-special .wrap,footer.site{padding-left:20px;padding-right:20px}
+    section.s{padding:56px 20px}
+    .header-row{grid-template-columns:auto 1fr auto;gap:14px}
+    .header-left .search{display:none}
+    .header-right .small{display:none}
+    .nav-row{justify-content:flex-start;overflow-x:auto;height:48px}
+    .nav-row a{padding:0 14px;font-size:13px;white-space:nowrap}
+    .hero-slide{padding:32px 24px}
+    .hero-slide h2.h-title{font-size:30px;letter-spacing:1.5px}
+    .hero-slide .h-sub{font-size:13px}
+    .s-title{font-size:22px;letter-spacing:2px}
+    .s-head{flex-direction:column;align-items:flex-start;gap:12px}
+    .featured h3{font-size:22px}
+    .lt-item{grid-template-columns:96px 1fr;gap:14px}
+    .actions-grid{grid-template-columns:1fr}
+    .donate-text h2{font-size:28px;letter-spacing:3px}
+    .about-text h2{font-size:26px;letter-spacing:2px}
+    .spot-text h2{font-size:28px;letter-spacing:2px}
+    .donate-side{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== TOP STRIP ===== -->
+<div class="topstrip">
+  <div class="topstrip-row">
+    <div class="left">
+      <span>Love &amp; Hope Foundation</span>
+      <span style="opacity:.5">·</span>
+      <span>Since 2008</span>
+    </div>
+    <div class="right">
+      <a class="ico" aria-label="facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
+      <a class="ico" aria-label="instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+      <a class="ico" aria-label="youtube"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
+      <a class="ico" aria-label="line"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
+      <span class="sep"></span>
+      <a class="lang">EN</a>
+      <a class="lang">登入</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-row">
+    <div class="header-left">
+      <button class="menubtn"><span class="bars"><i></i><i></i><i></i></span> Menu</button>
+      <a class="search">⌕ Search</a>
+    </div>
+    <a class="logo" href="#">
+      <img src="images/logo.png" alt="薛伯輝基金會 Love Hope Foundation" style="height:50px;width:auto;display:block">
+    </a>
+    <div class="header-right">
+      <a class="small">電子報</a>
+      <button class="donate-btn">捐款支持</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== PRIMARY NAV ===== -->
+<nav class="nav">
+  <div class="nav-row">
+    <a href="#">關於我們</a>
+    <a href="#" class="active">公益行動</a>
+    <a href="#">真愛多多</a>
+    <a href="#">慈善身影</a>
+    <a href="#">最新消息</a>
+    <a href="#">場地租借</a>
+    <a href="#">文創小舖</a>
+    <a href="#">搖籃咖啡</a>
+  </div>
+</nav>
+
+<!-- ===== HERO CAROUSEL ===== -->
+<section class="hero">
+  <div class="hero-stage" id="heroStage">
+    <div class="hero-slide hero-slide-1 on">
+      <div class="bg">hero key visual ／ 待補</div>
+      <div class="h-meta"><span class="cat">SPECIAL ISSUE</span><span class="date">2026 / 05 / 03</span></div>
+      <h2 class="h-title">陪伴每一個慢飛的孩子，<br>看見更美麗的世界。</h2>
+      <p class="h-sub">薛伯輝基金會啟動真愛多多專案，募集資金與專業資源，於台南學甲築起伯利恆早療暨融合教育中心，持續推動社會接納與多元共融。</p>
+      <a class="h-cta">閱讀完整專案 →</a>
+    </div>
+    <div class="hero-slide hero-slide-2">
+      <div class="bg">hero key visual ／ 待補</div>
+      <div class="h-meta"><span class="cat">FEATURE</span><span class="date">2026 / 05 / 01</span></div>
+      <h2 class="h-title">紳士企業家薛伯輝，<br>留下的不只是一個名字。</h2>
+      <p class="h-sub">從敦煌書店到基金會，回顧薛伯輝先生五十年公益足跡，與夫人陳惠如女士接續傳承的「愛與希望」。</p>
+      <a class="h-cta">閱讀慈善身影 →</a>
+    </div>
+    <div class="hero-slide hero-slide-3">
+      <div class="bg">hero key visual ／ 待補</div>
+      <div class="h-meta"><span class="cat">EVENT</span><span class="date">2026 / 04 / 28</span></div>
+      <h2 class="h-title">奧兒福音樂會 2026，<br>讓共融的聲音被聽見。</h2>
+      <p class="h-sub">每年一度，特殊孩子與專業樂手同台，以音樂為橋，邀請每一位觀眾走進共融的現場。</p>
+      <a class="h-cta">索取免費票券 →</a>
+    </div>
+  </div>
+  <div class="hero-dots">
+    <button class="on" data-idx="0" aria-label="slide 1"></button>
+    <button data-idx="1" aria-label="slide 2"></button>
+    <button data-idx="2" aria-label="slide 3"></button>
+  </div>
+
+  <div class="wrap">
+    <div class="hero-strip">
+      <div class="hero-strip-item">
+        <span class="num">01</span>
+        <span class="ttl">真愛多多｜伯利恆早療中心開幕倒數</span>
+      </div>
+      <div class="hero-strip-item">
+        <span class="num">02</span>
+        <span class="ttl">搖籃咖啡｜五月母親節限定菜單上線</span>
+      </div>
+      <div class="hero-strip-item">
+        <span class="num">03</span>
+        <span class="ttl">場地租借｜七月愛的講堂檔期釋出</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LATEST ===== -->
+<section class="s">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="left">
+        <span class="s-label">Latest</span>
+        <h2 class="s-title">最新消息</h2>
+      </div>
+      <a class="s-more">看全部消息 →</a>
+    </div>
+
+    <div class="latest-grid">
+      <a class="featured">
+        <div class="img">
+          <span class="tag">Feature</span>
+          <span class="lbl">image / featured</span>
+        </div>
+        <div class="meta">
+          <span class="cat">愛的講堂</span>
+          <span>2026 / 05 / 03</span>
+          <span>by 編輯部</span>
+        </div>
+        <h3>陪伴的力量：當特殊教育走進日常生活</h3>
+        <p>從一位特殊孩子的日常出發，看見家庭與社會如何成為彼此的支柱。本期愛的講堂邀請特教教師、家長與職能治療師，以真實案例展開三場深度對話，探討融合教育在家庭、校園與職場的實踐路徑。</p>
+      </a>
+
+      <div class="latest-list">
+        <a class="lt-item">
+          <div class="img b"></div>
+          <div>
+            <div class="meta"><span class="cat">搖籃咖啡</span><span>2026 / 05 / 01</span></div>
+            <h4>春日的咖啡香：搖籃咖啡迎接五月新菜單</h4>
+          </div>
+        </a>
+        <a class="lt-item">
+          <div class="img c"></div>
+          <div>
+            <div class="meta"><span class="cat">愛的講堂</span><span>2026 / 04 / 28</span></div>
+            <h4>融合教育講座：與甘神父的精神同行</h4>
+          </div>
+        </a>
+        <a class="lt-item">
+          <div class="img d"></div>
+          <div>
+            <div class="meta"><span class="cat">場地租借</span><span>2026 / 04 / 22</span></div>
+            <h4>五月份愛的講堂空間檔期，現正開放預約</h4>
+          </div>
+        </a>
+        <a class="lt-item">
+          <div class="img"></div>
+          <div>
+            <div class="meta"><span class="cat">真愛多多</span><span>2026 / 04 / 18</span></div>
+            <h4>伯利恆早療中心工程進度：五月最新報告</h4>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRENDING ===== -->
+<section class="s s-trending">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="left">
+        <span class="s-label">Trending</span>
+        <h2 class="s-title">熱門閱讀</h2>
+      </div>
+      <a class="s-more">查看更多 →</a>
+    </div>
+
+    <div class="trend-grid">
+      <a class="tr-item">
+        <span class="num">01</span>
+        <div class="body">
+          <div class="meta"><span class="cat">真愛多多</span><span>2026 / 04 / 12</span></div>
+          <h4>「早起步、不放手」：甘惠忠神父的五十年共融之路</h4>
+        </div>
+      </a>
+      <a class="tr-item">
+        <span class="num">02</span>
+        <div class="body">
+          <div class="meta"><span class="cat">公益行動</span><span>2026 / 03 / 28</span></div>
+          <h4>當美學走進偏鄉教室：花蓮玉里駐校計畫第三年回顧</h4>
+        </div>
+      </a>
+      <a class="tr-item">
+        <span class="num">03</span>
+        <div class="body">
+          <div class="meta"><span class="cat">慈善身影</span><span>2026 / 03 / 14</span></div>
+          <h4>薛伯輝先生與敦煌書店：一家書店如何撐起一個公益基金會</h4>
+        </div>
+      </a>
+      <a class="tr-item">
+        <span class="num">04</span>
+        <div class="body">
+          <div class="meta"><span class="cat">搖籃咖啡</span><span>2026 / 03 / 02</span></div>
+          <h4>專訪｜在搖籃咖啡學沖咖啡的小宇，今天滿一年了</h4>
+        </div>
+      </a>
+      <a class="tr-item">
+        <span class="num">05</span>
+        <div class="body">
+          <div class="meta"><span class="cat">公益行動</span><span>2026 / 02 / 25</span></div>
+          <h4>原生藝術：自閉症青年的畫，正在被世界看見</h4>
+        </div>
+      </a>
+      <a class="tr-item">
+        <span class="num">06</span>
+        <div class="body">
+          <div class="meta"><span class="cat">愛的講堂</span><span>2026 / 02 / 18</span></div>
+          <h4>家長心聲：當「慢」不再是焦慮，而是另一種速度</h4>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SPECIAL ISSUE 5 actions ===== -->
+<section class="s-special">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="left">
+        <span class="s-label">Special Issue</span>
+        <h2 class="s-title">五大公益行動</h2>
+      </div>
+      <a class="s-more">了解全部行動 →</a>
+    </div>
+
+    <div class="actions-grid">
+      <a class="act">
+        <div class="img"><span class="num">01</span><span class="lbl">image / action 01</span></div>
+        <div class="body">
+          <span class="cat">Transition</span>
+          <h4>特殊生<br>轉銜職場</h4>
+          <p>陪伴特殊孩子走入職場，從培訓、媒合到陪同上工，建立自立的尊嚴。</p>
+          <span class="arr">了解更多</span>
+        </div>
+      </a>
+      <a class="act">
+        <div class="img"><span class="num">02</span><span class="lbl">image / action 02</span></div>
+        <div class="body">
+          <span class="cat">Outsider Art</span>
+          <h4>自閉症<br>原生藝術</h4>
+          <p>看見每一份獨特，從藝術中綻放天賦，並協助作品走入展覽與市場。</p>
+          <span class="arr">了解更多</span>
+        </div>
+      </a>
+      <a class="act">
+        <div class="img"><span class="num">03</span><span class="lbl">image / action 03</span></div>
+        <div class="body">
+          <span class="cat">Aesthetic Edu.</span>
+          <h4>偏鄉<br>美學教育</h4>
+          <p>把美感與文化帶進偏遠校園，每年駐校陪伴數百位孩子。</p>
+          <span class="arr">了解更多</span>
+        </div>
+      </a>
+      <a class="act">
+        <div class="img"><span class="num">04</span><span class="lbl">image / action 04</span></div>
+        <div class="body">
+          <span class="cat">Music</span>
+          <h4>奧兒福<br>音樂會</h4>
+          <p>音樂為橋，讓共融的聲音被聽見，每年免費售票邀請大眾共享。</p>
+          <span class="arr">了解更多</span>
+        </div>
+      </a>
+      <a class="act">
+        <div class="img"><span class="num">05</span><span class="lbl">image / action 05</span></div>
+        <div class="body">
+          <span class="cat">Elder Care</span>
+          <h4>老人<br>服務</h4>
+          <p>陪伴長者度過晚年，溫柔守護每一段時光與每一份記憶。</p>
+          <span class="arr">了解更多</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SPOTLIGHT 真愛多多 ===== -->
+<section class="s-spot">
+  <div class="spot-band">
+    <div class="spot-img">
+      <div class="meta"><span class="cat">Spotlight</span><span>真愛多多 ／ 2026</span></div>
+      <span>video ／ 待補</span>
+      <span class="lnk">youtu.be/P8aMCSEXvLk</span>
+    </div>
+    <div class="spot-text">
+      <div class="label">Spotlight Project</div>
+      <h2>真愛多多<br>伯利恆早療中心</h2>
+      <div class="quote">「早起步，不放手 — 讓每一個慢飛的孩子，都能抬起頭來，看看這美麗的世界。」</div>
+      <p>薛伯輝基金會傳承甘惠忠神父「早起步、不放手」的共融精神，於台南學甲築起伯利恆早療暨融合教育中心，持續推動社會接納與多元共融。本專案募集資金與專業資源，邀請您一同見證下一個十年。</p>
+      <div class="ctas">
+        <a class="btn-r">支持本專案</a>
+        <a class="btn-l">看完整故事</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="s s-about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-img">
+        <div class="since">
+          <div class="y">2008</div>
+          <div class="t">Renamed to Love Hope</div>
+        </div>
+        <span class="lbl">portrait ／ 待補</span>
+      </div>
+      <div class="about-text">
+        <div class="label">About</div>
+        <h2>關於薛伯輝基金會</h2>
+        <p class="lead">2008 年，陳惠如女士為紀念先生薛伯輝，將「薛氏文教基金會」更名為「薛伯輝基金會」，以「愛與希望」為核心，延續對社會弱勢的溫柔守護。</p>
+        <p>1975 年成立，2013 年自台北市教育局轉隸於教育部。提倡文化教育，發揚倫理孝道，捐贈圖書、設立獎學金、興建文化教育設施，並支持特殊教育活動。</p>
+        <div class="about-meta">
+          <div class="cell"><div class="y">1975</div><div class="t">基金會成立</div></div>
+          <div class="cell"><div class="y">2008</div><div class="t">更名為薛伯輝基金會</div></div>
+          <div class="cell"><div class="y">2013</div><div class="t">轉隸教育部</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORIES ===== -->
+<section class="s s-stories">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="left">
+        <span class="s-label">Stories</span>
+        <h2 class="s-title">愛的故事</h2>
+      </div>
+      <a class="s-more">所有人物故事 →</a>
+    </div>
+
+    <div class="stories-grid">
+      <a class="story">
+        <span class="lbl">portrait 01</span>
+        <div class="body">
+          <div class="label">A Gentleman</div>
+          <h3>薛伯輝先生的慈善身影</h3>
+          <div class="sub">紳士企業家 ・ 公益與慈善的步履</div>
+          <span class="more">閱讀故事 →</span>
+        </div>
+      </a>
+      <a class="story">
+        <span class="lbl">portrait 02</span>
+        <div class="body">
+          <div class="label">Father of Slow Angels</div>
+          <h3>閱讀甘惠忠神父</h3>
+          <div class="sub">奉獻台灣特教逾半世紀</div>
+          <span class="more">閱讀故事 →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SUPPORT ===== -->
+<section class="s s-support">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="left">
+        <span class="s-label">Support</span>
+        <h2 class="s-title">支持我們的另一種方式</h2>
+      </div>
+      <a class="s-more">所有支持方式 →</a>
+    </div>
+
+    <div class="support-grid">
+      <a class="sup">
+        <div class="img"><span class="num">01</span><span class="lbl">product / 文創</span></div>
+        <span class="meta">Shop</span>
+        <h4>文創小舖</h4>
+        <p>幾米系列與藝術家合作商品，每一件都是支持公益的溫暖宣言。</p>
+        <span class="more">逛逛小舖</span>
+      </a>
+      <a class="sup">
+        <div class="img"><span class="num">02</span><span class="lbl">space / 咖啡</span></div>
+        <span class="meta">Cafe</span>
+        <h4>搖籃咖啡</h4>
+        <p>由特殊孩子親手沖煮的每一杯咖啡，都是邁向獨立的腳步。</p>
+        <span class="more">了解更多</span>
+      </a>
+      <a class="sup">
+        <div class="img"><span class="num">03</span><span class="lbl">venue / 場地</span></div>
+        <span class="meta">Venue</span>
+        <h4>場地租借</h4>
+        <p>提供溫暖、典雅的活動空間，支持您的講座、聚會與分享。</p>
+        <span class="more">查看場地</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DONATE BAND ===== -->
+<section class="donate-band">
+  <div class="donate-grid">
+    <div class="donate-text">
+      <div class="label">Donate</div>
+      <h2>你的陪伴<br>是他們向前的力量</h2>
+      <p>每一筆捐款，都是延續愛與希望的支持。<br>讓我們一起，陪伴每一個慢飛的孩子，看見更美麗的世界。</p>
+      <div class="actions">
+        <a class="btn-w">線上捐款</a>
+        <a class="btn-wo">月捐專案</a>
+      </div>
+    </div>
+    <div class="donate-side">
+      <div class="donate-fact">
+        <div class="n">17<span style="font-size:18px;margin-left:4px">年</span></div>
+        <div class="t">持續陪伴慢飛家庭</div>
+      </div>
+      <div class="donate-fact">
+        <div class="n">5<span style="font-size:18px;margin-left:4px">大</span></div>
+        <div class="t">公益行動同步進行</div>
+      </div>
+      <div class="donate-fact">
+        <div class="n">1,200<span style="font-size:18px;margin-left:4px">+</span></div>
+        <div class="t">受益家庭與孩子</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site">
+  <div class="foot-top">
+    <div>
+      <div class="foot-logo" style="margin-bottom:24px">
+        <img src="images/logo.png" alt="薛伯輝基金會 Love Hope Foundation" style="height:46px;width:auto;display:block">
+      </div>
+      <p>地址：10043 台北市中正區<br>博愛路 154 號 6 樓</p>
+      <p>電話：(02) 2381-6678</p>
+      <p>傳真：(02) 2381-3171</p>
+      <p style="margin-top:10px">love.hopech@gmail.com</p>
+    </div>
+    <div>
+      <h5>About</h5>
+      <a href="#">關於我們</a>
+      <a href="#">慈善身影</a>
+      <a href="#">捐款與徵信</a>
+      <a href="#">財務報告</a>
+    </div>
+    <div>
+      <h5>Actions</h5>
+      <a href="#">公益行動</a>
+      <a href="#">真愛多多專案</a>
+      <a href="#">最新消息</a>
+      <a href="#">愛的講堂</a>
+    </div>
+    <div>
+      <h5>Visit</h5>
+      <a href="#">場地租借</a>
+      <a href="#">文創小舖</a>
+      <a href="#">搖籃咖啡</a>
+      <a href="#">交通方式</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Love Hope Foundation. All Rights Reserved.</span>
+    <div class="socials">
+      <a>FB</a><a>IG</a><a>YT</a><a>LINE</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== COOKIE ===== -->
+<div class="cookie" id="cookieBanner">
+  <div class="ctext">
+    <strong>Cookie 政策提示</strong>
+    本網站使用 Cookie 以提供更好的瀏覽體驗。繼續瀏覽即表示您同意 Cookie 使用。<a href="#">More info</a>
+  </div>
+  <button onclick="document.getElementById('cookieBanner').style.display='none'">同意並關閉</button>
+</div>
+
+<script>
+  // hero carousel
+  (function(){
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dots button');
+    let cur = 0, t;
+    function go(i){
+      slides.forEach(s=>s.classList.remove('on'));
+      dots.forEach(d=>d.classList.remove('on'));
+      slides[i].classList.add('on');
+      dots[i].classList.add('on');
+      cur = i;
+    }
+    function next(){ go((cur+1)%slides.length); }
+    dots.forEach(d=>d.addEventListener('click', e=>{
+      go(parseInt(d.dataset.idx,10));
+      clearInterval(t); t = setInterval(next, 6000);
+    }));
+    t = setInterval(next, 6000);
+  })();
+</script>
+
+</body>
+</html>
