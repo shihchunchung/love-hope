@@ -55,6 +55,9 @@
   .logo .en{font-family:"Archivo",sans-serif;font-weight:500;color:var(--ink);font-size:10px;letter-spacing:4px;margin-top:8px;text-transform:uppercase}
   .header-right{display:flex;justify-content:flex-end;align-items:center;gap:18px}
   .header-right .small{font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);font-weight:600}
+  .header-socials{display:flex;align-items:center;gap:14px;padding-right:18px;border-right:1px solid var(--line)}
+  .header-socials .ico{width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);transition:color .2s}
+  .header-socials .ico:hover{color:var(--brand)}
   .donate-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;background:var(--brand);color:#fff;font-family:"Noto Sans TC",sans-serif;font-size:13px;letter-spacing:3px;font-weight:500;transition:background .2s}
   .donate-btn::after{content:"→";font-family:"Archivo",sans-serif;font-weight:400}
   .donate-btn:hover{background:var(--brand-dark)}
@@ -294,6 +297,7 @@
     .header-row{grid-template-columns:auto 1fr auto;gap:14px}
     .header-left .search{display:none}
     .header-right .small{display:none}
+    .header-socials{display:none}
     .nav-row{justify-content:flex-start;overflow-x:auto;height:48px}
     .nav-row a{padding:0 14px;font-size:13px;white-space:nowrap}
     .hero-slide{padding:32px 24px}
@@ -322,11 +326,6 @@
       <span>Since 2008</span>
     </div>
     <div class="right">
-      <a class="ico" aria-label="facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
-      <a class="ico" aria-label="instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
-      <a class="ico" aria-label="youtube"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
-      <a class="ico" aria-label="line"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
-      <span class="sep"></span>
       <a class="lang">EN</a>
       <a class="lang">登入</a>
     </div>
@@ -344,6 +343,12 @@
       <img src="images/logo.png" alt="薛伯輝基金會 Love Hope Foundation" style="height:50px;width:auto;display:block">
     </a>
     <div class="header-right">
+      <div class="header-socials">
+        <a class="ico" aria-label="facebook" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
+        <a class="ico" aria-label="instagram" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a class="ico" aria-label="youtube" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
+        <a class="ico" aria-label="line" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
+      </div>
       <button class="donate-btn">捐款支持</button>
     </div>
   </div>
