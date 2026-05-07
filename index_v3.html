@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>薛伯輝基金會 Love Hope Foundation｜v3 編輯感版</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brand:#8C0A0A;
+    --brand-dark:#5C0606;
+    --brand-tint:#FBEEEE;
+    --ink:#18181b;
+    --charcoal:#3f3f46;
+    --body:#363636;
+    --muted:#71717a;
+    --pale:#a1a1aa;
+    --line:#dbdbdb;
+    --line-soft:#e4e4e7;
+    --line-softer:#f4f4f5;
+    --bg:#ffffff;
+    --ease:cubic-bezier(0.215,0.61,0.355,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--body);font-family:"Noto Sans TC","IBM Plex Sans",-apple-system,sans-serif;line-height:1.5;font-weight:400;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+  h1,h2,h3,h4,h5{color:var(--ink);font-weight:500;line-height:1.4;letter-spacing:.03em}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  button{cursor:pointer;font-family:inherit;border:none;background:none;color:inherit}
+  ul{list-style:none}
+
+  .lat{font-family:"IBM Plex Sans",sans-serif}
+  .wrap{max-width:1344px;margin:0 auto;padding:0 32px}
+  .wrap-narrow{max-width:1152px;margin:0 auto;padding:0 32px}
+
+  /* ============ HEADER ============ */
+  .app-header{background:#fff;border-bottom:1px solid var(--line-soft)}
+  .app-header .row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:22px 32px;gap:24px;max-width:1344px;margin:0 auto}
+  .app-header .left{display:flex;align-items:center;gap:14px}
+  .app-header .logo{justify-self:center;display:block}
+  .app-header .logo img{height:54px;width:auto}
+  .app-header .right{display:flex;justify-content:flex-end;align-items:center;gap:18px}
+  .header-socials{display:flex;align-items:center;gap:6px}
+  .header-socials a{width:36px;height:36px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);transition:background .25s var(--ease)}
+  .header-socials a:hover{background:var(--line-soft)}
+  .header-socials a svg{width:18px;height:18px}
+  .header-utility{display:flex;align-items:center;gap:18px}
+  .header-utility a{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);font-weight:500;transition:color .25s var(--ease)}
+  .header-utility a:hover{color:var(--brand)}
+  .donate-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 24px;background:var(--brand);color:#fff;font-size:12px;letter-spacing:.2em;font-weight:500;border-radius:9999px;transition:background .5s var(--ease);font-family:"IBM Plex Sans","Noto Sans TC",sans-serif}
+  .donate-btn::after{content:"→";font-family:"IBM Plex Sans",sans-serif;font-weight:400}
+  .donate-btn:hover{background:var(--brand-dark)}
+  .header-search{width:36px;height:36px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);background:transparent;transition:background .25s var(--ease);border:0}
+  .header-search:hover{background:var(--line-soft)}
+
+  /* ============ NAV (white + top/bottom hairline + red short underline) ============ */
+  .app-nav{background:#fff;border-top:1px solid var(--charcoal);border-bottom:1px solid var(--charcoal);position:relative;z-index:5}
+  .app-nav .row{display:flex;justify-content:center;align-items:center;height:52px;gap:8px;max-width:1344px;margin:0 auto;padding:0 32px;flex-wrap:wrap}
+  .app-nav a{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 18px;font-size:14px;font-weight:500;color:var(--ink);position:relative;letter-spacing:.05em;transition:color .25s var(--ease)}
+  .app-nav a::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-1px;width:0;height:2px;background:var(--brand);transition:width .35s var(--ease)}
+  .app-nav a:hover::after,.app-nav a.active::after{width:24px}
+
+  /* ============ HERO BANNER (center-focus peek + asymmetric 20px 0 20px 0 corners) ============ */
+  .banner-slider{padding:24px 0 0;background:#fff;position:relative}
+  .banner-stage{position:relative;width:100%;overflow:hidden}
+  .banner-track{display:flex;gap:20px;will-change:transform;transition:transform .55s var(--ease)}
+  .banner-slide{flex:0 0 1050px;aspect-ratio:1050/578;position:relative;background:#0a0a0a;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:0;color:#fff;cursor:pointer;text-decoration:none}
+  .banner-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.65) 100%);pointer-events:none;z-index:1}
+  .banner-slide .h-title{position:relative;z-index:2;padding:48px 56px;font-size:30px;line-height:1.5;font-weight:500;color:#fff;letter-spacing:.05em;max-width:760px;opacity:0;transform:translateY(12px);transition:opacity .5s ease .15s,transform .5s ease .15s;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:0}
+  .banner-slide.on .h-title{opacity:1;transform:translateY(0)}
+  .banner-slide-1{background:linear-gradient(135deg,#5a0808 0%,#1a0202 100%)}
+  .banner-slide-2{background:linear-gradient(135deg,#2a2a2a 0%,#0a0a0a 100%)}
+  .banner-slide-3{background:linear-gradient(135deg,#3a1818 0%,#1a0808 100%)}
+
+  .banner-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.9);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:20px;font-family:"IBM Plex Sans",sans-serif;line-height:1;cursor:pointer;opacity:.7;transition:opacity .25s var(--ease),background .25s var(--ease);border:0}
+  .banner-arrow:hover{opacity:1;background:#fff}
+  .banner-arrow.prev{left:calc((100% - 1050px)/4 + 6rem)}
+  .banner-arrow.next{right:calc((100% - 1050px)/4 + 6rem)}
+  .banner-dots{display:flex;justify-content:center;gap:10px;margin-top:20px;height:24px;align-items:center}
+  .banner-dots button{width:8px;height:8px;border-radius:50%;background:#d4d4d8;transition:background .25s var(--ease),transform .25s var(--ease);padding:0;border:0}
+  .banner-dots button:hover{background:var(--muted)}
+  .banner-dots button.on{background:var(--ink);transform:scale(1.15)}
+
+  /* ============ NOW HAPPENING ticker ============ */
+  .now-ticker{margin-top:8px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .now-ticker .row{display:flex;align-items:stretch;max-width:1344px;margin:0 auto;padding:0 32px;height:52px}
+  .now-ticker .label{display:inline-flex;align-items:center;font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:.25em;color:var(--brand);font-weight:700;padding-right:24px;border-right:1px solid var(--line);text-transform:uppercase}
+  .now-ticker .items{display:flex;flex:1;align-items:center;gap:36px;padding-left:24px;overflow-x:auto;scrollbar-width:none}
+  .now-ticker .items::-webkit-scrollbar{display:none}
+  .now-ticker .item{display:inline-flex;align-items:center;gap:10px;font-size:13px;color:var(--ink);white-space:nowrap;transition:color .25s var(--ease)}
+  .now-ticker .item:hover{color:var(--brand)}
+  .now-ticker .item .num{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:.15em;color:var(--brand);font-weight:700}
+
+  /* ============ SECTION + CENTERED HEADER w/ flanking hairlines ============ */
+  section.section{padding:72px 0}
+  section.section.is-first{padding-top:48px}
+  .section-head{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:40px;text-align:center}
+  .section-head .title-row{display:flex;align-items:center;justify-content:center;gap:14px}
+  .section-head .title-row .icon{width:18px;height:18px;color:var(--ink)}
+  .section-head h2.section-title{font-size:30px;font-weight:700;color:var(--ink);letter-spacing:.05em;padding-left:.05em;line-height:1.2;margin:0}
+  .section-head .subtitle{display:flex;align-items:center;gap:16px;width:100%;max-width:480px;font-family:"IBM Plex Sans",sans-serif;font-size:13px;letter-spacing:.25em;color:var(--ink);font-weight:500;text-transform:uppercase}
+  .section-head .subtitle::before,.section-head .subtitle::after{content:"";flex:1;height:1px;background:var(--charcoal)}
+  .section-head .subtitle span{flex-shrink:0}
+
+  .view-more-wrap{display:flex;justify-content:center;margin-top:48px}
+  .view-more-btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 32px;border:1px solid var(--line);color:var(--body);font-family:"IBM Plex Sans",sans-serif;font-size:13px;letter-spacing:.2em;font-weight:500;border-radius:9999px;transition:all .5s var(--ease);background:#fff}
+  .view-more-btn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+  /* ============ UTILITIES ============ */
+  .has-hover-scale{overflow:hidden}
+  .has-hover-scale .img-fill{transition:transform .7s var(--ease)}
+  a:hover .has-hover-scale .img-fill{transform:scale(1.1)}
+  .has-loading-spin{position:relative;background:var(--line-soft)}
+  .has-loading-spin::before{content:"";position:absolute;top:50%;left:50%;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;border:3px solid #d4d4d8;border-top-color:transparent;animation:spin 1s linear infinite;z-index:0}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .c-tag{display:inline-block;font-family:"IBM Plex Sans","Noto Sans TC",sans-serif;font-size:14px;letter-spacing:.05em;color:var(--brand);font-weight:700}
+
+  /* ============ ARTICLE CARD (4px micro-rounded, lean info) ============ */
+  .article-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px 28px}
+  .article-card{display:block;cursor:pointer}
+  .article-card-image{aspect-ratio:9/5;overflow:hidden;background:linear-gradient(135deg,#3a1818,#1a0202);position:relative;margin-bottom:14px;border-radius:4px}
+  .article-card-image .img-fill{position:absolute;inset:0;background:inherit;transition:transform .7s var(--ease)}
+  .article-card:hover .article-card-image .img-fill{transform:scale(1.1)}
+  .article-grid.is-latest .article-card:nth-child(2) .article-card-image{background:linear-gradient(135deg,#a89070,#604530)}
+  .article-grid.is-latest .article-card:nth-child(3) .article-card-image{background:linear-gradient(135deg,#888,#3a3a3a)}
+  .article-grid.is-latest .article-card:nth-child(4) .article-card-image{background:linear-gradient(135deg,#c4a880,#704830)}
+  .article-grid.is-latest .article-card:nth-child(5) .article-card-image{background:linear-gradient(135deg,#5a3a2a,#1a1010)}
+  .article-grid.is-latest .article-card:nth-child(6) .article-card-image{background:linear-gradient(135deg,#8C0A0A,#3a1818)}
+  .article-card.is-about .article-card-image{background:linear-gradient(160deg,#5a0808,#1a0202)}
+  .article-card.is-portrait-1 .article-card-image{background:linear-gradient(160deg,#3a3a3a,#0a0a0a)}
+  .article-card.is-portrait-2 .article-card-image{background:linear-gradient(160deg,#5a3a28,#1a0808)}
+  .article-grid.is-support .article-card:nth-child(1) .article-card-image{background:linear-gradient(135deg,#a89070,#604530)}
+  .article-grid.is-support .article-card:nth-child(2) .article-card-image{background:linear-gradient(135deg,#c8a880,#704830)}
+  .article-grid.is-support .article-card:nth-child(3) .article-card-image{background:linear-gradient(135deg,#b8a890,#5a4830)}
+
+  .article-card-image .since-mark{position:absolute;bottom:18px;left:18px;color:#fff;z-index:2}
+  .article-card-image .since-mark .lbl{font-family:"IBM Plex Sans",sans-serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;display:block;opacity:.8;margin-bottom:4px;font-weight:600}
+  .article-card-image .since-mark .yr{font-family:"IBM Plex Sans",sans-serif;font-size:42px;font-weight:700;letter-spacing:-1px;line-height:1}
+  .article-card .meta{display:flex;justify-content:space-between;align-items:center;font-family:"IBM Plex Sans","Noto Sans TC",sans-serif;font-size:12px;letter-spacing:.05em;color:var(--charcoal);margin-bottom:10px}
+  .article-card .meta .date{font-weight:500;color:var(--charcoal)}
+  .article-card .title{font-size:18px;line-height:1.55;font-weight:500;letter-spacing:.04em;color:var(--ink);margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;transition:color .5s ease;text-align:justify}
+  .article-card:hover .title{color:var(--brand)}
+  .article-card .description{font-size:14px;line-height:1.85;color:var(--body);margin:0 0 12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .article-card .byline{font-family:"IBM Plex Sans","Noto Sans TC",sans-serif;font-size:13px;letter-spacing:.03em;color:var(--charcoal)}
+  .article-card .article-action{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);font-weight:600;border-bottom:1px solid var(--ink);padding-bottom:3px;display:inline-block;transition:.25s var(--ease);margin-top:6px}
+  .article-card:hover .article-action{color:var(--brand);border-color:var(--brand)}
+
+  /* ============ TRENDING — magazine spread (1 big + 4 small) ============ */
+  .trend-spread{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:stretch}
+  .trend-feature{position:relative;display:flex;flex-direction:column}
+  .trend-feature-img{aspect-ratio:5/4;border-radius:4px;overflow:hidden;background:linear-gradient(135deg,#3a1818,#0a0202);position:relative;margin-bottom:18px}
+  .trend-feature-img .img-fill{position:absolute;inset:0;background:inherit;transition:transform .7s var(--ease)}
+  .trend-feature:hover .trend-feature-img .img-fill{transform:scale(1.05)}
+  .trend-feature-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.55) 100%);z-index:1;pointer-events:none}
+  .trend-rank{position:absolute;font-family:"IBM Plex Sans",sans-serif;font-weight:700;line-height:.85;color:transparent;-webkit-text-stroke:1.5px var(--brand);transition:color .5s var(--ease),transform .5s var(--ease),text-shadow .5s var(--ease);transform-origin:right bottom;letter-spacing:-.04em}
+  .trend-feature .trend-rank{font-size:160px;right:24px;bottom:-12px;z-index:2;color:rgba(255,255,255,.0);-webkit-text-stroke:1.5px #fff}
+  .trend-feature:hover .trend-rank{color:#fff;text-shadow:5px 5px 0 var(--brand-dark);transform:scale(1.08)}
+  .trend-feature .meta{display:flex;justify-content:space-between;font-family:"IBM Plex Sans","Noto Sans TC",sans-serif;font-size:13px;letter-spacing:.05em;margin-bottom:12px}
+  .trend-feature .meta .cat{color:var(--brand);font-weight:700}
+  .trend-feature .meta .date{color:var(--charcoal);font-weight:500}
+  .trend-feature h3{font-size:26px;line-height:1.4;font-weight:500;letter-spacing:.04em;color:var(--ink);transition:color .5s ease;margin-bottom:14px}
+  .trend-feature:hover h3{color:var(--brand)}
+  .trend-feature p.lead{font-size:14px;line-height:1.85;color:var(--body);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+  .trend-list{display:grid;grid-template-rows:repeat(4,1fr);gap:0}
+  .trend-item{display:grid;grid-template-columns:80px 1fr 110px;gap:20px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:background .5s var(--ease)}
+  .trend-item:first-child{border-top:1px solid var(--line)}
+  .trend-item:hover{background:var(--brand-tint)}
+  .trend-item .rk{font-family:"IBM Plex Sans",sans-serif;font-size:48px;font-weight:700;line-height:1;color:var(--brand);letter-spacing:-.04em;text-align:center}
+  .trend-item .body{display:flex;flex-direction:column;gap:6px;min-width:0}
+  .trend-item .meta{display:flex;gap:10px;font-family:"IBM Plex Sans","Noto Sans TC",sans-serif;font-size:11px;letter-spacing:.05em}
+  .trend-item .meta .cat{color:var(--brand);font-weight:700}
+  .trend-item .meta .date{color:var(--charcoal);font-weight:500}
+  .trend-item h4{font-size:15px;line-height:1.55;font-weight:500;letter-spacing:.04em;color:var(--ink);transition:color .5s ease;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .trend-item:hover h4{color:var(--brand)}
+  .trend-item .thumb{width:110px;height:70px;border-radius:4px;background:linear-gradient(135deg,#604530,#2a1808);overflow:hidden;position:relative}
+  .trend-item:nth-child(2) .thumb{background:linear-gradient(135deg,#3a3a3a,#0a0a0a)}
+  .trend-item:nth-child(3) .thumb{background:linear-gradient(135deg,#704830,#2a1a0a)}
+  .trend-item:nth-child(4) .thumb{background:linear-gradient(135deg,#5a3a2a,#1a1010)}
+
+  /* ============ FIVE ACTIONS — horizontal stripes ============ */
+  .actions-stack{display:flex;flex-direction:column}
+  .action-row{display:grid;grid-template-columns:140px 1fr 280px 160px;gap:32px;align-items:center;padding:36px 0;border-bottom:1px solid var(--charcoal);cursor:pointer;transition:padding .5s var(--ease)}
+  .action-row:first-child{border-top:1px solid var(--charcoal)}
+  .action-row:hover{padding-left:18px}
+  .action-row .num{font-family:"IBM Plex Sans",sans-serif;font-size:88px;font-weight:700;line-height:1;color:var(--brand);letter-spacing:-.04em;text-align:left}
+  .action-row .body{display:flex;flex-direction:column;gap:10px}
+  .action-row .cat{font-family:"IBM Plex Sans","Noto Sans TC",sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--charcoal);font-weight:700}
+  .action-row h3{font-size:24px;line-height:1.4;font-weight:700;letter-spacing:.05em;color:var(--ink);transition:color .5s ease}
+  .action-row:hover h3{color:var(--brand)}
+  .action-row p{font-size:14px;line-height:1.8;color:var(--body)}
+  .action-row .thumb{aspect-ratio:4/3;border-radius:4px;overflow:hidden;background:linear-gradient(180deg,#5a0808,#1a0202);position:relative}
+  .action-row:nth-child(2) .thumb{background:linear-gradient(180deg,#3a3a3a,#0a0a0a)}
+  .action-row:nth-child(3) .thumb{background:linear-gradient(180deg,#704830,#2a1808)}
+  .action-row:nth-child(4) .thumb{background:linear-gradient(180deg,#5a3a2a,#2a1a0a)}
+  .action-row:nth-child(5) .thumb{background:linear-gradient(180deg,#3a1818,#1a0808)}
+  .action-row .arr{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--ink);font-weight:600;text-align:right;border-bottom:1px solid var(--ink);padding-bottom:4px;justify-self:end;transition:.5s var(--ease)}
+  .action-row .arr::after{content:"  →"}
+  .action-row:hover .arr{color:var(--brand);border-color:var(--brand)}
+
+  /* ============ SPOTLIGHT (La Vie feature-card + 60×3 red bar) ============ */
+  .spot-card{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--line-softer);align-items:stretch;border-radius:4px;overflow:hidden}
+  .spot-img{position:relative;background:linear-gradient(135deg,#5a0808 0%,#1a0202 100%);overflow:hidden;min-height:420px;display:flex;align-items:center;justify-content:center}
+  .spot-img .img-fill{position:absolute;inset:0;background:inherit;transition:transform .7s var(--ease)}
+  .spot-card:hover .spot-img .img-fill{transform:scale(1.05)}
+  .spot-img::before{content:"▶";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.12);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.4);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;padding-left:6px;z-index:2;transition:transform .5s var(--ease)}
+  .spot-card:hover .spot-img::before{transform:translate(-50%,-50%) scale(1.1)}
+  .spot-img .img-meta{position:absolute;top:24px;left:24px;font-family:"IBM Plex Sans","Noto Sans TC",sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#fff;display:flex;gap:14px;align-items:center;z-index:2}
+  .spot-img .img-meta .pill{background:var(--brand);padding:6px 12px;font-weight:700;letter-spacing:.25em}
+  .spot-img .lnk{position:absolute;bottom:24px;left:24px;font-family:"IBM Plex Sans",sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);z-index:2}
+  .spot-text{padding:56px 64px;display:flex;flex-direction:column;justify-content:center}
+  .spot-text .eyebrow{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:18px}
+  .spot-text h2{font-size:30px;line-height:1.4;font-weight:700;letter-spacing:.04em;color:var(--ink);margin-bottom:0;position:relative;padding-bottom:24px}
+  .spot-text h2::after{content:"";position:absolute;left:0;bottom:0;width:60px;height:3px;background:var(--brand);transition:background .5s ease,width .5s var(--ease)}
+  .spot-card:hover .spot-text h2::after{width:90px}
+  .spot-text .quote{font-size:16px;line-height:1.95;color:var(--ink);font-weight:400;margin:28px 0 32px;letter-spacing:.02em}
+  .spot-text .quote em{font-style:normal;color:var(--brand);font-weight:500}
+  .spot-text .ctas{display:flex;gap:14px;flex-wrap:wrap}
+  .spot-text .btn-r{display:inline-flex;align-items:center;gap:10px;padding:12px 24px;background:var(--brand);color:#fff;font-size:12px;letter-spacing:.2em;font-weight:500;border-radius:9999px;transition:background .5s var(--ease)}
+  .spot-text .btn-r::after{content:"→"}
+  .spot-text .btn-r:hover{background:var(--brand-dark)}
+  .spot-text .btn-l{display:inline-flex;align-items:center;gap:10px;padding:12px 24px;border:1px solid var(--line);color:var(--ink);font-size:12px;letter-spacing:.2em;font-weight:500;border-radius:9999px;transition:all .5s var(--ease);background:#fff}
+  .spot-text .btn-l:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+  /* ============ DONATE CARD (contained red card, not full-bleed) ============ */
+  .donate-card{background:var(--brand);color:#fff;border-radius:4px;padding:64px;display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center;position:relative;overflow:hidden}
+  .donate-card::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 85% 15%,rgba(0,0,0,.18) 0,transparent 60%);pointer-events:none}
+  .donate-text{position:relative}
+  .donate-text .eyebrow{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#f4d8d8;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:14px}
+  .donate-text .eyebrow::before{content:"";width:32px;height:1px;background:#f4d8d8}
+  .donate-text h2{font-size:36px;color:#fff;letter-spacing:.06em;line-height:1.4;margin-bottom:20px;font-weight:700}
+  .donate-text p{font-size:15px;color:rgba(255,255,255,.85);line-height:1.95;margin-bottom:28px;max-width:480px}
+  .donate-text .actions{display:flex;gap:14px;flex-wrap:wrap}
+  .donate-text .btn-w{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;background:#fff;color:var(--brand);font-size:12px;letter-spacing:.2em;font-weight:600;border-radius:9999px;transition:all .5s var(--ease);border:1px solid #fff}
+  .donate-text .btn-w::after{content:"→"}
+  .donate-text .btn-w:hover{background:transparent;color:#fff}
+  .donate-text .btn-wo{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;border:1px solid rgba(255,255,255,.5);color:#fff;font-size:12px;letter-spacing:.2em;font-weight:500;border-radius:9999px;transition:all .5s var(--ease)}
+  .donate-text .btn-wo:hover{background:#fff;color:var(--brand);border-color:#fff}
+
+  .donate-stats{display:grid;grid-template-rows:repeat(3,1fr);gap:0;border-left:1px solid rgba(255,255,255,.2);padding-left:40px;position:relative}
+  .donate-fact{padding:18px 0;border-bottom:1px solid rgba(255,255,255,.18);display:grid;grid-template-columns:auto 1fr;align-items:end;gap:20px;cursor:default}
+  .donate-fact:first-child{padding-top:0}
+  .donate-fact:last-child{border-bottom:none;padding-bottom:0}
+  .donate-fact .n{font-family:"IBM Plex Sans",sans-serif;font-size:60px;font-weight:700;line-height:1;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.85);transition:color .5s var(--ease),text-shadow .5s var(--ease)}
+  .donate-fact:hover .n{color:#fff;text-shadow:3px 3px 0 var(--brand-dark)}
+  .donate-fact .n sub{font-family:"Noto Sans TC",sans-serif;font-size:14px;font-weight:500;margin-left:5px;letter-spacing:.05em;color:rgba(255,255,255,.85);-webkit-text-stroke:0;vertical-align:baseline;position:relative;bottom:.5em}
+  .donate-fact .t{font-size:13px;color:rgba(255,255,255,.85);letter-spacing:.08em;line-height:1.6;padding-bottom:6px}
+
+  /* ============ FOOTER (dark + full info) ============ */
+  .app-footer{background:var(--ink);color:#fff;padding:72px 0 36px;text-align:center}
+  .app-footer .footer-info{display:flex;flex-direction:column;align-items:center;gap:18px;margin-bottom:48px;max-width:1344px;margin-left:auto;margin-right:auto;padding:0 32px}
+  .app-footer .footer-address{font-size:14px;color:#fff;letter-spacing:.1em;font-weight:500}
+  .app-footer .footer-contact{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 18px;font-size:13px;color:rgba(255,255,255,.75);letter-spacing:.05em}
+  .app-footer .footer-contact .lbl{font-family:"IBM Plex Sans",sans-serif;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.2em;font-size:10px;margin-right:8px;text-transform:uppercase}
+  .app-footer .footer-contact a{font-family:"IBM Plex Sans","Noto Sans TC",sans-serif;font-size:13px;letter-spacing:.05em;color:rgba(255,255,255,.75);transition:color .25s var(--ease)}
+  .app-footer .footer-contact a:hover{color:#fff}
+  .app-footer .footer-contact .dot{color:rgba(255,255,255,.3)}
+  .app-footer .footer-giro{display:inline-flex;align-items:center;gap:18px;padding:14px 28px;border-top:1px solid rgba(255,255,255,.15);border-bottom:1px solid rgba(255,255,255,.15);margin-top:8px;flex-wrap:wrap;justify-content:center;font-size:13px}
+  .app-footer .footer-giro .giro-label{font-family:"IBM Plex Sans","Noto Sans TC",sans-serif;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#fff;font-weight:700;padding:5px 12px;background:var(--brand);letter-spacing:.2em}
+  .app-footer .footer-giro .giro-cell{color:rgba(255,255,255,.85);letter-spacing:.05em}
+  .app-footer .footer-giro .giro-cell b{font-family:"IBM Plex Sans",sans-serif;font-weight:700;color:#fff;letter-spacing:.1em;margin-left:6px}
+  .app-footer .footer-giro .giro-sep{color:rgba(255,255,255,.25);font-weight:400}
+  .app-footer .footer-links{display:flex;justify-content:center;gap:0;flex-wrap:wrap;margin-bottom:24px}
+  .app-footer .footer-links a{font-size:13px;color:rgba(255,255,255,.75);letter-spacing:.08em;font-weight:500;transition:color .25s var(--ease);padding:6px 18px}
+  .app-footer .footer-links a:hover{color:#fff}
+  .app-footer .footer-copy{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:.25em;color:rgba(255,255,255,.4);text-transform:uppercase}
+
+  /* ============ BACK TO TOP ============ */
+  .cd-top{position:fixed;right:24px;bottom:24px;width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Sans",sans-serif;font-size:18px;line-height:1;z-index:80;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .3s var(--ease),transform .3s var(--ease),background .25s var(--ease)}
+  .cd-top.on{opacity:1;transform:translateY(0);pointer-events:auto}
+  .cd-top:hover{background:var(--brand)}
+
+  /* ============ COOKIE ============ */
+  .cookie{position:fixed;bottom:24px;left:24px;right:24px;max-width:680px;margin:0 auto;background:#fff;padding:18px 24px;display:flex;align-items:center;gap:24px;font-size:13px;color:var(--body);box-shadow:0 12px 40px rgba(0,0,0,.12);border-top:3px solid var(--brand);z-index:99}
+  .cookie .ctext{flex:1;line-height:1.7}
+  .cookie .ctext strong{display:block;color:var(--ink);font-size:14px;margin-bottom:4px;letter-spacing:.05em;font-weight:700}
+  .cookie .ctext a{color:var(--brand);text-decoration:underline;text-underline-offset:2px}
+  .cookie button{padding:10px 20px;font-size:12px;letter-spacing:.15em;background:var(--brand);color:#fff;font-weight:500;border-radius:9999px}
+  .cookie button:hover{background:var(--brand-dark)}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1216px){
+    .wrap,.wrap-narrow{padding:0 24px;max-width:1152px}
+    .donate-grid{padding:0 24px;max-width:1152px}
+  }
+  @media (max-width: 1024px){
+    .banner-slide{flex-basis:min(720px, calc(100vw - 80px))}
+    .banner-arrow.prev{left:16px}
+    .banner-arrow.next{right:16px}
+    .article-grid{grid-template-columns:repeat(2,1fr);gap:36px 24px}
+    .trend-spread{grid-template-columns:1fr;gap:48px}
+    .trend-feature .trend-rank{font-size:120px}
+    .action-row{grid-template-columns:80px 1fr 200px 100px;gap:18px}
+    .action-row .num{font-size:60px}
+    .spot-card{grid-template-columns:1fr}
+    .spot-img{min-height:340px}
+    .spot-text{padding:40px 32px}
+    .donate-card{grid-template-columns:1fr;gap:40px;padding:48px}
+    .donate-stats{border-left:0;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:24px}
+    .donate-text h2{font-size:30px}
+    .donate-fact .n{font-size:52px}
+    .now-ticker .row{height:auto;flex-direction:column;align-items:flex-start;padding:14px 24px}
+    .now-ticker .label{border-right:0;padding:0 0 8px 0;border-bottom:1px solid var(--line);width:100%}
+    .now-ticker .items{padding-left:0;padding-top:8px;width:100%}
+  }
+  @media (max-width: 720px){
+    .app-header .row,.app-nav .row,.banner-slider,section.section{padding-left:16px;padding-right:16px}
+    section.section{padding:56px 16px}
+    .app-header .row{grid-template-columns:auto 1fr auto;gap:14px;padding:14px 16px}
+    .header-socials,.header-utility{display:none}
+    .donate-btn{padding:9px 16px;font-size:11px;letter-spacing:.15em}
+    .app-nav .row{justify-content:flex-start;overflow-x:auto;height:48px;gap:0;padding:0 16px;flex-wrap:nowrap}
+    .app-nav a{padding:0 14px;font-size:13px;white-space:nowrap;height:48px}
+    .banner-slider{padding:0}
+    .banner-slide{flex-basis:100vw}
+    .banner-slide .h-title{font-size:18px;letter-spacing:.04em;padding:24px 24px}
+    .banner-arrow{display:none}
+    .section-head h2.section-title{font-size:22px;letter-spacing:.04em}
+    .section-head .subtitle{font-size:11px;max-width:320px}
+    .article-grid{grid-template-columns:1fr;gap:32px}
+    .article-card .title{font-size:17px}
+    .trend-feature h3{font-size:20px}
+    .trend-feature .trend-rank{font-size:96px;right:16px}
+    .trend-item{grid-template-columns:60px 1fr 90px;gap:14px}
+    .trend-item .rk{font-size:36px}
+    .trend-item .thumb{width:90px;height:60px}
+    .action-row{grid-template-columns:60px 1fr;gap:14px;padding:24px 0}
+    .action-row .thumb,.action-row .arr{display:none}
+    .action-row .num{font-size:48px}
+    .action-row h3{font-size:18px}
+    .donate-card{padding:32px 24px;gap:32px}
+    .donate-text h2{font-size:24px;letter-spacing:.04em}
+    .spot-text h2{font-size:24px;letter-spacing:.03em}
+    .spot-text{padding:32px 20px}
+    .app-footer{padding:48px 0 24px}
+    .app-footer .footer-giro{padding:14px 16px;gap:10px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER (single layer, social-left + logo-center + utility-right) ===== -->
+<header class="app-header">
+  <div class="row">
+    <div class="left">
+      <div class="header-socials">
+        <a aria-label="facebook" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z"/></svg></a>
+        <a aria-label="instagram" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a aria-label="youtube" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
+        <a aria-label="line" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
+      </div>
+    </div>
+    <a class="logo" href="#"><img src="images/logo.png" alt="薛伯輝基金會 Love Hope Foundation"></a>
+    <div class="right">
+      <button class="header-search" aria-label="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z"/></svg>
+      </button>
+      <div class="header-utility">
+        <a href="#">EN</a>
+      </div>
+      <button class="donate-btn">捐款支持</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== NAV (white + top/bottom hairline + red short underline) ===== -->
+<nav class="app-nav">
+  <div class="row">
+    <a href="#">關於我們</a>
+    <a href="#" class="active">公益行動</a>
+    <a href="#">真愛多多</a>
+    <a href="#">慈善身影</a>
+    <a href="#">最新消息</a>
+    <a href="#">場地租借</a>
+    <a href="#">文創小舖</a>
+    <a href="#">搖籃咖啡</a>
+  </div>
+</nav>
+
+<!-- ===== HERO BANNER (center-focus peek + asymmetric corners 20px 0 20px 0) ===== -->
+<section class="banner-slider">
+  <div class="banner-stage" id="bannerStage">
+    <button class="banner-arrow prev" aria-label="previous">‹</button>
+    <button class="banner-arrow next" aria-label="next">›</button>
+    <div class="banner-track" id="bannerTrack">
+      <a class="banner-slide banner-slide-1 on" href="#">
+        <h2 class="h-title">陪伴每一個慢飛的孩子，看見更美麗的世界</h2>
+      </a>
+      <a class="banner-slide banner-slide-2" href="#">
+        <h2 class="h-title">紳士企業家薛伯輝，留下的不只是一個名字</h2>
+      </a>
+      <a class="banner-slide banner-slide-3" href="#">
+        <h2 class="h-title">奧兒福音樂會 2026，讓共融的聲音被聽見</h2>
+      </a>
+    </div>
+  </div>
+  <div class="banner-dots">
+    <button class="on" data-idx="0" aria-label="slide 1"></button>
+    <button data-idx="1" aria-label="slide 2"></button>
+    <button data-idx="2" aria-label="slide 3"></button>
+  </div>
+</section>
+
+<!-- ===== LATEST: 3 cols 9:5 article-card ===== -->
+<section class="section is-first">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="title-row">
+        <h2 class="section-title">最新消息</h2>
+      </div>
+      <p class="subtitle"><span>Latest</span></p>
+    </header>
+
+    <div class="article-grid is-latest">
+      <a class="article-card">
+        <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
+        <div class="meta"><span class="cat c-tag">愛的講堂</span><span class="date">2026 / 05 / 03</span></div>
+        <h3 class="title">陪伴的力量：當特殊教育走進日常生活</h3>
+        <div class="byline">by 編輯部</div>
+      </a>
+      <a class="article-card">
+        <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
+        <div class="meta"><span class="cat c-tag">搖籃咖啡</span><span class="date">2026 / 05 / 01</span></div>
+        <h3 class="title">春日的咖啡香：搖籃咖啡迎接五月新菜單，與母親一起享受</h3>
+        <div class="byline">by 編輯部</div>
+      </a>
+      <a class="article-card">
+        <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
+        <div class="meta"><span class="cat c-tag">愛的講堂</span><span class="date">2026 / 04 / 28</span></div>
+        <h3 class="title">融合教育講座：與甘神父的精神同行，下一個十年的共融之路</h3>
+        <div class="byline">by 編輯部</div>
+      </a>
+      <a class="article-card">
+        <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
+        <div class="meta"><span class="cat c-tag">場地租借</span><span class="date">2026 / 04 / 22</span></div>
+        <h3 class="title">五月份愛的講堂空間檔期，現正開放預約</h3>
+        <div class="byline">by 場地組</div>
+      </a>
+      <a class="article-card">
+        <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
+        <div class="meta"><span class="cat c-tag">真愛多多</span><span class="date">2026 / 04 / 18</span></div>
+        <h3 class="title">伯利恆早療中心工程進度：五月最新報告</h3>
+        <div class="byline">by 真愛多多專案</div>
+      </a>
+      <a class="article-card">
+        <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
+        <div class="meta"><span class="cat c-tag">慈善身影</span><span class="date">2026 / 04 / 12</span></div>
+        <h3 class="title">紳士企業家薛伯輝百年回顧：那個用書店撐起公益的男人</h3>
+        <div class="byline">by 編輯部</div>
+      </a>
+    </div>
+
+    <div class="view-more-wrap">
+      <a class="view-more-btn" href="#">View More</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRENDING: magazine spread (1 big + 4 small) ===== -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="title-row">
+        <h2 class="section-title">熱門閱讀</h2>
+      </div>
+      <p class="subtitle"><span>Trending</span></p>
+    </header>
+
+    <div class="trend-spread">
+      <a class="trend-feature" href="#">
+        <figure class="trend-feature-img has-loading-spin">
+          <span class="img-fill"></span>
+          <figcaption class="trend-rank">01</figcaption>
+        </figure>
+        <div class="meta"><span class="cat c-tag">真愛多多</span><span class="date">2026 / 04 / 12</span></div>
+        <h3>「早起步、不放手」：甘惠忠神父的五十年共融之路</h3>
+        <p class="lead">奉獻台灣特教逾半世紀，從台南菁寮到後甲，那一份「永遠的溫柔倔強」，成為慢飛家庭間口耳相傳的指南。</p>
+      </a>
+
+      <div class="trend-list">
+        <a class="trend-item" href="#">
+          <span class="rk">02</span>
+          <div class="body">
+            <div class="meta"><span class="cat">公益行動</span><span class="date">2026 / 03 / 28</span></div>
+            <h4>當美學走進偏鄉教室：花蓮玉里駐校計畫第三年回顧</h4>
+          </div>
+          <div class="thumb"></div>
+        </a>
+        <a class="trend-item" href="#">
+          <span class="rk">03</span>
+          <div class="body">
+            <div class="meta"><span class="cat">慈善身影</span><span class="date">2026 / 03 / 14</span></div>
+            <h4>薛伯輝先生與敦煌書店：一家書店如何撐起一個公益基金會</h4>
+          </div>
+          <div class="thumb"></div>
+        </a>
+        <a class="trend-item" href="#">
+          <span class="rk">04</span>
+          <div class="body">
+            <div class="meta"><span class="cat">搖籃咖啡</span><span class="date">2026 / 03 / 02</span></div>
+            <h4>專訪｜在搖籃咖啡學沖咖啡的小宇，今天滿一年了</h4>
+          </div>
+          <div class="thumb"></div>
+        </a>
+        <a class="trend-item" href="#">
+          <span class="rk">05</span>
+          <div class="body">
+            <div class="meta"><span class="cat">公益行動</span><span class="date">2026 / 02 / 25</span></div>
+            <h4>原生藝術：自閉症青年的畫，正在被世界看見</h4>
+          </div>
+          <div class="thumb"></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="view-more-wrap">
+      <a class="view-more-btn" href="#">View More</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FIVE ACTIONS — horizontal stripes ===== -->
+<section class="section">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="title-row">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span>
+        <h2 class="section-title">五大公益行動</h2>
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span>
+      </div>
+      <p class="subtitle"><span>Special Issue</span></p>
+    </header>
+
+    <div class="actions-stack">
+      <a class="action-row" href="#">
+        <span class="num">01</span>
+        <div class="body">
+          <span class="cat">Transition</span>
+          <h3>特殊生轉銜職場</h3>
+          <p>陪伴特殊孩子走入職場，從培訓、媒合到陪同上工，建立自立的尊嚴。</p>
+        </div>
+        <div class="thumb has-loading-spin"></div>
+        <span class="arr">了解更多</span>
+      </a>
+      <a class="action-row" href="#">
+        <span class="num">02</span>
+        <div class="body">
+          <span class="cat">Outsider Art</span>
+          <h3>自閉症原生藝術</h3>
+          <p>看見每一份獨特，從藝術中綻放天賦，並協助作品走入展覽與市場。</p>
+        </div>
+        <div class="thumb has-loading-spin"></div>
+        <span class="arr">了解更多</span>
+      </a>
+      <a class="action-row" href="#">
+        <span class="num">03</span>
+        <div class="body">
+          <span class="cat">Aesthetic Edu.</span>
+          <h3>偏鄉美學教育</h3>
+          <p>把美感與文化帶進偏遠校園，每年駐校陪伴數百位孩子。</p>
+        </div>
+        <div class="thumb has-loading-spin"></div>
+        <span class="arr">了解更多</span>
+      </a>
+      <a class="action-row" href="#">
+        <span class="num">04</span>
+        <div class="body">
+          <span class="cat">Music</span>
+          <h3>奧兒福音樂會</h3>
+          <p>音樂為橋，讓共融的聲音被聽見，每年免費售票邀請大眾共享。</p>
+        </div>
+        <div class="thumb has-loading-spin"></div>
+        <span class="arr">了解更多</span>
+      </a>
+      <a class="action-row" href="#">
+        <span class="num">05</span>
+        <div class="body">
+          <span class="cat">Elder Care</span>
+          <h3>老人服務</h3>
+          <p>陪伴長者度過晚年，溫柔守護每一段時光與每一份記憶。</p>
+        </div>
+        <div class="thumb has-loading-spin"></div>
+        <span class="arr">了解更多</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SPOTLIGHT 真愛多多 (feature-card + 60×3 red bar + star icon) ===== -->
+<section class="section">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="title-row">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 17l-6.18 3.25L7 13.74 2 9.27l6.91-1L12 2l3.09 6.27L22 9.27l-5 4.47 1.18 6.51z"/></svg></span>
+        <h2 class="section-title">真愛多多 Spotlight</h2>
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 17l-6.18 3.25L7 13.74 2 9.27l6.91-1L12 2l3.09 6.27L22 9.27l-5 4.47 1.18 6.51z"/></svg></span>
+      </div>
+      <p class="subtitle"><span>Featured Project</span></p>
+    </header>
+
+    <a class="spot-card" href="#">
+      <div class="spot-img has-loading-spin">
+        <span class="img-fill"></span>
+        <div class="img-meta"><span class="pill">Spotlight</span><span>真愛多多 ／ 2026</span></div>
+        <span class="lnk">youtu.be/P8aMCSEXvLk</span>
+      </div>
+      <div class="spot-text">
+        <div class="eyebrow">伯利恆早療中心</div>
+        <h2>讓每一個慢飛的孩子<br>都能抬起頭來</h2>
+        <p class="quote">「<em>早起步，不放手</em> — 讓每一個慢飛的孩子，都能抬起頭來，看看這美麗的世界。」</p>
+        <div class="ctas">
+          <span class="btn-r">支持本專案</span>
+          <span class="btn-l">看完整故事</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ===== ABOUT (3 cols, people cards keep description) ===== -->
+<section class="section">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="title-row">
+        <h2 class="section-title">關於我們</h2>
+      </div>
+      <p class="subtitle"><span>About</span></p>
+    </header>
+
+    <div class="article-grid is-about">
+      <a class="article-card is-about">
+        <figure class="article-card-image has-loading-spin">
+          <span class="img-fill"></span>
+          <span class="since-mark">
+            <span class="lbl">Since</span>
+            <span class="yr">1975</span>
+          </span>
+        </figure>
+        <div class="meta"><span class="cat c-tag">基金會</span><span class="date">50 年公益</span></div>
+        <h3 class="title">薛伯輝基金會 ｜ 愛與希望的延續</h3>
+        <p class="description">1975 年成立，2008 年陳惠如女士為紀念先生薛伯輝先生而更名，2013 年轉隸於教育部。延續對社會弱勢的溫柔守護。</p>
+        <div class="byline">1975 成立 ・ 2008 更名 ・ 2013 轉隸教育部</div>
+      </a>
+      <a class="article-card is-portrait-1">
+        <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
+        <div class="meta"><span class="cat c-tag">慈善身影</span><span class="date">A Gentleman</span></div>
+        <h3 class="title">薛伯輝先生 ｜ 紳士企業家的慈善身影</h3>
+        <p class="description">從敦煌書店到基金會，回顧薛伯輝先生五十年的公益足跡，與公益和慈善的步履從未停下。</p>
+        <div class="byline">by 編輯部</div>
+      </a>
+      <a class="article-card is-portrait-2">
+        <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
+        <div class="meta"><span class="cat c-tag">慈善身影</span><span class="date">Father of Slow Angels</span></div>
+        <h3 class="title">甘惠忠神父 ｜ 慢飛天使的父親</h3>
+        <p class="description">奉獻台灣特教逾半世紀，「早起步、不放手」的精神在台灣慢飛家庭間生根。</p>
+        <div class="byline">by 編輯部</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SUPPORT (3 cols, no description) ===== -->
+<section class="section">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="title-row">
+        <h2 class="section-title">支持我們的另一種方式</h2>
+      </div>
+      <p class="subtitle"><span>Support</span></p>
+    </header>
+
+    <div class="article-grid is-support">
+      <a class="article-card">
+        <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
+        <div class="meta"><span class="cat c-tag">Shop</span><span class="date">文創公益</span></div>
+        <h3 class="title">文創小舖</h3>
+        <span class="article-action">逛逛小舖 →</span>
+      </a>
+      <a class="article-card">
+        <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
+        <div class="meta"><span class="cat c-tag">Cafe</span><span class="date">共融職場</span></div>
+        <h3 class="title">搖籃咖啡</h3>
+        <span class="article-action">了解更多 →</span>
+      </a>
+      <a class="article-card">
+        <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
+        <div class="meta"><span class="cat c-tag">Venue</span><span class="date">愛的講堂</span></div>
+        <h3 class="title">場地租借</h3>
+        <span class="article-action">查看場地 →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DONATE CARD (contained, not full-bleed) ===== -->
+<section class="section">
+  <div class="wrap">
+    <div class="donate-card">
+      <div class="donate-text">
+        <div class="eyebrow">Donate</div>
+        <h2>你的陪伴<br>是他們向前的力量</h2>
+        <p>每一筆捐款，都是延續愛與希望的支持。讓我們一起，陪伴每一個慢飛的孩子，看見更美麗的世界。</p>
+        <div class="actions">
+          <a class="btn-w">線上捐款</a>
+          <a class="btn-wo">月捐專案</a>
+        </div>
+      </div>
+      <div class="donate-stats">
+        <div class="donate-fact">
+          <div class="n">17<sub>年</sub></div>
+          <div class="t">持續陪伴慢飛家庭</div>
+        </div>
+        <div class="donate-fact">
+          <div class="n">5<sub>大</sub></div>
+          <div class="t">公益行動同步進行</div>
+        </div>
+        <div class="donate-fact">
+          <div class="n">1,200<sub>+</sub></div>
+          <div class="t">受益家庭與孩子</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER (dark + full info) ===== -->
+<footer class="app-footer">
+  <div class="footer-info">
+    <p class="footer-address">10043 台北市中正區博愛路 154 號 6 樓</p>
+    <p class="footer-contact">
+      <span><span class="lbl">TEL</span>(02) 2381-6678</span>
+      <span class="dot">·</span>
+      <span><span class="lbl">FAX</span>(02) 2381-3171</span>
+      <span class="dot">·</span>
+      <a href="mailto:love.hopech@gmail.com">love.hopech@gmail.com</a>
+    </p>
+    <div class="footer-giro">
+      <span class="giro-label">郵政劃撥</span>
+      <span class="giro-cell">帳號<b>50067771</b></span>
+      <span class="giro-sep">｜</span>
+      <span class="giro-cell">戶名<b>財團法人薛伯輝基金會</b></span>
+    </div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#">關於我們</a></li>
+    <li><a href="#">公益行動</a></li>
+    <li><a href="#">慈善身影</a></li>
+    <li><a href="#">真愛多多</a></li>
+    <li><a href="#">最新消息</a></li>
+    <li><a href="#">場地租借</a></li>
+    <li><a href="#">文創小舖</a></li>
+    <li><a href="#">搖籃咖啡</a></li>
+    <li><a href="#">聯絡我們</a></li>
+    <li><a href="#">隱私權政策</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Love Hope Foundation. All Rights Reserved.</p>
+</footer>
+
+<!-- ===== BACK TO TOP ===== -->
+<a class="cd-top" id="cdTop" href="#" title="回到頂部" aria-label="back to top">↑</a>
+
+<!-- ===== COOKIE ===== -->
+<div class="cookie" id="cookieBanner">
+  <div class="ctext">
+    <strong>Cookie 政策提示</strong>
+    本網站使用 Cookie 以提供更好的瀏覽體驗。繼續瀏覽即表示您同意 Cookie 使用。<a href="#">More info</a>
+  </div>
+  <button onclick="document.getElementById('cookieBanner').style.display='none'">同意並關閉</button>
+</div>
+
+<script>
+  // ============ HERO BANNER carousel (center-focus + side-peek, infinite) ============
+  (function(){
+    const stage  = document.getElementById('bannerStage');
+    const track  = document.getElementById('bannerTrack');
+    const real   = Array.from(track.querySelectorAll('.banner-slide'));
+    const dots   = document.querySelectorAll('.banner-dots button');
+    const prev   = stage.querySelector('.banner-arrow.prev');
+    const next   = stage.querySelector('.banner-arrow.next');
+    const GAP    = 20;
+    const N      = real.length;
+
+    const makeClone = s => { const c = s.cloneNode(true); c.classList.remove('on'); c.dataset.clone = '1'; return c; };
+    real.forEach(s => track.appendChild(makeClone(s)));
+    [...real].reverse().forEach(s => track.insertBefore(makeClone(s), track.firstChild));
+    const slides = track.querySelectorAll('.banner-slide');
+
+    let pos = N;
+    let timer, animating = false;
+
+    function translate(animate){
+      const stageW = stage.clientWidth;
+      const slideW = slides[0].getBoundingClientRect().width;
+      const offset = (stageW / 2) - (slideW / 2) - pos * (slideW + GAP);
+      track.style.transition = animate ? '' : 'none';
+      track.style.transform  = 'translateX(' + offset + 'px)';
+      if (!animate){ void track.offsetWidth; track.style.transition = ''; }
+    }
+    function paintActive(){
+      const realIdx = ((pos - N) % N + N) % N;
+      slides.forEach((s, i) => s.classList.toggle('on', i === pos));
+      dots.forEach((d, i)   => d.classList.toggle('on', i === realIdx));
+    }
+    function step(delta){
+      if (animating) return;
+      animating = true; pos += delta; translate(true); paintActive();
+    }
+    track.addEventListener('transitionend', e => {
+      if (e.propertyName !== 'transform') return;
+      animating = false;
+      if (pos < N)        { pos += N; translate(false); paintActive(); }
+      else if (pos >= 2*N){ pos -= N; translate(false); paintActive(); }
+    });
+    function autoplay(){ clearInterval(timer); timer = setInterval(() => step(1), 5000); }
+    function jumpTo(realIdx){
+      if (animating) return;
+      animating = true; pos = N + realIdx; translate(true); paintActive();
+    }
+    dots.forEach(d => d.addEventListener('click', () => { jumpTo(parseInt(d.dataset.idx, 10)); autoplay(); }));
+    prev.addEventListener('click', () => { step(-1); autoplay(); });
+    next.addEventListener('click', () => { step(1);  autoplay(); });
+    window.addEventListener('resize', () => translate(false));
+    requestAnimationFrame(() => { translate(false); paintActive(); autoplay(); });
+  })();
+
+  // ============ BACK TO TOP ============
+  (function(){
+    const btn = document.getElementById('cdTop');
+    if (!btn) return;
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        btn.classList.toggle('on', window.scrollY > 600);
+        ticking = false;
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
