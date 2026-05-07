@@ -63,13 +63,6 @@
   .app-nav a::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-1px;width:0;height:2px;background:var(--brand);transition:width .35s var(--ease)}
   .app-nav a:hover::after,.app-nav a.active::after{width:24px}
 
-  /* ============ PAGE HEADER (single banner-style hero, simpler than carousel) ============ */
-  .page-hero{padding:24px 0 0;background:#fff;position:relative}
-  .page-hero-stage{max-width:1050px;margin:0 auto;aspect-ratio:1050/420;background:linear-gradient(135deg,#5a3a2a 0%,#1a0808 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
-  .page-hero-stage::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.65) 100%);pointer-events:none;z-index:1}
-  .page-hero-stage .h-eyebrow{position:relative;z-index:2;padding:0 56px;font-family:"IBM Plex Sans",sans-serif;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#fff;opacity:.85;margin-bottom:16px;font-weight:600}
-  .page-hero-stage h1{position:relative;z-index:2;padding:0 56px 48px;font-size:42px;line-height:1.4;font-weight:700;color:#fff;letter-spacing:.06em}
-
   /* ============ SECTION + CENTERED HEADER ============ */
   section.section{padding:72px 0}
   section.section.is-first{padding-top:48px}
@@ -106,8 +99,9 @@
   .venue-row .arr::after{content:"  →"}
   .venue-row:hover .arr{color:var(--brand);border-color:var(--brand)}
 
-  /* ============ VENUE DETAIL (spot-card pattern stacked) ============ */
-  .venue-detail{display:grid;grid-template-columns:1fr 1fr;background:var(--line-softer);align-items:stretch;border-radius:4px;overflow:hidden;margin-bottom:32px}
+  /* ============ VENUE DETAIL (spot-card pattern stacked, high-key hover) ============ */
+  .venue-detail{display:grid;grid-template-columns:1fr 1fr;background:var(--line-softer);align-items:stretch;border-radius:4px;overflow:hidden;margin-bottom:32px;text-decoration:none;color:inherit;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+  .venue-detail:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--ink)}
   .venue-detail:last-child{margin-bottom:0}
   .venue-detail.is-flip{grid-template-columns:1fr 1fr}
   .venue-detail.is-flip .v-img{order:2}
@@ -116,7 +110,8 @@
   .v-img.is-aesthetic{background:linear-gradient(135deg,#a89070,#604530)}
   .v-img.is-kitchen{background:linear-gradient(135deg,#c8a880,#5a4830)}
   .v-img .img-meta{position:absolute;top:24px;left:24px;font-family:"IBM Plex Sans","Noto Sans TC",sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#fff;display:flex;gap:14px;align-items:center;z-index:2}
-  .v-img .img-meta .pill{background:var(--brand);padding:6px 12px;font-weight:700;letter-spacing:.25em}
+  .v-img .img-meta .pill{background:transparent;border:1.5px solid #fff;color:#fff;padding:5px 12px;font-weight:700;letter-spacing:.25em;transition:background .5s var(--ease),border-color .5s var(--ease),color .5s var(--ease)}
+  .venue-detail:hover .v-img .img-meta .pill{background:var(--brand);border-color:var(--brand);color:#fff}
   .v-img .lnk{position:absolute;bottom:24px;left:24px;font-family:"IBM Plex Sans",sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);z-index:2}
   .v-text{padding:56px 64px;display:flex;flex-direction:column;justify-content:center}
   .v-text .eyebrow{font-family:"Noto Sans TC",sans-serif;font-size:14px;letter-spacing:.2em;color:var(--brand);font-weight:500;margin-bottom:16px}
@@ -129,12 +124,12 @@
   .v-text .specs .spec-val{font-size:14px;line-height:1.7;color:var(--ink);font-weight:500}
   .v-text .specs ul{display:flex;flex-direction:column;gap:4px}
 
-  /* ============ PDF DOWNLOAD BLOCK ============ */
-  .pdf-block{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;padding:40px 48px;background:var(--line-softer);border-radius:4px}
-  .pdf-text .pdf-tag{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--brand);font-weight:700;display:block;margin-bottom:10px}
-  .pdf-text h3{font-size:24px;font-weight:700;letter-spacing:.05em;color:var(--ink);margin-bottom:10px}
-  .pdf-text p{font-size:14px;line-height:1.85;color:var(--charcoal);letter-spacing:.04em}
-  .pdf-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:var(--brand);color:#fff;font-family:"IBM Plex Sans","Noto Sans TC",sans-serif;font-size:13px;letter-spacing:.15em;font-weight:600;border-radius:9999px;transition:background .5s var(--ease);white-space:nowrap}
+  /* ============ PDF DOWNLOAD STRIP (thin hairline row, demoted) ============ */
+  .pdf-block{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;padding:24px 0;border-top:1px solid var(--charcoal);border-bottom:1px solid var(--charcoal)}
+  .pdf-text{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap}
+  .pdf-text .pdf-tag{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--brand);font-weight:700}
+  .pdf-text h3{font-size:18px;font-weight:600;letter-spacing:.04em;color:var(--ink);margin:0}
+  .pdf-btn{display:inline-flex;align-items:center;gap:10px;padding:10px 22px;background:var(--brand);color:#fff;font-family:"IBM Plex Sans","Noto Sans TC",sans-serif;font-size:12px;letter-spacing:.15em;font-weight:600;border-radius:9999px;transition:background .5s var(--ease);white-space:nowrap}
   .pdf-btn::after{content:"↓"}
   .pdf-btn:hover{background:var(--brand-dark)}
 
@@ -174,41 +169,29 @@
     .wrap,.wrap-narrow{padding:0 24px;max-width:1152px}
   }
   @media (max-width: 1024px){
-    .page-hero-stage{aspect-ratio:1050/520}
-    .page-hero-stage h1{font-size:32px;padding:0 32px 36px}
-    .page-hero-stage .h-eyebrow{padding:0 32px}
-    .venue-row{grid-template-columns:80px 1fr 200px 100px;gap:18px}
-    .venue-row .num{font-size:60px}
     .venue-detail{grid-template-columns:1fr}
     .venue-detail.is-flip .v-img{order:1}
     .venue-detail.is-flip .v-text{order:2}
     .v-img{min-height:340px}
     .v-text{padding:40px 32px}
-    .pdf-block{grid-template-columns:1fr;gap:24px;padding:32px}
   }
   @media (max-width: 720px){
-    .app-header .row,.app-nav .row,.page-hero,section.section{padding-left:16px;padding-right:16px}
+    .app-header .row,.app-nav .row,section.section{padding-left:16px;padding-right:16px}
     section.section{padding:56px 16px}
     .app-header .row{grid-template-columns:auto 1fr auto;gap:14px;padding:14px 16px}
     .header-socials,.header-utility{display:none}
     .donate-btn{padding:9px 16px;font-size:11px;letter-spacing:.15em}
     .app-nav .row{justify-content:flex-start;overflow-x:auto;height:48px;gap:0;padding:0 16px;flex-wrap:nowrap}
     .app-nav a{padding:0 14px;font-size:13px;white-space:nowrap;height:48px}
-    .page-hero{padding:0}
-    .page-hero-stage{aspect-ratio:5/4}
-    .page-hero-stage h1{font-size:24px;letter-spacing:.04em;padding:0 20px 28px}
-    .page-hero-stage .h-eyebrow{padding:0 20px}
     .section-head h2.section-title{font-size:22px;letter-spacing:.04em}
     .section-head .subtitle{font-size:11px;max-width:320px}
-    .venue-row{grid-template-columns:60px 1fr;gap:14px;padding:24px 0}
-    .venue-row .thumb,.venue-row .arr{display:none}
-    .venue-row .num{font-size:48px}
-    .venue-row h3{font-size:18px}
     .v-text{padding:32px 20px}
     .v-text h2{font-size:22px;letter-spacing:.03em}
-    .step:nth-last-child(-n+2){border-bottom:none}
     .closing-quote{padding:48px 0}
     .closing-quote q{font-size:18px;letter-spacing:.04em;line-height:1.9}
+    .pdf-block{grid-template-columns:1fr;gap:14px;padding:18px 0;text-align:center}
+    .pdf-text{justify-content:center;flex-wrap:wrap;gap:8px 14px}
+    .pdf-btn{margin:0 auto}
     .app-footer{padding:48px 0 24px}
     .app-footer .footer-giro{padding:14px 16px;gap:10px}
   }
@@ -254,70 +237,10 @@
   </div>
 </nav>
 
-<!-- ===== PAGE HERO ===== -->
-<section class="page-hero">
-  <div class="page-hero-stage has-loading-spin">
-    <p class="h-eyebrow">Venue Rental</p>
-    <h1>場地租借</h1>
-  </div>
-</section>
-
-<!-- ===== ① VENUE OVERVIEW (action-row pattern) ===== -->
-<section class="section is-first">
-  <div class="wrap">
-    <header class="section-head">
-      <div class="title-row">
-        <h2 class="section-title">三個空間</h2>
-      </div>
-      <p class="subtitle"><span>Spaces</span></p>
-    </header>
-
-    <div class="venues-stack">
-      <a class="venue-row" href="#venue-lecture">
-        <span class="num">01</span>
-        <div class="body">
-          <span class="tagline">談教養，凡事皆教養。</span>
-          <h3>愛的講堂</h3>
-          <span class="meta">約 35 坪 ・ <b>100–120 人</b></span>
-        </div>
-        <div class="thumb has-loading-spin"></div>
-        <span class="arr">查看詳情</span>
-      </a>
-      <a class="venue-row" href="#venue-aesthetic">
-        <span class="num">02</span>
-        <div class="body">
-          <span class="tagline">談美學，生活即美學。</span>
-          <h3>惠如美學教室</h3>
-          <span class="meta">10 坪 ・ <b>10–20 人</b></span>
-        </div>
-        <div class="thumb has-loading-spin"></div>
-        <span class="arr">查看詳情</span>
-      </a>
-      <a class="venue-row" href="#venue-kitchen">
-        <span class="num">03</span>
-        <div class="body">
-          <span class="tagline">輕食，是一種簡單哲學。</span>
-          <h3>遇見輕食</h3>
-          <span class="meta">白色家用廚房 ・ <b>10–30 人</b></span>
-        </div>
-        <div class="thumb has-loading-spin"></div>
-        <span class="arr">查看詳情</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== ② VENUE DETAIL × 3 ===== -->
-<section class="section" style="padding-top:0">
-  <div class="wrap">
-    <header class="section-head">
-      <div class="title-row">
-        <h2 class="section-title">場地深度介紹</h2>
-      </div>
-      <p class="subtitle"><span>Venue Detail</span></p>
-    </header>
-
-    <article class="venue-detail" id="venue-lecture">
+<!-- ===== VENUE SPREADS (spot-card pattern, alternating, high-key hover) ===== -->
+<section class="section">
+  <div class="wrap-narrow">
+    <a class="venue-detail" href="venue-lecture.html" id="venue-lecture">
       <div class="v-img has-loading-spin">
         <div class="img-meta"><span class="pill">01</span><span>愛的講堂</span></div>
         <span class="lnk">image / 王采元 攝影</span>
@@ -327,9 +250,9 @@
         <h2>愛的講堂</h2>
         <p class="desc">在這約 35 坪的空間裡可容納 100~120 人，可舉辦演講、座談會、研習、教學、小型音樂會、小型舞蹈發表會、藝文展覽、美學教育等活動。</p>
       </div>
-    </article>
+    </a>
 
-    <article class="venue-detail is-flip" id="venue-aesthetic">
+    <a class="venue-detail is-flip" href="venue-aesthetic.html" id="venue-aesthetic">
       <div class="v-img is-aesthetic has-loading-spin">
         <div class="img-meta"><span class="pill">02</span><span>惠如美學教室</span></div>
         <span class="lnk">image / 王采元 攝影</span>
@@ -339,9 +262,9 @@
         <h2>惠如美學教室</h2>
         <p class="desc">10 坪區間可容納 10~20 人，凝聚更多共識。可舉辦小型的會議、座談與美學教育等活動。</p>
       </div>
-    </article>
+    </a>
 
-    <article class="venue-detail" id="venue-kitchen">
+    <a class="venue-detail" href="venue-kitchen.html" id="venue-kitchen">
       <div class="v-img is-kitchen has-loading-spin">
         <div class="img-meta"><span class="pill">03</span><span>遇見輕食</span></div>
         <span class="lnk">image / 王采元 攝影</span>
@@ -351,7 +274,7 @@
         <h2>遇見輕食</h2>
         <p class="desc">白色家用廚房，用清爽無負擔的食材分享健康。可容納 10~30 人，舉辦小型烹飪教學、小型社團活動、家庭溫馨聚會等活動。</p>
       </div>
-    </article>
+    </a>
   </div>
 </section>
 
@@ -362,17 +285,10 @@
       <div class="pdf-text">
         <span class="pdf-tag">Application</span>
         <h3>使用辦法</h3>
-        <p>場地費率、設備加購、申請流程、取消政策、注意事項與繳費帳戶等完整資訊，請參閱使用辦法。</p>
       </div>
       <a class="pdf-btn" href="#">下載使用辦法 PDF</a>
     </div>
   </div>
-</section>
-
-<!-- ===== CLOSING QUOTE ===== -->
-<section class="closing-quote">
-  <q>我們準備好了！等待老朋友與新朋友來到這繁華城市中寧靜而優雅的停靠站，只要您有需要，大門永遠為您而開。</q>
-  <p class="sig">薛伯輝基金會</p>
 </section>
 
 <!-- ===== FOOTER ===== -->
