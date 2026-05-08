@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <style>
   :root{
     --brand:#8C0A0A;
@@ -20,7 +20,7 @@
     --bg:#ffffff;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:var(--bg);color:var(--body);font-family:"Noto Sans TC","IBM Plex Sans",-apple-system,sans-serif;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+  html,body{background:var(--bg);color:var(--body);font-family:"Noto Sans TC","IBM Plex Serif",-apple-system,sans-serif;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
   body{overflow-x:hidden}
   h1,h2,h3,h4,h5{color:var(--ink);font-weight:700;line-height:1.3}
   a{color:inherit;text-decoration:none}
@@ -28,7 +28,7 @@
   button{cursor:pointer;font-family:inherit;border:none;background:none;color:inherit}
   ul{list-style:none}
 
-  .lat{font-family:"IBM Plex Sans",sans-serif}
+  .lat{font-family:"IBM Plex Serif",sans-serif}
   .wrap{max-width:1320px;margin:0 auto;padding:0 40px}
 
   /* ============ HEADER ============ */
@@ -42,10 +42,10 @@
   .header-socials a{width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);transition:color .2s}
   .header-socials a:hover{color:var(--brand)}
   .header-utility{display:flex;align-items:center;gap:14px;padding-left:18px;border-left:1px solid var(--line)}
-  .header-utility a{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);font-weight:600;transition:color .2s}
+  .header-utility a{font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);font-weight:600;transition:color .2s}
   .header-utility a:hover{color:var(--brand)}
   .donate-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;background:var(--brand);color:#fff;font-size:13px;letter-spacing:3px;font-weight:500;transition:background .2s}
-  .donate-btn::after{content:"→";font-family:"IBM Plex Sans",sans-serif;font-weight:400}
+  .donate-btn::after{content:"→";font-family:"IBM Plex Serif",sans-serif;font-weight:400}
   .donate-btn:hover{background:var(--brand-dark)}
 
   /* ============ NAV ============ */
@@ -53,9 +53,7 @@
   .app-nav .row{display:flex;justify-content:center;align-items:stretch;height:54px}
   .app-nav a{display:flex;align-items:center;padding:0 22px;font-size:14px;font-weight:500;color:var(--ink);position:relative;letter-spacing:2px;transition:color .15s}
   .app-nav a:not(:last-child)::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:14px;background:var(--line)}
-  .app-nav a::before{content:"";position:absolute;left:22px;right:22px;bottom:14px;height:0;background:var(--brand);transition:height .2s,opacity .2s;opacity:0}
-  .app-nav a:hover::before{height:1px;opacity:.5}
-  .app-nav a.active::before{height:2px;opacity:1}
+  .app-nav a:hover,.app-nav a.active{color:var(--brand)}
 
   /* ============ HERO BANNER (La Vie banner-slider 風格) ============ */
   .banner-slider{padding:32px 0 0;background:#fff;position:relative}
@@ -69,7 +67,7 @@
   .banner-slide-2{background:linear-gradient(135deg,#2a2a2a 0%,#0a0a0a 100%)}
   .banner-slide-3{background:linear-gradient(135deg,#3a1818 0%,#1a0808 100%)}
 
-  .banner-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.85);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:20px;font-family:"IBM Plex Sans",sans-serif;line-height:1;box-shadow:0 2px 10px rgba(0,0,0,.12);cursor:pointer;opacity:.5;transition:opacity .2s,background .2s,transform .2s;border:0}
+  .banner-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.85);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:20px;font-family:"IBM Plex Serif",sans-serif;line-height:1;box-shadow:0 2px 10px rgba(0,0,0,.12);cursor:pointer;opacity:.5;transition:opacity .2s,background .2s,transform .2s;border:0}
   .banner-arrow:hover{opacity:1;background:#fff;transform:translateY(-50%) scale(1.05)}
   .banner-arrow.prev{left:calc((100% - 1050px)/4 + 7rem)}
   .banner-arrow.next{right:calc((100% - 1050px)/4 + 7rem)}
@@ -80,13 +78,14 @@
 
   /* ============ SECTION + 中英雙層標頭 (La Vie 主節奏) ============ */
   section.section{padding:80px 0}
+  section.section.is-paper{background:#F8F4EE}
   .banner-slider + section.section{padding-top:44px}
   .section-head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--ink);padding-bottom:18px;margin-bottom:48px}
   .section-head .titles{display:flex;flex-direction:column;gap:8px}
   .section-head h2.section-title{font-size:30px;font-weight:700;color:var(--ink);letter-spacing:4px;line-height:1.2}
-  .section-head .subtitle{font-family:"IBM Plex Sans",sans-serif;font-size:12px;letter-spacing:5px;color:var(--brand);font-weight:600;text-transform:uppercase;display:flex;align-items:center;gap:14px}
+  .section-head .subtitle{font-family:"IBM Plex Serif",sans-serif;font-size:12px;letter-spacing:5px;color:var(--brand);font-weight:600;text-transform:uppercase;display:flex;align-items:center;gap:14px}
   .section-head .subtitle::before{content:"";width:24px;height:1px;background:var(--brand)}
-  .s-more{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);font-weight:600;display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid var(--ink);padding-bottom:4px;transition:.2s;align-self:flex-end;padding-bottom:6px}
+  .s-more{font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);font-weight:600;display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid var(--ink);padding-bottom:4px;transition:.2s;align-self:flex-end;padding-bottom:6px}
   .s-more:hover{color:var(--brand);border-color:var(--brand)}
 
   /* ============ UTILITIES (La Vie has-* helpers) ============ */
@@ -98,7 +97,7 @@
   .has-loading-spin{position:relative}
   .has-loading-spin::before{content:"";position:absolute;top:50%;left:50%;width:32px;height:32px;margin:-16px 0 0 -16px;border-radius:50%;border:2px solid transparent;border-top-color:rgba(255,255,255,.6);border-right-color:rgba(255,255,255,.6);animation:spin 1s linear infinite;opacity:.6;z-index:0}
   @keyframes spin{to{transform:rotate(360deg)}}
-  .c-tag{display:inline-block;font-family:"IBM Plex Sans",sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--brand);font-weight:700}
+  .c-tag{display:inline-block;font-family:"IBM Plex Serif",sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--brand);font-weight:700}
 
   /* La Vie 灰色偏移底塊 */
   .has-before-background{position:relative;isolation:isolate}
@@ -128,19 +127,20 @@
   .article-grid.is-support .article-card:nth-child(3) .article-card-image{background:linear-gradient(135deg,#b8a890,#5a4830)}
 
   .article-card-image .since-mark{position:absolute;bottom:18px;left:18px;color:#fff;z-index:2}
-  .article-card-image .since-mark .lbl{font-family:"IBM Plex Sans",sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;display:block;opacity:.7;margin-bottom:4px;font-weight:600}
-  .article-card-image .since-mark .yr{font-family:"IBM Plex Sans",sans-serif;font-size:38px;font-weight:800;letter-spacing:-1px;line-height:1}
-  .article-card .meta{display:flex;gap:12px;font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .article-card-image .since-mark .lbl{font-family:"IBM Plex Serif",sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;display:block;opacity:.7;margin-bottom:4px;font-weight:600}
+  .article-card-image .since-mark .yr{font-family:"IBM Plex Serif",sans-serif;font-size:38px;font-weight:800;letter-spacing:-1px;line-height:1}
+  .article-card .meta{display:flex;gap:12px;font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
   .article-card .meta .cat{color:var(--brand);font-weight:700}
   .article-card .title{font-size:18px;line-height:1.6;font-weight:500;letter-spacing:.5px;color:var(--ink);margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;transition:color .2s}
   .article-card:hover .title{color:var(--brand)}
   .article-card .description{font-size:14px;line-height:1.85;color:var(--body);margin:0 0 14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .article-card .byline{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:1.5px;color:var(--muted)}
-  .article-card .article-action{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);font-weight:600;border-bottom:1px solid var(--ink);padding-bottom:3px;display:inline-block;transition:.2s}
+  .article-card .byline{font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:1.5px;color:var(--muted)}
+  .article-card .article-action{font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);font-weight:600;border-bottom:1px solid var(--ink);padding-bottom:3px;display:inline-block;transition:.2s}
   .article-card:hover .article-action{color:var(--brand);border-color:var(--brand)}
 
   .view-more-wrap{display:flex;justify-content:center}
-  .view-more-btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 32px;border:1px solid var(--line);color:var(--ink);font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;border-radius:99px;transition:all .2s;background:#fff}
+  .view-more-btn{display:inline-flex;align-items:center;gap:10px;justify-content:center;padding:13px 32px;border:1px solid var(--ink);color:var(--ink);font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;transition:all .2s;background:#fff}
+  .view-more-btn::after{content:"→"}
   .view-more-btn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
 
   /* ============ TRENDING: 輪播 + 大數字角標 (La Vie 標誌做法) ============ */
@@ -153,7 +153,8 @@
   .trend-img .img-fill{position:absolute;inset:0;background:inherit;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
   .trend-card:hover .trend-img .img-fill{transform:scale(1.05)}
   .trend-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.55) 100%);pointer-events:none;z-index:1}
-  .trend-img .rank{position:absolute;left:12px;bottom:-12px;font-family:"IBM Plex Sans",sans-serif;font-size:120px;font-weight:800;line-height:.85;color:#fff;letter-spacing:-4px;text-shadow:0 4px 24px rgba(0,0,0,.4);z-index:2}
+  .trend-img .rank{position:absolute;left:14px;top:14px;font-family:"IBM Plex Serif",sans-serif;font-size:11px;font-weight:600;line-height:1;color:#fff;letter-spacing:3px;text-transform:uppercase;z-index:2;display:inline-flex;align-items:baseline;gap:4px}
+  .trend-img .rank::before{content:"No.";opacity:.7;font-weight:400;font-style:italic}
   .trend-card:nth-child(2) .trend-img{background:linear-gradient(135deg,#604530,#2a1808)}
   .trend-card:nth-child(3) .trend-img{background:linear-gradient(135deg,#3a3a3a,#0a0a0a)}
   .trend-card:nth-child(4) .trend-img{background:linear-gradient(135deg,#704830,#2a1a0a)}
@@ -162,11 +163,11 @@
   .trend-card:nth-child(7) .trend-img{background:linear-gradient(135deg,#a89070,#604530)}
   .trend-card:nth-child(8) .trend-img{background:linear-gradient(135deg,#c8a880,#5a4830)}
   .trend-body{padding:22px 4px 0}
-  .trend-body .meta{display:flex;gap:12px;font-family:"IBM Plex Sans",sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .trend-body .meta{display:flex;gap:12px;font-family:"IBM Plex Serif",sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
   .trend-body .cat{color:var(--brand);font-weight:700}
   .trend-body h4{font-size:15px;line-height:1.6;font-weight:500;color:var(--ink);letter-spacing:.5px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;transition:color .2s}
   .trend-card:hover h4{color:var(--brand)}
-  .trend-arrow{position:absolute;top:34%;z-index:5;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid var(--line);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;transition:all .2s;box-shadow:0 4px 14px rgba(0,0,0,.08);font-family:"IBM Plex Sans",sans-serif;line-height:1}
+  .trend-arrow{position:absolute;top:34%;z-index:5;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid var(--line);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;transition:all .2s;box-shadow:0 4px 14px rgba(0,0,0,.08);font-family:"IBM Plex Serif",sans-serif;line-height:1}
   .trend-arrow:hover{background:var(--brand);border-color:var(--brand);color:#fff}
   .trend-arrow.prev{left:-20px}
   .trend-arrow.next{right:-20px}
@@ -178,13 +179,13 @@
   .act .img{aspect-ratio:4/5;position:relative;overflow:hidden;background:linear-gradient(180deg,#5a0808,#1a0202)}
   .act .img .img-fill{position:absolute;inset:0;background:inherit;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
   .act:hover .img .img-fill{transform:scale(1.05)}
-  .act .img .num{position:absolute;top:18px;left:18px;font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:2.5px;color:rgba(255,255,255,.85);font-weight:600;z-index:2}
-  .act .img .lbl{position:absolute;bottom:14px;right:14px;font-family:"IBM Plex Sans",sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.55);z-index:2}
+  .act .img .num{position:absolute;top:18px;left:18px;font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:2.5px;color:rgba(255,255,255,.85);font-weight:600;z-index:2}
+  .act .img .lbl{position:absolute;bottom:14px;right:14px;font-family:"IBM Plex Serif",sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.55);z-index:2}
   .act .body{padding:22px 24px 28px;flex:1;display:flex;flex-direction:column}
-  .act .cat{font-family:"IBM Plex Sans",sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:10px}
+  .act .cat{font-family:"IBM Plex Serif",sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:10px}
   .act h4{font-size:18px;letter-spacing:2px;line-height:1.5;margin-bottom:10px;font-weight:700;color:var(--ink)}
   .act p{font-size:13px;color:var(--muted);line-height:1.8;flex:1}
-  .act .arr{margin-top:14px;font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:2px;color:var(--ink);font-weight:600;text-transform:uppercase}
+  .act .arr{margin-top:14px;font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:2px;color:var(--ink);font-weight:600;text-transform:uppercase}
   .act .arr::after{content:" →"}
   .act:nth-child(2) .img{background:linear-gradient(180deg,#3a3a3a,#0a0a0a)}
   .act:nth-child(3) .img{background:linear-gradient(180deg,#704830,#2a1808)}
@@ -192,15 +193,15 @@
   .act:nth-child(5) .img{background:linear-gradient(180deg,#3a1818,#1a0808)}
 
   /* ============ SPOTLIGHT: 真愛多多 (feature-card 收縮版) ============ */
-  .spot-band{display:grid;grid-template-columns:1fr 1fr;min-height:380px;background:#fff}
-  .spot-img{background:linear-gradient(135deg,#5a0808 0%,#1a0202 100%);position:relative;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;overflow:hidden}
+  .spot-band{display:grid;grid-template-columns:1.4fr 1fr;min-height:440px;background:#fff}
+  .spot-img{background:linear-gradient(135deg,#5a0808 0%,#1a0202 100%);position:relative;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;overflow:hidden}
   .spot-img .img-fill{position:absolute;inset:0;background:inherit}
   .spot-img::before{content:"▶";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.1);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.4);color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;padding-left:5px;z-index:2}
-  .spot-img .meta{position:absolute;top:24px;left:24px;font-family:"IBM Plex Sans",sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#fff;display:flex;gap:12px;align-items:center;z-index:2}
+  .spot-img .meta{position:absolute;top:24px;left:24px;font-family:"IBM Plex Serif",sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#fff;display:flex;gap:12px;align-items:center;z-index:2}
   .spot-img .meta .cat{background:var(--brand);padding:5px 10px;font-weight:700}
-  .spot-img .lnk{position:absolute;bottom:24px;left:24px;font-family:"IBM Plex Sans",sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.6);z-index:2}
+  .spot-img .lnk{position:absolute;bottom:24px;left:24px;font-family:"IBM Plex Serif",sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.6);z-index:2}
   .spot-text{padding:48px 56px;display:flex;flex-direction:column;justify-content:center}
-  .spot-text .label{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+  .spot-text .label{font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:12px}
   .spot-text .label::before{content:"";width:24px;height:1px;background:var(--brand)}
   .spot-text h2{font-size:28px;line-height:1.4;font-weight:700;letter-spacing:2px;margin-bottom:18px;color:var(--ink)}
   .spot-text .quote{font-size:15px;line-height:1.85;color:var(--ink);font-weight:500;border-left:2px solid var(--brand);padding-left:18px;margin-bottom:24px;letter-spacing:.5px}
@@ -217,7 +218,7 @@
   .donate-band{background:var(--brand);color:#fff}
   .donate-grid{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
   .donate-text{padding:88px 64px;display:flex;flex-direction:column;justify-content:center}
-  .donate-text .label{font-family:"IBM Plex Sans",sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#f4d8d8;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:14px}
+  .donate-text .label{font-family:"IBM Plex Serif",sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#f4d8d8;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:14px}
   .donate-text .label::before{content:"";width:32px;height:1px;background:#f4d8d8}
   .donate-text h2{font-size:48px;color:#fff;letter-spacing:6px;line-height:1.4;margin-bottom:22px;font-weight:900}
   .donate-text p{font-size:15px;color:rgba(255,255,255,.85);line-height:2;margin-bottom:32px}
@@ -227,33 +228,37 @@
   .donate-text .btn-w:hover{background:#f4d8d8}
   .donate-text .btn-wo{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border:1px solid rgba(255,255,255,.6);color:#fff;font-size:13px;letter-spacing:2.5px;font-weight:500;transition:all .2s}
   .donate-text .btn-wo:hover{background:rgba(255,255,255,.12);border-color:#fff}
-  .donate-side{background:#1a0202;display:grid;grid-template-rows:1fr 1fr 1fr;border-left:1px solid rgba(255,255,255,.1)}
-  .donate-fact{padding:36px 48px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;justify-content:center}
+  .donate-side{background:#1a0202;display:flex;flex-direction:column;border-left:1px solid rgba(255,255,255,.08)}
+  .donate-fact{padding:30px 48px;border-bottom:1px solid rgba(255,255,255,.08);display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:18px}
+  .donate-fact.is-hero{padding:42px 48px}
   .donate-fact:last-child{border-bottom:none}
-  .donate-fact .n{font-family:"IBM Plex Sans",sans-serif;font-size:42px;font-weight:800;color:#fff;letter-spacing:1px;line-height:1}
-  .donate-fact .t{font-size:13px;color:rgba(255,255,255,.7);margin-top:10px;letter-spacing:1.5px}
+  .donate-fact .n{font-family:"IBM Plex Serif",sans-serif;font-size:48px;font-weight:600;color:#fff;letter-spacing:-1px;line-height:1;font-style:italic}
+  .donate-fact .n .u{font-family:"Noto Sans TC",sans-serif;font-style:normal;font-size:14px;font-weight:500;letter-spacing:1px;margin-left:6px;color:rgba(255,255,255,.8)}
+  .donate-fact.is-hero .n{font-size:64px}
+  .donate-fact .t{font-size:13px;color:rgba(255,255,255,.75);letter-spacing:1.5px;line-height:1.6}
+  .donate-fact .t .lbl{display:block;font-family:"IBM Plex Serif",sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.4);font-weight:600;margin-bottom:4px;font-style:italic}
 
   /* ============ FOOTER (La Vie 極簡式 + 法人聯絡資訊) ============ */
   .app-footer{background:#fff;border-top:1px solid var(--line);padding:60px 40px 40px;text-align:center}
   .app-footer .footer-info{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:42px}
   .app-footer .footer-address{font-size:13px;color:var(--ink);letter-spacing:1.5px;font-weight:500}
   .app-footer .footer-contact{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 14px;font-size:13px;color:var(--body);letter-spacing:.5px}
-  .app-footer .footer-contact .lbl{font-family:"IBM Plex Sans",sans-serif;font-weight:700;color:var(--ink);letter-spacing:2px;font-size:10px;margin-right:6px}
-  .app-footer .footer-contact a{font-family:"IBM Plex Sans",sans-serif;font-size:13px;letter-spacing:.5px;color:var(--body);transition:color .2s}
+  .app-footer .footer-contact .lbl{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:var(--ink);letter-spacing:2px;font-size:10px;margin-right:6px}
+  .app-footer .footer-contact a{font-family:"IBM Plex Serif",sans-serif;font-size:13px;letter-spacing:.5px;color:var(--body);transition:color .2s}
   .app-footer .footer-contact a:hover{color:var(--brand)}
   .app-footer .footer-contact .dot{color:var(--muted)}
   .app-footer .footer-giro{display:inline-flex;align-items:center;gap:16px;padding:12px 24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:8px;flex-wrap:wrap;justify-content:center;font-size:13px}
-  .app-footer .footer-giro .giro-label{font-family:"IBM Plex Sans",sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--brand);font-weight:700;padding:4px 10px;border:1px solid var(--brand)}
+  .app-footer .footer-giro .giro-label{font-family:"IBM Plex Serif",sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--brand);font-weight:700;padding:4px 10px;border:1px solid var(--brand)}
   .app-footer .footer-giro .giro-cell{color:var(--body);letter-spacing:.5px}
-  .app-footer .footer-giro .giro-cell b{font-family:"IBM Plex Sans",sans-serif;font-weight:700;color:var(--ink);letter-spacing:1.5px;margin-left:4px}
+  .app-footer .footer-giro .giro-cell b{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:var(--ink);letter-spacing:1.5px;margin-left:4px}
   .app-footer .footer-giro .giro-sep{color:var(--line);font-weight:700}
   .app-footer .footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:22px}
   .app-footer .footer-links a{font-size:13px;color:var(--ink);letter-spacing:1px;font-weight:500;transition:color .2s}
   .app-footer .footer-links a:hover{color:var(--brand)}
-  .app-footer .footer-copy{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:2.5px;color:var(--muted);text-transform:uppercase}
+  .app-footer .footer-copy{font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:2.5px;color:var(--muted);text-transform:uppercase}
 
   /* ============ BACK TO TOP ============ */
-  .cd-top{position:fixed;right:24px;bottom:24px;width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Sans",sans-serif;font-size:18px;line-height:1;z-index:80;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s,background .2s;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+  .cd-top{position:fixed;right:24px;bottom:24px;width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Serif",sans-serif;font-size:18px;line-height:1;z-index:80;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s,background .2s;box-shadow:0 6px 20px rgba(0,0,0,.18)}
   .cd-top.on{opacity:1;transform:translateY(0);pointer-events:auto}
   .cd-top:hover{background:var(--brand)}
 
@@ -264,42 +269,6 @@
   .cookie .ctext a{color:var(--brand);text-decoration:underline;text-underline-offset:2px}
   .cookie button{padding:9px 18px;font-size:12px;letter-spacing:2px;background:var(--brand);color:#fff;font-weight:500}
   .cookie button:hover{background:var(--brand-dark)}
-
-  /* ============ NAV VARIANTS (Tweaks) ============ */
-  /* 預設 = C 紅框 + 底線下劃 (已 inline 在 .app-header 和 .app-nav) */
-
-  /* A. 純文字變色 — 拿掉紅框、拿掉底線、active 文字變紅 */
-  body[data-nav-style="bare"] .app-header{border-bottom:1px solid var(--line)}
-  body[data-nav-style="bare"] .app-nav{border-top:0;border-bottom-color:var(--line)}
-  body[data-nav-style="bare"] .app-nav a::before{display:none}
-  body[data-nav-style="bare"] .app-nav a:hover,
-  body[data-nav-style="bare"] .app-nav a.active{color:var(--brand)}
-
-  /* B. 紅框 + 文字變色 — 保留紅框、拿掉底線、active 文字變紅 */
-  body[data-nav-style="frame-color"] .app-nav a::before{display:none}
-  body[data-nav-style="frame-color"] .app-nav a:hover,
-  body[data-nav-style="frame-color"] .app-nav a.active{color:var(--brand)}
-
-  /* 框粗細：2px override (僅在 B/C 有紅框時生效，bare 不受影響) */
-  body:not([data-nav-style="bare"])[data-frame-thickness="2"] .app-nav{border-top-width:2px;border-bottom-width:2px}
-
-  /* ============ TWEAKS PANEL ============ */
-  .tweaks-toggle{position:fixed;top:140px;right:24px;background:var(--ink);color:#fff;border:0;padding:10px 16px;font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;cursor:pointer;z-index:60;box-shadow:0 6px 20px rgba(0,0,0,.18);transition:background .2s;display:inline-flex;align-items:center;gap:8px}
-  .tweaks-toggle::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand)}
-  .tweaks-toggle:hover{background:var(--brand)}
-  .tweaks-toggle:hover::before{background:#fff}
-  .tweaks-panel{position:fixed;top:140px;right:24px;background:#fff;border:1px solid var(--line);box-shadow:0 12px 40px rgba(0,0,0,.12);padding:18px 20px;z-index:61;font-size:13px;width:280px}
-  .tweaks-panel[hidden]{display:none}
-  .tweaks-close{position:absolute;top:10px;right:10px;width:24px;height:24px;border-radius:50%;background:transparent;color:var(--muted);border:0;font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Sans",sans-serif}
-  .tweaks-close:hover{background:var(--line-soft);color:var(--ink)}
-  .tweaks-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:14px}
-  .tweaks-head strong{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--brand);font-weight:700}
-  .tweaks-head small{font-size:11px;color:var(--muted);letter-spacing:.5px;font-weight:400}
-  .tweaks-group .lbl{display:block;font-family:"IBM Plex Sans",sans-serif;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:8px}
-  .tweaks-options{display:flex;flex-direction:column;gap:2px}
-  .tweaks-options label{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:4px;cursor:pointer;font-size:13px;color:var(--ink);transition:background .15s}
-  .tweaks-options label:hover{background:var(--line-soft)}
-  .tweaks-options label input{margin:0;accent-color:var(--brand)}
 
   /* ============ MOBILE DRAWER (Nav) ============ */
   .nav-toggle{display:none;width:36px;height:36px;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;cursor:pointer;background:transparent;border:0}
@@ -313,7 +282,7 @@
   .drawer-head{display:flex;justify-content:space-between;align-items:center;padding:22px 28px;border-bottom:1px solid rgba(255,255,255,.12)}
   .drawer-close{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;border:0;transition:background .2s}
   .drawer-close:hover{background:rgba(255,255,255,.22)}
-  .drawer-utility{display:flex;align-items:center;gap:12px;font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600}
+  .drawer-utility{display:flex;align-items:center;gap:12px;font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600}
   .drawer-utility a{color:rgba(255,255,255,.9);transition:color .2s}
   .drawer-utility a:hover{color:#fff}
   .drawer-utility .sep{color:rgba(255,255,255,.3)}
@@ -342,13 +311,13 @@
     .spot-band,.donate-grid{grid-template-columns:1fr}
     .spot-text{padding:36px 28px}
     .donate-text{padding:48px 32px}
-    .donate-side{grid-template-rows:none;grid-template-columns:repeat(3,1fr);border-left:none;border-top:1px solid rgba(255,255,255,.1)}
-    .donate-fact{border-bottom:none;border-right:1px solid rgba(255,255,255,.08);padding:24px}
+    .donate-side{flex-direction:row;border-left:none;border-top:1px solid rgba(255,255,255,.1)}
+    .donate-fact{flex:1;padding:24px;border-bottom:none;border-right:1px solid rgba(255,255,255,.08);grid-template-columns:1fr;gap:8px}
+    .donate-fact.is-hero{padding:24px}
     .donate-fact:last-child{border-right:none}
+    .donate-fact .n,.donate-fact.is-hero .n{font-size:36px}
     .has-before-background.is-offset-br::before{inset:20px -16px -20px 20px}
     .app-nav,.app-header{position:static}
-    .tweaks-toggle{top:auto;bottom:24px;right:16px}
-    .tweaks-panel{top:auto;bottom:80px;right:16px;left:16px;width:auto}
   }
   @media (max-width: 720px){
     .app-header .row,.app-nav .row,.banner-slider,section.section,.app-footer{padding-left:20px;padding-right:20px}
@@ -370,7 +339,9 @@
     .trend-card{flex:0 0 80%}
     .donate-text h2{font-size:28px;letter-spacing:3px}
     .spot-text h2{font-size:22px;letter-spacing:1.5px}
-    .donate-side{grid-template-columns:1fr}
+    .donate-side{flex-direction:column}
+    .donate-fact{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
+    .donate-fact:last-child{border-bottom:none}
   }
 </style>
 </head>
@@ -511,56 +482,56 @@
       <button class="trend-arrow next" aria-label="next">›</button>
       <div class="trend-track" id="trendTrack">
         <a class="trend-card">
-          <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">1</figcaption></div>
+          <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">01</figcaption></div>
           <div class="trend-body">
             <div class="meta"><span class="cat">真愛多多</span><span>2026 / 04 / 12</span></div>
             <h4>「早起步、不放手」：甘惠忠神父的五十年共融之路</h4>
           </div>
         </a>
         <a class="trend-card">
-          <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">2</figcaption></div>
+          <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">02</figcaption></div>
           <div class="trend-body">
             <div class="meta"><span class="cat">公益行動</span><span>2026 / 03 / 28</span></div>
             <h4>當美學走進偏鄉教室：花蓮玉里駐校計畫第三年回顧</h4>
           </div>
         </a>
         <a class="trend-card">
-          <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">3</figcaption></div>
+          <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">03</figcaption></div>
           <div class="trend-body">
             <div class="meta"><span class="cat">慈善身影</span><span>2026 / 03 / 14</span></div>
             <h4>薛伯輝先生與敦煌書店：一家書店如何撐起一個公益基金會</h4>
           </div>
         </a>
         <a class="trend-card">
-          <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">4</figcaption></div>
+          <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">04</figcaption></div>
           <div class="trend-body">
             <div class="meta"><span class="cat">搖籃咖啡</span><span>2026 / 03 / 02</span></div>
             <h4>專訪｜在搖籃咖啡學沖咖啡的小宇，今天滿一年了</h4>
           </div>
         </a>
         <a class="trend-card">
-          <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">5</figcaption></div>
+          <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">05</figcaption></div>
           <div class="trend-body">
             <div class="meta"><span class="cat">公益行動</span><span>2026 / 02 / 25</span></div>
             <h4>原生藝術：自閉症青年的畫，正在被世界看見</h4>
           </div>
         </a>
         <a class="trend-card">
-          <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">6</figcaption></div>
+          <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">06</figcaption></div>
           <div class="trend-body">
             <div class="meta"><span class="cat">愛的講堂</span><span>2026 / 02 / 18</span></div>
             <h4>家長心聲：當「慢」不再是焦慮，而是另一種速度</h4>
           </div>
         </a>
         <a class="trend-card">
-          <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">7</figcaption></div>
+          <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">07</figcaption></div>
           <div class="trend-body">
             <div class="meta"><span class="cat">最新消息</span><span>2026 / 02 / 04</span></div>
             <h4>奧兒福音樂會邁入第十屆：今年的曲目，由孩子們親自挑選</h4>
           </div>
         </a>
         <a class="trend-card">
-          <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">8</figcaption></div>
+          <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">08</figcaption></div>
           <div class="trend-body">
             <div class="meta"><span class="cat">場地租借</span><span>2026 / 01 / 22</span></div>
             <h4>愛的講堂改造紀錄：一個讓對話真正發生的空間</h4>
@@ -572,7 +543,7 @@
 </section>
 
 <!-- ===== SPECIAL ISSUE 5 actions ===== -->
-<section class="section">
+<section class="section is-paper">
   <div class="wrap">
     <header class="section-head">
       <div class="titles">
@@ -635,7 +606,7 @@
 </section>
 
 <!-- ===== SPOTLIGHT 真愛多多 (用共用 has-before-background) ===== -->
-<section class="section">
+<section class="section is-paper">
   <div class="wrap">
     <div class="has-before-background is-offset-br">
       <div class="spot-band">
@@ -751,17 +722,17 @@
       </div>
     </div>
     <div class="donate-side">
-      <div class="donate-fact">
-        <div class="n">17<span style="font-size:18px;margin-left:4px">年</span></div>
-        <div class="t">持續陪伴慢飛家庭</div>
+      <div class="donate-fact is-hero">
+        <div class="n">1,200<span class="u">+</span></div>
+        <div class="t"><span class="lbl">Beneficiaries</span>受益家庭與孩子</div>
       </div>
       <div class="donate-fact">
-        <div class="n">5<span style="font-size:18px;margin-left:4px">大</span></div>
-        <div class="t">公益行動同步進行</div>
+        <div class="n">17<span class="u">年</span></div>
+        <div class="t"><span class="lbl">Companionship</span>陪伴慢飛家庭</div>
       </div>
       <div class="donate-fact">
-        <div class="n">1,200<span style="font-size:18px;margin-left:4px">+</span></div>
-        <div class="t">受益家庭與孩子</div>
+        <div class="n">12<span class="u">屆</span></div>
+        <div class="t"><span class="lbl">Olfeo Concert</span>奧兒福音樂會</div>
       </div>
     </div>
   </div>
@@ -828,31 +799,6 @@
       <a aria-label="instagram" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
       <a aria-label="youtube" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
       <a aria-label="line" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
-    </div>
-  </div>
-</aside>
-
-<!-- ===== TWEAKS PANEL ===== -->
-<button class="tweaks-toggle" id="tweaksToggle" type="button">Tweaks</button>
-<aside class="tweaks-panel" id="tweaksPanel" hidden>
-  <button class="tweaks-close" id="tweaksClose" type="button" aria-label="close">×</button>
-  <div class="tweaks-head">
-    <strong>Tweaks</strong>
-    <small>主導覽列樣式</small>
-  </div>
-  <div class="tweaks-group">
-    <span class="lbl">Nav Style</span>
-    <div class="tweaks-options">
-      <label><input type="radio" name="navStyle" value="bare"> A 純文字變色</label>
-      <label><input type="radio" name="navStyle" value="frame-color"> B 紅框 ＋ 文字變色</label>
-      <label><input type="radio" name="navStyle" value="frame-underline"> C 紅框 ＋ 底線下劃（現行）</label>
-    </div>
-  </div>
-  <div class="tweaks-group" style="margin-top:14px">
-    <span class="lbl">Frame Thickness</span>
-    <div class="tweaks-options">
-      <label><input type="radio" name="frameThickness" value="1"> 1px（現行）</label>
-      <label><input type="radio" name="frameThickness" value="2"> 2px</label>
     </div>
   </div>
 </aside>
@@ -1001,66 +947,6 @@
     drawer.querySelectorAll('.drawer-nav a').forEach(a => {
       a.addEventListener('click', shut);
     });
-  })();
-
-  // ============ NAV STYLE TWEAKS ============
-  (function(){
-    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-      "navStyle": "frame-underline",
-      "frameThickness": "1"
-    }/*EDITMODE-END*/;
-
-    const state  = {...TWEAK_DEFAULTS};
-    const panel  = document.getElementById('tweaksPanel');
-    const toggle = document.getElementById('tweaksToggle');
-    const close  = document.getElementById('tweaksClose');
-    if (!panel) return;
-
-    function apply(){
-      document.body.dataset.navStyle = state.navStyle || 'frame-underline';
-      document.body.dataset.frameThickness = state.frameThickness || '1';
-    }
-    function syncPanel(){
-      panel.querySelectorAll('input[name="navStyle"]').forEach(r => {
-        r.checked = (r.value === state.navStyle);
-      });
-      panel.querySelectorAll('input[name="frameThickness"]').forEach(r => {
-        r.checked = (r.value === state.frameThickness);
-      });
-    }
-
-    toggle && toggle.addEventListener('click', () => {
-      panel.hidden = !panel.hidden;
-      if (!panel.hidden) syncPanel();
-    });
-    close && close.addEventListener('click', () => { panel.hidden = true; });
-
-    panel.querySelectorAll('input[name="navStyle"]').forEach(r => {
-      r.addEventListener('change', () => {
-        if (!r.checked) return;
-        state.navStyle = r.value;
-        apply();
-        try { window.parent.postMessage({type:'__edit_mode_set_keys', edits:{navStyle: r.value}}, '*'); } catch(e){}
-      });
-    });
-    panel.querySelectorAll('input[name="frameThickness"]').forEach(r => {
-      r.addEventListener('change', () => {
-        if (!r.checked) return;
-        state.frameThickness = r.value;
-        apply();
-        try { window.parent.postMessage({type:'__edit_mode_set_keys', edits:{frameThickness: r.value}}, '*'); } catch(e){}
-      });
-    });
-
-    window.addEventListener('message', e => {
-      if (!e.data) return;
-      if (e.data.type === '__activate_edit_mode'){ panel.hidden = false; syncPanel(); }
-      else if (e.data.type === '__deactivate_edit_mode'){ panel.hidden = true; }
-    });
-
-    apply();
-    syncPanel();
-    try { window.parent.postMessage({type:'__edit_mode_available'}, '*'); } catch(e){}
   })();
 </script>
 
