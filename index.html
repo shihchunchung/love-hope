@@ -51,9 +51,24 @@
   /* ============ NAV ============ */
   .app-nav{border-top:1px solid var(--brand);border-bottom:1px solid var(--brand);background:#fff;position:sticky;top:86px;z-index:49}
   .app-nav .row{display:flex;justify-content:center;align-items:stretch;height:54px}
-  .app-nav a{display:flex;align-items:center;padding:0 22px;font-size:14px;font-weight:500;color:var(--ink);position:relative;letter-spacing:2px;transition:color .15s}
+  .app-nav a{display:flex;align-items:center;padding:0 22px;font-size:14px;font-weight:500;color:var(--ink);position:relative;letter-spacing:2px;transition:color .15s,background .2s}
   .app-nav a:not(:last-child)::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:14px;background:var(--line)}
   .app-nav a:hover,.app-nav a.active{color:var(--brand)}
+
+  /* External link styling (用於 搖籃咖啡 等外連) */
+  .app-nav a.is-external{color:#6B4423;gap:6px}
+  .app-nav a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:13px;font-weight:400;display:inline-block;transition:transform .25s,opacity .2s;line-height:1;opacity:.6}
+  .app-nav a.is-external:hover{color:#6B4423;background:#F4EDE0}
+  .app-nav a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
+
+  /* 共用：footer & drawer 的外連 */
+  .app-footer .footer-links a.is-external{color:#6B4423;display:inline-flex;align-items:center;gap:5px}
+  .app-footer .footer-links a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:12px;font-weight:400;opacity:.6;transition:transform .25s,opacity .2s;line-height:1}
+  .app-footer .footer-links a.is-external:hover{color:#6B4423}
+  .app-footer .footer-links a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
+  .drawer-nav a.is-external{color:#F4EDE0;gap:10px}
+  .drawer-nav a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:14px;font-weight:400;opacity:.7;transition:transform .25s,opacity .2s;line-height:1;margin-left:auto;padding-right:6px}
+  .drawer-nav a.is-external:hover .ext-mark,.drawer-nav a.is-external.active .ext-mark{transform:translate(2px,-2px);opacity:1}
 
   /* ============ HERO BANNER (La Vie banner-slider 風格) ============ */
   .banner-slider{padding:32px 0 0;background:#fff;position:relative}
@@ -381,7 +396,7 @@
     <a href="#">真愛多多</a>
     <a href="#">最新消息</a>
     <a href="#">文創小舖</a>
-    <a href="#">搖籃咖啡</a>
+    <a href="#" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
     <a href="#">場地租借</a>
   </div>
 </nav>
@@ -763,7 +778,7 @@
     <li><a href="#">真愛多多</a></li>
     <li><a href="#">最新消息</a></li>
     <li><a href="#">文創小舖</a></li>
-    <li><a href="#">搖籃咖啡</a></li>
+    <li><a href="#" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a></li>
     <li><a href="#">場地租借</a></li>
     <li><a href="#">聯絡我們</a></li>
     <li><a href="#">隱私權政策</a></li>
@@ -789,7 +804,7 @@
     <a href="#">真愛多多</a>
     <a href="#">最新消息</a>
     <a href="#">文創小舖</a>
-    <a href="#">搖籃咖啡</a>
+    <a href="#" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
     <a href="#">場地租借</a>
   </nav>
   <div class="drawer-foot">
