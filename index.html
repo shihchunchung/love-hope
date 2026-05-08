@@ -269,6 +269,40 @@
   .cookie button{padding:9px 18px;font-size:12px;letter-spacing:2px;background:var(--brand);color:#fff;font-weight:500}
   .cookie button:hover{background:var(--brand-dark)}
 
+  /* ============ NAV VARIANTS (Tweaks) ============ */
+  body[data-nav-style="red"] .app-nav,
+  body[data-nav-style="red-scroll"] .app-nav:not(.is-scrolled){background:var(--brand);border-bottom-color:rgba(255,255,255,.08)}
+  body[data-nav-style="red"] .app-nav a,
+  body[data-nav-style="red-scroll"] .app-nav:not(.is-scrolled) a{color:rgba(255,255,255,.85)}
+  body[data-nav-style="red"] .app-nav a:not(:last-child)::after,
+  body[data-nav-style="red-scroll"] .app-nav:not(.is-scrolled) a:not(:last-child)::after{background:rgba(255,255,255,.18)}
+  body[data-nav-style="red"] .app-nav a:hover,
+  body[data-nav-style="red"] .app-nav a.active,
+  body[data-nav-style="red-scroll"] .app-nav:not(.is-scrolled) a:hover,
+  body[data-nav-style="red-scroll"] .app-nav:not(.is-scrolled) a.active{color:#fff}
+  body[data-nav-style="red"] .app-nav a.active::before,
+  body[data-nav-style="red-scroll"] .app-nav:not(.is-scrolled) a.active::before{content:"";position:absolute;left:22px;right:22px;bottom:14px;height:2px;background:#fff}
+  body[data-nav-style="red-scroll"] .app-nav,
+  body[data-nav-style="red-scroll"] .app-nav a{transition:background .3s ease,color .3s ease,border-color .3s ease}
+
+  /* ============ TWEAKS PANEL ============ */
+  .tweaks-toggle{position:fixed;top:140px;right:24px;background:var(--ink);color:#fff;border:0;padding:10px 16px;font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;cursor:pointer;z-index:60;box-shadow:0 6px 20px rgba(0,0,0,.18);transition:background .2s;display:inline-flex;align-items:center;gap:8px}
+  .tweaks-toggle::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand)}
+  .tweaks-toggle:hover{background:var(--brand)}
+  .tweaks-toggle:hover::before{background:#fff}
+  .tweaks-panel{position:fixed;top:140px;right:24px;background:#fff;border:1px solid var(--line);box-shadow:0 12px 40px rgba(0,0,0,.12);padding:18px 20px;z-index:61;font-size:13px;width:260px}
+  .tweaks-panel[hidden]{display:none}
+  .tweaks-close{position:absolute;top:10px;right:10px;width:24px;height:24px;border-radius:50%;background:transparent;color:var(--muted);border:0;font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Sans",sans-serif}
+  .tweaks-close:hover{background:var(--line-soft);color:var(--ink)}
+  .tweaks-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:14px}
+  .tweaks-head strong{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--brand);font-weight:700}
+  .tweaks-head small{font-size:11px;color:var(--muted);letter-spacing:.5px;font-weight:400}
+  .tweaks-group .lbl{display:block;font-family:"IBM Plex Sans",sans-serif;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:8px}
+  .tweaks-options{display:flex;flex-direction:column;gap:2px}
+  .tweaks-options label{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:4px;cursor:pointer;font-size:13px;color:var(--ink);transition:background .15s}
+  .tweaks-options label:hover{background:var(--line-soft)}
+  .tweaks-options label input{margin:0;accent-color:var(--brand)}
+
   /* ============ RESPONSIVE ============ */
   @media (max-width: 1100px){
     .banner-slide{flex-basis:min(720px, calc(100vw - 80px))}
@@ -288,6 +322,8 @@
     .donate-fact:last-child{border-right:none}
     .has-before-background.is-offset-br::before{inset:20px -16px -20px 20px}
     .app-nav,.app-header{position:static}
+    .tweaks-toggle{top:auto;bottom:24px;right:16px}
+    .tweaks-panel{top:auto;bottom:80px;right:16px;left:16px;width:auto}
   }
   @media (max-width: 720px){
     .app-header .row,.app-nav .row,.banner-slider,section.section,.app-footer{padding-left:20px;padding-right:20px}
@@ -752,6 +788,24 @@
   <p class="footer-copy">© 2026 Love Hope Foundation. All Rights Reserved.</p>
 </footer>
 
+<!-- ===== TWEAKS PANEL ===== -->
+<button class="tweaks-toggle" id="tweaksToggle" type="button">Tweaks</button>
+<aside class="tweaks-panel" id="tweaksPanel" hidden>
+  <button class="tweaks-close" id="tweaksClose" type="button" aria-label="close">×</button>
+  <div class="tweaks-head">
+    <strong>Tweaks</strong>
+    <small>主導覽列樣式</small>
+  </div>
+  <div class="tweaks-group">
+    <span class="lbl">Nav Style</span>
+    <div class="tweaks-options">
+      <label><input type="radio" name="navStyle" value="white"> 白底（現行）</label>
+      <label><input type="radio" name="navStyle" value="red"> 紅底白字</label>
+      <label><input type="radio" name="navStyle" value="red-scroll"> 紅底＋捲動變白</label>
+    </div>
+  </div>
+</aside>
+
 <!-- ===== BACK TO TOP ===== -->
 <a class="cd-top" id="cdTop" href="#" title="回到頂部" aria-label="back to top">↑</a>
 
@@ -864,6 +918,57 @@
         ticking = false;
       });
     });
+  })();
+
+  // ============ NAV STYLE TWEAKS ============
+  (function(){
+    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "navStyle": "white"
+    }/*EDITMODE-END*/;
+
+    const state  = {...TWEAK_DEFAULTS};
+    const panel  = document.getElementById('tweaksPanel');
+    const toggle = document.getElementById('tweaksToggle');
+    const close  = document.getElementById('tweaksClose');
+    const nav    = document.querySelector('.app-nav');
+    if (!panel || !nav) return;
+
+    toggle && toggle.addEventListener('click', () => {
+      panel.hidden = !panel.hidden;
+      if (!panel.hidden) syncPanel();
+    });
+    close && close.addEventListener('click', () => { panel.hidden = true; });
+
+    function apply(){ document.body.dataset.navStyle = state.navStyle || 'white'; }
+    function syncPanel(){
+      panel.querySelectorAll('input[name="navStyle"]').forEach(r => {
+        r.checked = (r.value === state.navStyle);
+      });
+    }
+
+    panel.querySelectorAll('input[name="navStyle"]').forEach(r => {
+      r.addEventListener('change', () => {
+        if (!r.checked) return;
+        state.navStyle = r.value;
+        apply();
+        try { window.parent.postMessage({type:'__edit_mode_set_keys', edits:{navStyle: r.value}}, '*'); } catch(e){}
+      });
+    });
+
+    // Register listener BEFORE announcing availability
+    window.addEventListener('message', e => {
+      if (!e.data) return;
+      if (e.data.type === '__activate_edit_mode'){ panel.hidden = false; syncPanel(); }
+      else if (e.data.type === '__deactivate_edit_mode'){ panel.hidden = true; }
+    });
+
+    apply();
+    syncPanel();
+    try { window.parent.postMessage({type:'__edit_mode_available'}, '*'); } catch(e){}
+
+    function updateScroll(){ nav.classList.toggle('is-scrolled', window.scrollY > 80); }
+    window.addEventListener('scroll', updateScroll, {passive:true});
+    updateScroll();
   })();
 </script>
 
