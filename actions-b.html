@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>公益行動 — 偏鄉美學教育 ｜ 薛伯輝基金會</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brand:#8C0A0A;
+    --brand-dark:#5C0606;
+    --brand-tint:#FBEEEE;
+    --ink:#111111;
+    --body:#333333;
+    --muted:#9A9A9A;
+    --line:#E8E8E8;
+    --line-soft:#F4F4F4;
+    --bg:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--body);font-family:"Noto Sans TC","IBM Plex Serif",-apple-system,sans-serif;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+  h1,h2,h3,h4,h5{color:var(--ink);font-weight:700;line-height:1.3}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  button{cursor:pointer;font-family:inherit;border:none;background:none;color:inherit}
+  ul{list-style:none}
+
+  .lat{font-family:"IBM Plex Serif",sans-serif}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+
+  /* ============ HEADER ============ */
+  .app-header{background:#fff;position:sticky;top:0;z-index:50}
+  .app-header .row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px 40px;gap:32px}
+  .app-header .left{display:flex;align-items:center;gap:18px}
+  .app-header .logo{justify-self:center;display:block}
+  .app-header .logo img{height:50px;width:auto}
+  .app-header .right{display:flex;justify-content:flex-end;align-items:center;gap:18px}
+  .header-socials{display:flex;align-items:center;gap:14px}
+  .header-socials a{width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);transition:color .2s}
+  .header-socials a:hover{color:var(--brand)}
+  .header-utility{display:flex;align-items:center;gap:14px;padding-left:18px;border-left:1px solid var(--line)}
+  .header-utility a{font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);font-weight:600;transition:color .2s}
+  .header-utility a:hover{color:var(--brand)}
+  .donate-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;background:var(--brand);color:#fff;font-size:13px;letter-spacing:3px;font-weight:500;transition:background .2s}
+  .donate-btn::after{content:"→";font-family:"IBM Plex Serif",sans-serif;font-weight:400}
+  .donate-btn:hover{background:var(--brand-dark)}
+
+  /* ============ NAV ============ */
+  .app-nav{border-top:1px solid var(--brand);border-bottom:1px solid var(--brand);background:#fff;position:sticky;top:86px;z-index:49}
+  .app-nav .row{display:flex;justify-content:center;align-items:stretch;height:54px}
+  .app-nav a{display:flex;align-items:center;padding:0 22px;font-size:14px;font-weight:500;color:var(--ink);position:relative;letter-spacing:2px;transition:color .15s,background .2s}
+  .app-nav a:not(:last-child)::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:14px;background:var(--line)}
+  .app-nav a:hover,.app-nav a.active{color:var(--brand)}
+
+  /* External link styling (用於 搖籃咖啡 等外連) */
+  .app-nav a.is-external{color:#6B4423;gap:6px}
+  .app-nav a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:13px;font-weight:400;display:inline-block;transition:transform .25s,opacity .2s;line-height:1;opacity:.6}
+  .app-nav a.is-external:hover{color:#6B4423;background:#F4EDE0}
+  .app-nav a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
+
+  /* 共用：footer & drawer 的外連 */
+  .app-footer .footer-links a.is-external{color:#D9B889;display:inline-flex;align-items:center;gap:5px}
+  .app-footer .footer-links a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:12px;font-weight:400;opacity:.6;transition:transform .25s,opacity .2s;line-height:1}
+  .app-footer .footer-links a.is-external:hover{color:#E5C99D}
+  .app-footer .footer-links a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
+  .drawer-nav a.is-external{color:#F4EDE0;gap:10px}
+  .drawer-nav a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:14px;font-weight:400;opacity:.7;transition:transform .25s,opacity .2s;line-height:1;margin-left:auto;padding-right:6px}
+  .drawer-nav a.is-external:hover .ext-mark,.drawer-nav a.is-external.active .ext-mark{transform:translate(2px,-2px);opacity:1}
+
+  /* ============ B · PUBLICATION HEAD (沿用 section-head 規則) ============ */
+  .pubhead-wrap{background:#fff}
+  .pubhead{
+    max-width:1320px;margin:0 auto;
+    padding:42px 40px 22px;
+    display:grid;grid-template-columns:auto 1fr;gap:48px;
+    align-items:flex-end;
+    border-bottom:1px solid var(--ink);
+  }
+  .pubhead .left{display:flex;flex-direction:column;gap:14px;min-width:0}
+  .pubhead .left h2{font-size:30px;letter-spacing:4px;color:var(--ink);font-weight:700;line-height:1.2}
+  .pubhead .left .tagline{font-size:14px;color:var(--body);line-height:1.85;max-width:560px;font-weight:400}
+  .pubhead .right{
+    display:flex;justify-content:flex-end;align-items:flex-end;
+    gap:0;flex-wrap:wrap;padding-bottom:6px;
+  }
+  .pubhead .right .cat{
+    padding:3px 14px 8px;font-size:12px;letter-spacing:1.5px;color:#555;
+    position:relative;line-height:1.4;font-weight:500;
+    background:none;cursor:pointer;font-family:inherit;
+    transition:color .2s;
+  }
+  .pubhead .right .cat + .cat{border-left:1px solid var(--line)}
+  .pubhead .right .cat:hover{color:var(--brand)}
+  .pubhead .right .cat.on{color:var(--brand);font-weight:700;cursor:default}
+  /* active 錨點：24×2px 品牌色短橫，置中於文字下方 */
+  .pubhead .right .cat.on::after{
+    content:"";
+    position:absolute;
+    left:50%;transform:translateX(-50%);
+    bottom:-1px;
+    width:24px;height:2px;
+    background:var(--brand);
+  }
+  .pubhead .right .cat.todo{color:#BBB}
+  .pubhead .right .cat.todo:hover{color:#888}
+
+  /* ============ UNIT LIST (對齊 A：meta › title › quote › article-action) ============ */
+  .unit-section{padding:48px 0 96px;background:#fff}
+  [hidden]{display:none !important}
+  .unit-list{display:flex;flex-direction:column}
+  .unit-row{
+    display:grid;grid-template-columns:400px 1fr;gap:48px;
+    padding:36px 0;border-bottom:1px solid var(--line);
+    align-items:center;transition:background .2s;
+  }
+  .unit-row:first-child{padding-top:16px}
+  .unit-row:last-child{border-bottom:none}
+  .unit-row:hover{background:var(--line-soft)}
+
+  .unit-image{
+    aspect-ratio:9/5;overflow:hidden;position:relative;
+    background:linear-gradient(135deg,#2a2a2a,#0f0f0f);
+  }
+  .unit-image .img-fill{
+    position:absolute;inset:0;background:inherit;
+    transition:transform .55s cubic-bezier(.25,.46,.45,.94);
+  }
+  .unit-row:hover .unit-image .img-fill{transform:scale(1.05)}
+  .unit-image::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.45) 100%);
+    pointer-events:none;z-index:1;
+  }
+  .unit-body{min-width:0;padding-right:24px}
+  .unit-body .meta{
+    display:flex;gap:12px;font-family:"IBM Plex Serif",sans-serif;
+    font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--muted);margin-bottom:14px;
+  }
+  .unit-body .meta .cat{color:var(--brand);font-weight:700}
+
+  .unit-body .title{
+    font-size:24px;line-height:1.5;font-weight:700;letter-spacing:2px;
+    color:var(--ink);margin-bottom:18px;transition:color .2s;
+  }
+  .unit-row:hover .title{color:var(--brand)}
+
+  .unit-body .quote{
+    font-size:15px;line-height:1.95;color:var(--body);
+    margin:0 0 22px;border-left:2px solid var(--brand);padding-left:16px;
+    letter-spacing:.5px;
+  }
+
+  .unit-body .article-action{
+    font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:2.5px;
+    text-transform:uppercase;color:var(--ink);font-weight:600;
+    border-bottom:1px solid var(--ink);padding-bottom:3px;
+    display:inline-block;transition:.2s;
+  }
+  .unit-row:hover .article-action{color:var(--brand);border-color:var(--brand)}
+
+  /* ============ EMPTY STATE (籌備中) ============ */
+  .unit-empty{
+    padding:120px 40px;text-align:center;
+    border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);
+  }
+  .unit-empty .lat{
+    font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:5px;
+    color:var(--brand);font-weight:600;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:14px;margin-bottom:18px;
+  }
+  .unit-empty .lat::before,.unit-empty .lat::after{content:"";width:24px;height:1px;background:var(--brand)}
+  .unit-empty h3{font-size:22px;letter-spacing:3px;margin-bottom:14px;font-weight:700}
+  .unit-empty p{font-size:14px;color:var(--body);line-height:1.85;max-width:520px;margin:0 auto}
+
+  /* ============ DONATE CARD (contained, not full-bleed) ============ */
+  .donate-band{padding:80px 0;background:#fff}
+  .donate-card{background:var(--brand);color:#fff;border-radius:4px;padding:64px;display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center;position:relative;overflow:hidden}
+  .donate-card::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 85% 15%,rgba(0,0,0,.18) 0,transparent 60%);pointer-events:none}
+  .donate-text{position:relative;z-index:1;padding:0}
+  .donate-text .label{font-family:"IBM Plex Serif",sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#f4d8d8;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:14px}
+  .donate-text .label::before{content:"";width:32px;height:1px;background:#f4d8d8}
+  .donate-text h2{font-size:38px;color:#fff;letter-spacing:5px;line-height:1.4;margin-bottom:20px;font-weight:700}
+  .donate-text p{font-size:15px;color:rgba(255,255,255,.85);line-height:1.95;margin-bottom:28px;max-width:480px}
+  .donate-text .actions{display:flex;gap:14px;flex-wrap:wrap}
+  .donate-text .btn-w{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;background:#fff;color:var(--brand);font-size:12px;letter-spacing:2.5px;font-weight:600;transition:background .2s}
+  .donate-text .btn-w::after{content:"→"}
+  .donate-text .btn-w:hover{background:#f4d8d8}
+  .donate-text .btn-wo{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;border:1px solid rgba(255,255,255,.5);color:#fff;font-size:12px;letter-spacing:2.5px;font-weight:500;transition:all .2s}
+  .donate-text .btn-wo:hover{background:rgba(255,255,255,.12);border-color:#fff}
+  .donate-stats{position:relative;z-index:1;display:flex;flex-direction:column;border-left:1px solid rgba(255,255,255,.2);padding-left:40px}
+  .donate-method{padding:18px 0;border-bottom:1px solid rgba(255,255,255,.18)}
+  .donate-method:first-child{padding-top:0}
+  .donate-method:last-child{border-bottom:none;padding-bottom:0}
+  .donate-method .method-label{display:block;font-family:"IBM Plex Serif",sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:700;margin-bottom:6px}
+  .donate-method h3{font-size:16px;color:#fff;letter-spacing:1.5px;margin-bottom:6px;font-weight:600}
+  .donate-method p{font-size:13px;color:rgba(255,255,255,.78);line-height:1.75;margin:0}
+  .donate-method b{color:#fff;font-weight:700}
+
+  /* ============ FOOTER (深色基座 + 法人聯絡資訊) ============ */
+  .app-footer{background:var(--ink);color:#fff;padding:64px 40px 36px;text-align:center;border-top:none}
+  .app-footer .footer-info{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:42px}
+  .app-footer .footer-address{font-size:13px;color:#fff;letter-spacing:1.5px;font-weight:500}
+  .app-footer .footer-contact{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 14px;font-size:13px;color:rgba(255,255,255,.75);letter-spacing:.5px}
+  .app-footer .footer-contact .lbl{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:2px;font-size:10px;margin-right:6px}
+  .app-footer .footer-contact a{font-family:"IBM Plex Serif",sans-serif;font-size:13px;letter-spacing:.5px;color:rgba(255,255,255,.75);transition:color .2s}
+  .app-footer .footer-contact a:hover{color:#fff}
+  .app-footer .footer-contact .dot{color:rgba(255,255,255,.3)}
+  .app-footer .footer-giro{display:inline-flex;align-items:center;gap:16px;padding:12px 24px;border-top:1px solid rgba(255,255,255,.15);border-bottom:1px solid rgba(255,255,255,.15);margin-top:8px;flex-wrap:wrap;justify-content:center;font-size:13px}
+  .app-footer .footer-giro .giro-label{font-family:"IBM Plex Serif",sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#fff;font-weight:700;padding:4px 10px;border:1px solid rgba(255,255,255,.4)}
+  .app-footer .footer-giro .giro-cell{color:rgba(255,255,255,.78);letter-spacing:.5px}
+  .app-footer .footer-giro .giro-cell b{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:#fff;letter-spacing:1.5px;margin-left:4px}
+  .app-footer .footer-giro .giro-sep{color:rgba(255,255,255,.2);font-weight:700}
+  .app-footer .footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:22px}
+  .app-footer .footer-links a{font-size:13px;color:#fff;letter-spacing:1px;font-weight:500;transition:color .2s}
+  .app-footer .footer-links a:hover{color:#f4d8d8}
+  .app-footer .footer-copy{font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:2.5px;color:rgba(255,255,255,.4);text-transform:uppercase}
+
+  /* ============ BACK TO TOP ============ */
+  .cd-top{position:fixed;right:24px;bottom:24px;width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Serif",sans-serif;font-size:18px;line-height:1;z-index:80;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s,background .2s;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+  .cd-top.on{opacity:1;transform:translateY(0);pointer-events:auto}
+  .cd-top:hover{background:var(--brand)}
+
+  /* ============ COOKIE ============ */
+  .cookie{position:fixed;bottom:24px;left:24px;right:24px;max-width:680px;margin:0 auto;background:#fff;padding:18px 24px;display:flex;align-items:center;gap:24px;font-size:13px;color:var(--body);box-shadow:0 12px 40px rgba(0,0,0,.12);border-top:3px solid var(--brand);z-index:99}
+  .cookie .ctext{flex:1;line-height:1.7}
+  .cookie .ctext strong{display:block;color:var(--ink);font-size:14px;margin-bottom:4px;letter-spacing:1px;font-weight:700}
+  .cookie .ctext a{color:var(--brand);text-decoration:underline;text-underline-offset:2px}
+  .cookie button{padding:9px 18px;font-size:12px;letter-spacing:2px;background:var(--brand);color:#fff;font-weight:500}
+  .cookie button:hover{background:var(--brand-dark)}
+
+  /* ============ MOBILE DRAWER (Nav) ============ */
+  .nav-toggle{display:none;width:36px;height:36px;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;cursor:pointer;background:transparent;border:0}
+  .nav-toggle span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .25s}
+
+  .drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .3s;z-index:90}
+  .drawer-backdrop.on{opacity:1;pointer-events:auto}
+
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:min(380px,88vw);background:var(--brand);color:#fff;z-index:91;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow-y:auto;box-shadow:-12px 0 40px rgba(0,0,0,.18)}
+  .drawer.on{transform:translateX(0)}
+  .drawer-head{display:flex;justify-content:space-between;align-items:center;padding:22px 28px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .drawer-close{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;border:0;transition:background .2s}
+  .drawer-close:hover{background:rgba(255,255,255,.22)}
+  .drawer-utility{display:flex;align-items:center;gap:12px;font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600}
+  .drawer-utility a{color:rgba(255,255,255,.9);transition:color .2s}
+  .drawer-utility a:hover{color:#fff}
+  .drawer-utility .sep{color:rgba(255,255,255,.3)}
+  .drawer-nav{flex:1;padding:18px 28px;display:flex;flex-direction:column}
+  .drawer-nav a{position:relative;padding:16px 0;font-size:17px;color:#fff;letter-spacing:3px;font-weight:500;border-bottom:1px solid rgba(255,255,255,.1);transition:padding .25s;display:flex;align-items:center;gap:14px}
+  .drawer-nav a::before{content:"";width:0;height:1px;background:#fff;transition:width .25s}
+  .drawer-nav a:hover,.drawer-nav a.active{padding-left:6px}
+  .drawer-nav a:hover::before,.drawer-nav a.active::before{width:24px}
+
+  /* drawer 二級展開（公益行動 6 個子項） */
+  .drawer-group{border-bottom:1px solid rgba(255,255,255,.1)}
+  .drawer-group > .drawer-group-head{
+    position:relative;
+    padding:16px 0;
+    font-size:17px;
+    color:#fff;
+    letter-spacing:3px;
+    font-weight:500;
+    transition:padding .25s;
+    display:flex;align-items:center;gap:14px;
+    cursor:pointer;
+    background:none;border:0;width:100%;text-align:left;
+    font-family:inherit;
+  }
+  .drawer-group > .drawer-group-head::before{content:"";width:0;height:1px;background:#fff;transition:width .25s}
+  .drawer-group.on > .drawer-group-head,
+  .drawer-group > .drawer-group-head:hover{padding-left:6px}
+  .drawer-group.on > .drawer-group-head::before,
+  .drawer-group > .drawer-group-head:hover::before{width:24px}
+  .drawer-group > .drawer-group-head .label{flex:1}
+  .drawer-group > .drawer-group-head .caret{
+    font-family:"IBM Plex Serif",sans-serif;
+    font-size:14px;opacity:.7;
+    transition:transform .25s;
+  }
+  .drawer-group.on > .drawer-group-head .caret{transform:rotate(180deg)}
+  .drawer-group .drawer-group-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .drawer-group.on .drawer-group-body{max-height:360px}
+  .drawer-group .drawer-group-body .sub-item{
+    display:block;
+    padding:12px 0 12px 18px;
+    font-size:14px;
+    color:rgba(255,255,255,.88);
+    letter-spacing:2px;
+    border:0;background:none;text-align:left;width:100%;
+    font-family:inherit;cursor:pointer;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    transition:color .2s,padding .2s;
+  }
+  .drawer-group .drawer-group-body .sub-item:last-child{border-bottom:none}
+  .drawer-group .drawer-group-body .sub-item:hover{color:#fff;padding-left:24px}
+  .drawer-group .drawer-group-body .sub-item.on{color:#fff;font-weight:700}
+  .drawer-group .drawer-group-body .sub-item.todo{color:rgba(255,255,255,.5)}
+  .drawer-group .drawer-group-body .sub-item.todo:hover{color:rgba(255,255,255,.75)}
+
+  .drawer-foot{padding:22px 28px 32px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;gap:18px}
+  .drawer-donate{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px;background:#fff;color:var(--brand);font-size:13px;letter-spacing:2.5px;font-weight:600;transition:background .2s}
+  .drawer-donate::after{content:"→"}
+  .drawer-donate:hover{background:#f4d8d8}
+  .drawer-social{display:flex;justify-content:center;gap:14px}
+  .drawer-social a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);display:inline-flex;align-items:center;justify-content:center;color:#fff;transition:background .2s}
+  .drawer-social a:hover{background:rgba(255,255,255,.22)}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1100px){
+    .pubhead{padding:36px 32px 20px;gap:32px}
+    .pubhead .left h2{font-size:26px;letter-spacing:3px}
+    .pubhead .right{justify-content:flex-end}
+    .unit-row{grid-template-columns:300px 1fr;gap:32px;padding:28px 0}
+    .unit-body{padding-right:0}
+    .unit-body .title{font-size:20px;letter-spacing:1.5px}
+    .app-nav,.app-header{position:static}
+    .unit-section{padding:36px 32px 72px}
+    .donate-card{grid-template-columns:1fr;gap:40px;padding:48px;border-radius:4px}
+    .donate-text{padding:0}
+    .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:32px}
+  }
+  @media (max-width: 720px){
+    .app-header .row,.app-nav .row,.app-footer{padding-left:20px;padding-right:20px}
+    .app-header .row{grid-template-columns:auto 1fr auto;gap:14px;padding:14px 20px}
+    .header-socials,.header-utility{display:none}
+    .donate-btn{padding:9px 14px;font-size:12px;letter-spacing:2px}
+    .app-nav{display:none}
+    .nav-toggle{display:flex}
+
+    /* pubhead：手機端隱藏右側類別列，分類切換交給 drawer */
+    .pubhead{
+      grid-template-columns:1fr;gap:16px;
+      padding:32px 20px 18px;
+      align-items:flex-start;
+      border-bottom:1px solid var(--ink);
+    }
+    .pubhead .left h2{font-size:24px;letter-spacing:2px}
+    .pubhead .left .tagline{font-size:13px;line-height:1.8}
+    .pubhead .right{display:none}
+
+    .unit-section{padding:28px 20px 64px}
+    .unit-row{grid-template-columns:1fr;gap:20px;padding:28px 0}
+    .unit-body .title{font-size:18px;letter-spacing:1px;margin-bottom:14px}
+    .unit-body .quote{font-size:14px;line-height:1.85;margin-bottom:18px}
+
+    .donate-band{padding:40px 20px}
+    .donate-card{padding:32px 24px;gap:28px}
+    .donate-text h2{font-size:26px;letter-spacing:3px}
+    .donate-stats{padding-top:24px}
+    .unit-empty{padding:80px 24px}
+    .unit-empty h3{font-size:18px;letter-spacing:2px}
+  }
+
+  /* ============ REVIEW VERSION SWITCHER (design review only) ============ */
+  .review-switcher{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(20,20,20,.92);color:#fff;border-radius:32px;padding:5px;display:inline-flex;align-items:center;gap:2px;z-index:100;box-shadow:0 8px 32px rgba(0,0,0,.28);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .review-switcher .rs-label{padding:0 12px 0 14px;font-family:"IBM Plex Serif",sans-serif;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:600;align-self:center}
+  .review-switcher .rs-divider{width:1px;height:18px;background:rgba(255,255,255,.15);margin:0 4px}
+  .review-switcher a{padding:8px 14px;border-radius:24px;color:#fff;text-decoration:none;transition:background .2s;display:inline-flex;align-items:baseline;gap:6px}
+  .review-switcher a:hover{background:rgba(255,255,255,.1)}
+  .review-switcher a.on{background:var(--brand)}
+  .review-switcher a .rs-v{font-family:"IBM Plex Serif",sans-serif;font-weight:700;font-size:12px;letter-spacing:1px}
+  .review-switcher a .rs-name{font-size:10px;letter-spacing:1px;opacity:.75}
+  .review-switcher a.on .rs-name{opacity:.95}
+  .review-switcher .rs-close{padding:6px 10px;border-radius:50%;color:rgba(255,255,255,.5);background:none;border:0;cursor:pointer;font-size:14px;line-height:1;margin-left:2px;transition:color .2s,background .2s}
+  .review-switcher .rs-close:hover{color:#fff;background:rgba(255,255,255,.1)}
+  @media (max-width:640px){
+    .review-switcher{bottom:80px}
+    .review-switcher .rs-name{display:none}
+    .review-switcher .rs-label{padding:0 8px 0 12px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="app-header">
+  <div class="row">
+    <div class="left">
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="header-socials">
+        <a aria-label="facebook" href="https://www.facebook.com/LoveHopeF" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
+        <a aria-label="instagram" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a aria-label="youtube" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
+        <a aria-label="line" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
+      </div>
+    </div>
+    <a class="logo" href="index.html"><img src="images/logo.png" alt="薛伯輝基金會 Love Hope Foundation"></a>
+    <div class="right">
+      <a class="donate-btn" href="donate.html">捐款支持</a>
+      <div class="header-utility">
+        <a href="#">EN</a>
+        <a href="#">登入</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="app-nav">
+  <div class="row">
+    <a href="about.html">關於我們</a>
+    <a href="people.html">慈善身影</a>
+    <a href="actions.html" class="active">公益行動</a>
+    <a href="true-love.html">真愛多多</a>
+    <a href="news.html">最新消息</a>
+    <a href="shop.html">文創小舖</a>
+    <a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
+    <a href="venue.html">場地租借</a>
+  </div>
+</nav>
+
+<!-- ===== B · PUBLICATION HEAD (section-head 樣式) ===== -->
+<div class="pubhead-wrap">
+  <div class="pubhead">
+    <div class="left">
+      <h2>陪伴力量大</h2>
+      <p class="tagline">以生活美學與文化底蘊，打造共學、共享、共榮的特別教育環境。</p>
+    </div>
+    <div class="right" role="tablist" aria-label="公益行動分類">
+      <button class="cat todo" data-cat="transition" role="tab">特殊生轉銜職場</button>
+      <button class="cat todo" data-cat="autism" role="tab">自閉症原生藝術</button>
+      <button class="cat on" data-cat="aesthetic" role="tab" aria-selected="true">偏鄉美學教育</button>
+      <button class="cat todo" data-cat="orff" role="tab">奧兒福音樂會</button>
+      <button class="cat todo" data-cat="elder" role="tab">老人服務</button>
+      <button class="cat todo" data-cat="other" role="tab">其他</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== UNIT LIST ===== -->
+<section class="unit-section">
+  <div class="wrap">
+
+    <!-- 偏鄉美學教育：7 單位（結構對齊 A） -->
+    <div class="unit-list" id="unitList">
+      <a class="unit-row" href="#">
+        <figure class="unit-image"><span class="img-fill"></span></figure>
+        <div class="unit-body">
+          <div class="meta"><span class="cat">屏東三地門</span></div>
+          <h3 class="title">愛唱歌的學校 — 地磨兒國小</h3>
+          <p class="quote">不求奪標，只求開心</p>
+          <span class="article-action">看單位故事 →</span>
+        </div>
+      </a>
+
+      <a class="unit-row" href="#">
+        <figure class="unit-image"><span class="img-fill"></span></figure>
+        <div class="unit-body">
+          <div class="meta"><span class="cat">台南學甲</span></div>
+          <h3 class="title">一心推動融合教育 — 伯利恆文教基金會</h3>
+          <p class="quote">用愛讓慢飛的天使，譜出屬於他們的未來</p>
+          <span class="article-action">看單位故事 →</span>
+        </div>
+      </a>
+
+      <a class="unit-row" href="#">
+        <figure class="unit-image"><span class="img-fill"></span></figure>
+        <div class="unit-body">
+          <div class="meta"><span class="cat">台南玉井</span></div>
+          <h3 class="title">牽起社區的手 — 天主教德蘭啟智中心</h3>
+          <p class="quote">當我的心尋著你的心，當我的手牽上你的手</p>
+          <span class="article-action">看單位故事 →</span>
+        </div>
+      </a>
+
+      <a class="unit-row" href="#">
+        <figure class="unit-image"><span class="img-fill"></span></figure>
+        <div class="unit-body">
+          <div class="meta"><span class="cat">台南新市</span></div>
+          <h3 class="title">慢飛天使一生的守護 — 天主教蘆葦啟智中心</h3>
+          <p class="quote">壓傷的蘆葦，祂不折斷；將熄的燈芯，祂不吹滅</p>
+          <span class="article-action">看單位故事 →</span>
+        </div>
+      </a>
+
+      <a class="unit-row" href="#">
+        <figure class="unit-image"><span class="img-fill"></span></figure>
+        <div class="unit-body">
+          <div class="meta"><span class="cat">台南安平漁光里</span></div>
+          <h3 class="title">漫漫漁光 — 天主教瑞復益智中心</h3>
+          <p class="quote">有人的地方就有愛，有愛的地方就有希望</p>
+          <span class="article-action">看單位故事 →</span>
+        </div>
+      </a>
+
+      <a class="unit-row" href="#">
+        <figure class="unit-image"><span class="img-fill"></span></figure>
+        <div class="unit-body">
+          <div class="meta"><span class="cat">澎湖馬公</span></div>
+          <h3 class="title">扎根菊島、用愛照顧 — 天主教惠民啟智中心</h3>
+          <p class="quote">凡你們對我這些最小兄弟中的一個所做的，就是對我做的</p>
+          <span class="article-action">看單位故事 →</span>
+        </div>
+      </a>
+
+      <a class="unit-row" href="#">
+        <figure class="unit-image"><span class="img-fill"></span></figure>
+        <div class="unit-body">
+          <div class="meta"><span class="cat">新北市泰山</span></div>
+          <h3 class="title">泰山奇蹟之家 — 天主教主顧修女會</h3>
+          <p class="quote">播下善的種子，讓愛無限延伸</p>
+          <span class="article-action">看單位故事 →</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- 籌備中：空狀態（預設隱藏） -->
+    <div class="unit-empty" id="unitEmpty" hidden>
+      <div class="lat">Coming Soon</div>
+      <h3 id="unitEmptyTitle">資料準備中</h3>
+      <p>此分類的內容正在彙整與整理中，敬請期待。<br>如有相關需求或合作，歡迎透過頁尾聯絡資訊與我們聯繫。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== DONATE BAND ===== -->
+<section class="donate-band">
+  <div class="wrap">
+    <div class="donate-card">
+      <div class="donate-text">
+        <div class="label">Donate</div>
+        <h2>捐款支持<br>愛與希望的延續</h2>
+        <p>每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
+        <div class="actions">
+          <a class="btn-w" href="donate.html">捐款方式</a>
+          <a class="btn-wo" href="donate.html">捐款徵信</a>
+        </div>
+      </div>
+      <div class="donate-stats" aria-label="捐款方式摘要">
+        <div class="donate-method">
+          <span class="method-label">Bank Transfer</span>
+          <h3>銀行匯款 / ATM 轉帳</h3>
+          <p>國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Postal Giro</span>
+          <h3>郵局劃撥</h3>
+          <p>帳號 <b>50067771</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Other Ways</span>
+          <h3>信用卡、支票與現場捐款</h3>
+          <p>歡迎透過信用卡授權書、支票或親臨基金會現場捐款，捐款徵信定期公開。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="app-footer">
+  <div class="footer-info">
+    <p class="footer-address">10043 台北市中正區博愛路 154 號 6 樓</p>
+    <p class="footer-contact">
+      <span><span class="lbl">TEL</span>(02) 2381-6678</span>
+      <span class="dot">·</span>
+      <span><span class="lbl">FAX</span>(02) 2381-3171</span>
+      <span class="dot">·</span>
+      <a href="mailto:love.hopech@gmail.com">love.hopech@gmail.com</a>
+    </p>
+    <div class="footer-giro">
+      <span class="giro-label">郵政劃撥</span>
+      <span class="giro-cell">帳號<b>50067771</b></span>
+      <span class="giro-sep">｜</span>
+      <span class="giro-cell">戶名<b>財團法人薛伯輝基金會</b></span>
+    </div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="about.html">關於我們</a></li>
+    <li><a href="people.html">慈善身影</a></li>
+    <li><a href="actions.html">公益行動</a></li>
+    <li><a href="true-love.html">真愛多多</a></li>
+    <li><a href="news.html">最新消息</a></li>
+    <li><a href="shop.html">文創小舖</a></li>
+    <li><a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a></li>
+    <li><a href="venue.html">場地租借</a></li>
+    <li><a href="mailto:love.hopech@gmail.com">聯絡我們</a></li>
+    <li><a href="privacy.html">隱私權政策</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Love Hope Foundation. All Rights Reserved.</p>
+</footer>
+
+<!-- ===== MOBILE DRAWER ===== -->
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <button class="drawer-close" id="drawerClose" type="button" aria-label="close menu">×</button>
+    <div class="drawer-utility">
+      <a href="#">EN</a>
+      <span class="sep">/</span>
+      <a href="#">登入</a>
+    </div>
+  </div>
+  <nav class="drawer-nav">
+    <a href="about.html">關於我們</a>
+    <a href="people.html">慈善身影</a>
+    <!-- 公益行動：可展開二級 -->
+    <div class="drawer-group on" id="drawerActions">
+      <button type="button" class="drawer-group-head" id="drawerActionsToggle">
+        <span class="label">公益行動</span>
+        <span class="caret">▾</span>
+      </button>
+      <div class="drawer-group-body">
+        <button type="button" class="sub-item todo" data-cat="transition">特殊生轉銜職場</button>
+        <button type="button" class="sub-item todo" data-cat="autism">自閉症原生藝術</button>
+        <button type="button" class="sub-item on"   data-cat="aesthetic">偏鄉美學教育</button>
+        <button type="button" class="sub-item todo" data-cat="orff">奧兒福音樂會</button>
+        <button type="button" class="sub-item todo" data-cat="elder">老人服務</button>
+        <button type="button" class="sub-item todo" data-cat="other">其他</button>
+      </div>
+    </div>
+    <a href="true-love.html">真愛多多</a>
+    <a href="news.html">最新消息</a>
+    <a href="shop.html">文創小舖</a>
+    <a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
+    <a href="venue.html">場地租借</a>
+  </nav>
+  <div class="drawer-foot">
+    <a class="drawer-donate" href="donate.html">捐款支持</a>
+    <div class="drawer-social">
+      <a aria-label="facebook" href="https://www.facebook.com/LoveHopeF" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
+      <a aria-label="instagram" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+      <a aria-label="youtube" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
+      <a aria-label="line" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== BACK TO TOP ===== -->
+<a class="cd-top" id="cdTop" href="#" title="回到頂部" aria-label="back to top">↑</a>
+
+<!-- ===== COOKIE ===== -->
+<div class="cookie" id="cookieBanner">
+  <div class="ctext">
+    <strong>Cookie 政策提示</strong>
+    本網站使用 Cookie 以提供更好的瀏覽體驗。繼續瀏覽即表示您同意 Cookie 使用。<a href="#">More info</a>
+  </div>
+  <button onclick="document.getElementById('cookieBanner').style.display='none'">同意並關閉</button>
+</div>
+
+<script>
+  // ============ BACK TO TOP ============
+  (function(){
+    const btn = document.getElementById('cdTop');
+    if (!btn) return;
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        btn.classList.toggle('on', window.scrollY > 600);
+        ticking = false;
+      });
+    });
+  })();
+
+  // ============ MOBILE DRAWER ============
+  (function(){
+    const toggle   = document.getElementById('navToggle');
+    const drawer   = document.getElementById('drawer');
+    const backdrop = document.getElementById('drawerBackdrop');
+    const close    = document.getElementById('drawerClose');
+    if (!toggle || !drawer || !backdrop) return;
+
+    function open(){
+      drawer.classList.add('on');
+      backdrop.classList.add('on');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function shut(){
+      drawer.classList.remove('on');
+      backdrop.classList.remove('on');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    toggle.addEventListener('click', open);
+    close && close.addEventListener('click', shut);
+    backdrop.addEventListener('click', shut);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && drawer.classList.contains('on')) shut();
+    });
+    drawer.querySelectorAll('.drawer-nav a').forEach(a => {
+      a.addEventListener('click', shut);
+    });
+  })();
+
+  // ============ 6 類分頁切換（pubhead 桌機 + drawer 手機共用） ============
+  (function(){
+    const cats       = document.querySelectorAll('.pubhead .right .cat');
+    const subItems   = document.querySelectorAll('.drawer-group .sub-item');
+    const list       = document.getElementById('unitList');
+    const empty      = document.getElementById('unitEmpty');
+    const emptyTitle = document.getElementById('unitEmptyTitle');
+    if (!cats.length || !list || !empty) return;
+
+    function setActive(target, label){
+      cats.forEach(b => {
+        const isOn = (b.dataset.cat === target);
+        b.classList.toggle('on', isOn);
+        if (isOn){
+          b.classList.remove('todo');
+          b.setAttribute('aria-selected', 'true');
+        } else {
+          b.removeAttribute('aria-selected');
+          if (b.dataset.cat !== 'aesthetic') b.classList.add('todo');
+          else b.classList.remove('todo');
+        }
+      });
+      subItems.forEach(s => {
+        const isOn = (s.dataset.cat === target);
+        s.classList.toggle('on', isOn);
+        if (isOn) s.classList.remove('todo');
+        else if (s.dataset.cat !== 'aesthetic') s.classList.add('todo');
+      });
+
+      if (target === 'aesthetic'){
+        list.hidden = false;
+        empty.hidden = true;
+      } else {
+        list.hidden = true;
+        empty.hidden = false;
+        if (emptyTitle) emptyTitle.textContent = (label || target) + ' · 資料準備中';
+      }
+    }
+
+    cats.forEach(btn => {
+      btn.addEventListener('click', () => setActive(btn.dataset.cat, btn.textContent.trim()));
+    });
+    subItems.forEach(s => {
+      s.addEventListener('click', () => {
+        setActive(s.dataset.cat, s.textContent.trim());
+        // 關 drawer
+        const drawer   = document.getElementById('drawer');
+        const backdrop = document.getElementById('drawerBackdrop');
+        if (drawer){
+          drawer.classList.remove('on');
+          backdrop && backdrop.classList.remove('on');
+          drawer.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+  })();
+
+  // ============ drawer 二級展開 ============
+  (function(){
+    const head = document.getElementById('drawerActionsToggle');
+    const grp  = document.getElementById('drawerActions');
+    if (!head || !grp) return;
+    head.addEventListener('click', () => grp.classList.toggle('on'));
+  })();
+</script>
+
+
+<!-- ===== REVIEW VERSION SWITCHER ===== -->
+<div class="review-switcher" role="navigation" aria-label="設計版本切換">
+  <span class="rs-label">版本比較</span>
+  <span class="rs-divider"></span>
+  <a href="actions-a.html" class="rs-link" aria-label="版本 A · sub-nav"><span class="rs-v">A</span><span class="rs-name">sub-nav</span></a>
+  <a href="actions-b.html" class="rs-link on" aria-label="版本 B · pubhead"><span class="rs-v">B</span><span class="rs-name">pubhead</span></a>
+  <a href="actions-c.html" class="rs-link" aria-label="版本 C · left rail"><span class="rs-v">C</span><span class="rs-name">left rail</span></a>
+  <a href="actions-e.html" class="rs-link" aria-label="版本 E · B + footer strip"><span class="rs-v">E</span><span class="rs-name">B + strip</span></a>
+  <button class="rs-close" type="button" onclick="this.parentElement.style.display='none'" aria-label="關閉版本切換器">×</button>
+</div>
+</body>
+</html>

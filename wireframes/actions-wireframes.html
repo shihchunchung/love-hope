@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>公益行動頁 Wireframes — 薛伯輝基金會</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAFAF8;
+    --frame:#fff;
+    --line:#D4D4D4;
+    --line-soft:#E8E8E8;
+    --fill:#EFEEEC;
+    --fill-soft:#F6F5F2;
+    --ink:#1A1A1A;
+    --muted:#9A9A9A;
+    --note:#666;
+    --accent:#8C0A0A;
+    --accent-tint:#FBEEEE;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-variant-numeric:tabular-nums}
+  html,body{background:var(--paper);color:var(--ink);font-family:"Noto Sans TC",-apple-system,sans-serif;line-height:1.55;font-size:14px}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  .lat{font-family:"IBM Plex Serif",serif}
+
+  /* PAGE SHELL */
+  .page{max-width:1480px;margin:0 auto;padding:56px 32px 96px}
+  .page-head{margin-bottom:48px;border-bottom:1px solid var(--ink);padding-bottom:24px}
+  .page-head .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;font-weight:500}
+  .page-head h1{font-size:30px;letter-spacing:2px;font-weight:700;margin-bottom:12px}
+  .page-head p{font-size:14px;color:var(--note);max-width:880px;line-height:1.8}
+  .page-head .principle{margin-top:18px;padding:14px 16px;background:#fff;border-left:3px solid var(--accent);font-size:13px;color:var(--ink);line-height:1.7}
+  .page-head .principle b{color:var(--accent)}
+
+  /* VARIANT BLOCK */
+  .variant{margin-bottom:72px}
+  .v-head{display:flex;align-items:baseline;gap:18px;margin-bottom:6px;flex-wrap:wrap}
+  .v-letter{font-family:"IBM Plex Mono",monospace;font-size:30px;font-weight:500;letter-spacing:1px;color:var(--ink)}
+  .v-name{font-size:18px;font-weight:700;letter-spacing:1.5px}
+  .v-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);padding:3px 8px;border:1px solid var(--accent)}
+  .v-sub{font-size:13px;color:var(--note);margin-bottom:22px;max-width:880px;line-height:1.7}
+  .v-body{display:grid;grid-template-columns:1fr 280px;gap:28px;align-items:flex-start}
+  @media (max-width:1100px){ .v-body{grid-template-columns:1fr} }
+
+  /* BROWSER FRAME */
+  .frame{background:#fff;border:1px solid var(--line);border-radius:2px;overflow:hidden;box-shadow:0 1px 0 var(--line-soft)}
+  .frame .url{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#F4F3F0;border-bottom:1px solid var(--line);font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted)}
+  .frame .url::before{content:"";width:8px;height:8px;border-radius:50%;background:#ccc;box-shadow:14px 0 0 #ccc,28px 0 0 #ccc;margin-right:24px}
+
+  /* simulated site shell — matches actual index.html nav */
+  .sim{background:#fff}
+  .sim-header{display:flex;justify-content:space-between;align-items:center;padding:14px 28px;border-bottom:1px solid var(--line-soft);font-size:11px;color:var(--muted);font-family:"IBM Plex Mono",monospace;letter-spacing:1px}
+  .sim-header .logo-mock{width:60px;height:14px;background:var(--ink)}
+  .sim-nav{display:flex;justify-content:center;gap:0;padding:0 28px;border-top:1px solid var(--accent);border-bottom:1px solid var(--accent);background:#fff;position:relative}
+  .sim-nav span{padding:11px 16px;font-size:12px;letter-spacing:2px;color:#555;position:relative;font-weight:500}
+  .sim-nav span.on{color:var(--accent);font-weight:700}
+  .sim-nav span.on::after{content:"";position:absolute;left:16px;right:16px;bottom:-1px;height:2px;background:var(--accent)}
+  .sim-nav span + span::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:1px;height:12px;background:var(--line-soft)}
+
+  .sim-foot{padding:18px 28px;border-top:1px solid var(--line-soft);font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--muted);letter-spacing:1.5px;text-align:center}
+  .sim-cta{padding:24px 40px;background:var(--ink);color:#fff;display:flex;justify-content:space-between;align-items:center}
+  .sim-cta .ctxt{font-size:13px;letter-spacing:1.5px}
+  .sim-cta .cbtn{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:2px;border:1px solid #fff;padding:8px 14px}
+
+  /* placeholders */
+  .ph{background:var(--fill);position:relative;color:var(--muted);font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:1.5px;display:flex;align-items:center;justify-content:center;text-align:center;padding:6px;border:1px solid var(--line-soft)}
+  .ph-line{height:7px;background:var(--fill);border-radius:1px;margin:4px 0}
+  .ph-line.w-80{width:80%}.ph-line.w-60{width:60%}
+
+  /* unit list（剝光版 · 列表式） */
+  .x-list{display:flex;flex-direction:column}
+  .x-list .item{
+    display:grid;
+    grid-template-columns:200px 1fr auto;
+    gap:28px;
+    padding:22px 0;
+    border-bottom:1px solid var(--line-soft);
+    align-items:center;
+  }
+  .x-list .item:first-child{padding-top:8px}
+  .x-list .item:last-child{border-bottom:none}
+  .x-list .item .thumb{
+    aspect-ratio:8/5;
+    background:var(--fill);
+    border:1px solid var(--line-soft);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--muted);letter-spacing:1.5px;
+  }
+  .x-list .item h5{font-size:17px;letter-spacing:1.5px;font-weight:700;margin-bottom:7px;line-height:1.45}
+  .x-list .item .quote{font-size:13px;color:#666;font-style:italic;margin-bottom:5px;line-height:1.7}
+  .x-list .item .loc{font-size:11px;color:var(--muted);letter-spacing:2px}
+  .x-list .item .arrow{font-family:"IBM Plex Mono",monospace;font-size:16px;color:var(--ink);padding:0 8px}
+
+  /* 縮排列表（給左 rail 版本，內容區較窄時用） */
+  .x-list-tight .item{grid-template-columns:160px 1fr auto;gap:22px;padding:18px 0}
+  .x-list-tight .item h5{font-size:15px}
+  .x-list-tight .item .quote{font-size:12px}
+
+  /* notes */
+  .notes{font-size:12px;color:var(--note);line-height:1.75}
+  .notes h4{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:2.5px;color:var(--ink);text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--ink)}
+  .notes dl{display:grid;grid-template-columns:64px 1fr;gap:9px 12px;margin-bottom:16px}
+  .notes dt{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);font-weight:500;padding-top:1px}
+  .notes dd{font-size:12px;color:var(--ink);line-height:1.6}
+  .notes .pros,.notes .cons{display:flex;gap:8px;margin-top:6px;font-size:11px;line-height:1.55}
+  .notes .pros span:first-child,.notes .cons span:first-child{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:1.5px;padding:2px 6px;align-self:flex-start;flex:0 0 auto}
+  .notes .pros span:first-child{background:#E8F0E2;color:#3A5A1A;border:1px solid #B8D098}
+  .notes .cons span:first-child{background:#F8E8E0;color:#7A3010;border:1px solid #E0B098}
+
+
+  /* ============================================================
+     方向 A · 鏡像主 nav（調整版）
+     - 移除自身底邊：主 nav 的品牌色底邊是「上邊」，下方用留白吸收
+     - 字級 12px、字距 1.5px：明確小主 nav 一級
+     - Active 用品牌色字 + 細短橫（1px）緊貼文字下方
+     ============================================================ */
+  .A-bar{
+    background:#fff;
+    display:flex;justify-content:center;align-items:stretch;
+    padding:13px 28px 19px;
+    /* 無 border-top, 無 border-bottom — 用留白與層級語彙分隔 */
+  }
+  .A-bar .item{
+    padding:0 16px;
+    font-size:12px;letter-spacing:1.5px;
+    color:#666;font-weight:500;
+    position:relative;
+    line-height:1.6;
+  }
+  .A-bar .item + .item::before{
+    content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);
+    width:1px;height:10px;background:var(--line-soft);
+  }
+  .A-bar .item.on{color:var(--accent);font-weight:700}
+  .A-bar .item.on::after{
+    content:"";position:absolute;left:16px;right:16px;bottom:-6px;
+    height:1px;background:var(--accent);
+  }
+  .A-bar .item.todo{color:#BBB}
+
+
+  /* ============================================================
+     方向 B · 不做 sub-nav，5 類進入頁面 section-head
+     使用站上既有 .section-head 樣式（黑色底邊、置左標題、置右 nav）
+     ============================================================ */
+  .B-pubhead{
+    padding:42px 40px 22px;
+    background:#fff;
+    display:grid;grid-template-columns:auto 1fr;gap:48px;
+    align-items:flex-end;
+    border-bottom:1px solid var(--ink);
+  }
+  .B-pubhead .left{display:flex;flex-direction:column;gap:8px}
+  .B-pubhead .left .lat{font-size:11px;letter-spacing:5px;color:var(--accent);font-weight:600;text-transform:uppercase;display:flex;align-items:center;gap:14px}
+  .B-pubhead .left .lat::before{content:"";width:24px;height:1px;background:var(--accent)}
+  .B-pubhead .left h2{font-size:30px;letter-spacing:4px;color:var(--ink);font-weight:700;line-height:1.2}
+  .B-pubhead .right{display:flex;justify-content:flex-end;align-items:flex-end;gap:6px;flex-wrap:wrap;padding-bottom:6px}
+  .B-pubhead .right .item{padding:3px 12px;font-size:12px;letter-spacing:1.5px;color:#666;position:relative;line-height:1.4}
+  .B-pubhead .right .item + .item{border-left:1px solid var(--line-soft)}
+  .B-pubhead .right .item.on{color:var(--accent);font-weight:700}
+  .B-pubhead .right .item.todo{color:#BBB}
+
+  .B-sub{
+    padding:34px 40px 0;background:#fff;
+  }
+  .B-sub h3{font-size:22px;letter-spacing:3px;font-weight:700;margin-bottom:8px}
+  .B-sub p{font-size:13px;color:#555;line-height:1.85;max-width:640px;margin-bottom:34px}
+
+
+  /* ============================================================
+     方向 D · 左側 rail
+     不與主 nav 水平堆疊，自然避開「突兀」問題
+     ============================================================ */
+  .D-layout{display:grid;grid-template-columns:240px 1fr;background:#fff;min-height:620px}
+  .D-rail{padding:48px 0 0;border-right:1px solid var(--line-soft)}
+  .D-rail .lat{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:3px;color:var(--accent);font-weight:600;padding:0 28px 24px;text-transform:uppercase;display:flex;align-items:center;gap:12px}
+  .D-rail .lat::before{content:"";width:20px;height:1px;background:var(--accent)}
+  .D-rail .item{display:block;padding:14px 28px;font-size:15px;letter-spacing:2px;color:#444;border-left:3px solid transparent;font-weight:500;line-height:1.5}
+  .D-rail .item.on{color:var(--accent);font-weight:700;border-left-color:var(--accent)}
+  .D-rail .item.todo{color:#B8B8B8}
+  .D-main{padding:48px 40px 36px}
+
+
+
+  /* meta head shared */
+  .x-meta{padding-bottom:14px;border-bottom:1px solid var(--ink);margin-bottom:24px;display:flex;justify-content:space-between;align-items:baseline}
+  .x-meta h3{font-size:16px;letter-spacing:2.5px;font-weight:700}
+  .x-meta .cnt{font-size:12px;color:var(--muted);letter-spacing:2px}
+
+  @media print{ body{background:#fff} .variant{break-inside:avoid;page-break-inside:avoid} }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ============ PAGE HEAD ============ -->
+  <header class="page-head">
+    <div class="eyebrow">Wireframes · v6 · 2026-05-19</div>
+    <h1>公益行動頁 — 3 個方向</h1>
+    <p>
+      問題診斷：主 nav 有很強的視覺律法。任何「不同語彙」的 sub-nav 放在它下方都會像補丁。
+      A 鏡像主 nav（含調整：無底邊、字級降一級、留白吸收）、B 收進 section-head、D 移到左側 rail。
+      設計前提：5 個分類都是長期的並列導航項，「籌備中」只是短期過渡。
+    </p>
+    <div class="principle">
+      <b>共同前提：</b>不放編號 · 不放英文小標 · 不放印戳 · Active 只用一個訊號 · 籌備中只用灰字<br>
+      <b>頁面文案：</b>公益行動有 tagline「陪伴力量大 ／ 以生活美學與文化底蘊，打造共學、共享、共榮的特別教育環境」<br>
+      <b>內容區：</b>偏鄉美學教育不需要特別敘述 · 不需要「合作單位 7 UNITS」meta · 直接呈現 7 張單位卡
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       A · 鏡像主 nav
+       ============================================================ -->
+  <section class="variant" id="a">
+    <div class="v-head">
+      <div class="v-letter">A</div>
+      <div class="v-name">鏡像主 nav</div>
+      <span class="v-tag">同一棟建築的第二樓</span>
+    </div>
+    <p class="v-sub">Sub-nav 用主 nav 的視覺骨架（白底、置中、垂直分隔線、品牌色 active）但明確降一級。<b>關鍵調整：</b>移除 sub-nav 自身底邊（主 nav 的品牌色底邊已是上邊）、字級壓到 12px、字距 1.5px、用留白（13/19px）吸收層級差。Active 改用文字下方 1px 細短橫，不再壓在底邊上，避免「雙層 chrome」突兀。</p>
+
+    <div class="v-body">
+      <div class="frame">
+        <div class="url">lovehope.org.tw / actions / aesthetic-edu</div>
+        <div class="sim">
+          <div class="sim-header"><span class="logo-mock"></span><span>NAV · DONATE · EN</span></div>
+          <nav class="sim-nav">
+            <span>關於我們</span><span>慈善身影</span><span class="on">公益行動</span><span>真愛多多</span><span>最新消息</span><span>文創小舖</span><span>搖籃咖啡 ↗</span><span>場地租借</span>
+          </nav>
+
+          <nav class="A-bar">
+            <span class="item todo">特殊生轉銜職場</span>
+            <span class="item todo">自閉症原生藝術</span>
+            <span class="item on">偏鄉美學教育</span>
+            <span class="item todo">奧兒福音樂會</span>
+            <span class="item todo">老人服務</span>
+          </nav>
+
+          <!-- 公益行動 頁面標題 -->
+          <div style="padding:48px 40px 32px;background:#fff">
+            <h2 style="font-size:32px;letter-spacing:4px;font-weight:700;margin-bottom:14px;line-height:1.3">陪伴力量大</h2>
+            <p style="font-size:14px;color:#444;line-height:1.85;max-width:680px">以生活美學與文化底蘊，打造共學、共享、共榮的特別教育環境。</p>
+          </div>
+
+          <div style="padding:0 40px 40px">
+            <div class="x-list">
+              <a class="item"><div class="thumb">img · 地磨兒</div><div><h5>愛唱歌的學校 — 地磨兒國小</h5><div class="quote">「不求奪標，只求開心」</div><div class="loc">屏東縣三地門</div></div><span class="arrow">→</span></a>
+              <a class="item"><div class="thumb">img · 伯利恆</div><div><h5>一心推動融合教育 — 伯利恆文教基金會</h5><div class="quote">「用愛讓慢飛的天使，譜出屬於他們的未來」</div><div class="loc">台南學甲</div></div><span class="arrow">→</span></a>
+              <a class="item"><div class="thumb">img · 德蘭</div><div><h5>牽起社區的手 — 天主教德蘭啟智中心</h5><div class="quote">「當我的心尋著你的心，當我的手牽上你的手」</div><div class="loc">台南玉井</div></div><span class="arrow">→</span></a>
+              <a class="item"><div class="thumb">img · 蘆葦</div><div><h5>慢飛天使一生的守護 — 天主教蘆葦啟智中心</h5><div class="quote">「壓傷的蘆葦，祂不折斷；將熄的燈芯，祂不吹滅」</div><div class="loc">台南新市</div></div><span class="arrow">→</span></a>
+              <a class="item"><div class="thumb">img · 瑞復</div><div><h5>漫漫漁光 — 天主教瑞復益智中心</h5><div class="quote">「有人的地方就有愛，有愛的地方就有希望」</div><div class="loc">台南安平漁光里</div></div><span class="arrow">→</span></a>
+              <a class="item"><div class="thumb">img · 惠民</div><div><h5>扎根菊島、用愛照顧 — 天主教惠民啟智中心</h5><div class="quote">「凡你們對我這些最小兄弟中的一個所做的，就是對我做的」</div><div class="loc">澎湖馬公</div></div><span class="arrow">→</span></a>
+              <a class="item"><div class="thumb">img · 泰山</div><div><h5>泰山奇蹟之家 — 天主教主顧修女會</h5><div class="quote">「播下善的種子，讓愛無限延伸」</div><div class="loc">新北市泰山</div></div><span class="arrow">→</span></a>
+            </div>
+          </div>
+
+          <div class="sim-cta"><div class="ctxt">想支持公益行動？</div><div class="cbtn">DONATE →</div></div>
+          <div class="sim-foot">FOOTER · 10043 台北市中正區博愛路 154 號</div>
+        </div>
+      </div>
+
+      <aside class="notes">
+        <h4>A 設計筆記（調整版）</h4>
+        <dl>
+          <dt>頂邊</dt><dd>無 — 由主 nav 的品牌色底邊承擔</dd>
+          <dt>底邊</dt><dd><b>移除</b> — 用 19px 留白與 hero 的黑色細線分隔</dd>
+          <dt>字級</dt><dd>12px / 字距 1.5px（明確比主 nav 14/2 小一級）</dd>
+          <dt>Active</dt><dd>品牌色字 + 1px 細短橫（緊貼文字下方，不壓底邊）</dd>
+          <dt>籌備中</dt><dd>#BBB 淺灰字</dd>
+          <dt>Sticky</dt><dd>保留（切換可達性是核心，不讓步）</dd>
+          <dt>手機</dt><dd>收進主 nav drawer 內二級展開，不顯示成第二條 bar</dd>
+        </dl>
+        <div class="pros"><span>PRO</span><span>視覺層級清楚；無雙層 chrome；切換隨時可達；可用於其他頁面（場地租借、最新消息）</span></div>
+        <div class="cons"><span>CON</span><span>桌面 sticky 雙層共 ~134px；手機需另設計 drawer 二級展開</span></div>
+      </aside>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       B · 不做 sub-nav，5 類進入 section-head
+       ============================================================ -->
+  <section class="variant" id="b">
+    <div class="v-head">
+      <div class="v-letter">B</div>
+      <div class="v-name">5 類進入頁面 section-head</div>
+      <span class="v-tag">最乾淨</span>
+    </div>
+    <p class="v-sub">主 nav 下完全沒有 sub-nav。改用站上既有的 <span class="mono">.section-head</span> 樣式（黑色底邊、置左標題、置右 link） — 把「公益行動」當作頁面 H2，5 類做成 section-head 右側的 nav 列。Sub-nav 不存在於 nav 系統，存在於「頁面的一部分」。</p>
+
+    <div class="v-body">
+      <div class="frame">
+        <div class="url">lovehope.org.tw / actions / aesthetic-edu</div>
+        <div class="sim">
+          <div class="sim-header"><span class="logo-mock"></span><span>NAV · DONATE · EN</span></div>
+          <nav class="sim-nav">
+            <span>關於我們</span><span>慈善身影</span><span class="on">公益行動</span><span>真愛多多</span><span>最新消息</span><span>文創小舖</span><span>搖籃咖啡 ↗</span><span>場地租借</span>
+          </nav>
+
+          <!-- 主 nav 之後直接接內容；用 section-head 樣式做出 publication header -->
+          <div class="B-pubhead">
+            <div class="left">
+              <h2>陪伴力量大</h2>
+              <p style="font-size:13px;color:#444;line-height:1.7;margin-top:8px;max-width:520px">以生活美學與文化底蘊，打造共學、共享、共榮的特別教育環境。</p>
+            </div>
+            <div class="right">
+              <span class="item todo">特殊生轉銜職場</span>
+              <span class="item todo">自閉症原生藝術</span>
+              <span class="item on">偏鄉美學教育</span>
+              <span class="item todo">奧兒福音樂會</span>
+              <span class="item todo">老人服務</span>
+            </div>
+          </div>
+
+          <div class="B-sub" style="padding-top:36px">
+            <div class="x-list">
+              <a class="item"><div class="thumb">img · 地磨兒</div><div><h5>愛唱歌的學校 — 地磨兒國小</h5><div class="quote">「不求奪標，只求開心」</div><div class="loc">屏東縣三地門</div></div><span class="arrow">→</span></a>
+              <a class="item"><div class="thumb">img · 伯利恆</div><div><h5>一心推動融合教育 — 伯利恆文教基金會</h5><div class="quote">「用愛讓慢飛的天使，譜出屬於他們的未來」</div><div class="loc">台南學甲</div></div><span class="arrow">→</span></a>
+              <a class="item"><div class="thumb">img · 德蘭</div><div><h5>牽起社區的手 — 天主教德蘭啟智中心</h5><div class="quote">「當我的心尋著你的心，當我的手牽上你的手」</div><div class="loc">台南玉井</div></div><span class="arrow">→</span></a>
+              <a class="item"><div class="thumb">img · 蘆葦</div><div><h5>慢飛天使一生的守護 — 天主教蘆葦啟智中心</h5><div class="quote">「壓傷的蘆葦，祂不折斷；將熄的燈芯，祂不吹滅」</div><div class="loc">台南新市</div></div><span class="arrow">→</span></a>
+              <a class="item"><div class="thumb">img · 瑞復</div><div><h5>漫漫漁光 — 天主教瑞復益智中心</h5><div class="quote">「有人的地方就有愛，有愛的地方就有希望」</div><div class="loc">台南安平漁光里</div></div><span class="arrow">→</span></a>
+              <a class="item"><div class="thumb">img · 惠民</div><div><h5>扎根菊島、用愛照顧 — 天主教惠民啟智中心</h5><div class="quote">「凡你們對我這些最小兄弟中的一個所做的，就是對我做的」</div><div class="loc">澎湖馬公</div></div><span class="arrow">→</span></a>
+              <a class="item"><div class="thumb">img · 泰山</div><div><h5>泰山奇蹟之家 — 天主教主顧修女會</h5><div class="quote">「播下善的種子，讓愛無限延伸」</div><div class="loc">新北市泰山</div></div><span class="arrow">→</span></a>
+            </div>
+          </div>
+
+          <div class="sim-cta"><div class="ctxt">想支持公益行動？</div><div class="cbtn">DONATE →</div></div>
+          <div class="sim-foot">FOOTER · 10043 台北市中正區博愛路 154 號</div>
+        </div>
+      </div>
+
+      <aside class="notes">
+        <h4>B 設計筆記</h4>
+        <dl>
+          <dt>策略</dt><dd>不存在 sub-nav；5 類進入 section-head 樣式</dd>
+          <dt>視覺</dt><dd>沿用站上既有的 <span class="mono">.section-head</span>：黑色底邊、置左標題（含 Latin 小標）、置右 nav</dd>
+          <dt>Active</dt><dd>品牌色字 + 粗體（其他 link 灰字）</dd>
+          <dt>籌備中</dt><dd>#BBB 淺灰字</dd>
+          <dt>Sticky</dt><dd>只有主 nav；section-head 是頁面內容，會隨捲動消失</dd>
+        </dl>
+        <div class="pros"><span>PRO</span><span>主 nav 後零突兀；完全使用站上既有 pattern；視覺最乾淨</span></div>
+        <div class="cons"><span>CON</span><span>捲動後切換 nav 看不到；需要回頂或另設 sticky 機制；5 類在桌面右側可能字寬不足</span></div>
+      </aside>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       D · 左側 rail
+       ============================================================ -->
+  <section class="variant" id="d">
+    <div class="v-head">
+      <div class="v-letter">D</div>
+      <div class="v-name">左側 rail</div>
+      <span class="v-tag">不與主 nav 衝突</span>
+    </div>
+    <p class="v-sub">分類做成左側 vertical rail，與主 nav 垂直關係而非堆疊，自然避開「水平條接水平條」造成的突兀。Rail 純文字、字級 15px、active 用 3px 品牌色左邊線。內容區拿到頁面寬度的 5/6。</p>
+
+    <div class="v-body">
+      <div class="frame">
+        <div class="url">lovehope.org.tw / actions / aesthetic-edu</div>
+        <div class="sim">
+          <div class="sim-header"><span class="logo-mock"></span><span>NAV · DONATE · EN</span></div>
+          <nav class="sim-nav">
+            <span>關於我們</span><span>慈善身影</span><span class="on">公益行動</span><span>真愛多多</span><span>最新消息</span><span>文創小舖</span><span>搖籃咖啡 ↗</span><span>場地租借</span>
+          </nav>
+
+          <div class="D-layout">
+            <aside class="D-rail">
+              <div class="item todo">特殊生轉銜職場</div>
+              <div class="item todo">自閉症原生藝術</div>
+              <div class="item on">偏鄉美學教育</div>
+              <div class="item todo">奧兒福音樂會</div>
+              <div class="item todo">老人服務</div>
+            </aside>
+            <div class="D-main">
+              <h2 style="font-size:32px;letter-spacing:4px;font-weight:700;margin-bottom:14px;line-height:1.3">陪伴力量大</h2>
+              <p style="font-size:14px;color:#444;line-height:1.85;max-width:680px;margin-bottom:36px">以生活美學與文化底蘊，打造共學、共享、共榮的特別教育環境。</p>
+
+              <div class="x-list x-list-tight">
+                <a class="item"><div class="thumb">img · 地磨兒</div><div><h5>愛唱歌的學校 — 地磨兒國小</h5><div class="quote">「不求奪標，只求開心」</div><div class="loc">屏東縣三地門</div></div><span class="arrow">→</span></a>
+                <a class="item"><div class="thumb">img · 伯利恆</div><div><h5>一心推動融合教育 — 伯利恆文教基金會</h5><div class="quote">「用愛讓慢飛的天使，譜出屬於他們的未來」</div><div class="loc">台南學甲</div></div><span class="arrow">→</span></a>
+                <a class="item"><div class="thumb">img · 德蘭</div><div><h5>牽起社區的手 — 天主教德蘭啟智中心</h5><div class="quote">「當我的心尋著你的心，當我的手牽上你的手」</div><div class="loc">台南玉井</div></div><span class="arrow">→</span></a>
+                <a class="item"><div class="thumb">img · 蘆葦</div><div><h5>慢飛天使一生的守護 — 天主教蘆葦啟智中心</h5><div class="quote">「壓傷的蘆葦，祂不折斷」</div><div class="loc">台南新市</div></div><span class="arrow">→</span></a>
+                <a class="item"><div class="thumb">img · 瑞復</div><div><h5>漫漫漁光 — 天主教瑞復益智中心</h5><div class="quote">「有人的地方就有愛，有愛的地方就有希望」</div><div class="loc">台南安平漁光里</div></div><span class="arrow">→</span></a>
+                <a class="item"><div class="thumb">img · 惠民</div><div><h5>扎根菊島、用愛照顧 — 天主教惠民啟智中心</h5><div class="quote">「凡你們對我這些最小兄弟中的一個所做的」</div><div class="loc">澎湖馬公</div></div><span class="arrow">→</span></a>
+                <a class="item"><div class="thumb">img · 泰山</div><div><h5>泰山奇蹟之家 — 天主教主顧修女會</h5><div class="quote">「播下善的種子，讓愛無限延伸」</div><div class="loc">新北市泰山</div></div><span class="arrow">→</span></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="sim-cta"><div class="ctxt">想支持公益行動？</div><div class="cbtn">DONATE →</div></div>
+          <div class="sim-foot">FOOTER · 10043 台北市中正區博愛路 154 號</div>
+        </div>
+      </div>
+
+      <aside class="notes">
+        <h4>D 設計筆記</h4>
+        <dl>
+          <dt>策略</dt><dd>切換移到頁面左側垂直欄，與主 nav 不再「水平接水平」</dd>
+          <dt>視覺</dt><dd>240px 純文字 rail，字級 15px / 字距 2px</dd>
+          <dt>Active</dt><dd>品牌色字 + 3px 品牌色左邊線</dd>
+          <dt>籌備中</dt><dd>淺灰字</dd>
+          <dt>Sticky</dt><dd>rail 桌面 sticky；手機降為頂部水平 chips 或 accordion</dd>
+          <dt>tagline</dt><dd>進到內容區左上，與 7 卡同欄</dd>
+        </dl>
+        <div class="pros"><span>PRO</span><span>不與主 nav 衝突；切換隨時可見；內容區仍寬</span></div>
+        <div class="cons"><span>CON</span><span>只有此頁有 rail，跨頁版型不一致；手機需另設計；rail 與 nav 連接處需仔細處理</span></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       COMPARE TABLE
+       ============================================================ -->
+  <section class="variant">
+    <div class="v-head"><div class="v-letter">∑</div><div class="v-name">三方向對照</div></div>
+    <div class="frame" style="padding:24px 28px;overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;min-width:780px">
+        <thead>
+          <tr style="border-bottom:1px solid var(--ink)">
+            <th style="text-align:left;padding:10px 8px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px">DIMENSION</th>
+            <th style="text-align:left;padding:10px 8px">A 鏡像 nav</th>
+            <th style="text-align:left;padding:10px 8px">B Section-head</th>
+            <th style="text-align:left;padding:10px 8px">D 左側 rail</th>
+          </tr>
+        </thead>
+        <tbody style="color:var(--note)">
+          <tr style="border-bottom:1px solid var(--line-soft)"><td style="padding:11px 8px;color:var(--ink);font-weight:600">切換在哪</td><td style="padding:11px 8px">主 nav 下方第二層</td><td style="padding:11px 8px">頁面 section-head 內</td><td style="padding:11px 8px">頁面左側垂直欄</td></tr>
+          <tr style="border-bottom:1px solid var(--line-soft)"><td style="padding:11px 8px;color:var(--ink);font-weight:600">與主 nav 關係</td><td style="padding:11px 8px">水平延伸</td><td style="padding:11px 8px">隔離於頁面內</td><td style="padding:11px 8px">垂直 / 不堆疊</td></tr>
+          <tr style="border-bottom:1px solid var(--line-soft)"><td style="padding:11px 8px;color:var(--ink);font-weight:600">突兀度</td><td style="padding:11px 8px">低（調整後解決）</td><td style="padding:11px 8px">無</td><td style="padding:11px 8px">無</td></tr>
+          <tr style="border-bottom:1px solid var(--line-soft)"><td style="padding:11px 8px;color:var(--ink);font-weight:600">切換可達性</td><td style="padding:11px 8px">隨時可見</td><td style="padding:11px 8px">捲過就看不到</td><td style="padding:11px 8px">隨時可見</td></tr>
+          <tr style="border-bottom:1px solid var(--line-soft)"><td style="padding:11px 8px;color:var(--ink);font-weight:600">跨頁一致</td><td style="padding:11px 8px">差</td><td style="padding:11px 8px">好</td><td style="padding:11px 8px">差</td></tr>
+          <tr style="border-bottom:1px solid var(--line-soft)"><td style="padding:11px 8px;color:var(--ink);font-weight:600">工程</td><td style="padding:11px 8px">低</td><td style="padding:11px 8px">最低</td><td style="padding:11px 8px">中</td></tr>
+          <tr><td style="padding:11px 8px;color:var(--ink);font-weight:600">適合語境</td><td style="padding:11px 8px">切換可達性優先</td><td style="padding:11px 8px">站上 pattern 優先</td><td style="padding:11px 8px">可達性 + 不突兀</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

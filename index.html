@@ -62,9 +62,9 @@
   .app-nav a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
 
   /* 共用：footer & drawer 的外連 */
-  .app-footer .footer-links a.is-external{color:#6B4423;display:inline-flex;align-items:center;gap:5px}
+  .app-footer .footer-links a.is-external{color:#D9B889;display:inline-flex;align-items:center;gap:5px}
   .app-footer .footer-links a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:12px;font-weight:400;opacity:.6;transition:transform .25s,opacity .2s;line-height:1}
-  .app-footer .footer-links a.is-external:hover{color:#6B4423}
+  .app-footer .footer-links a.is-external:hover{color:#E5C99D}
   .app-footer .footer-links a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
   .drawer-nav a.is-external{color:#F4EDE0;gap:10px}
   .drawer-nav a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:14px;font-weight:400;opacity:.7;transition:transform .25s,opacity .2s;line-height:1;margin-left:auto;padding-right:6px}
@@ -188,7 +188,7 @@
   .trend-arrow.next{right:-20px}
 
   /* ============ SPECIAL ISSUE: 5 公益行動 ============ */
-  .actions-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .actions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
   .act{background:#fff;cursor:pointer;transition:background .25s;display:flex;flex-direction:column}
   .act:hover{background:var(--brand-tint)}
   .act .img{aspect-ratio:4/5;position:relative;overflow:hidden;background:linear-gradient(180deg,#5a0808,#1a0202)}
@@ -206,6 +206,7 @@
   .act:nth-child(3) .img{background:linear-gradient(180deg,#704830,#2a1808)}
   .act:nth-child(4) .img{background:linear-gradient(180deg,#5a3a2a,#2a1a0a)}
   .act:nth-child(5) .img{background:linear-gradient(180deg,#3a1818,#1a0808)}
+  .act:nth-child(6) .img{background:linear-gradient(180deg,#4a4a4a,#1a1a1a)}
 
   /* ============ SPOTLIGHT: 真愛多多 (feature-card 收縮版) ============ */
   .spot-band{display:grid;grid-template-columns:1.4fr 1fr;min-height:440px;background:#fff}
@@ -229,48 +230,48 @@
 
   /* ABOUT / STORIES / SUPPORT 都改用 .article-card 系統 (見 LATEST 區塊) */
 
-  /* ============ DONATE BAND ============ */
-  .donate-band{background:var(--brand);color:#fff}
-  .donate-grid{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
-  .donate-text{padding:88px 64px;display:flex;flex-direction:column;justify-content:center}
+  /* ============ DONATE CARD (contained, not full-bleed) ============ */
+  .donate-band{padding:80px 0;background:#fff}
+  .donate-card{background:var(--brand);color:#fff;border-radius:4px;padding:64px;display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center;position:relative;overflow:hidden}
+  .donate-card::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 85% 15%,rgba(0,0,0,.18) 0,transparent 60%);pointer-events:none}
+  .donate-text{position:relative;z-index:1;padding:0}
   .donate-text .label{font-family:"IBM Plex Serif",sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#f4d8d8;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:14px}
   .donate-text .label::before{content:"";width:32px;height:1px;background:#f4d8d8}
-  .donate-text h2{font-size:48px;color:#fff;letter-spacing:6px;line-height:1.4;margin-bottom:22px;font-weight:900}
-  .donate-text p{font-size:15px;color:rgba(255,255,255,.85);line-height:2;margin-bottom:32px}
-  .donate-text .actions{display:flex;gap:16px;flex-wrap:wrap}
-  .donate-text .btn-w{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;background:#fff;color:var(--brand);font-size:13px;letter-spacing:2.5px;font-weight:600;transition:background .2s}
+  .donate-text h2{font-size:38px;color:#fff;letter-spacing:5px;line-height:1.4;margin-bottom:20px;font-weight:700}
+  .donate-text p{font-size:15px;color:rgba(255,255,255,.85);line-height:1.95;margin-bottom:28px;max-width:480px}
+  .donate-text .actions{display:flex;gap:14px;flex-wrap:wrap}
+  .donate-text .btn-w{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;background:#fff;color:var(--brand);font-size:12px;letter-spacing:2.5px;font-weight:600;transition:background .2s}
   .donate-text .btn-w::after{content:"→"}
   .donate-text .btn-w:hover{background:#f4d8d8}
-  .donate-text .btn-wo{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border:1px solid rgba(255,255,255,.6);color:#fff;font-size:13px;letter-spacing:2.5px;font-weight:500;transition:all .2s}
+  .donate-text .btn-wo{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;border:1px solid rgba(255,255,255,.5);color:#fff;font-size:12px;letter-spacing:2.5px;font-weight:500;transition:all .2s}
   .donate-text .btn-wo:hover{background:rgba(255,255,255,.12);border-color:#fff}
-  .donate-side{background:#1a0202;display:flex;flex-direction:column;border-left:1px solid rgba(255,255,255,.08)}
-  .donate-fact{padding:30px 48px;border-bottom:1px solid rgba(255,255,255,.08);display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:18px}
-  .donate-fact.is-hero{padding:42px 48px}
-  .donate-fact:last-child{border-bottom:none}
-  .donate-fact .n{font-family:"IBM Plex Serif",sans-serif;font-size:48px;font-weight:600;color:#fff;letter-spacing:-1px;line-height:1;font-style:italic}
-  .donate-fact .n .u{font-family:"Noto Sans TC",sans-serif;font-style:normal;font-size:14px;font-weight:500;letter-spacing:1px;margin-left:6px;color:rgba(255,255,255,.8)}
-  .donate-fact.is-hero .n{font-size:64px}
-  .donate-fact .t{font-size:13px;color:rgba(255,255,255,.75);letter-spacing:1.5px;line-height:1.6}
-  .donate-fact .t .lbl{display:block;font-family:"IBM Plex Serif",sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.4);font-weight:600;margin-bottom:4px;font-style:italic}
+  .donate-stats{position:relative;z-index:1;display:flex;flex-direction:column;border-left:1px solid rgba(255,255,255,.2);padding-left:40px}
+  .donate-method{padding:18px 0;border-bottom:1px solid rgba(255,255,255,.18)}
+  .donate-method:first-child{padding-top:0}
+  .donate-method:last-child{border-bottom:none;padding-bottom:0}
+  .donate-method .method-label{display:block;font-family:"IBM Plex Serif",sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:700;margin-bottom:6px}
+  .donate-method h3{font-size:16px;color:#fff;letter-spacing:1.5px;margin-bottom:6px;font-weight:600}
+  .donate-method p{font-size:13px;color:rgba(255,255,255,.78);line-height:1.75;margin:0}
+  .donate-method b{color:#fff;font-weight:700}
 
-  /* ============ FOOTER (La Vie 極簡式 + 法人聯絡資訊) ============ */
-  .app-footer{background:#fff;border-top:1px solid var(--line);padding:60px 40px 40px;text-align:center}
+  /* ============ FOOTER (深色基座 + 法人聯絡資訊) ============ */
+  .app-footer{background:var(--ink);color:#fff;padding:64px 40px 36px;text-align:center;border-top:none}
   .app-footer .footer-info{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:42px}
-  .app-footer .footer-address{font-size:13px;color:var(--ink);letter-spacing:1.5px;font-weight:500}
-  .app-footer .footer-contact{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 14px;font-size:13px;color:var(--body);letter-spacing:.5px}
-  .app-footer .footer-contact .lbl{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:var(--ink);letter-spacing:2px;font-size:10px;margin-right:6px}
-  .app-footer .footer-contact a{font-family:"IBM Plex Serif",sans-serif;font-size:13px;letter-spacing:.5px;color:var(--body);transition:color .2s}
-  .app-footer .footer-contact a:hover{color:var(--brand)}
-  .app-footer .footer-contact .dot{color:var(--muted)}
-  .app-footer .footer-giro{display:inline-flex;align-items:center;gap:16px;padding:12px 24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:8px;flex-wrap:wrap;justify-content:center;font-size:13px}
-  .app-footer .footer-giro .giro-label{font-family:"IBM Plex Serif",sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--brand);font-weight:700;padding:4px 10px;border:1px solid var(--brand)}
-  .app-footer .footer-giro .giro-cell{color:var(--body);letter-spacing:.5px}
-  .app-footer .footer-giro .giro-cell b{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:var(--ink);letter-spacing:1.5px;margin-left:4px}
-  .app-footer .footer-giro .giro-sep{color:var(--line);font-weight:700}
+  .app-footer .footer-address{font-size:13px;color:#fff;letter-spacing:1.5px;font-weight:500}
+  .app-footer .footer-contact{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 14px;font-size:13px;color:rgba(255,255,255,.75);letter-spacing:.5px}
+  .app-footer .footer-contact .lbl{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:2px;font-size:10px;margin-right:6px}
+  .app-footer .footer-contact a{font-family:"IBM Plex Serif",sans-serif;font-size:13px;letter-spacing:.5px;color:rgba(255,255,255,.75);transition:color .2s}
+  .app-footer .footer-contact a:hover{color:#fff}
+  .app-footer .footer-contact .dot{color:rgba(255,255,255,.3)}
+  .app-footer .footer-giro{display:inline-flex;align-items:center;gap:16px;padding:12px 24px;border-top:1px solid rgba(255,255,255,.15);border-bottom:1px solid rgba(255,255,255,.15);margin-top:8px;flex-wrap:wrap;justify-content:center;font-size:13px}
+  .app-footer .footer-giro .giro-label{font-family:"IBM Plex Serif",sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#fff;font-weight:700;padding:4px 10px;border:1px solid rgba(255,255,255,.4)}
+  .app-footer .footer-giro .giro-cell{color:rgba(255,255,255,.78);letter-spacing:.5px}
+  .app-footer .footer-giro .giro-cell b{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:#fff;letter-spacing:1.5px;margin-left:4px}
+  .app-footer .footer-giro .giro-sep{color:rgba(255,255,255,.2);font-weight:700}
   .app-footer .footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:22px}
-  .app-footer .footer-links a{font-size:13px;color:var(--ink);letter-spacing:1px;font-weight:500;transition:color .2s}
-  .app-footer .footer-links a:hover{color:var(--brand)}
-  .app-footer .footer-copy{font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:2.5px;color:var(--muted);text-transform:uppercase}
+  .app-footer .footer-links a{font-size:13px;color:#fff;letter-spacing:1px;font-weight:500;transition:color .2s}
+  .app-footer .footer-links a:hover{color:#f4d8d8}
+  .app-footer .footer-copy{font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:2.5px;color:rgba(255,255,255,.4);text-transform:uppercase}
 
   /* ============ BACK TO TOP ============ */
   .cd-top{position:fixed;right:24px;bottom:24px;width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Serif",sans-serif;font-size:18px;line-height:1;z-index:80;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s,background .2s;box-shadow:0 6px 20px rgba(0,0,0,.18)}
@@ -323,14 +324,12 @@
     .actions-grid{grid-template-columns:repeat(2,1fr)}
     .trend-card{flex:0 0 calc((100% - 32px)/2)}
     .trend-arrow{display:none}
-    .spot-band,.donate-grid{grid-template-columns:1fr}
+    .spot-band{grid-template-columns:1fr}
     .spot-text{padding:36px 28px}
-    .donate-text{padding:48px 32px}
-    .donate-side{flex-direction:row;border-left:none;border-top:1px solid rgba(255,255,255,.1)}
-    .donate-fact{flex:1;padding:24px;border-bottom:none;border-right:1px solid rgba(255,255,255,.08);grid-template-columns:1fr;gap:8px}
-    .donate-fact.is-hero{padding:24px}
-    .donate-fact:last-child{border-right:none}
-    .donate-fact .n,.donate-fact.is-hero .n{font-size:36px}
+    .donate-band{padding:56px 0}
+    .donate-card{grid-template-columns:1fr;gap:40px;padding:48px;border-radius:4px}
+    .donate-text{padding:0}
+    .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:32px}
     .has-before-background.is-offset-br::before{inset:20px -16px -20px 20px}
     .app-nav,.app-header{position:static}
   }
@@ -352,11 +351,11 @@
     .article-card .title{font-size:17px}
     .actions-grid{grid-template-columns:1fr}
     .trend-card{flex:0 0 80%}
-    .donate-text h2{font-size:28px;letter-spacing:3px}
+    .donate-band{padding:40px 20px}
+    .donate-card{padding:32px 24px;gap:28px}
+    .donate-text h2{font-size:26px;letter-spacing:3px}
     .spot-text h2{font-size:22px;letter-spacing:1.5px}
-    .donate-side{flex-direction:column}
-    .donate-fact{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
-    .donate-fact:last-child{border-bottom:none}
+    .donate-stats{padding-top:24px}
   }
 </style>
 </head>
@@ -370,7 +369,7 @@
         <span></span><span></span><span></span>
       </button>
       <div class="header-socials">
-        <a aria-label="facebook" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
+        <a aria-label="facebook" href="https://www.facebook.com/LoveHopeF" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
         <a aria-label="instagram" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
         <a aria-label="youtube" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
         <a aria-label="line" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
@@ -378,7 +377,7 @@
     </div>
     <a class="logo" href="#"><img src="images/logo.png" alt="薛伯輝基金會 Love Hope Foundation"></a>
     <div class="right">
-      <button class="donate-btn">捐款支持</button>
+      <a class="donate-btn" href="donate.html">捐款支持</a>
       <div class="header-utility">
         <a href="#">EN</a>
         <a href="#">登入</a>
@@ -390,14 +389,14 @@
 <!-- ===== NAV ===== -->
 <nav class="app-nav">
   <div class="row">
-    <a href="#">關於我們</a>
-    <a href="#">慈善身影</a>
-    <a href="#" class="active">公益行動</a>
-    <a href="#">真愛多多</a>
-    <a href="#">最新消息</a>
-    <a href="#">文創小舖</a>
-    <a href="#" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
-    <a href="#">場地租借</a>
+    <a href="about.html">關於我們</a>
+    <a href="people.html">慈善身影</a>
+    <a href="actions-a.html" class="active">公益行動</a>
+    <a href="true-love.html">真愛多多</a>
+    <a href="news.html">最新消息</a>
+    <a href="shop.html">文創小舖</a>
+    <a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
+    <a href="venue.html">場地租借</a>
   </div>
 </nav>
 
@@ -407,14 +406,14 @@
     <button class="banner-arrow prev" aria-label="previous">‹</button>
     <button class="banner-arrow next" aria-label="next">›</button>
     <div class="banner-track" id="bannerTrack">
-      <a class="banner-slide banner-slide-1 on" href="#">
-        <h2 class="h-title">陪伴每一個慢飛的孩子，看見更美麗的世界</h2>
+      <a class="banner-slide banner-slide-1 on" href="about.html">
+        <h2 class="h-title">一步一步向前行，延續愛與希望的基金會</h2>
       </a>
-      <a class="banner-slide banner-slide-2" href="#">
-        <h2 class="h-title">紳士企業家薛伯輝，留下的不只是一個名字</h2>
+      <a class="banner-slide banner-slide-2" href="people.html">
+        <h2 class="h-title">紳士企業家薛伯輝，留下愛與希望的慈善身影</h2>
       </a>
-      <a class="banner-slide banner-slide-3" href="#">
-        <h2 class="h-title">奧兒福音樂會 2026，讓共融的聲音被聽見</h2>
+      <a class="banner-slide banner-slide-3" href="true-love.html">
+        <h2 class="h-title">完成甘惠忠神父的心願，伯利恆早療暨融合教育中心</h2>
       </a>
     </div>
   </div>
@@ -437,119 +436,119 @@
     </header>
 
     <div class="article-grid is-latest">
-      <a class="article-card">
+      <a class="article-card" href="news.html">
         <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
-        <div class="meta"><span class="cat">愛的講堂</span><span>2026 / 05 / 03</span></div>
-        <h3 class="title">陪伴的力量：當特殊教育走進日常生活</h3>
-        <div class="byline">by 編輯部</div>
+        <div class="meta"><span class="cat">公告</span><span>2024 / 11 / 06</span></div>
+        <h3 class="title">【公告】蔡紹華慈善濟助事業基金會併入本會</h3>
+        <div class="byline">基金會公告</div>
       </a>
-      <a class="article-card">
+      <a class="article-card" href="news.html">
         <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
-        <div class="meta"><span class="cat">搖籃咖啡</span><span>2026 / 05 / 01</span></div>
-        <h3 class="title">春日的咖啡香：搖籃咖啡迎接五月新菜單，與母親一起享受</h3>
-        <div class="byline">by 編輯部</div>
+        <div class="meta"><span class="cat">共融藝術展</span><span>2022 / 12 / 23</span></div>
+        <h3 class="title">【共融藝術展】白與黑-王俠軍與原生藝術家</h3>
+        <div class="byline">活動資訊</div>
       </a>
-      <a class="article-card">
+      <a class="article-card" href="news.html">
         <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
-        <div class="meta"><span class="cat">愛的講堂</span><span>2026 / 04 / 28</span></div>
-        <h3 class="title">融合教育講座：與甘神父的精神同行，下一個十年的共融之路</h3>
-        <div class="byline">by 編輯部</div>
+        <div class="meta"><span class="cat">美濃文創</span><span>2022 / 12 / 21</span></div>
+        <h3 class="title">楊牧書房在美濃</h3>
+        <div class="byline">美濃文創中心</div>
       </a>
-      <a class="article-card">
+      <a class="article-card" href="news.html">
         <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
-        <div class="meta"><span class="cat">場地租借</span><span>2026 / 04 / 22</span></div>
-        <h3 class="title">五月份愛的講堂空間檔期，現正開放預約</h3>
-        <div class="byline">by 場地組</div>
+        <div class="meta"><span class="cat">Podcast</span><span>2022 / 12 / 14</span></div>
+        <h3 class="title">【Podcast】《楊牧的山風海雨》</h3>
+        <div class="byline">Podcast</div>
       </a>
-      <a class="article-card">
+      <a class="article-card" href="news.html">
         <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
-        <div class="meta"><span class="cat">真愛多多</span><span>2026 / 04 / 18</span></div>
-        <h3 class="title">伯利恆早療中心工程進度：五月最新報告</h3>
-        <div class="byline">by 真愛多多專案</div>
+        <div class="meta"><span class="cat">閱讀月</span><span>2022 / 11 / 28</span></div>
+        <h3 class="title">【線上講座資訊】楊牧的山風海雨</h3>
+        <div class="byline">線上講座</div>
       </a>
-      <a class="article-card">
+      <a class="article-card" href="news.html">
         <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
-        <div class="meta"><span class="cat">慈善身影</span><span>2026 / 04 / 12</span></div>
-        <h3 class="title">紳士企業家薛伯輝百年回顧：那個用書店撐起公益的男人</h3>
-        <div class="byline">by 編輯部</div>
+        <div class="meta"><span class="cat">真愛多多</span><span>2018 / 03 / 08</span></div>
+        <h3 class="title">【敬邀】伯利恆早療暨融合教育中心落成典禮</h3>
+        <div class="byline">真愛多多</div>
       </a>
     </div>
 
     <div class="view-more-wrap">
-      <a class="view-more-btn" href="#">View More</a>
+      <a class="view-more-btn" href="news.html">View More</a>
     </div>
   </div>
 </section>
 
-<!-- ===== TRENDING (La Vie style carousel + rank) ===== -->
+<!-- ===== FEATURED STORIES (La Vie style carousel + rank) ===== -->
 <section class="section" style="background:#fff;padding-top:0">
   <div class="wrap">
     <header class="section-head">
       <div class="titles">
-        <h2 class="section-title">熱門閱讀</h2>
-        <p class="subtitle"><span>Trending</span></p>
+        <h2 class="section-title">重點故事</h2>
+        <p class="subtitle"><span>Stories</span></p>
       </div>
-      <a class="s-more">查看更多 →</a>
+      <a class="s-more" href="people.html">查看更多 →</a>
     </header>
 
     <div class="trend-frame" id="trendFrame">
       <button class="trend-arrow prev" aria-label="previous">‹</button>
       <button class="trend-arrow next" aria-label="next">›</button>
       <div class="trend-track" id="trendTrack">
-        <a class="trend-card">
+        <a class="trend-card" href="people.html">
           <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">01</figcaption></div>
           <div class="trend-body">
-            <div class="meta"><span class="cat">真愛多多</span><span>2026 / 04 / 12</span></div>
-            <h4>「早起步、不放手」：甘惠忠神父的五十年共融之路</h4>
+            <div class="meta"><span class="cat">慈善身影</span><span>薛伯輝先生</span></div>
+            <h4>紳士企業家的慈善身影：從文化教育到基金會精神</h4>
           </div>
         </a>
-        <a class="trend-card">
+        <a class="trend-card" href="people.html">
           <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">02</figcaption></div>
           <div class="trend-body">
-            <div class="meta"><span class="cat">公益行動</span><span>2026 / 03 / 28</span></div>
-            <h4>當美學走進偏鄉教室：花蓮玉里駐校計畫第三年回顧</h4>
+            <div class="meta"><span class="cat">慈善身影</span><span>甘惠忠神父</span></div>
+            <h4>關於慢飛天使，他是永遠的父親</h4>
           </div>
         </a>
-        <a class="trend-card">
+        <a class="trend-card" href="actions-a.html">
           <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">03</figcaption></div>
           <div class="trend-body">
-            <div class="meta"><span class="cat">慈善身影</span><span>2026 / 03 / 14</span></div>
-            <h4>薛伯輝先生與敦煌書店：一家書店如何撐起一個公益基金會</h4>
+            <div class="meta"><span class="cat">公益行動</span><span>地磨兒國小</span></div>
+            <h4>愛唱歌的學校：不求奪標，只求開心</h4>
           </div>
         </a>
-        <a class="trend-card">
+        <a class="trend-card" href="true-love.html">
           <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">04</figcaption></div>
           <div class="trend-body">
-            <div class="meta"><span class="cat">搖籃咖啡</span><span>2026 / 03 / 02</span></div>
-            <h4>專訪｜在搖籃咖啡學沖咖啡的小宇，今天滿一年了</h4>
+            <div class="meta"><span class="cat">真愛多多</span><span>伯利恆中心</span></div>
+            <h4>甘惠忠神父的心願，薛伯輝基金會的使命</h4>
           </div>
         </a>
-        <a class="trend-card">
+        <a class="trend-card" href="actions-a.html">
           <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">05</figcaption></div>
           <div class="trend-body">
-            <div class="meta"><span class="cat">公益行動</span><span>2026 / 02 / 25</span></div>
-            <h4>原生藝術：自閉症青年的畫，正在被世界看見</h4>
+            <div class="meta"><span class="cat">公益行動</span><span>德蘭啟智中心</span></div>
+            <h4>牽起社區的手，讓距離不阻礙愛的傳遞</h4>
           </div>
         </a>
-        <a class="trend-card">
+        <a class="trend-card" href="actions-a.html">
           <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">06</figcaption></div>
           <div class="trend-body">
-            <div class="meta"><span class="cat">愛的講堂</span><span>2026 / 02 / 18</span></div>
-            <h4>家長心聲：當「慢」不再是焦慮，而是另一種速度</h4>
+            <div class="meta"><span class="cat">公益行動</span><span>惠民啟智中心</span></div>
+            <h4>扎根菊島，讓愛進駐澎湖離島中的離島</h4>
           </div>
         </a>
-        <a class="trend-card">
+        <a class="trend-card" href="actions-a.html">
           <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">07</figcaption></div>
           <div class="trend-body">
-            <div class="meta"><span class="cat">最新消息</span><span>2026 / 02 / 04</span></div>
-            <h4>奧兒福音樂會邁入第十屆：今年的曲目，由孩子們親自挑選</h4>
+            <div class="meta"><span class="cat">公益行動</span><span>泰山奇蹟之家</span></div>
+            <h4>播下善的種子，讓長輩的生活重新有美感與歡樂</h4>
           </div>
         </a>
-        <a class="trend-card">
+        <a class="trend-card" href="actions-a.html">
           <div class="trend-img has-loading-spin"><span class="img-fill"></span><figcaption class="rank">08</figcaption></div>
           <div class="trend-body">
-            <div class="meta"><span class="cat">場地租借</span><span>2026 / 01 / 22</span></div>
-            <h4>愛的講堂改造紀錄：一個讓對話真正發生的空間</h4>
+            <div class="meta"><span class="cat">希望工程</span><span>德文宿舍</span></div>
+            <h4>八八水災之後，改造地磨兒國小德文分校學生宿舍</h4>
           </div>
         </a>
       </div>
@@ -562,56 +561,65 @@
   <div class="wrap">
     <header class="section-head">
       <div class="titles">
-        <h2 class="section-title">五大公益行動</h2>
+        <h2 class="section-title">公益行動</h2>
         <p class="subtitle"><span>Special Issue</span></p>
       </div>
-      <a class="s-more">了解全部行動 →</a>
+      <a class="s-more" href="actions-a.html">了解全部行動 →</a>
     </header>
 
     <div class="has-before-background is-offset-br">
     <div class="actions-grid">
-      <a class="act">
+      <a class="act" href="actions-a.html">
         <div class="img has-loading-spin"><span class="img-fill"></span><span class="num">01</span><span class="lbl">image / action 01</span></div>
         <div class="body">
           <span class="cat">Transition</span>
           <h4>特殊生<br>轉銜職場</h4>
-          <p>陪伴特殊孩子走入職場，從培訓、媒合到陪同上工，建立自立的尊嚴。</p>
+          <p>陪伴特殊生從學習走向職場，透過培力、支持與實作，建立穩定生活的可能。</p>
           <span class="arr">了解更多</span>
         </div>
       </a>
-      <a class="act">
+      <a class="act" href="actions-a.html">
         <div class="img has-loading-spin"><span class="img-fill"></span><span class="num">02</span><span class="lbl">image / action 02</span></div>
         <div class="body">
           <span class="cat">Outsider Art</span>
           <h4>自閉症<br>原生藝術</h4>
-          <p>看見每一份獨特，從藝術中綻放天賦，並協助作品走入展覽與市場。</p>
+          <p>看見特殊創作者的獨特表達，讓藝術成為被理解、被欣賞、被支持的橋樑。</p>
           <span class="arr">了解更多</span>
         </div>
       </a>
-      <a class="act">
+      <a class="act" href="actions-a.html">
         <div class="img has-loading-spin"><span class="img-fill"></span><span class="num">03</span><span class="lbl">image / action 03</span></div>
         <div class="body">
           <span class="cat">Aesthetic Edu.</span>
           <h4>偏鄉<br>美學教育</h4>
-          <p>把美感與文化帶進偏遠校園，每年駐校陪伴數百位孩子。</p>
+          <p>以生活美學與文化底蘊陪伴偏鄉孩子，打造共學、共享、共榮的教育環境。</p>
           <span class="arr">了解更多</span>
         </div>
       </a>
-      <a class="act">
+      <a class="act" href="actions-a.html">
         <div class="img has-loading-spin"><span class="img-fill"></span><span class="num">04</span><span class="lbl">image / action 04</span></div>
         <div class="body">
           <span class="cat">Music</span>
           <h4>奧兒福<br>音樂會</h4>
-          <p>音樂為橋，讓共融的聲音被聽見，每年免費售票邀請大眾共享。</p>
+          <p>讓音樂成為共融的語言，邀請孩子、家庭與社會共同聽見彼此的力量。</p>
           <span class="arr">了解更多</span>
         </div>
       </a>
-      <a class="act">
+      <a class="act" href="actions-a.html">
         <div class="img has-loading-spin"><span class="img-fill"></span><span class="num">05</span><span class="lbl">image / action 05</span></div>
         <div class="body">
           <span class="cat">Elder Care</span>
           <h4>老人<br>服務</h4>
-          <p>陪伴長者度過晚年，溫柔守護每一段時光與每一份記憶。</p>
+          <p>關懷長者生活、陪伴與安全需求，讓照顧不只停在服務，也保有美感與尊嚴。</p>
+          <span class="arr">了解更多</span>
+        </div>
+      </a>
+      <a class="act" href="actions-a.html">
+        <div class="img has-loading-spin"><span class="img-fill"></span><span class="num">06</span><span class="lbl">image / action 06</span></div>
+        <div class="body">
+          <span class="cat">Others</span>
+          <h4>其他</h4>
+          <p>彙整不在主要分類中的其他支持與合作案例。</p>
           <span class="arr">了解更多</span>
         </div>
       </a>
@@ -627,16 +635,16 @@
       <div class="spot-band">
         <div class="spot-img has-loading-spin">
           <span class="img-fill"></span>
-          <div class="meta"><span class="cat">Spotlight</span><span>真愛多多 ／ 2026</span></div>
-          <span class="lnk">youtu.be/P8aMCSEXvLk</span>
+          <div class="meta"><span class="cat">Spotlight</span><span>真愛多多 ／ 伯利恆中心</span></div>
+          <span class="lnk">lovehope.org.tw / true-love</span>
         </div>
         <div class="spot-text">
           <div class="label">Spotlight Project</div>
-          <h2>真愛多多｜伯利恆早療中心</h2>
+          <h2>真愛多多｜伯利恆早療暨融合教育中心</h2>
           <div class="quote">「早起步，不放手 — 讓每一個慢飛的孩子，都能抬起頭來，看看這美麗的世界。」</div>
           <div class="ctas">
-            <a class="btn-r">支持本專案</a>
-            <a class="btn-l">看完整故事</a>
+            <a class="btn-r" href="donate.html">捐款支持</a>
+            <a class="btn-l" href="true-love.html">看完整故事</a>
           </div>
         </div>
       </div>
@@ -652,11 +660,11 @@
         <h2 class="section-title">關於我們</h2>
         <p class="subtitle"><span>About</span></p>
       </div>
-      <a class="s-more">完整介紹 →</a>
+      <a class="s-more" href="about.html">完整介紹 →</a>
     </header>
 
     <div class="article-grid is-about">
-      <a class="article-card is-about">
+      <a class="article-card is-about" href="about.html">
         <figure class="article-card-image has-loading-spin">
           <span class="img-fill"></span>
           <span class="since-mark">
@@ -664,24 +672,24 @@
             <span class="yr">1975</span>
           </span>
         </figure>
-        <div class="meta"><span class="cat">基金會</span><span>50 年公益</span></div>
+        <div class="meta"><span class="cat">基金會</span><span>1975 / 2008 / 2013</span></div>
         <h3 class="title">薛伯輝基金會 ｜ 愛與希望的延續</h3>
-        <p class="description">1975 年成立，2008 年陳惠如女士為紀念先生薛伯輝先生而更名，2013 年轉隸於教育部。延續對社會弱勢的溫柔守護。</p>
+        <p class="description">1975 年成立薛氏文教基金會，2008 年更名為薛伯輝基金會，2013 年由台北市教育局轉隸教育部。</p>
         <div class="byline">1975 成立 ・ 2008 更名 ・ 2013 轉隸教育部</div>
       </a>
-      <a class="article-card is-portrait-1">
+      <a class="article-card is-portrait-1" href="people.html">
         <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
         <div class="meta"><span class="cat">慈善身影</span><span>A Gentleman</span></div>
         <h3 class="title">薛伯輝先生 ｜ 紳士企業家的慈善身影</h3>
-        <p class="description">從敦煌書店到基金會，回顧薛伯輝先生五十年的公益足跡，與公益和慈善的步履從未停下。</p>
-        <div class="byline">by 編輯部</div>
+        <p class="description">薛伯輝先生長期支持文化教育與清寒學子，陳惠如女士與家人延續他的精神，讓基金會成為愛與希望的起點。</p>
+        <div class="byline">人物故事</div>
       </a>
-      <a class="article-card is-portrait-2">
+      <a class="article-card is-portrait-2" href="people.html">
         <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
         <div class="meta"><span class="cat">慈善身影</span><span>Father of Slow Angels</span></div>
         <h3 class="title">甘惠忠神父 ｜ 慢飛天使的父親</h3>
-        <p class="description">奉獻台灣特教逾半世紀，「早起步、不放手」的精神在台灣慢飛家庭間生根。</p>
-        <div class="byline">by 編輯部</div>
+        <p class="description">甘惠忠神父一生奉獻台灣早療與融合教育，期盼每一個孩子都能抬起頭來看看這美麗的世界。</p>
+        <div class="byline">人物故事</div>
       </a>
     </div>
   </div>
@@ -695,29 +703,29 @@
         <h2 class="section-title">支持我們的另一種方式</h2>
         <p class="subtitle"><span>Support</span></p>
       </div>
-      <a class="s-more">所有支持方式 →</a>
+      <a class="s-more" href="donate.html">所有支持方式 →</a>
     </header>
 
     <div class="article-grid is-support">
-      <a class="article-card">
+      <a class="article-card" href="shop.html">
         <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
         <div class="meta"><span class="cat">Shop</span><span>文創公益</span></div>
         <h3 class="title">文創小舖</h3>
-        <p class="description">幾米系列與藝術家合作商品，每一件都是支持公益的溫暖宣言。</p>
+        <p class="description">以文創品、出版品與公益合作商品，讓支持化為日常生活中的一份心意。</p>
         <span class="article-action">逛逛小舖 →</span>
       </a>
-      <a class="article-card">
+      <a class="article-card" href="https://www.facebook.com/LoveHopeYLC/" target="_blank" rel="noopener">
         <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
         <div class="meta"><span class="cat">Cafe</span><span>共融職場</span></div>
         <h3 class="title">搖籃咖啡</h3>
-        <p class="description">由特殊孩子親手沖煮的每一杯咖啡，都是邁向獨立的腳步。</p>
+        <p class="description">美濃文創中心、搖籃咖啡與惠如小屋，延伸基金會在地方文化與共融實踐上的陪伴。</p>
         <span class="article-action">了解更多 →</span>
       </a>
-      <a class="article-card">
+      <a class="article-card" href="venue.html">
         <figure class="article-card-image has-loading-spin"><span class="img-fill"></span></figure>
         <div class="meta"><span class="cat">Venue</span><span>愛的講堂</span></div>
         <h3 class="title">場地租借</h3>
-        <p class="description">提供溫暖、典雅的活動空間，支持您的講座、聚會與分享。</p>
+        <p class="description">愛的講堂約 35 坪，可容納 100 至 120 人，適合演講、座談、研習、教學與藝文活動。</p>
         <span class="article-action">查看場地 →</span>
       </a>
     </div>
@@ -726,28 +734,33 @@
 
 <!-- ===== DONATE BAND ===== -->
 <section class="donate-band">
-  <div class="donate-grid">
-    <div class="donate-text">
-      <div class="label">Donate</div>
-      <h2>你的陪伴<br>是他們向前的力量</h2>
-      <p>每一筆捐款，都是延續愛與希望的支持。<br>讓我們一起，陪伴每一個慢飛的孩子，看見更美麗的世界。</p>
-      <div class="actions">
-        <a class="btn-w">線上捐款</a>
-        <a class="btn-wo">月捐專案</a>
+  <div class="wrap">
+    <div class="donate-card">
+      <div class="donate-text">
+        <div class="label">Donate</div>
+        <h2>捐款支持<br>愛與希望的延續</h2>
+        <p>每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
+        <div class="actions">
+          <a class="btn-w" href="donate.html">捐款方式</a>
+          <a class="btn-wo" href="donate.html">捐款徵信</a>
+        </div>
       </div>
-    </div>
-    <div class="donate-side">
-      <div class="donate-fact is-hero">
-        <div class="n">1,200<span class="u">+</span></div>
-        <div class="t"><span class="lbl">Beneficiaries</span>受益家庭與孩子</div>
-      </div>
-      <div class="donate-fact">
-        <div class="n">17<span class="u">年</span></div>
-        <div class="t"><span class="lbl">Companionship</span>陪伴慢飛家庭</div>
-      </div>
-      <div class="donate-fact">
-        <div class="n">12<span class="u">屆</span></div>
-        <div class="t"><span class="lbl">Olfeo Concert</span>奧兒福音樂會</div>
+      <div class="donate-stats" aria-label="捐款方式摘要">
+        <div class="donate-method">
+          <span class="method-label">Bank Transfer</span>
+          <h3>銀行匯款 / ATM 轉帳</h3>
+          <p>國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Postal Giro</span>
+          <h3>郵局劃撥</h3>
+          <p>帳號 <b>50067771</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Other Ways</span>
+          <h3>信用卡、支票與現場捐款</h3>
+          <p>歡迎透過信用卡授權書、支票或親臨基金會現場捐款，捐款徵信定期公開。</p>
+        </div>
       </div>
     </div>
   </div>
@@ -772,16 +785,16 @@
     </div>
   </div>
   <ul class="footer-links">
-    <li><a href="#">關於我們</a></li>
-    <li><a href="#">慈善身影</a></li>
-    <li><a href="#">公益行動</a></li>
-    <li><a href="#">真愛多多</a></li>
-    <li><a href="#">最新消息</a></li>
-    <li><a href="#">文創小舖</a></li>
-    <li><a href="#" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a></li>
-    <li><a href="#">場地租借</a></li>
-    <li><a href="#">聯絡我們</a></li>
-    <li><a href="#">隱私權政策</a></li>
+    <li><a href="about.html">關於我們</a></li>
+    <li><a href="people.html">慈善身影</a></li>
+    <li><a href="actions-a.html">公益行動</a></li>
+    <li><a href="true-love.html">真愛多多</a></li>
+    <li><a href="news.html">最新消息</a></li>
+    <li><a href="shop.html">文創小舖</a></li>
+    <li><a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a></li>
+    <li><a href="venue.html">場地租借</a></li>
+    <li><a href="mailto:love.hopech@gmail.com">聯絡我們</a></li>
+    <li><a href="privacy.html">隱私權政策</a></li>
   </ul>
   <p class="footer-copy">© 2026 Love Hope Foundation. All Rights Reserved.</p>
 </footer>
@@ -798,19 +811,19 @@
     </div>
   </div>
   <nav class="drawer-nav">
-    <a href="#">關於我們</a>
-    <a href="#">慈善身影</a>
-    <a href="#" class="active">公益行動</a>
-    <a href="#">真愛多多</a>
-    <a href="#">最新消息</a>
-    <a href="#">文創小舖</a>
-    <a href="#" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
-    <a href="#">場地租借</a>
+    <a href="about.html">關於我們</a>
+    <a href="people.html">慈善身影</a>
+    <a href="actions-a.html" class="active">公益行動</a>
+    <a href="true-love.html">真愛多多</a>
+    <a href="news.html">最新消息</a>
+    <a href="shop.html">文創小舖</a>
+    <a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
+    <a href="venue.html">場地租借</a>
   </nav>
   <div class="drawer-foot">
-    <a class="drawer-donate" href="#">捐款支持</a>
+    <a class="drawer-donate" href="donate.html">捐款支持</a>
     <div class="drawer-social">
-      <a aria-label="facebook" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
+      <a aria-label="facebook" href="https://www.facebook.com/LoveHopeF" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
       <a aria-label="instagram" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
       <a aria-label="youtube" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
       <a aria-label="line" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
