@@ -40,7 +40,7 @@
   --lh-loose:1.9;
 }
 
-/* ===== 提案版字級 —— 整併到 9 階,中文友善 ===== */
+/* ===== 落地版字級 —— 已出貨,中文友善 ===== */
 [data-scale="proposed"]{
   --t-eyebrow:12px;       /* Serif 英文標籤,字距 2.5–3 */
   --t-meta:13px;          /* 中文 meta */
@@ -52,8 +52,8 @@
   --t-card-title-s:17px;
   --t-title:26px;
   --t-section:34px;
-  --t-display:42px;
-  --t-display-l:54px;
+  --t-display:38px;
+  --t-display-l:42px;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -138,8 +138,8 @@ p.body{font-size:15px;line-height:1.85;color:var(--body);margin-bottom:18px;max-
 .ladder-row .sample.title{font-size:20px;font-weight:700;line-height:1.4;letter-spacing:1px}
 .ladder-row .sample.title-l{font-size:26px;font-weight:700;line-height:1.35;letter-spacing:2px}
 .ladder-row .sample.section{font-size:34px;font-weight:800;letter-spacing:3px;line-height:1.25}
-.ladder-row .sample.display{font-size:42px;font-weight:800;letter-spacing:3px;line-height:1.2}
-.ladder-row .sample.display-l{font-size:54px;font-weight:900;letter-spacing:4px;line-height:1.15}
+.ladder-row .sample.display{font-size:38px;font-weight:800;letter-spacing:3px;line-height:1.2}
+.ladder-row .sample.display-l{font-size:42px;font-weight:900;letter-spacing:4px;line-height:1.15}
 
 /* ===== Preview frame: live component comparison ===== */
 .toggle-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:24px 0 0;padding:18px 24px;background:var(--ink);color:#fff;position:sticky;top:0;z-index:20}
@@ -256,12 +256,12 @@ p.body{font-size:15px;line-height:1.85;color:var(--body);margin-bottom:18px;max-
     <div>
       <div class="num">No. 01 / Typography</div>
       <h1 class="doc-title">字級系統<br><span class="em">設計提案</span></h1>
-      <p class="doc-sub">A proposal for the Love Hope Foundation type scale —— from a junior designer, for discussion.</p>
+      <p class="doc-sub">The shipped type scale for the Love Hope Foundation —— as implemented across all pages.</p>
     </div>
     <div></div>
     <div class="meta">
       LOVE HOPE FOUNDATION<br>
-      Internal Doc · v0.1<br>
+      Shipped · v1.0<br>
       May 2026
     </div>
   </header>
@@ -461,15 +461,15 @@ p.body{font-size:15px;line-height:1.85;color:var(--body);margin-bottom:18px;max-
       </div>
       <div class="ladder-row">
         <div class="tk">display</div>
-        <div class="sz">42 px<span class="old">舊 30 / 38 px</span></div>
+        <div class="sz">38 px<span class="old">舊 30 px</span></div>
         <div class="sample display">守護希望的力量</div>
-        <div class="use">Hero 標題、捐款主標。clamp 至 28px @ mobile。</div>
+        <div class="use">Hero 標題、捐款主標。clamp 至 24px @ mobile。</div>
       </div>
       <div class="ladder-row">
         <div class="tk">display-l</div>
-        <div class="sz">54 px</div>
+        <div class="sz">42 px<span class="old">舊 38 px</span></div>
         <div class="sample display-l">愛與希望</div>
-        <div class="use">特殊頁面 hero、年度報告封面。clamp 至 36px @ mobile。</div>
+        <div class="use">特殊頁面 hero、年度報告封面。clamp 至 28px @ mobile。</div>
       </div>
     </div>
   </section>
@@ -639,9 +639,9 @@ p.body{font-size:15px;line-height:1.85;color:var(--body);margin-bottom:18px;max-
   <span class="br">--t-title-l</span>:   <span class="v">26px</span>;
 
   <span class="c">/* —— Display (responsive) —— */</span>
-  <span class="br">--t-section</span>:   <span class="v">clamp(26px, 3vw, 34px)</span>;
-  <span class="br">--t-display</span>:   <span class="v">clamp(28px, 4vw, 42px)</span>;
-  <span class="br">--t-display-l</span>: <span class="v">clamp(36px, 5vw, 54px)</span>;
+  <span class="br">--t-section</span>:   <span class="v">clamp(26px, 3.2vw, 34px)</span>;
+  <span class="br">--t-display</span>:   <span class="v">clamp(24px, 3.6vw, 38px)</span>;
+  <span class="br">--t-display-l</span>: <span class="v">clamp(28px, 4.4vw, 42px)</span>;
 }
     </div>
   </section>
@@ -667,8 +667,8 @@ p.body{font-size:15px;line-height:1.85;color:var(--body);margin-bottom:18px;max-
       <div class="q">
         <div class="n">02</div>
         <div class="body-q">
-          <h4>Display 級要不要更編輯感(更大、更戲劇)?</h4>
-          <p>目前提案 42px,偏穩重。如果想要更強的編輯雜誌感,可以開到 56–64px,搭配 IBM Plex Serif 義體做引言。風格更強烈,但跟基金會「溫和、信任」調性的距離也更遠。</p>
+          <h4>Display 級的最終取捨 —— 收斂版而非編輯雜誌感</h4>
+          <p>初版提案 display 42 / display-l 54 偏向編輯雜誌感。實作時刻意往下收一階至 <b>38 / 42</b>,讓首頁 hero 與捐款主標維持基金會「溫和、信任」的調性,避免過度戲劇化。手機端 clamp 至 24 / 28px,在窄欄不會壓迫。若日後年度報告或活動 landing 想推大,可再另立 <code style="font-family:'IBM Plex Serif';color:var(--brand);background:var(--line-soft);padding:2px 6px;font-size:13px;">--t-hero</code> token,不動主階梯。</p>
         </div>
       </div>
       <div class="q">
@@ -696,8 +696,8 @@ p.body{font-size:15px;line-height:1.85;color:var(--body);margin-bottom:18px;max-
   </section>
 
   <footer class="doc-footer">
-    <div class="l">End of proposal · 等你回饋,我再進行下一步。</div>
-    <div class="r">LHF · Typography v0.1</div>
+    <div class="l">Shipped 2026-05-20 · 全站套用完成。</div>
+    <div class="r">LHF · Typography v1.0</div>
   </footer>
 
 </div>
