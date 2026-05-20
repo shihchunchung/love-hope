@@ -18,9 +18,23 @@
     --line:#E8E8E8;
     --line-soft:#F4F4F4;
     --bg:#ffffff;
+
+    /* ===== Typography tokens ===== */
+    --t-caption:12px;
+    --t-eyebrow:12px;
+    --t-meta:13px;
+    --t-body-s:15px;
+    --t-body:16px;
+    --t-body-l:18px;
+    --t-title-s:17px;
+    --t-title:20px;
+    --t-title-l:26px;
+    --t-section:clamp(26px, 3.2vw, 34px);
+    --t-display:clamp(24px, 3.6vw, 38px);
+    --t-display-l:clamp(28px, 4.4vw, 42px);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:var(--bg);color:var(--body);font-family:"Noto Sans TC","IBM Plex Serif",-apple-system,sans-serif;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+  html,body{font-size:16px;font-feature-settings:"palt";background:var(--bg);color:var(--body);font-family:"Noto Sans TC","IBM Plex Serif",-apple-system,sans-serif;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
   body{overflow-x:hidden}
   h1,h2,h3,h4,h5{color:var(--ink);font-weight:700;line-height:1.3}
   a{color:inherit;text-decoration:none}
@@ -51,7 +65,7 @@
   /* ============ NAV ============ */
   .app-nav{border-top:1px solid var(--brand);border-bottom:1px solid var(--brand);background:#fff;position:sticky;top:86px;z-index:49}
   .app-nav .row{display:flex;justify-content:center;align-items:stretch;height:54px}
-  .app-nav a{display:flex;align-items:center;padding:0 22px;font-size:16px;font-weight:500;color:var(--ink);position:relative;letter-spacing:2px;transition:color .15s,background .2s}
+  .app-nav a{display:flex;align-items:center;padding:0 22px;font-size:16px;font-weight:500;color:var(--ink);position:relative;letter-spacing:1px;transition:color .15s,background .2s}
   .app-nav a:not(:last-child)::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:14px;background:var(--line)}
   .app-nav a:hover,.app-nav a.active{color:var(--brand)}
 
@@ -117,7 +131,7 @@
   /* ============ PAGE HERO ============ */
   .page-hero{padding:72px 0 40px;background:#fff;border-bottom:1px solid var(--ink)}
   .page-hero .wrap{max-width:1320px;margin:0 auto;padding:0 40px}
-  .page-hero h1{font-size:42px;letter-spacing:6px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:18px}
+  .page-hero h1{font-size:var(--t-display-l);letter-spacing:3px;font-weight:700;color:var(--ink);line-height:1.25;margin-bottom:18px}
   .page-hero .lead{font-size:17px;color:var(--body);line-height:2;max-width:640px;letter-spacing:.5px}
 
   /* ============ UNITS LIST (editorial 列表：圖左文右、大圖) ============ */
@@ -156,8 +170,7 @@
   }
   .unit-body .meta .cat{color:var(--brand);font-weight:700}
 
-  .unit-body .title{
-    font-size:26px;line-height:1.5;font-weight:700;letter-spacing:2px;
+  .unit-body .title{font-size:var(--t-title-l);line-height:1.45;font-weight:700;letter-spacing:1.5px;
     color:var(--ink);margin-bottom:18px;transition:color .2s;
   }
   .unit-row:hover .title{color:var(--brand)}
@@ -187,7 +200,7 @@
   .empty-state .e-lat{
     font-family:"IBM Plex Serif",sans-serif;
     font-size:12px;
-    letter-spacing:4px;
+    letter-spacing:3px;
     text-transform:uppercase;
     color:var(--muted);
     margin-bottom:14px;
@@ -196,9 +209,7 @@
   .empty-state .e-lat::before,.empty-state .e-lat::after{
     content:"";width:24px;height:1px;background:var(--line);
   }
-  .empty-state h3{
-    font-size:26px;
-    letter-spacing:4px;
+  .empty-state h3{font-size:var(--t-title-l); letter-spacing:1.5px;
     color:#999;
     font-weight:500;
     margin-bottom:14px;
@@ -220,7 +231,7 @@
   .donate-text{position:relative;z-index:1;padding:0}
   .donate-text .label{font-family:"IBM Plex Serif",sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#f4d8d8;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:14px}
   .donate-text .label::before{content:"";width:32px;height:1px;background:#f4d8d8}
-  .donate-text h2{font-size:42px;color:#fff;letter-spacing:5px;line-height:1.4;margin-bottom:20px;font-weight:700}
+  .donate-text h2{font-size:var(--t-display-l);color:#fff;letter-spacing:3px;line-height:1.4;margin-bottom:20px;font-weight:700}
   .donate-text p{font-size:17px;color:rgba(255,255,255,.85);line-height:1.95;margin-bottom:28px;max-width:480px}
   .donate-text .actions{display:flex;gap:14px;flex-wrap:wrap}
   .donate-text .btn-w{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;background:#fff;color:var(--brand);font-size:13px;letter-spacing:2.5px;font-weight:600;transition:background .2s}
@@ -242,7 +253,7 @@
   .app-footer .footer-info{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:42px}
   .app-footer .footer-address{font-size:15px;color:#fff;letter-spacing:1.5px;font-weight:500}
   .app-footer .footer-contact{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 14px;font-size:15px;color:rgba(255,255,255,.75);letter-spacing:.5px}
-  .app-footer .footer-contact .lbl{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:2px;font-size:12px;margin-right:6px}
+  .app-footer .footer-contact .lbl{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:2px;font-size:13px;margin-right:6px}
   .app-footer .footer-contact a{font-family:"IBM Plex Serif",sans-serif;font-size:15px;letter-spacing:.5px;color:rgba(255,255,255,.75);transition:color .2s}
   .app-footer .footer-contact a:hover{color:#fff}
   .app-footer .footer-contact .dot{color:rgba(255,255,255,.3)}
@@ -363,7 +374,6 @@
     .app-nav,.app-header{position:static}
     .sub-nav{position:static}
     .page-hero{padding:56px 0 36px}
-    .page-hero h1{font-size:36px;letter-spacing:4px}
     .unit-row{grid-template-columns:300px 1fr;gap:32px;padding:28px 0}
     .unit-body{padding-right:0}
     .unit-body .title{font-size:20px;letter-spacing:1.5px}
@@ -380,7 +390,6 @@
     .nav-toggle{display:flex}
     .wrap{padding:0 20px}
     .page-hero{padding:44px 0 28px}
-    .page-hero h1{font-size:28px;letter-spacing:3px;line-height:1.45}
     .page-hero .lead{font-size:16px;line-height:1.9}
     .units-section{padding:36px 0 64px}
     .unit-row{grid-template-columns:1fr;gap:20px;padding:28px 0}
@@ -388,7 +397,6 @@
     .unit-body .quote{font-size:16px;line-height:1.85;margin-bottom:18px}
     .donate-band{padding:40px 20px}
     .donate-card{padding:32px 24px;gap:28px}
-    .donate-text h2{font-size:28px;letter-spacing:3px}
     .donate-text{padding:48px 20px}
     .donate-stats{padding-top:24px}
     .empty-state{padding:80px 20px}

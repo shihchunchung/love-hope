@@ -18,9 +18,23 @@
     --line:#E8E8E8;
     --line-soft:#F4F4F4;
     --bg:#ffffff;
+
+    /* ===== Typography tokens ===== */
+    --t-caption:12px;
+    --t-eyebrow:12px;
+    --t-meta:13px;
+    --t-body-s:15px;
+    --t-body:16px;
+    --t-body-l:18px;
+    --t-title-s:17px;
+    --t-title:20px;
+    --t-title-l:26px;
+    --t-section:clamp(26px, 3.2vw, 34px);
+    --t-display:clamp(24px, 3.6vw, 38px);
+    --t-display-l:clamp(28px, 4.4vw, 42px);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:var(--bg);color:var(--body);font-family:"Noto Sans TC","IBM Plex Serif",-apple-system,sans-serif;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+  html,body{font-size:16px;font-feature-settings:"palt";background:var(--bg);color:var(--body);font-family:"Noto Sans TC","IBM Plex Serif",-apple-system,sans-serif;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
   body{overflow-x:hidden}
   h1,h2,h3,h4,h5{color:var(--ink);font-weight:700;line-height:1.3}
   a{color:inherit;text-decoration:none}
@@ -51,7 +65,7 @@
   /* ============ NAV ============ */
   .app-nav{border-top:1px solid var(--brand);border-bottom:1px solid var(--brand);background:#fff;position:sticky;top:86px;z-index:49}
   .app-nav .row{display:flex;justify-content:center;align-items:stretch;height:54px}
-  .app-nav a{display:flex;align-items:center;padding:0 22px;font-size:16px;font-weight:500;color:var(--ink);position:relative;letter-spacing:2px;transition:color .15s,background .2s}
+  .app-nav a{display:flex;align-items:center;padding:0 22px;font-size:16px;font-weight:500;color:var(--ink);position:relative;letter-spacing:1px;transition:color .15s,background .2s}
   .app-nav a:not(:last-child)::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:14px;background:var(--line)}
   .app-nav a:hover,.app-nav a.active{color:var(--brand)}
 
@@ -80,7 +94,7 @@
     border-bottom:1px solid var(--ink);
   }
   .pubhead .left{display:flex;flex-direction:column;gap:14px;min-width:0}
-  .pubhead .left h2{font-size:34px;letter-spacing:4px;color:var(--ink);font-weight:700;line-height:1.2}
+  .pubhead .left h2{font-size:var(--t-section);letter-spacing:2.5px;color:var(--ink);font-weight:700;line-height:1.2}
   .pubhead .left .tagline{font-size:16px;color:var(--body);line-height:1.85;max-width:560px;font-weight:400}
   .pubhead .right{
     display:flex;justify-content:flex-end;align-items:flex-end;
@@ -142,8 +156,7 @@
   }
   .unit-body .meta .cat{color:var(--brand);font-weight:700}
 
-  .unit-body .title{
-    font-size:26px;line-height:1.5;font-weight:700;letter-spacing:2px;
+  .unit-body .title{font-size:var(--t-title-l);line-height:1.45;font-weight:700;letter-spacing:1.5px;
     color:var(--ink);margin-bottom:18px;transition:color .2s;
   }
   .unit-row:hover .title{color:var(--brand)}
@@ -168,12 +181,12 @@
     border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);
   }
   .unit-empty .lat{
-    font-family:"IBM Plex Serif",sans-serif;font-size:12px;letter-spacing:5px;
+    font-family:"IBM Plex Serif",sans-serif;font-size:12px;letter-spacing:3px;
     color:var(--brand);font-weight:600;text-transform:uppercase;
     display:inline-flex;align-items:center;gap:14px;margin-bottom:18px;
   }
   .unit-empty .lat::before,.unit-empty .lat::after{content:"";width:24px;height:1px;background:var(--brand)}
-  .unit-empty h3{font-size:24px;letter-spacing:3px;margin-bottom:14px;font-weight:700}
+  .unit-empty h3{font-size:var(--t-title-l);letter-spacing:2px;margin-bottom:14px;font-weight:700}
   .unit-empty p{font-size:16px;color:var(--body);line-height:1.85;max-width:520px;margin:0 auto}
 
   /* ============ DONATE CARD (contained, not full-bleed) ============ */
@@ -183,7 +196,7 @@
   .donate-text{position:relative;z-index:1;padding:0}
   .donate-text .label{font-family:"IBM Plex Serif",sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#f4d8d8;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:14px}
   .donate-text .label::before{content:"";width:32px;height:1px;background:#f4d8d8}
-  .donate-text h2{font-size:42px;color:#fff;letter-spacing:5px;line-height:1.4;margin-bottom:20px;font-weight:700}
+  .donate-text h2{font-size:var(--t-display-l);color:#fff;letter-spacing:3px;line-height:1.4;margin-bottom:20px;font-weight:700}
   .donate-text p{font-size:17px;color:rgba(255,255,255,.85);line-height:1.95;margin-bottom:28px;max-width:480px}
   .donate-text .actions{display:flex;gap:14px;flex-wrap:wrap}
   .donate-text .btn-w{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;background:#fff;color:var(--brand);font-size:13px;letter-spacing:2.5px;font-weight:600;transition:background .2s}
@@ -205,7 +218,7 @@
   .app-footer .footer-info{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:42px}
   .app-footer .footer-address{font-size:15px;color:#fff;letter-spacing:1.5px;font-weight:500}
   .app-footer .footer-contact{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 14px;font-size:15px;color:rgba(255,255,255,.75);letter-spacing:.5px}
-  .app-footer .footer-contact .lbl{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:2px;font-size:12px;margin-right:6px}
+  .app-footer .footer-contact .lbl{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:2px;font-size:13px;margin-right:6px}
   .app-footer .footer-contact a{font-family:"IBM Plex Serif",sans-serif;font-size:15px;letter-spacing:.5px;color:rgba(255,255,255,.75);transition:color .2s}
   .app-footer .footer-contact a:hover{color:#fff}
   .app-footer .footer-contact .dot{color:rgba(255,255,255,.3)}
@@ -311,7 +324,6 @@
   /* ============ RESPONSIVE ============ */
   @media (max-width: 1100px){
     .pubhead{padding:36px 32px 20px;gap:32px}
-    .pubhead .left h2{font-size:28px;letter-spacing:3px}
     .pubhead .right{justify-content:flex-end}
     .unit-row{grid-template-columns:300px 1fr;gap:32px;padding:28px 0}
     .unit-body{padding-right:0}
@@ -337,7 +349,6 @@
       align-items:flex-start;
       border-bottom:1px solid var(--ink);
     }
-    .pubhead .left h2{font-size:26px;letter-spacing:2px}
     .pubhead .left .tagline{font-size:15px;line-height:1.8}
     .pubhead .right{display:none}
 
@@ -348,7 +359,6 @@
 
     .donate-band{padding:40px 20px}
     .donate-card{padding:32px 24px;gap:28px}
-    .donate-text h2{font-size:28px;letter-spacing:3px}
     .donate-stats{padding-top:24px}
     .unit-empty{padding:80px 24px}
     .unit-empty h3{font-size:20px;letter-spacing:2px}
