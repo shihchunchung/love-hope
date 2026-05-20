@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>字級系統提案 — 薛伯輝基金會</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand:#8C0A0A;
+  --brand-dark:#5C0606;
+  --brand-tint:#FBEEEE;
+  --ink:#111111;
+  --body:#333333;
+  --muted:#9A9A9A;
+  --line:#E8E8E8;
+  --line-soft:#F4F4F4;
+  --paper:#FAF8F5;
+  --bg:#ffffff;
+
+  /* ===== 字級 token —— 預設 = 目前現況 ===== */
+  --t-eyebrow:11px;       /* 上方 utility、Serif 標籤 */
+  --t-meta:11px;          /* 卡片日期、作者 */
+  --t-caption:10px;       /* 角標、小字 */
+  --t-body-s:13px;        /* 卡片描述、small body */
+  --t-body:14px;          /* 一般內文 */
+  --t-body-l:15px;        /* 引言、敘述 */
+  --t-card-title:18px;    /* 文章卡標題 */
+  --t-card-title-s:15px;  /* 趨勢卡標題 */
+  --t-title:24px;         /* 副標 */
+  --t-section:30px;       /* 區塊標題 */
+  --t-display:30px;       /* 主視覺 */
+  --t-display-l:38px;     /* 大型 CTA */
+
+  --lh-tight:1.3;
+  --lh-snug:1.5;
+  --lh-normal:1.7;
+  --lh-loose:1.9;
+}
+
+/* ===== 提案版字級 —— 整併到 9 階,中文友善 ===== */
+[data-scale="proposed"]{
+  --t-eyebrow:12px;       /* Serif 英文標籤,字距 2.5–3 */
+  --t-meta:13px;          /* 中文 meta */
+  --t-caption:12px;       /* 最小不低於 12 */
+  --t-body-s:15px;        /* 卡片描述 */
+  --t-body:16px;          /* 主要內文 —— 新基準 */
+  --t-body-l:18px;        /* 引言 */
+  --t-card-title:20px;
+  --t-card-title-s:17px;
+  --t-title:26px;
+  --t-section:34px;
+  --t-display:42px;
+  --t-display-l:54px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--body);font-family:"Noto Sans TC",-apple-system,sans-serif;line-height:var(--lh-normal);font-weight:400;-webkit-font-smoothing:antialiased}
+.lat{font-family:"IBM Plex Serif",serif}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{cursor:pointer;font-family:inherit;border:none;background:none;color:inherit}
+ul{list-style:none}
+
+/* ===== Doc shell ===== */
+.doc{max-width:1080px;margin:0 auto;padding:80px 56px 120px}
+
+.doc-header{display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:end;padding-bottom:36px;border-bottom:1px solid var(--ink);margin-bottom:64px}
+.doc-header .num{font-family:"IBM Plex Serif",serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--brand);font-weight:600}
+.doc-header .meta{font-family:"IBM Plex Serif",serif;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:right;line-height:1.8}
+.doc-title{font-size:54px;font-weight:900;letter-spacing:4px;line-height:1.15;color:var(--ink);margin-top:18px}
+.doc-title .em{color:var(--brand)}
+.doc-sub{font-family:"IBM Plex Serif",serif;font-style:italic;font-size:18px;color:var(--muted);margin-top:14px;letter-spacing:.5px;font-weight:400;line-height:1.5}
+
+/* ===== Section structure ===== */
+section.s{margin-top:96px}
+.s-head{display:grid;grid-template-columns:80px 1fr;gap:32px;align-items:baseline;margin-bottom:36px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.s-head .nm{font-family:"IBM Plex Serif",serif;font-size:13px;letter-spacing:4px;color:var(--brand);font-weight:600}
+.s-head h2{font-size:30px;font-weight:800;letter-spacing:3px;color:var(--ink);line-height:1.25}
+.s-head .desc{grid-column:2;font-family:"IBM Plex Serif",serif;font-style:italic;color:var(--muted);font-size:15px;letter-spacing:.5px;margin-top:8px;line-height:1.6;font-weight:400}
+
+.lede{font-size:17px;line-height:1.85;color:var(--ink);max-width:680px;margin-bottom:32px;font-weight:400}
+p.body{font-size:15px;line-height:1.85;color:var(--body);margin-bottom:18px;max-width:720px}
+
+/* ===== Stats row ===== */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:36px 0}
+.stat{background:#fff;padding:28px 24px}
+.stat .k{font-family:"IBM Plex Serif",serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:14px}
+.stat .v{font-size:42px;font-weight:800;color:var(--ink);letter-spacing:1px;line-height:1;display:flex;align-items:baseline;gap:8px}
+.stat .v .u{font-size:14px;font-weight:500;color:var(--muted);letter-spacing:1px}
+.stat .nt{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6;letter-spacing:.5px}
+
+/* ===== Size inventory chart ===== */
+.inv{margin:32px 0 24px;border-top:1px solid var(--line);padding-top:24px}
+.inv-row{display:grid;grid-template-columns:80px 1fr 60px;align-items:center;gap:18px;padding:8px 0;border-bottom:1px dotted var(--line)}
+.inv-row .px{font-family:"IBM Plex Serif",serif;font-size:13px;font-weight:600;color:var(--ink);letter-spacing:1px}
+.inv-row .bar{height:10px;background:var(--brand-tint);position:relative;overflow:hidden}
+.inv-row .bar i{display:block;height:100%;background:var(--brand)}
+.inv-row .ct{font-family:"IBM Plex Serif",serif;font-size:12px;color:var(--muted);letter-spacing:1px;text-align:right;font-weight:500}
+.inv-row.is-hot{background:linear-gradient(to right,rgba(140,10,10,.04),transparent)}
+.inv-row.is-hot .px{color:var(--brand)}
+
+/* ===== Issue cards ===== */
+.issues{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin:36px 0}
+.issue{padding:28px 28px 32px;background:#fff;border:1px solid var(--line);position:relative}
+.issue .ix{position:absolute;top:0;left:0;background:var(--brand);color:#fff;font-family:"IBM Plex Serif",serif;font-size:10px;letter-spacing:2.5px;font-weight:700;padding:5px 10px;text-transform:uppercase}
+.issue h4{font-size:17px;font-weight:700;letter-spacing:1.5px;color:var(--ink);margin:18px 0 10px;line-height:1.4}
+.issue p{font-size:14px;line-height:1.75;color:var(--body)}
+
+/* ===== Principles list ===== */
+.principles{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line);margin-top:24px}
+.principle{padding:32px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:50px 1fr;gap:20px}
+.principle:nth-child(odd){padding-right:32px;border-right:1px solid var(--line)}
+.principle:nth-child(even){padding-left:32px}
+.principle .pn{font-family:"IBM Plex Serif",serif;font-size:32px;font-weight:300;color:var(--brand);line-height:1;letter-spacing:-1px}
+.principle h4{font-size:16px;font-weight:700;letter-spacing:1.5px;color:var(--ink);margin-bottom:10px;line-height:1.4}
+.principle p{font-size:14px;line-height:1.8;color:var(--body)}
+
+/* ===== Scale ladder ===== */
+.ladder{margin:32px 0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.ladder-row{display:grid;grid-template-columns:130px 90px 1fr 200px;gap:24px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--line)}
+.ladder-row:last-child{border-bottom:0}
+.ladder-row .tk{font-family:"IBM Plex Serif",serif;font-weight:600;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--brand)}
+.ladder-row .sz{font-family:"IBM Plex Serif",serif;font-size:14px;color:var(--ink);font-weight:600;letter-spacing:1px}
+.ladder-row .sz .old{color:var(--muted);font-weight:400;font-size:11px;text-decoration:line-through;display:block;margin-top:2px}
+.ladder-row .sample{color:var(--ink);font-weight:500}
+.ladder-row .use{font-size:12px;color:var(--muted);line-height:1.6;letter-spacing:.5px}
+
+.ladder-row .sample.eyebrow{font-family:"IBM Plex Serif",serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;font-weight:600;color:var(--brand)}
+.ladder-row .sample.meta{font-size:13px;letter-spacing:1px;color:var(--muted);font-weight:500}
+.ladder-row .sample.caption{font-size:12px;color:var(--muted)}
+.ladder-row .sample.body-s{font-size:15px;line-height:1.75}
+.ladder-row .sample.body{font-size:16px;line-height:1.85}
+.ladder-row .sample.body-l{font-size:18px;line-height:1.75}
+.ladder-row .sample.title-s{font-size:17px;font-weight:700;line-height:1.45}
+.ladder-row .sample.title{font-size:20px;font-weight:700;line-height:1.4;letter-spacing:1px}
+.ladder-row .sample.title-l{font-size:26px;font-weight:700;line-height:1.35;letter-spacing:2px}
+.ladder-row .sample.section{font-size:34px;font-weight:800;letter-spacing:3px;line-height:1.25}
+.ladder-row .sample.display{font-size:42px;font-weight:800;letter-spacing:3px;line-height:1.2}
+.ladder-row .sample.display-l{font-size:54px;font-weight:900;letter-spacing:4px;line-height:1.15}
+
+/* ===== Preview frame: live component comparison ===== */
+.toggle-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:24px 0 0;padding:18px 24px;background:var(--ink);color:#fff;position:sticky;top:0;z-index:20}
+.toggle-bar .lbl{font-family:"IBM Plex Serif",serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:600}
+.toggle-bar .seg{display:inline-flex;background:rgba(255,255,255,.08);padding:4px;gap:0}
+.toggle-bar .seg button{padding:8px 20px;font-family:"IBM Plex Serif",serif;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;color:rgba(255,255,255,.6);transition:.2s}
+.toggle-bar .seg button.active{background:#fff;color:var(--ink)}
+.toggle-bar .ctx{font-family:"IBM Plex Serif",serif;font-style:italic;font-size:13px;color:rgba(255,255,255,.7);letter-spacing:.5px}
+
+.frame{background:#fff;border:1px solid var(--line);border-top:0;padding:0;overflow:hidden}
+
+/* mocked components for preview */
+.mock-banner{background:linear-gradient(135deg,#5a0808 0%,#1a0202 100%);padding:64px 56px;color:#fff;position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:340px}
+.mock-banner .eyebrow{font-family:"IBM Plex Serif",serif;font-size:var(--t-eyebrow);letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:600;margin-bottom:18px;display:flex;align-items:center;gap:14px}
+.mock-banner .eyebrow::before{content:"";width:32px;height:1px;background:rgba(255,255,255,.6)}
+.mock-banner h1{font-size:var(--t-display);line-height:1.4;font-weight:700;letter-spacing:2px;color:#fff;max-width:760px}
+
+.mock-section{padding:56px 56px 48px}
+.mock-section .head{display:flex;align-items:end;justify-content:space-between;gap:24px;padding-bottom:22px;margin-bottom:36px;border-bottom:2px solid var(--ink)}
+.mock-section .head .sub{font-family:"IBM Plex Serif",serif;font-size:var(--t-eyebrow);letter-spacing:5px;color:var(--brand);font-weight:600;text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.mock-section .head .sub::before{content:"";width:32px;height:1px;background:var(--brand)}
+.mock-section .head h2{font-size:var(--t-section);font-weight:700;color:var(--ink);letter-spacing:3px;line-height:1.2}
+.mock-section .head .more{font-family:"IBM Plex Serif",serif;font-size:var(--t-eyebrow);letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);font-weight:600;border-bottom:1px solid var(--ink);padding-bottom:4px}
+
+.mock-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.mock-card{display:flex;flex-direction:column}
+.mock-card .img{aspect-ratio:4/3;background:linear-gradient(135deg,#FBEEEE 0%,#f4d8d8 100%);position:relative;display:flex;align-items:center;justify-content:center;color:rgba(140,10,10,.25);font-family:"IBM Plex Serif",serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px}
+.mock-card .tag{font-family:"IBM Plex Serif",serif;font-size:var(--t-eyebrow);letter-spacing:2.5px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:10px}
+.mock-card .meta{display:flex;gap:12px;font-family:"IBM Plex Serif",serif;font-size:var(--t-meta);letter-spacing:1.5px;color:var(--muted);margin-bottom:10px;font-weight:500}
+.mock-card .title{font-size:var(--t-card-title);line-height:1.55;font-weight:500;letter-spacing:.5px;color:var(--ink);margin-bottom:10px}
+.mock-card .desc{font-size:var(--t-body-s);line-height:1.85;color:var(--body);margin-bottom:14px}
+.mock-card .byline{font-family:"IBM Plex Serif",serif;font-size:var(--t-meta);letter-spacing:1.5px;color:var(--muted);font-weight:500}
+
+.mock-spot{display:grid;grid-template-columns:1.1fr 1fr;gap:0;background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.mock-spot .pane{padding:48px 48px;display:flex;flex-direction:column;justify-content:center}
+.mock-spot .pane.lft{background:linear-gradient(135deg,#5a0808 0%,#1a0202 100%);color:#fff;min-height:280px}
+.mock-spot .pane.lft .label{font-family:"IBM Plex Serif",serif;font-size:var(--t-eyebrow);letter-spacing:3px;color:rgba(255,255,255,.5);text-transform:uppercase;font-weight:600;display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.mock-spot .pane.lft .label::before{content:"";width:32px;height:1px;background:rgba(255,255,255,.4)}
+.mock-spot .pane.lft h3{font-size:var(--t-title);color:#fff;letter-spacing:2px;line-height:1.4;font-weight:600}
+.mock-spot .pane.rt .label{font-family:"IBM Plex Serif",serif;font-size:var(--t-eyebrow);letter-spacing:3px;color:var(--brand);text-transform:uppercase;font-weight:700;display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.mock-spot .pane.rt .label::before{content:"";width:32px;height:1px;background:var(--brand)}
+.mock-spot .pane.rt h3{font-size:var(--t-display);line-height:1.35;font-weight:700;letter-spacing:2px;color:var(--ink);margin-bottom:16px}
+.mock-spot .pane.rt .quote{font-size:var(--t-body-l);line-height:1.85;color:var(--ink);font-weight:500;border-left:2px solid var(--brand);padding-left:18px;margin-bottom:20px;letter-spacing:.5px}
+
+/* ===== Mobile comparison ===== */
+.mobile-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;margin-top:36px}
+.mobile-grid .pho{display:flex;flex-direction:column;align-items:center;gap:16px}
+.mobile-grid .pho .lab{font-family:"IBM Plex Serif",serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:600}
+.mobile-grid .pho .lab b{color:var(--ink)}
+.mobile-bezel{width:340px;border:1px solid var(--line);background:#fff;padding:24px;overflow:hidden}
+.mobile-bezel .bn{background:linear-gradient(135deg,#5a0808 0%,#1a0202 100%);color:#fff;padding:24px 20px;margin-bottom:24px}
+.mobile-bezel .bn .eb{font-family:"IBM Plex Serif",serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;opacity:.7;margin-bottom:10px}
+.mobile-bezel .bn h1{font-size:20px;line-height:1.45;font-weight:600;letter-spacing:1.5px}
+.mobile-bezel.is-proposed .bn h1{font-size:24px;line-height:1.4}
+.mobile-bezel.is-proposed .bn .eb{font-size:12px}
+.mobile-bezel .ttl{font-size:11px;font-family:"IBM Plex Serif",serif;letter-spacing:3px;color:var(--brand);font-weight:700;margin-bottom:14px}
+.mobile-bezel.is-proposed .ttl{font-size:12px}
+.mobile-bezel .head{font-size:22px;font-weight:700;letter-spacing:2px;color:var(--ink);margin-bottom:18px;line-height:1.25}
+.mobile-bezel.is-proposed .head{font-size:26px}
+.mobile-bezel .tx{font-size:13px;line-height:1.85;color:var(--body)}
+.mobile-bezel.is-proposed .tx{font-size:16px;line-height:1.9}
+
+/* ===== Responsive strategy ===== */
+.resp{margin-top:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line)}
+.resp .col{padding:28px 28px 32px;border-right:1px solid var(--line)}
+.resp .col:last-child{border-right:0}
+.resp .col .vp{font-family:"IBM Plex Serif",serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:12px}
+.resp .col .vp b{color:var(--ink);font-weight:700}
+.resp .col h4{font-size:18px;font-weight:700;color:var(--ink);letter-spacing:1px;margin-bottom:14px;line-height:1.3}
+.resp .col p{font-size:14px;line-height:1.75;color:var(--body);margin-bottom:14px}
+.resp .col code{font-family:"IBM Plex Serif",serif;font-size:12px;background:var(--line-soft);padding:2px 6px;color:var(--brand);letter-spacing:0;font-weight:500}
+
+.code-block{margin-top:24px;background:#0d0d0d;color:#f4f4f4;padding:28px 32px;font-family:"IBM Plex Serif",serif;font-size:13px;line-height:1.85;letter-spacing:.5px;overflow-x:auto}
+.code-block .k{color:#f4d8d8}
+.code-block .v{color:#fff;font-weight:600}
+.code-block .c{color:#6a6a6a;font-style:italic}
+.code-block .br{color:var(--brand);font-weight:600}
+
+/* ===== Open questions ===== */
+.qs{margin-top:32px;border-top:1px solid var(--ink)}
+.q{display:grid;grid-template-columns:60px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--line);align-items:start}
+.q .n{font-family:"IBM Plex Serif",serif;font-size:26px;font-weight:300;color:var(--brand);line-height:1;letter-spacing:-1px}
+.q .body-q h4{font-size:17px;font-weight:700;color:var(--ink);letter-spacing:1px;margin-bottom:8px;line-height:1.4}
+.q .body-q p{font-size:14px;line-height:1.8;color:var(--body)}
+
+.doc-footer{margin-top:96px;padding-top:32px;border-top:1px solid var(--ink);display:flex;justify-content:space-between;align-items:center}
+.doc-footer .l{font-family:"IBM Plex Serif",serif;font-style:italic;font-size:14px;color:var(--muted);letter-spacing:.5px}
+.doc-footer .r{font-family:"IBM Plex Serif",serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+.hl{background:linear-gradient(transparent 62%,var(--brand-tint) 62%);padding:0 2px}
+
+@media (max-width:880px){
+  .doc{padding:48px 24px 80px}
+  .doc-header{grid-template-columns:1fr;gap:12px}
+  .doc-header .meta{text-align:left}
+  .doc-title{font-size:36px;letter-spacing:2px}
+  .s-head{grid-template-columns:1fr;gap:8px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .issues,.mobile-grid,.resp,.mock-cards,.mock-spot{grid-template-columns:1fr}
+  .principles{grid-template-columns:1fr}
+  .principle{padding:24px 0 !important;border-right:0 !important;padding-left:0 !important}
+  .ladder-row{grid-template-columns:1fr 1fr;gap:14px}
+  .ladder-row .sample{grid-column:1/-1;border-top:1px dotted var(--line);padding-top:12px;margin-top:4px}
+  .ladder-row .use{grid-column:1/-1}
+}
+</style>
+</head>
+<body>
+
+<div class="doc" data-scale="current" id="doc">
+
+  <!-- ========================= HEADER ========================= -->
+  <header class="doc-header">
+    <div>
+      <div class="num">No. 01 / Typography</div>
+      <h1 class="doc-title">字級系統<br><span class="em">設計提案</span></h1>
+      <p class="doc-sub">A proposal for the Love Hope Foundation type scale —— from a junior designer, for discussion.</p>
+    </div>
+    <div></div>
+    <div class="meta">
+      LOVE HOPE FOUNDATION<br>
+      Internal Doc · v0.1<br>
+      May 2026
+    </div>
+  </header>
+
+  <!-- ========================= INTRO ========================= -->
+  <p class="lede">
+    這份文件針對基金會官網的<span class="hl">字體大小</span>提出一套系統化提案。目前 5 個頁面中使用了 <b>18 種不同字級</b>,缺乏共同的階梯與命名。我會先攤開現況、列出問題,再提出一套整併到 9 階的字級系統,最後示範它套用到實際元件後的差異 —— 等你回饋。
+  </p>
+
+  <!-- ========================= 1. AUDIT ========================= -->
+  <section class="s">
+    <div class="s-head">
+      <div class="nm">§ 01</div>
+      <h2>現況審視</h2>
+      <p class="desc">The current state — what we have, what's broken.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="k">不同字級數量</div>
+        <div class="v">18<span class="u">種</span></div>
+        <div class="nt">9px 到 38px,缺乏共同的比例尺。</div>
+      </div>
+      <div class="stat">
+        <div class="k">最常使用字級</div>
+        <div class="v">13<span class="u">px</span></div>
+        <div class="nt">5 頁共出現 56 次,卻無明確語意。</div>
+      </div>
+      <div class="stat">
+        <div class="k">內文範圍</div>
+        <div class="v">13–15<span class="u">px</span></div>
+        <div class="nt">中文內文偏小,可讀性不足。</div>
+      </div>
+      <div class="stat">
+        <div class="k">根字級</div>
+        <div class="v">未設定</div>
+        <div class="nt">沒有 html { font-size },全用 px。</div>
+      </div>
+    </div>
+
+    <p class="body">下圖是目前 5 個頁面中所有 <code style="font-family:'IBM Plex Serif';color:var(--brand);background:var(--line-soft);padding:2px 6px;font-size:13px;font-weight:500;">font-size</code> 宣告的分布。可以看到字級集中在 10–14px 區間,加總超過 200 次 —— 這個區間對中文閱讀是不舒服的。</p>
+
+    <div class="inv">
+      <div class="inv-row is-hot"><div class="px">13 px</div><div class="bar"><i style="width:100%"></i></div><div class="ct">56 ×</div></div>
+      <div class="inv-row is-hot"><div class="px">14 px</div><div class="bar"><i style="width:75%"></i></div><div class="ct">42 ×</div></div>
+      <div class="inv-row is-hot"><div class="px">12 px</div><div class="bar"><i style="width:71%"></i></div><div class="ct">40 ×</div></div>
+      <div class="inv-row is-hot"><div class="px">11 px</div><div class="bar"><i style="width:66%"></i></div><div class="ct">37 ×</div></div>
+      <div class="inv-row is-hot"><div class="px">10 px</div><div class="bar"><i style="width:46%"></i></div><div class="ct">26 ×</div></div>
+      <div class="inv-row"><div class="px">15 px</div><div class="bar"><i style="width:23%"></i></div><div class="ct">13 ×</div></div>
+      <div class="inv-row"><div class="px">18 px</div><div class="bar"><i style="width:23%"></i></div><div class="ct">13 ×</div></div>
+      <div class="inv-row"><div class="px">17 px</div><div class="bar"><i style="width:18%"></i></div><div class="ct">10 ×</div></div>
+      <div class="inv-row"><div class="px">24 px</div><div class="bar"><i style="width:18%"></i></div><div class="ct">10 ×</div></div>
+      <div class="inv-row"><div class="px">20 px</div><div class="bar"><i style="width:16%"></i></div><div class="ct">9 ×</div></div>
+      <div class="inv-row"><div class="px">22 px</div><div class="bar"><i style="width:16%"></i></div><div class="ct">9 ×</div></div>
+      <div class="inv-row"><div class="px">26 px</div><div class="bar"><i style="width:14%"></i></div><div class="ct">8 ×</div></div>
+      <div class="inv-row"><div class="px">38 px</div><div class="bar"><i style="width:12%"></i></div><div class="ct">7 ×</div></div>
+      <div class="inv-row"><div class="px">16 px</div><div class="bar"><i style="width:9%"></i></div><div class="ct">5 ×</div></div>
+      <div class="inv-row"><div class="px">9 / 28 / 30 / 32 px</div><div class="bar"><i style="width:6%"></i></div><div class="ct">2–4 × 各</div></div>
+    </div>
+
+    <div class="issues">
+      <div class="issue">
+        <div class="ix">問題 01</div>
+        <h4>沒有共同階梯</h4>
+        <p>18 個字級中,9 / 10 / 11 / 12 / 13 / 14 / 15 / 16 / 17 / 18 都用過 —— 視覺上幾乎沒有差別,卻散布在各個元件。設計師很難判斷「這個應該用哪個」,工程師也難以一致實作。</p>
+      </div>
+      <div class="issue">
+        <div class="ix">問題 02</div>
+        <h4>中文內文偏小</h4>
+        <p>內文集中在 13–15px。中文字符密度高、筆畫多,在螢幕上 13px 已逼近可讀性下限。卡片描述 (13–14px) 在 1.6 行高下尤其擁擠。</p>
+      </div>
+      <div class="issue">
+        <div class="ix">問題 03</div>
+        <h4>缺乏語意命名</h4>
+        <p>每個元件直接寫死 px。「13px」沒有語意 —— 它可能是卡片描述、按鈕、footer 聯絡資訊 …… 同樣的值散落各處,卻不知道改動其中一個會不會影響其他。</p>
+      </div>
+      <div class="issue">
+        <div class="ix">問題 04</div>
+        <h4>沒有響應式策略</h4>
+        <p>所有字級都是固定 px,沒有 clamp() 或斷點調整。手機上 banner 標題 30px 偏大、內文 13px 偏小;桌機上反過來。需要一套會「呼吸」的尺。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= 2. PRINCIPLES ========================= -->
+  <section class="s">
+    <div class="s-head">
+      <div class="nm">§ 02</div>
+      <h2>設計原則</h2>
+      <p class="desc">Four guiding principles for a Chinese-first editorial site.</p>
+    </div>
+
+    <p class="lede">基金會的內容調性偏編輯感、長文閱讀,所以字級系統的目標不是「網頁應用程式」的緊湊,而是「期刊」的舒適。以下四個原則會貫穿整個提案。</p>
+
+    <div class="principles">
+      <div class="principle">
+        <div class="pn">01</div>
+        <div>
+          <h4>中文比英文大 1–2 階</h4>
+          <p>中文字符方塊密實、筆畫複雜,同一像素下視認性低於拉丁字母。內文基準應從 13–14px 提升到 <b>16–17px</b>,引言到 18px。Serif 拉丁文 (IBM Plex Serif) 因為當作標籤、字距拉開,可以維持 11–12px。</p>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="pn">02</div>
+        <div>
+          <h4>模組化比例尺</h4>
+          <p>從基準 16px 出發,用約 <b>1.2 倍 (小三度)</b> 比例往上推:16 → 18 → 20 → 24 → 30 → 36 → 48。每階都「明顯不同」,避免出現 13 / 14 / 15 三個幾乎一樣的字級。</p>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="pn">03</div>
+        <div>
+          <h4>語意命名 token</h4>
+          <p>不寫死 px,而是用 <code style="font-family:'IBM Plex Serif';color:var(--brand);background:var(--line-soft);padding:2px 6px;font-size:12px;">--t-body</code>、<code style="font-family:'IBM Plex Serif';color:var(--brand);background:var(--line-soft);padding:2px 6px;font-size:12px;">--t-section</code> 這樣的 CSS 變數。未來要全站微調只改 :root,所有元件同步更新。</p>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="pn">04</div>
+        <div>
+          <h4>會呼吸的尺</h4>
+          <p>主要 display 級用 <b>clamp()</b>:手機收縮、桌機展開。內文則固定 (太隨意縮放會讓段落體感變化太大)。Hero 標題如:<code style="font-family:'IBM Plex Serif';color:var(--brand);background:var(--line-soft);padding:2px 6px;font-size:12px;">clamp(28px, 4vw, 42px)</code></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= 3. SCALE LADDER ========================= -->
+  <section class="s">
+    <div class="s-head">
+      <div class="nm">§ 03</div>
+      <h2>提案字級階梯</h2>
+      <p class="desc">A ten-step scale, named by purpose.</p>
+    </div>
+
+    <p class="lede">從 18 個字級整併到 <b>10 個</b>。每一階都有明確名稱與用途,中文 / Serif / weight 都已校準。下表是預覽 —— 字體實際是右欄的樣子。</p>
+
+    <div class="ladder">
+      <div class="ladder-row">
+        <div class="tk">eyebrow</div>
+        <div class="sz">12 px<span class="old">舊 11 px</span></div>
+        <div class="sample eyebrow">Latest News · 最新消息</div>
+        <div class="use">Serif 英文標籤、Section 上方小標。字距 2.5–3px,uppercase。</div>
+      </div>
+      <div class="ladder-row">
+        <div class="tk">meta</div>
+        <div class="sz">13 px<span class="old">舊 11 px</span></div>
+        <div class="sample meta">2026.05.20 · 林宜瑩 · 報導</div>
+        <div class="use">日期、作者、麵包屑。weight 500。</div>
+      </div>
+      <div class="ladder-row">
+        <div class="tk">caption</div>
+        <div class="sz">12 px<span class="old">舊 10 px</span></div>
+        <div class="sample caption">圖說：偏鄉藝術教育課程現場,2025 年秋。</div>
+        <div class="use">圖說、註解、最小可讀字級。<b>絕對下限</b>。</div>
+      </div>
+      <div class="ladder-row">
+        <div class="tk">body-s</div>
+        <div class="sz">15 px<span class="old">舊 13 px</span></div>
+        <div class="sample body-s">卡片描述、列表項目的簡介文字。比主要內文略小,但仍保持中文舒適閱讀。</div>
+        <div class="use">文章卡描述、行動方案說明、Footer 內文。</div>
+      </div>
+      <div class="ladder-row">
+        <div class="tk">body</div>
+        <div class="sz">16 px<span class="old">舊 14 px</span></div>
+        <div class="sample body">主要閱讀文字。文章內容、長篇敘述、捐款說明都使用這個字級。line-height 1.85 提供舒適呼吸感。</div>
+        <div class="use"><b>內文基準</b>。文章內頁、敘述段落。</div>
+      </div>
+      <div class="ladder-row">
+        <div class="tk">body-l</div>
+        <div class="sz">18 px<span class="old">舊 15 px</span></div>
+        <div class="sample body-l">引言、Lead Paragraph、文章首段。略大於內文,引導讀者進入長文。</div>
+        <div class="use">引言、quote、首段強調。</div>
+      </div>
+      <div class="ladder-row">
+        <div class="tk">title-s</div>
+        <div class="sz">17 px<span class="old">舊 15 px</span></div>
+        <div class="sample title-s">趨勢卡標題、Sidebar 小標</div>
+        <div class="use">緊湊區的標題。weight 600。</div>
+      </div>
+      <div class="ladder-row">
+        <div class="tk">title</div>
+        <div class="sz">20 px<span class="old">舊 18 px</span></div>
+        <div class="sample title">文章卡標題、行動方案標題</div>
+        <div class="use">主要卡片標題。weight 600。</div>
+      </div>
+      <div class="ladder-row">
+        <div class="tk">title-l</div>
+        <div class="sz">26 px<span class="old">舊 24 / 28 px</span></div>
+        <div class="sample title-l">焦點專欄主標、捐款區副標</div>
+        <div class="use">大型 panel 標題。weight 700。</div>
+      </div>
+      <div class="ladder-row">
+        <div class="tk">section</div>
+        <div class="sz">34 px<span class="old">舊 30 px</span></div>
+        <div class="sample section">公益行動</div>
+        <div class="use">區塊大標。weight 800,字距 3px。</div>
+      </div>
+      <div class="ladder-row">
+        <div class="tk">display</div>
+        <div class="sz">42 px<span class="old">舊 30 / 38 px</span></div>
+        <div class="sample display">守護希望的力量</div>
+        <div class="use">Hero 標題、捐款主標。clamp 至 28px @ mobile。</div>
+      </div>
+      <div class="ladder-row">
+        <div class="tk">display-l</div>
+        <div class="sz">54 px</div>
+        <div class="sample display-l">愛與希望</div>
+        <div class="use">特殊頁面 hero、年度報告封面。clamp 至 36px @ mobile。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= 4. LIVE COMPARISON ========================= -->
+  <section class="s">
+    <div class="s-head">
+      <div class="nm">§ 04</div>
+      <h2>實際套用比較</h2>
+      <p class="desc">Side by side — current vs. proposed, on real components.</p>
+    </div>
+
+    <p class="lede">點上方按鈕可以即時切換「目前」與「提案」字級,套用在重現的官網元件上。注意內文密度、標題層次、視覺呼吸感的差別。</p>
+
+    <div class="toggle-bar">
+      <div class="lbl">字級版本</div>
+      <div class="seg">
+        <button class="active" data-set="current">目前 Current</button>
+        <button data-set="proposed">提案 Proposed</button>
+      </div>
+      <div class="ctx" id="ctx">基準 13–14px / 18 個字級</div>
+    </div>
+
+    <div class="frame">
+      <!-- Banner -->
+      <div class="mock-banner">
+        <div class="eyebrow">Latest Feature · 最新焦點</div>
+        <h1>偏鄉美學教育 ── 讓孩子用畫筆，描繪屬於自己的世界</h1>
+      </div>
+
+      <!-- Section: latest articles -->
+      <div class="mock-section">
+        <div class="head">
+          <div>
+            <div class="sub">Latest News · 最新消息</div>
+            <h2>當期專題</h2>
+          </div>
+          <a class="more">VIEW ALL →</a>
+        </div>
+        <div class="mock-cards">
+          <div class="mock-card">
+            <div class="img">FEATURED IMAGE</div>
+            <div class="tag">公益行動</div>
+            <div class="meta"><span>2026.05.18</span><span>林宜瑩</span></div>
+            <h3 class="title">在山與海之間,讓藝術成為孩子的另一種語言</h3>
+            <p class="desc">基金會 2026 年春季偏鄉藝術教育計畫,走進台東、屏東與花蓮的 12 所國小,以為期八週的駐校創作課程……</p>
+            <div class="byline">By LOVE HOPE TEAM</div>
+          </div>
+          <div class="mock-card">
+            <div class="img">FEATURED IMAGE</div>
+            <div class="tag">當期專題</div>
+            <div class="meta"><span>2026.05.10</span><span>陳怡安</span></div>
+            <h3 class="title">音樂作為陪伴 —— 失智長者的聲音記憶</h3>
+            <p class="desc">透過熟悉的旋律喚醒被遺忘的時光。本季與北市聯醫合作的「聲音記憶」計畫,在六家日照中心展開……</p>
+            <div class="byline">By LOVE HOPE TEAM</div>
+          </div>
+          <div class="mock-card">
+            <div class="img">FEATURED IMAGE</div>
+            <div class="tag">基金會動態</div>
+            <div class="meta"><span>2026.04.28</span><span>編輯部</span></div>
+            <h3 class="title">2025 年度報告:三千個被照亮的角落</h3>
+            <p class="desc">過去一年我們陪伴了 3,128 位學童、長者與弱勢家庭。一份完整紀錄,獻給每一位支持者……</p>
+            <div class="byline">By LOVE HOPE TEAM</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spotlight -->
+      <div class="mock-spot">
+        <div class="pane lft">
+          <div class="label">In Focus · 焦點訪談</div>
+          <h3>「我們做的不是慈善,是陪伴。」── 創辦人專訪</h3>
+        </div>
+        <div class="pane rt">
+          <div class="label">Founder's Voice</div>
+          <h3>三十年,一張未完成的地圖</h3>
+          <p class="quote">「真正的善意,是讓被幫助的人也能成為幫助別人的人。」</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ========================= 5. MOBILE ========================= -->
+  <section class="s">
+    <div class="s-head">
+      <div class="nm">§ 05</div>
+      <h2>手機 vs 桌機</h2>
+      <p class="desc">Where the current sizes hurt most — and what changes.</p>
+    </div>
+
+    <p class="lede">手機是基金會流量的主要來源,但目前字級沒有針對手機調整。下面是同一個區塊在手機尺寸下的呈現對比。</p>
+
+    <div class="mobile-grid">
+      <div class="pho">
+        <div class="lab">目前 — 內文 <b>13px</b></div>
+        <div class="mobile-bezel">
+          <div class="bn">
+            <div class="eb">LATEST FEATURE</div>
+            <h1>偏鄉美學教育 ── 讓孩子用畫筆描繪世界</h1>
+          </div>
+          <div class="ttl">公益行動</div>
+          <div class="head">當期專題</div>
+          <p class="tx">基金會 2026 年春季偏鄉藝術教育計畫,走進台東、屏東與花蓮的 12 所國小,以為期八週的駐校創作課程,陪伴 240 位孩子用藝術重新認識自己的家鄉。</p>
+        </div>
+      </div>
+      <div class="pho">
+        <div class="lab">提案 — 內文 <b>16px</b></div>
+        <div class="mobile-bezel is-proposed">
+          <div class="bn">
+            <div class="eb">LATEST FEATURE</div>
+            <h1>偏鄉美學教育 ── 讓孩子用畫筆描繪世界</h1>
+          </div>
+          <div class="ttl">公益行動</div>
+          <div class="head">當期專題</div>
+          <p class="tx">基金會 2026 年春季偏鄉藝術教育計畫,走進台東、屏東與花蓮的 12 所國小,以為期八週的駐校創作課程,陪伴 240 位孩子用藝術重新認識自己的家鄉。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= 6. RESPONSIVE ========================= -->
+  <section class="s">
+    <div class="s-head">
+      <div class="nm">§ 06</div>
+      <h2>響應式策略</h2>
+      <p class="desc">How sizes flex across viewports.</p>
+    </div>
+
+    <p class="lede">內文字級在所有裝置上保持一致 (16px) —— 因為閱讀舒適度不該因為螢幕大小而改變。但 <b>display 級</b>會用 <code style="font-family:'IBM Plex Serif';color:var(--brand);background:var(--line-soft);padding:2px 6px;font-size:13px;">clamp()</code> 在大小螢幕間流暢過渡。</p>
+
+    <div class="resp">
+      <div class="col">
+        <div class="vp">Mobile · <b>≤ 640 px</b></div>
+        <h4>緊湊但不擠</h4>
+        <p>Display 縮小至 28–32px,section 標題 26px。內文維持 16px,行距略寬至 1.9 補足窄欄體感。</p>
+        <p>Eyebrow 字距收窄到 2px (拉太開在窄欄會斷行)。</p>
+      </div>
+      <div class="col">
+        <div class="vp">Tablet · <b>641 – 1024 px</b></div>
+        <h4>過渡帶</h4>
+        <p>透過 clamp() 自動內插。多數情境下落在桌機與手機中間值。</p>
+        <p>卡片內文不變,但卡片標題從 20px 平滑放大到桌機 22px。</p>
+      </div>
+      <div class="col">
+        <div class="vp">Desktop · <b>≥ 1025 px</b></div>
+        <h4>展開呼吸</h4>
+        <p>Display 開到 42–54px,section 標題 34px。利用大型字級建立報導感、編輯感。</p>
+        <p>Eyebrow 字距 3px,uppercase 拉丁字母拉開律動。</p>
+      </div>
+    </div>
+
+    <div class="code-block">
+<span class="c">/* :root 字級 token —— 提案版 */</span>
+<span class="k">:root</span> {
+  <span class="c">/* —— Body family —— */</span>
+  <span class="br">--t-caption</span>:   <span class="v">12px</span>;
+  <span class="br">--t-eyebrow</span>:   <span class="v">12px</span>;   <span class="c">/* Serif label */</span>
+  <span class="br">--t-meta</span>:      <span class="v">13px</span>;
+  <span class="br">--t-body-s</span>:    <span class="v">15px</span>;
+  <span class="br">--t-body</span>:      <span class="v">16px</span>;   <span class="c">/* 內文基準 */</span>
+  <span class="br">--t-body-l</span>:    <span class="v">18px</span>;
+
+  <span class="c">/* —— Title family —— */</span>
+  <span class="br">--t-title-s</span>:   <span class="v">17px</span>;
+  <span class="br">--t-title</span>:     <span class="v">20px</span>;
+  <span class="br">--t-title-l</span>:   <span class="v">26px</span>;
+
+  <span class="c">/* —— Display (responsive) —— */</span>
+  <span class="br">--t-section</span>:   <span class="v">clamp(26px, 3vw, 34px)</span>;
+  <span class="br">--t-display</span>:   <span class="v">clamp(28px, 4vw, 42px)</span>;
+  <span class="br">--t-display-l</span>: <span class="v">clamp(36px, 5vw, 54px)</span>;
+}
+    </div>
+  </section>
+
+  <!-- ========================= 7. OPEN QUESTIONS ========================= -->
+  <section class="s">
+    <div class="s-head">
+      <div class="nm">§ 07</div>
+      <h2>下一步討論</h2>
+      <p class="desc">Questions for the manager.</p>
+    </div>
+
+    <p class="lede">在落地之前,有幾個方向上的判斷需要先對齊。</p>
+
+    <div class="qs">
+      <div class="q">
+        <div class="n">01</div>
+        <div class="body-q">
+          <h4>內文要不要真的從 13–14px 拉到 16px?</h4>
+          <p>這是最大的視覺改動。中文 16px 對長文閱讀更友善,但版面會「變鬆」 —— 卡片高度增加 10–15%,首頁可見資訊量減少。要先確認這個方向你能接受。</p>
+        </div>
+      </div>
+      <div class="q">
+        <div class="n">02</div>
+        <div class="body-q">
+          <h4>Display 級要不要更編輯感(更大、更戲劇)?</h4>
+          <p>目前提案 42px,偏穩重。如果想要更強的編輯雜誌感,可以開到 56–64px,搭配 IBM Plex Serif 義體做引言。風格更強烈,但跟基金會「溫和、信任」調性的距離也更遠。</p>
+        </div>
+      </div>
+      <div class="q">
+        <div class="n">03</div>
+        <div class="body-q">
+          <h4>Caption 10px 真的可以淘汰嗎?</h4>
+          <p>目前 10px 共出現 26 次 —— 多在角標、圖說、按鈕標籤。提案下限拉到 12px。如果某些角標必須極小 (例如英文版權標示),可以保留一個 <code style="font-family:'IBM Plex Serif';color:var(--brand);background:var(--line-soft);padding:2px 6px;font-size:13px;">--t-micro: 11px</code>,但不放進主階梯。</p>
+        </div>
+      </div>
+      <div class="q">
+        <div class="n">04</div>
+        <div class="body-q">
+          <h4>要不要同時調整 line-height 與 letter-spacing?</h4>
+          <p>字級系統的姊妹是行高與字距。目前行高都用 1.6–1.85,字距散落 0.5–5px。如果要做就一次做完整;如果先處理字級,行高與字距下一階段再進。</p>
+        </div>
+      </div>
+      <div class="q">
+        <div class="n">05</div>
+        <div class="body-q">
+          <h4>導入方式:全站一次換 vs 分階段?</h4>
+          <p>全站換的好處是徹底乾淨;分階段 (例如先做首頁 + 文章內頁) 風險低、但會出現「混搭期」。基金會官網規模不大 (5 頁),我建議一次換,週末完成。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="doc-footer">
+    <div class="l">End of proposal · 等你回饋,我再進行下一步。</div>
+    <div class="r">LHF · Typography v0.1</div>
+  </footer>
+
+</div>
+
+<script>
+const doc = document.getElementById('doc');
+const ctx = document.getElementById('ctx');
+const buttons = document.querySelectorAll('.toggle-bar .seg button');
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const set = btn.dataset.set;
+    doc.setAttribute('data-scale', set);
+    ctx.textContent = set === 'current'
+      ? '基準 13–14px / 18 個字級'
+      : '基準 16px / 10 個字級 / clamp() 響應式';
+  });
+});
+</script>
+
+</body>
+</html>
