@@ -203,6 +203,44 @@
   }
   .unit-row:hover .article-action{color:var(--brand);border-color:var(--brand)}
 
+  /* ============ Variant A · 引言主導 ============ */
+  .unit-row--quote-led .title{
+    font-size:var(--t-title);font-weight:500;color:var(--muted);
+    letter-spacing:1px;margin-bottom:14px;
+  }
+  .unit-row--quote-led .quote{
+    font-size:var(--t-display);line-height:1.45;color:var(--ink);
+    font-weight:700;border-left:none;padding:0;
+    margin:0 0 26px;letter-spacing:1.5px;
+  }
+  .unit-row--quote-led .quote::before{content:"「";color:var(--brand)}
+  .unit-row--quote-led .quote::after{content:"」";color:var(--brand)}
+  .unit-row--quote-led:hover .title{color:var(--brand)}
+
+  /* ============ Variant B · 編號排版 ============ */
+  .unit-row--numbered .row-num{
+    display:block;font-family:"IBM Plex Serif",sans-serif;
+    font-size:60px;font-weight:300;color:var(--brand);
+    line-height:0.9;letter-spacing:-2px;margin-bottom:18px;
+  }
+
+  /* ============ Variant C · 分節 editorial ============ */
+  .unit-row--sections .quote{margin-bottom:24px}
+  .unit-row--sections .sec-h{
+    font-family:"IBM Plex Serif",sans-serif;
+    font-size:var(--t-eyebrow);color:var(--brand);
+    letter-spacing:3px;text-transform:uppercase;font-weight:700;
+    margin:14px 0 6px;display:flex;align-items:center;gap:12px;
+  }
+  .unit-row--sections .sec-h::after{
+    content:"";flex:1;height:1px;background:var(--line);
+  }
+  .unit-row--sections .sec-p{
+    font-size:var(--t-body-s);line-height:1.9;color:var(--body);
+    margin:0 0 14px;letter-spacing:.3px;
+  }
+  .unit-row--sections .article-action{margin-top:8px}
+
   /* ============ EMPTY STATE (籌備中分類) ============ */
   .empty-state{
     padding:120px 0;
@@ -508,7 +546,8 @@
         </div>
       </a>
 
-      <a class="unit-row" href="#">
+      <!-- Variant A · 引言主導 -->
+      <a class="unit-row unit-row--quote-led" href="#">
         <figure class="unit-image">
           <span class="img-fill"></span>
         </figure>
@@ -516,23 +555,30 @@
           <div class="meta"><span class="cat">台南玉井</span></div>
           <h3 class="title">牽起社區的手 — 天主教德蘭啟智中心</h3>
           <p class="quote">當我的心尋著你的心，當我的手牽上你的手</p>
+          <p class="excerpt">位於台南玉井山區，提供日間托育、到宅療育與社區家園服務。2011 年贈車後拓展至新住民家庭與山區長者照護，目前經常性服務約 150 人。</p>
+          <div class="footnote">支持自 2011 ｜ 校車・新住民計畫・長者照顧</div>
           <span class="article-action">看單位故事 →</span>
         </div>
       </a>
 
-      <a class="unit-row" href="#">
+      <!-- Variant B · 編號排版 -->
+      <a class="unit-row unit-row--numbered" href="#">
         <figure class="unit-image">
           <span class="img-fill"></span>
         </figure>
         <div class="unit-body">
+          <span class="row-num">04</span>
           <div class="meta"><span class="cat">台南新市</span></div>
           <h3 class="title">慢飛天使一生的守護 — 天主教蘆葦啟智中心</h3>
           <p class="quote">壓傷的蘆葦，祂不折斷；將熄的燈芯，祂不吹滅</p>
+          <p class="excerpt">由邱修女集合八千多人愛心建成，提供 0-6 歲早期療育與 16 歲以上心智障礙日間照顧、就業支持，機構內 150 人、社區另 264 人。</p>
+          <div class="footnote">支持自 2012 ｜ 特殊兒童獎學金</div>
           <span class="article-action">看單位故事 →</span>
         </div>
       </a>
 
-      <a class="unit-row" href="#">
+      <!-- Variant C · 分節 editorial -->
+      <a class="unit-row unit-row--sections" href="#">
         <figure class="unit-image">
           <span class="img-fill"></span>
         </figure>
@@ -540,6 +586,12 @@
           <div class="meta"><span class="cat">台南安平漁光里</span></div>
           <h3 class="title">漫漫漁光 — 天主教瑞復益智中心</h3>
           <p class="quote">有人的地方就有愛，有愛的地方就有希望</p>
+          <h4 class="sec-h">關於</h4>
+          <p class="sec-p">漁光里被稱為最美的特教中心，服務遲緩嬰幼兒與多重障礙人士。</p>
+          <h4 class="sec-h">規模</h4>
+          <p class="sec-p">日托照顧 220 多人，社區服務另約 300 人。</p>
+          <h4 class="sec-h">支持</h4>
+          <p class="sec-p">2012 起支持多元職能發展與煎餅行動車計畫。</p>
           <span class="article-action">看單位故事 →</span>
         </div>
       </a>
