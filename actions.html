@@ -139,16 +139,15 @@
   [hidden]{display:none !important}
   .unit-list{display:flex;flex-direction:column}
   .unit-row{
-    display:grid;grid-template-columns:400px 1fr;gap:48px;
-    padding:36px 0;border-bottom:1px solid var(--line);
+    display:grid;grid-template-columns:560px 1fr;gap:56px;
+    padding:20px;margin:0 -20px 4px;
     align-items:center;transition:background .2s;
   }
-  .unit-row:first-child{padding-top:16px}
-  .unit-row:last-child{border-bottom:none}
+  .unit-row:last-child{margin-bottom:0}
   .unit-row:hover{background:var(--line-soft)}
 
   .unit-image{
-    aspect-ratio:9/5;overflow:hidden;position:relative;
+    aspect-ratio:3/2;overflow:hidden;position:relative;
     background:linear-gradient(135deg,#2a2a2a,#0f0f0f);
   }
   .unit-image .img-fill{
@@ -374,7 +373,7 @@
     .app-nav,.app-header{position:static}
     .sub-nav{position:static}
     .page-hero{padding:56px 0 36px}
-    .unit-row{grid-template-columns:300px 1fr;gap:32px;padding:28px 0}
+    .unit-row{grid-template-columns:380px 1fr;gap:36px;padding:16px;margin:0 -16px 3px}
     .unit-body{padding-right:0}
     .unit-body .title{font-size:var(--t-title);letter-spacing:1.5px}
     .donate-card{grid-template-columns:1fr;gap:40px;padding:48px;border-radius:4px}
@@ -392,7 +391,7 @@
     .page-hero{padding:44px 0 28px}
     .page-hero .lead{font-size:var(--t-body);line-height:1.9}
     .units-section{padding:36px 0 64px}
-    .unit-row{grid-template-columns:1fr;gap:20px;padding:28px 0}
+    .unit-row{grid-template-columns:1fr;gap:20px;padding:14px;margin:0 -14px 3px}
     .unit-body .title{font-size:var(--t-title);letter-spacing:1px;margin-bottom:14px}
     .unit-body .quote{font-size:var(--t-body);line-height:1.85;margin-bottom:18px}
     .donate-band{padding:40px 20px}
