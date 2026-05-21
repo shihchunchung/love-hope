@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>間距系統審計 — 薛伯輝基金會</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand:#8C0A0A;
+  --brand-dark:#5C0606;
+  --brand-tint:#FBEEEE;
+  --ink:#111111;
+  --body:#333333;
+  --muted:#9A9A9A;
+  --line:#E8E8E8;
+  --line-soft:#F4F4F4;
+  --paper:#FAF8F5;
+  --bg:#ffffff;
+
+  --red:#B8001F;
+  --red-bg:#FBEBEE;
+  --amber:#A66B00;
+  --amber-bg:#FCF4E2;
+  --green:#2E6B3B;
+  --green-bg:#EAF3EC;
+
+  --lh-tight:1.3;
+  --lh-snug:1.5;
+  --lh-normal:1.75;
+  --lh-loose:1.9;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--body);font-family:"Noto Sans TC",-apple-system,sans-serif;line-height:var(--lh-normal);font-weight:400;-webkit-font-smoothing:antialiased;font-size:16px}
+.lat{font-family:"IBM Plex Serif",serif}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+ul{list-style:none}
+code{font-family:"IBM Plex Serif",serif;background:var(--line-soft);padding:2px 7px;color:var(--brand);font-size:13px;font-weight:500;letter-spacing:0}
+
+/* ===== Doc shell ===== */
+.doc{max-width:1080px;margin:0 auto;padding:80px 56px 120px}
+
+.doc-header{display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:end;padding-bottom:36px;border-bottom:1px solid var(--ink);margin-bottom:64px}
+.doc-header .num{font-family:"IBM Plex Serif",serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--brand);font-weight:600}
+.doc-header .meta{font-family:"IBM Plex Serif",serif;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:right;line-height:1.8}
+.doc-title{font-size:54px;font-weight:900;letter-spacing:3px;line-height:1.15;color:var(--ink);margin-top:18px}
+.doc-title .em{color:var(--brand)}
+.doc-sub{font-family:"IBM Plex Serif",serif;font-style:italic;font-size:18px;color:var(--muted);margin-top:14px;letter-spacing:.3px;font-weight:400;line-height:1.5}
+
+/* ===== Section structure ===== */
+section.s{margin-top:96px}
+.s-head{display:grid;grid-template-columns:80px 1fr;gap:32px;align-items:baseline;margin-bottom:36px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.s-head .nm{font-family:"IBM Plex Serif",serif;font-size:13px;letter-spacing:4px;color:var(--brand);font-weight:600}
+.s-head h2{font-size:30px;font-weight:800;letter-spacing:2px;color:var(--ink);line-height:1.25}
+.s-head .desc{grid-column:2;font-family:"IBM Plex Serif",serif;font-style:italic;color:var(--muted);font-size:15px;letter-spacing:.3px;margin-top:8px;line-height:1.6;font-weight:400}
+
+.lede{font-size:17px;line-height:1.85;color:var(--ink);max-width:680px;margin-bottom:32px;font-weight:400}
+p.body{font-size:15px;line-height:1.85;color:var(--body);margin-bottom:18px;max-width:740px}
+
+/* ===== Stats row ===== */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:36px 0}
+.stat{background:#fff;padding:28px 24px}
+.stat .k{font-family:"IBM Plex Serif",serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:14px}
+.stat .v{font-size:42px;font-weight:800;color:var(--ink);letter-spacing:1px;line-height:1;display:flex;align-items:baseline;gap:8px}
+.stat .v .u{font-size:14px;font-weight:500;color:var(--muted);letter-spacing:1px}
+.stat .nt{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6;letter-spacing:.5px}
+
+/* ===== Inventory chart ===== */
+.inv{margin:32px 0 24px;border-top:1px solid var(--line);padding-top:24px}
+.inv h3{font-family:"IBM Plex Serif",serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:16px}
+.inv-row{display:grid;grid-template-columns:120px 1fr 70px;align-items:center;gap:18px;padding:7px 0;border-bottom:1px dotted var(--line)}
+.inv-row .px{font-family:"IBM Plex Serif",serif;font-size:13px;font-weight:600;color:var(--ink);letter-spacing:1px}
+.inv-row .bar{height:10px;background:var(--brand-tint);position:relative;overflow:hidden}
+.inv-row .bar i{display:block;height:100%;background:var(--brand)}
+.inv-row .ct{font-family:"IBM Plex Serif",serif;font-size:12px;color:var(--muted);letter-spacing:.5px;text-align:right;font-weight:500}
+.inv-row.is-hot{background:linear-gradient(to right,rgba(140,10,10,.04),transparent)}
+.inv-row.is-hot .px{color:var(--brand)}
+
+.inv-pair{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin:32px 0}
+
+/* ===== Principles ===== */
+.principles{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line);margin-top:24px}
+.principle{padding:32px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:50px 1fr;gap:20px}
+.principle:nth-child(odd){padding-right:32px;border-right:1px solid var(--line)}
+.principle:nth-child(even){padding-left:32px}
+.principle .pn{font-family:"IBM Plex Serif",serif;font-size:32px;font-weight:300;color:var(--brand);line-height:1;letter-spacing:-1px}
+.principle h4{font-size:16px;font-weight:700;letter-spacing:1px;color:var(--ink);margin-bottom:10px;line-height:1.4}
+.principle p{font-size:14px;line-height:1.8;color:var(--body)}
+
+/* ===== Audit category card ===== */
+.cat{margin:36px 0;background:#fff;border:1px solid var(--line)}
+.cat-head{display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:center;padding:22px 28px;border-bottom:1px solid var(--line)}
+.cat-head .n{font-family:"IBM Plex Serif",serif;font-size:28px;font-weight:300;color:var(--brand);letter-spacing:-1px;line-height:1}
+.cat-head h3{font-size:20px;font-weight:700;color:var(--ink);letter-spacing:1px;line-height:1.3}
+.cat-head h3 .en{display:block;font-family:"IBM Plex Serif",serif;font-style:italic;font-size:12px;color:var(--muted);font-weight:400;letter-spacing:.5px;margin-top:4px}
+.cat-head .verdict{font-family:"IBM Plex Serif",serif;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:6px 12px;line-height:1}
+.cat-head .verdict.red{background:var(--red-bg);color:var(--red)}
+.cat-head .verdict.amber{background:var(--amber-bg);color:var(--amber)}
+.cat-head .verdict.green{background:var(--green-bg);color:var(--green)}
+
+.cat-body{padding:24px 28px 28px}
+.cat-body .label{font-family:"IBM Plex Serif",serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:700;margin:4px 0 10px;display:block}
+.cat-body .label:first-child{margin-top:0}
+.cat-body p{font-size:14px;line-height:1.85;color:var(--body);margin-bottom:8px}
+.cat-body p:last-child{margin-bottom:0}
+.cat-body .now{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:14px;padding:14px 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.cat-body .now > div .label{margin-top:0}
+.cat-body .judgment{padding-top:14px;border-top:1px dashed var(--line)}
+.cat-body .judgment .label{color:var(--brand)}
+.cat-body table{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:13px;line-height:1.55}
+.cat-body table th{font-family:"IBM Plex Serif",serif;text-align:left;font-weight:600;letter-spacing:2px;text-transform:uppercase;font-size:10px;color:var(--muted);padding:8px 12px 8px 0;border-bottom:1px solid var(--line)}
+.cat-body table td{padding:8px 12px 8px 0;border-bottom:1px dotted var(--line);vertical-align:top;color:var(--body)}
+.cat-body table td:last-child{padding-right:0}
+.cat-body table td.sel{font-family:"IBM Plex Serif",serif;color:var(--ink);font-weight:500}
+.cat-body table td.now-val{font-family:"IBM Plex Serif",serif;font-size:12px;color:var(--muted)}
+.cat-body table td.new-val{font-family:"IBM Plex Serif",serif;font-size:12px;color:var(--brand);font-weight:700}
+.cat-body table td.reason{font-size:12px;color:var(--body);line-height:1.7}
+
+/* ===== Verdict list (final action lists) ===== */
+.action-list{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);margin:32px 0}
+.action-list.red-list{border-color:var(--red)}
+.action-list.amber-list{border-color:var(--amber)}
+.action-list.green-list{border-color:var(--green)}
+.action-row{display:grid;grid-template-columns:32px 1fr 180px 180px;gap:18px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px}
+.action-row:last-child{border-bottom:0}
+.action-row .ix{font-family:"IBM Plex Serif",serif;font-size:11px;letter-spacing:2px;color:var(--muted);font-weight:600}
+.action-row .sel{font-family:"IBM Plex Serif",serif;color:var(--ink);font-weight:500;font-size:13px}
+.action-row .sel small{display:block;font-family:"Noto Sans TC",sans-serif;font-size:11px;color:var(--muted);margin-top:2px;letter-spacing:.5px;font-weight:400;line-height:1.5}
+.action-row .from{font-family:"IBM Plex Serif",serif;font-size:12px;color:var(--muted);font-weight:500}
+.action-row .from::before{content:"→";color:var(--brand);margin:0 8px;font-weight:700}
+.action-row .to{font-family:"IBM Plex Serif",serif;font-size:12px;color:var(--brand);font-weight:700}
+
+/* ===== Code block ===== */
+.code-block{margin-top:24px;background:#0d0d0d;color:#f4f4f4;padding:28px 32px;font-family:"IBM Plex Serif",serif;font-size:13px;line-height:1.85;letter-spacing:.3px;overflow-x:auto}
+.code-block .k{color:#f4d8d8}
+.code-block .v{color:#fff;font-weight:600}
+.code-block .c{color:#6a6a6a;font-style:italic}
+.code-block .br{color:var(--brand);font-weight:600}
+.code-block .strike{color:#6a6a6a;text-decoration:line-through}
+
+/* ===== Open questions ===== */
+.qs{margin-top:32px;border-top:1px solid var(--ink)}
+.q{display:grid;grid-template-columns:60px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--line);align-items:start}
+.q .n{font-family:"IBM Plex Serif",serif;font-size:26px;font-weight:300;color:var(--brand);line-height:1;letter-spacing:-1px}
+.q .body-q h4{font-size:17px;font-weight:700;color:var(--ink);letter-spacing:.5px;margin-bottom:8px;line-height:1.4}
+.q .body-q p{font-size:14px;line-height:1.8;color:var(--body)}
+
+.doc-footer{margin-top:96px;padding-top:32px;border-top:1px solid var(--ink);display:flex;justify-content:space-between;align-items:center}
+.doc-footer .l{font-family:"IBM Plex Serif",serif;font-style:italic;font-size:14px;color:var(--muted);letter-spacing:.3px}
+.doc-footer .r{font-family:"IBM Plex Serif",serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+.hl{background:linear-gradient(transparent 62%,var(--brand-tint) 62%);padding:0 2px}
+
+.tally{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:28px 0 36px}
+.tally .t{background:#fff;padding:24px 24px 22px;text-align:left}
+.tally .t .v{font-family:"IBM Plex Serif",serif;font-size:36px;font-weight:300;letter-spacing:-1px;line-height:1;margin-bottom:8px}
+.tally .t.red .v{color:var(--red)}
+.tally .t.amber .v{color:var(--amber)}
+.tally .t.green .v{color:var(--green)}
+.tally .t .k{font-family:"IBM Plex Serif",serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);font-weight:700;margin-bottom:8px}
+.tally .t .nt{font-size:12px;color:var(--muted);line-height:1.6}
+
+@media (max-width:880px){
+  .doc{padding:48px 24px 80px}
+  .doc-header{grid-template-columns:1fr;gap:12px}
+  .doc-header .meta{text-align:left}
+  .doc-title{font-size:36px;letter-spacing:1px}
+  .s-head{grid-template-columns:1fr;gap:8px}
+  .stats,.tally{grid-template-columns:repeat(2,1fr)}
+  .principles{grid-template-columns:1fr}
+  .principle{padding:24px 0 !important;border-right:0 !important;padding-left:0 !important}
+  .inv-pair{grid-template-columns:1fr}
+  .cat-body .now{grid-template-columns:1fr;gap:14px}
+  .cat-head{grid-template-columns:auto 1fr;gap:14px}
+  .cat-head .verdict{grid-column:1/-1;justify-self:flex-start}
+  .action-row{grid-template-columns:1fr;gap:6px}
+  .action-row .from,.action-row .to{font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<div class="doc">
+
+  <!-- ========================= HEADER ========================= -->
+  <header class="doc-header">
+    <div>
+      <div class="num">No. 02 / Spacing</div>
+      <h1 class="doc-title">間距系統<br><span class="em">審計提案</span></h1>
+      <p class="doc-sub">A field audit of every padding, margin, gap, line-height and letter-spacing across index / actions / actions-dimuer — after the Direction 2 type-scale ship.</p>
+    </div>
+    <div></div>
+    <div class="meta">
+      LOVE HOPE FOUNDATION<br>
+      Audit · post type v2<br>
+      May 2026
+    </div>
+  </header>
+
+  <!-- ========================= INTRO ========================= -->
+  <p class="lede">
+    上一輪把內文從 16 拉到 <span class="hl">18px</span>、hero 從 38 拉到 44px。字級變大,**容器、邊距、行高、字距**沒跟著重整。這份文件針對 3 個檔案、9 大類間距,逐項判斷「太擠 / 太鬆 / 不動」。最後給出必動清單、建議清單,以及刻意不動的清單。
+  </p>
+
+  <!-- ========================= 1. AUDIT OVERVIEW ========================= -->
+  <section class="s">
+    <div class="s-head">
+      <div class="nm">§ 01</div>
+      <h2>現況審視</h2>
+      <p class="desc">The numbers — what's actually in the stylesheet today.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="k">padding 唯一值</div>
+        <div class="v">28<span class="u">種</span></div>
+        <div class="nt">從 0 到 80px 散落,缺乏共同步距。</div>
+      </div>
+      <div class="stat">
+        <div class="k">margin-bottom 唯一值</div>
+        <div class="v">13<span class="u">種</span></div>
+        <div class="nt">4 / 6 / 8 / 10 / 14 / 18 / 20 / 22 / 24 / 28 / 40 / 42 / 48 / 56 各出現過。</div>
+      </div>
+      <div class="stat">
+        <div class="k">line-height 唯一值</div>
+        <div class="v">14<span class="u">種</span></div>
+        <div class="nt">1 到 2.05,12 個變體,內文用了 5 種。</div>
+      </div>
+      <div class="stat">
+        <div class="k">letter-spacing 唯一值</div>
+        <div class="v">9<span class="u">種</span></div>
+        <div class="nt">0 到 3.5px,中文身上 hard-coded .5–1.5px。</div>
+      </div>
+    </div>
+
+    <p class="body">下圖左:全站 padding 出現次數分布。右:line-height 出現次數分布。可以看到 padding 集中在 14 / 28 / 48,但中間值極多;line-height 散到 12 種,內文層級就用了 5 種。</p>
+
+    <div class="inv-pair">
+      <div class="inv">
+        <h3>Padding 分布(三檔合計)</h3>
+        <div class="inv-row is-hot"><div class="px">14 px</div><div class="bar"><i style="width:100%"></i></div><div class="ct">12 ×</div></div>
+        <div class="inv-row is-hot"><div class="px">28 px</div><div class="bar"><i style="width:75%"></i></div><div class="ct">9 ×</div></div>
+        <div class="inv-row is-hot"><div class="px">48 px</div><div class="bar"><i style="width:67%"></i></div><div class="ct">8 ×</div></div>
+        <div class="inv-row"><div class="px">22 px</div><div class="bar"><i style="width:58%"></i></div><div class="ct">7 ×</div></div>
+        <div class="inv-row"><div class="px">40 px</div><div class="bar"><i style="width:50%"></i></div><div class="ct">6 ×</div></div>
+        <div class="inv-row"><div class="px">64 px</div><div class="bar"><i style="width:42%"></i></div><div class="ct">5 ×</div></div>
+        <div class="inv-row"><div class="px">24 px</div><div class="bar"><i style="width:33%"></i></div><div class="ct">4 ×</div></div>
+        <div class="inv-row"><div class="px">56 px</div><div class="bar"><i style="width:25%"></i></div><div class="ct">3 ×</div></div>
+        <div class="inv-row"><div class="px">9 / 16 / 32 / 36 / 60 / 72 / 80 / 96</div><div class="bar"><i style="width:17%"></i></div><div class="ct">2 × 各</div></div>
+      </div>
+
+      <div class="inv">
+        <h3>Line-height 分布(三檔合計)</h3>
+        <div class="inv-row is-hot"><div class="px">1.0</div><div class="bar"><i style="width:100%"></i></div><div class="ct">14 ×</div></div>
+        <div class="inv-row is-hot"><div class="px">1.85</div><div class="bar"><i style="width:50%"></i></div><div class="ct">7 ×</div></div>
+        <div class="inv-row"><div class="px">1.6</div><div class="bar"><i style="width:36%"></i></div><div class="ct">5 ×</div></div>
+        <div class="inv-row"><div class="px">1.5</div><div class="bar"><i style="width:36%"></i></div><div class="ct">5 ×</div></div>
+        <div class="inv-row"><div class="px">1.95</div><div class="bar"><i style="width:29%"></i></div><div class="ct">4 ×</div></div>
+        <div class="inv-row"><div class="px">1.3</div><div class="bar"><i style="width:21%"></i></div><div class="ct">3 ×</div></div>
+        <div class="inv-row"><div class="px">1.4</div><div class="bar"><i style="width:21%"></i></div><div class="ct">3 ×</div></div>
+        <div class="inv-row"><div class="px">1.75 / 1.8 / 1.9 / 2.0</div><div class="bar"><i style="width:21%"></i></div><div class="ct">2 × 各</div></div>
+        <div class="inv-row"><div class="px">1.2 / 1.25 / 1.35 / 1.45 / 1.7 / 2.05</div><div class="bar"><i style="width:7%"></i></div><div class="ct">1 × 各</div></div>
+      </div>
+    </div>
+
+    <p class="body"><b>核心發現:</b>padding 與 margin-bottom 看似「東家 22、西家 24」其實沒太多差別 —— 設計師 / 工程師憑直覺撒值。但 <b>字級拉大後,所有為 16px 內文設計的 padding 都偏緊一階</b>;一些原本「比較大的留白」反而剛好對到新的字級比例,該保留。要看細節。</p>
+  </section>
+
+  <!-- ========================= 2. PRINCIPLES ========================= -->
+  <section class="s">
+    <div class="s-head">
+      <div class="nm">§ 02</div>
+      <h2>審計四準則</h2>
+      <p class="desc">How I judge each spacing value — not by ratio, but by purpose.</p>
+    </div>
+
+    <p class="lede">本次審計不採「全部按比例放大」。每一個 spacing 都要回答四個問題,再決定動不動、怎麼動。</p>
+
+    <div class="principles">
+      <div class="principle">
+        <div class="pn">01</div>
+        <div>
+          <h4>本意是什麼?</h4>
+          <p>每個 padding / margin 都有功能 —— 是「分隔內容」、「強調結構」、「容器呼吸」或「視覺停頓」?分清楚才能判斷字級升級後本意是否還達成。</p>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="pn">02</div>
+        <div>
+          <h4>字級升級後本意還達成嗎?</h4>
+          <p>字大了會壓縮 spacing 的「相對」呼吸感。原本 1.5x 行高的留白變相對小 —— 但有些 spacing 因為本來就過大,字升級反而剛好對齊。逐項看,別預設要加。</p>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="pn">03</div>
+        <div>
+          <h4>同源還是散亂?</h4>
+          <p>22 / 24 / 28 三個值在不同卡上隨機出現,代表沒有共識。本次審計傾向把「同類功能的 spacing」收斂到同一值 —— 但不引入 token 系統(基金會規模不需要)。</p>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="pn">04</div>
+        <div>
+          <h4>編輯密度 vs 設計留白</h4>
+          <p>編輯型網站不靠 white space 取勝。NYT、報導者的卡是緊的。字級拉大 ≠ 邊距也要拉大。中老年讀者要的是「看得清楚」,不是「空之又空」。寧可保留扎實密度。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= 3. 9-CATEGORY AUDIT ========================= -->
+  <section class="s">
+    <div class="s-head">
+      <div class="nm">§ 03</div>
+      <h2>九大類審計</h2>
+      <p class="desc">Each category, independently judged — current state, my call, and why.</p>
+    </div>
+
+    <p class="lede">下方 9 個分類,每一類獨立判斷。色彩編碼:<b style="color:var(--red)">RED</b> = 字級升級後已明顯失衡,必動;<b style="color:var(--amber)">AMBER</b> = 建議調整,但有商榷空間;<b style="color:var(--green)">GREEN</b> = 仔細看過,刻意不動。</p>
+
+    <!-- CAT 01 -->
+    <div class="cat">
+      <div class="cat-head">
+        <div class="n">01</div>
+        <h3>Section 縱向節奏 <span class="en">Section-level vertical padding</span></h3>
+        <div class="verdict amber">部分動</div>
+      </div>
+      <div class="cat-body">
+        <span class="label">現況</span>
+        <table>
+          <tr><th>元件</th><th>桌機</th><th>手機</th></tr>
+          <tr><td class="sel">section.section</td><td class="now-val">padding: 80px 0</td><td class="now-val">padding: 56px 20px</td></tr>
+          <tr><td class="sel">.banner-slider + section</td><td class="now-val">padding-top: 44px</td><td class="now-val">—</td></tr>
+          <tr><td class="sel">.donate-band</td><td class="now-val">padding: 80px 0</td><td class="now-val">padding: 40px 20px</td></tr>
+          <tr><td class="sel">.page-hero (actions)</td><td class="now-val">padding: 72px 0 40px</td><td class="now-val">padding: 44px 0 28px</td></tr>
+          <tr><td class="sel">.units-section</td><td class="now-val">padding: 60px 0 96px</td><td class="now-val">padding: 36px 0 64px</td></tr>
+        </table>
+
+        <div class="judgment">
+          <span class="label">判斷</span>
+          <p><b>section 之間 80px 維持 — 不該再加</b>。內文升到 18px 後,80px 上下相當於 ~4.4× 行高,跟報導者、端傳媒同級。再加會變鬆散。</p>
+          <p><b>但 <code>.page-hero 72/40</code> 上下不對稱問題明顯放大</b>:hero h1 升到 48px 後,下方只有 40px 接 lead,壓迫感強。</p>
+          <p><b><code>.units-section 60/96</code> 上方比其他 section 短 20px</b> —— 跟 sub-nav 共構視覺壓力,動到 72 比較對稱。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAT 02 -->
+    <div class="cat">
+      <div class="cat-head">
+        <div class="n">02</div>
+        <h3>元件內 padding <span class="en">Component-level internal padding</span></h3>
+        <div class="verdict red">必動</div>
+      </div>
+      <div class="cat-body">
+        <span class="label">現況</span>
+        <table>
+          <tr><th>元件</th><th>padding</th><th>內含字級</th></tr>
+          <tr><td class="sel">.act .body (公益行動卡)</td><td class="now-val">22px 24px 28px</td><td class="reason">cat 13 / h4 22 / p 17</td></tr>
+          <tr><td class="sel">.banner-slide .h-title</td><td class="now-val">48px 56px</td><td class="reason">hero 30→44px</td></tr>
+          <tr><td class="sel">.spot-text</td><td class="now-val">48px 56px</td><td class="reason">h2 38px / quote 20</td></tr>
+          <tr><td class="sel">.donate-card</td><td class="now-val">64px</td><td class="reason">h2 48px / 多區塊</td></tr>
+          <tr><td class="sel">.section-head</td><td class="now-val">padding-bottom: 18px</td><td class="reason">主標 38px</td></tr>
+          <tr><td class="sel">.footer-giro</td><td class="now-val">12px 24px</td><td class="reason">label 13 / cell 17</td></tr>
+          <tr><td class="sel">.unit-row (mobile)</td><td class="now-val">14px</td><td class="reason">title 22 / quote 20</td></tr>
+        </table>
+
+        <div class="judgment">
+          <span class="label">判斷</span>
+          <p><b>「字大了 padding 沒跟」最明顯的就是 <code>.act .body 22/24/28</code></b>:卡標 22px、內文 17px、cat label 13px 全擠在 22px 上邊距、24px 左右、28px 下緣裡。其中 <b>22 / 24</b> 是針對舊 14px 內文的尺度,該升到 28。</p>
+          <p><b><code>.section-head padding-bottom: 18px</code> 配 38px 主標 = 比例 0.47</b>,顯著偏緊。主標升級後,標題與分隔線靠太近。應該到 26–28px。</p>
+          <p><b><code>.footer-giro 12px 24px</code></b>:giro-label 13px 在 12px 縱向 padding 內,字升級後框體比字本身高度只多一點。需要到 16/28。</p>
+          <p><code>.banner-slide .h-title 48/56</code> 和 <code>.spot-text 48/56</code> 經過審視 <b>仍然合適</b> —— 它們本來就為大字級設計,字升級後仍有呼吸。不動。</p>
+          <p><code>.donate-card 64px</code> 是大型 panel,字升級後 h2 48px,padding 比 h2 多 16px,左右各 64px,還在合理範圍。<b>不動</b>。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAT 03 -->
+    <div class="cat">
+      <div class="cat-head">
+        <div class="n">03</div>
+        <h3>標題 → 內容垂直距離 <span class="en">Heading-to-content margins</span></h3>
+        <div class="verdict red">必動</div>
+      </div>
+      <div class="cat-body">
+        <span class="label">現況</span>
+        <table>
+          <tr><th>元件</th><th>margin-bottom</th><th>標題現大小</th></tr>
+          <tr><td class="sel">.act h4 → .act p</td><td class="now-val">10px</td><td class="reason">22px</td></tr>
+          <tr><td class="sel">.act .cat → .act h4</td><td class="now-val">10px</td><td class="reason">13px → 22px</td></tr>
+          <tr><td class="sel">.article-card .title → .description</td><td class="now-val">10px</td><td class="reason">22px</td></tr>
+          <tr><td class="sel">.article-card .meta → .title</td><td class="now-val">10px</td><td class="reason">14px → 22px</td></tr>
+          <tr><td class="sel">.article-card .description → .article-action</td><td class="now-val">14px</td><td class="reason">18px</td></tr>
+          <tr><td class="sel">.donate-text h2 → p</td><td class="now-val">20px</td><td class="reason">48px</td></tr>
+          <tr><td class="sel">.spot-text h2 → quote</td><td class="now-val">18px</td><td class="reason">38px</td></tr>
+          <tr><td class="sel">.section-head .titles gap</td><td class="now-val">8px</td><td class="reason">15px → 38px</td></tr>
+        </table>
+
+        <div class="judgment">
+          <span class="label">判斷</span>
+          <p><b>10px margin-bottom 出現多次,放在 22px 標題下,比例 0.45</b>。對 14px 標題(舊版)是合理 0.71,字級升級後就過緊。標題 / 副標 / 卡內各層皆然 —— 全部 10 → 14px。</p>
+          <p><b><code>.donate-text h2 → p</code> 的 20px</b>:48px 主標下接 19px 副文,20px 仍偏緊;升到 28px。</p>
+          <p><b><code>.section-head .titles gap: 8px</code></b>:eyebrow 15px 跟主標 38px 之間只有 8px,主標升級後比例失衡;升到 12px。</p>
+          <p><code>.spot-text h2 → quote 18px</code>:雖然主標也升到 38px,但 quote 有 border-left 結構強化視覺停頓,18px 仍 OK。<b>不動</b>。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAT 04 -->
+    <div class="cat">
+      <div class="cat-head">
+        <div class="n">04</div>
+        <h3>Grid gap <span class="en">Between-card horizontal & vertical gaps</span></h3>
+        <div class="verdict amber">部分動</div>
+      </div>
+      <div class="cat-body">
+        <span class="label">現況</span>
+        <table>
+          <tr><th>元件</th><th>gap</th><th>備註</th></tr>
+          <tr><td class="sel">.article-grid (3 欄)</td><td class="now-val">56px row × 32px col</td><td class="reason">桌機文章卡 grid</td></tr>
+          <tr><td class="sel">.article-grid (2 欄 tablet)</td><td class="now-val">40px row × 24px col</td><td class="reason">平板降階</td></tr>
+          <tr><td class="sel">.actions-grid (公益行動)</td><td class="now-val">1px (divider)</td><td class="reason">用線分隔,non-spacing</td></tr>
+          <tr><td class="sel">.donate-card grid</td><td class="now-val">56px (桌機) / 40 (平板) / 28 (手機)</td><td class="reason">兩欄面板</td></tr>
+          <tr><td class="sel">.unit-row (actions)</td><td class="now-val">64px / 40 / 20</td><td class="reason">故事列圖文</td></tr>
+        </table>
+
+        <div class="judgment">
+          <span class="label">判斷</span>
+          <p><b><code>.article-grid 32px col gap</code></b>:卡內字升級後,卡片寬度不變但內容看起來更滿。32 col 仍可,<b>不動</b>。56 row gap 是給 9:5 大圖 + 標題群留呼吸,合理。<b>不動</b>。</p>
+          <p><b><code>.actions-grid 1px</code></b> 是用 line color 模擬 divider 的特殊用法,結構需要,不動。</p>
+          <p><b><code>.donate-card mobile gap: 40px → 32px</code></b>:手機端兩欄 stack 後,40px 顯得鬆;字升級後 stack 之間留 32 即可保持節奏。</p>
+          <p>其他 grid 不變。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAT 05 -->
+    <div class="cat">
+      <div class="cat-head">
+        <div class="n">05</div>
+        <h3>Line-height <span class="en">Vertical rhythm within text</span></h3>
+        <div class="verdict red">必動(系統化)</div>
+      </div>
+      <div class="cat-body">
+        <span class="label">現況散度</span>
+        <p>全站 line-height 用了 <b>14 個不同值</b>:1, 1.2, 1.25, 1.3, 1.35, 1.4, 1.45, 1.5, 1.6, 1.7, 1.75, 1.8, 1.85, 1.9, 1.95, 2, 2.05。其中內文相關層級(body / quote / description)就用了 5 種(1.75 / 1.8 / 1.85 / 1.9 / 1.95 / 2 / 2.05)—— 散亂、無系統。</p>
+
+        <div class="judgment">
+          <span class="label">判斷</span>
+          <p><b>收斂到 6 個值</b>(不必引入 token,直接統一硬編碼):</p>
+          <table>
+            <tr><th>值</th><th>用途</th><th>取代</th></tr>
+            <tr><td class="new-val">1</td><td class="reason">icons / 按鈕 / 純字數字</td><td class="now-val">維持</td></tr>
+            <tr><td class="new-val">1.25</td><td class="reason">Display (hero / display-l)</td><td class="now-val">取代 1.2 / 1.25 / 1.35</td></tr>
+            <tr><td class="new-val">1.35</td><td class="reason">Section / display (中型標題)</td><td class="now-val">取代 1.3 / 1.4</td></tr>
+            <tr><td class="new-val">1.5</td><td class="reason">卡片標題 / Title</td><td class="now-val">取代 1.45 / 1.5</td></tr>
+            <tr><td class="new-val">1.75</td><td class="reason">meta、eyebrow、緊湊內文</td><td class="now-val">取代 1.6 / 1.7 / 1.75 / 1.8</td></tr>
+            <tr><td class="new-val">1.85</td><td class="reason">內文、引言、長段落 ⭐</td><td class="now-val">取代 1.85 / 1.9 / 1.95 / 2 / 2.05</td></tr>
+          </table>
+          <p style="margin-top:14px"><b>關鍵</b>:18px 內文配 1.85 已是 33.3px 行距,完全足夠中老年閱讀。把 1.95、2、2.05 散在不同地方收回 1.85 —— 不會讓字變難讀,反而視覺更整齊。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAT 06 -->
+    <div class="cat">
+      <div class="cat-head">
+        <div class="n">06</div>
+        <h3>中文身上的 letter-spacing <span class="en">Latin-borrowed letter-spacing on Chinese text</span></h3>
+        <div class="verdict red">必動</div>
+      </div>
+      <div class="cat-body">
+        <span class="label">問題核心</span>
+        <p>上一輪已把<b>中文大標</b>的 letter-spacing 從 2–3px 收到 1–1.5px。但<b>內文、導覽、footer、按鈕</b>的中文身上,仍有 .5–3px 的 letter-spacing —— 這是「給拉丁字 / 中英混排」的設計慣性,中文獨自承擔反而<b>變散</b>。</p>
+
+        <span class="label">現況清單</span>
+        <table>
+          <tr><th>元件</th><th>letter-spacing</th><th>內容性質</th></tr>
+          <tr><td class="sel">.app-nav a (導覽)</td><td class="now-val">1px</td><td class="reason">純中文「公益行動」</td></tr>
+          <tr><td class="sel">.footer-address</td><td class="now-val">1.5px</td><td class="reason">純中文地址</td></tr>
+          <tr><td class="sel">.footer-contact</td><td class="now-val">.5px</td><td class="reason">中文 + 拉丁混</td></tr>
+          <tr><td class="sel">.footer-links a</td><td class="now-val">1px</td><td class="reason">純中文</td></tr>
+          <tr><td class="sel">.unit-body .description</td><td class="now-val">.5px</td><td class="reason">純中文長段</td></tr>
+          <tr><td class="sel">.spot-text .quote</td><td class="now-val">.5px</td><td class="reason">中文引言</td></tr>
+          <tr><td class="sel">.drawer-nav a</td><td class="now-val">3px</td><td class="reason">中文 mobile drawer</td></tr>
+          <tr><td class="sel">.donate-method p</td><td class="now-val">隱含 (本文有 .5px)</td><td class="reason">中文捐款說明</td></tr>
+          <tr><td class="sel">.donate-method h3</td><td class="now-val">1.5px</td><td class="reason">中文標題</td></tr>
+        </table>
+
+        <div class="judgment">
+          <span class="label">判斷</span>
+          <p><b>中文內文、導覽、footer 文字 → 全部 letter-spacing 歸 0</b>。中文字方塊本身就有等寬間隔,加 letter-spacing 會讓字方塊之間有額外縫,看起來「散」、「不實心」,中老年掃讀更累。</p>
+          <p><b>保留 letter-spacing 的場合</b>:</p>
+          <ul style="margin-top:8px;padding-left:18px;list-style:disc">
+            <li style="margin-bottom:6px;font-size:14px;line-height:1.85">IBM Plex Serif uppercase 拉丁 eyebrow / label(英文需要 ls)</li>
+            <li style="margin-bottom:6px;font-size:14px;line-height:1.85">按鈕中文(略保留 1px 強化「可點擊」的呼吸感)</li>
+            <li style="margin-bottom:6px;font-size:14px;line-height:1.85">大標題(已處理過,維持 1–1.5px)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAT 07 -->
+    <div class="cat">
+      <div class="cat-head">
+        <div class="n">07</div>
+        <h3>Container 寬度 <span class="en">Max-widths & readable column widths</span></h3>
+        <div class="verdict green">不動</div>
+      </div>
+      <div class="cat-body">
+        <span class="label">現況</span>
+        <table>
+          <tr><th>元件</th><th>max-width</th><th>用途</th></tr>
+          <tr><td class="sel">.wrap (主容器)</td><td class="now-val">1320px</td><td class="reason">全頁主寬</td></tr>
+          <tr><td class="sel">.banner-slide .h-title</td><td class="now-val">760px</td><td class="reason">banner 標題</td></tr>
+          <tr><td class="sel">.body-col (dimuer)</td><td class="now-val">760px</td><td class="reason">故事內文段落欄寬</td></tr>
+          <tr><td class="sel">.lede (docs)</td><td class="now-val">680px</td><td class="reason">引言</td></tr>
+          <tr><td class="sel">.page-hero .lead</td><td class="now-val">640px</td><td class="reason">page hero 副文</td></tr>
+          <tr><td class="sel">.donate-text p</td><td class="now-val">480px</td><td class="reason">捐款主文</td></tr>
+        </table>
+
+        <div class="judgment">
+          <span class="label">判斷</span>
+          <p>18px 中文內文在 760px 欄寬 = 約 <b>42 字 / 行</b>。理論最佳是 35–40 字,42 略寬但仍在舒適範圍。閱讀體驗 OK。</p>
+          <p>640、680、480px 都符合中文閱讀區間,且各有功能(引言短、主文長、捐款 CTA 緊湊)。</p>
+          <p><b>結論:不動 container 寬度</b>。本來就規劃合理,字級升級沒有突破舒適區。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAT 08 -->
+    <div class="cat">
+      <div class="cat-head">
+        <div class="n">08</div>
+        <h3>Header / Footer 內邊 <span class="en">Page chrome padding</span></h3>
+        <div class="verdict amber">部分動</div>
+      </div>
+      <div class="cat-body">
+        <span class="label">現況</span>
+        <table>
+          <tr><th>元件</th><th>padding</th><th>備註</th></tr>
+          <tr><td class="sel">.app-header .row</td><td class="now-val">18px 40px</td><td class="reason">頂部 logo + utility</td></tr>
+          <tr><td class="sel">.app-nav a</td><td class="now-val">padding: 0 22px(欄高 由 line-height 撐)</td><td class="reason">主導覽 link</td></tr>
+          <tr><td class="sel">.app-footer</td><td class="now-val">64px 40px 36px</td><td class="reason">footer 外緣</td></tr>
+          <tr><td class="sel">.footer-giro</td><td class="now-val">12px 24px</td><td class="reason">劃撥帳號區</td></tr>
+          <tr><td class="sel">.sub-nav .item (dimuer)</td><td class="now-val">0 26px</td><td class="reason">分類 sub-nav</td></tr>
+        </table>
+
+        <div class="judgment">
+          <span class="label">判斷</span>
+          <p><b><code>.footer-giro 12/24</code> 已在 CAT 02 標必動</b> → 16/28。</p>
+          <p><b><code>.app-header .row 18/40</code></b>:標準 logo 高度 ~40px,18px 縱向 padding = header 總高 76px。字升級後仍合理。<b>不動</b>。</p>
+          <p><b><code>.app-footer 64/40/36</code></b>:字升級後 footer 各區塊內容變高,外緣 padding 仍能容納。<b>不動</b>。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAT 09 -->
+    <div class="cat">
+      <div class="cat-head">
+        <div class="n">09</div>
+        <h3>Mobile overrides <span class="en">Responsive spacing reductions</span></h3>
+        <div class="verdict green">不動</div>
+      </div>
+      <div class="cat-body">
+        <span class="label">現況</span>
+        <p>各檔在 <code>@media (max-width:1100px)</code>、<code>(max-width:720px)</code> 內把 padding / gap / hero 都縮小。例如 <code>section.section</code> 桌機 80px → 手機 56px,<code>.page-hero</code> 桌機 72/40 → 手機 44/28,<code>.donate-card</code> 桌機 64 → 手機 32/24。</p>
+
+        <div class="judgment">
+          <span class="label">判斷</span>
+          <p>字升級後手機端 18px 內文仍在 32–48px 左右 padding 內,內容沒有貼邊。手機 padding 已經接近<b>最小可行</b>,再縮會壓迫,再放會變相對小,目前是 sweet spot。</p>
+          <p><b>例外</b>:CAT 02 提到的<code>.act .body 22/24/28</code> 必動,連動影響 mobile 行為 —— 但 mobile 沒有獨立 override,跟著桌機新值即可。</p>
+          <p>其餘 mobile override <b>全部維持</b>。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= 4. RED LIST ========================= -->
+  <section class="s">
+    <div class="s-head">
+      <div class="nm">§ 04</div>
+      <h2>必動清單 (RED)</h2>
+      <p class="desc">10 places. Already showing visible strain after the type bump.</p>
+    </div>
+
+    <p class="lede">字級升級後比例已明顯失衡的 10 處,逐項列出。共動 3 個檔案。</p>
+
+    <div class="tally">
+      <div class="t red">
+        <div class="v">10</div>
+        <div class="k">必動 RED</div>
+        <div class="nt">字級升後已明顯失衡。</div>
+      </div>
+      <div class="t amber">
+        <div class="v">6</div>
+        <div class="k">建議 AMBER</div>
+        <div class="nt">商榷空間,可整批做或留到下版。</div>
+      </div>
+      <div class="t green">
+        <div class="v">23+</div>
+        <div class="k">不動 GREEN</div>
+        <div class="nt">審計過,刻意保留。</div>
+      </div>
+    </div>
+
+    <div class="action-list red-list">
+      <div class="action-row"><div class="ix">R1</div><div class="sel">.section-head padding-bottom<small>主標 38px 與分隔線距離</small></div><div class="from">18px</div><div class="to">28px</div></div>
+      <div class="action-row"><div class="ix">R2</div><div class="sel">.section-head .titles gap<small>eyebrow 15px → 主標 38px</small></div><div class="from">8px</div><div class="to">12px</div></div>
+      <div class="action-row"><div class="ix">R3</div><div class="sel">.page-hero padding (actions)<small>hero 48px 上下呼吸</small></div><div class="from">72px 0 40px</div><div class="to">80px 0 56px</div></div>
+      <div class="action-row"><div class="ix">R4</div><div class="sel">.act .body padding<small>公益行動卡內距</small></div><div class="from">22px 24px 28px</div><div class="to">28px 28px 32px</div></div>
+      <div class="action-row"><div class="ix">R5</div><div class="sel">.act h4 / .article-card .title margin-bottom<small>卡標 → 內文</small></div><div class="from">10px</div><div class="to">14px</div></div>
+      <div class="action-row"><div class="ix">R6</div><div class="sel">.act .cat / .article-card .meta margin-bottom<small>標籤 → 卡標</small></div><div class="from">10px</div><div class="to">12px</div></div>
+      <div class="action-row"><div class="ix">R7</div><div class="sel">.donate-text h2 margin-bottom<small>主標 48px → 副文</small></div><div class="from">20px</div><div class="to">28px</div></div>
+      <div class="action-row"><div class="ix">R8</div><div class="sel">.footer-giro padding<small>14px label + 17px cell</small></div><div class="from">12px 24px</div><div class="to">16px 28px</div></div>
+      <div class="action-row"><div class="ix">R9</div><div class="sel">Line-height 全站收斂<small>14 種 → 6 個固定值(見 § 03 CAT 05)</small></div><div class="from">散亂</div><div class="to">1 / 1.25 / 1.35 / 1.5 / 1.75 / 1.85</div></div>
+      <div class="action-row"><div class="ix">R10</div><div class="sel">中文 letter-spacing 歸零<small>導覽 / footer / 內文 / quote / drawer-nav(見 § 03 CAT 06)</small></div><div class="from">.5–3px</div><div class="to">0</div></div>
+    </div>
+
+    <p class="body" style="margin-top:24px"><b>影響範圍:</b>R1–R8 動 <b>10 個選擇器</b>,line-height 收斂約 <b>15 個選擇器</b>,letter-spacing 歸零約 <b>10 個選擇器</b>。三個檔案同步動。</p>
+  </section>
+
+  <!-- ========================= 5. AMBER LIST ========================= -->
+  <section class="s">
+    <div class="s-head">
+      <div class="nm">§ 05</div>
+      <h2>建議調整 (AMBER)</h2>
+      <p class="desc">Worth fixing — but could ship in a second pass.</p>
+    </div>
+
+    <p class="lede">字級升級後沒有「明顯壞掉」,但動了會更好的 6 處。可以跟 RED 一起出,也可以等 RED 落地後看效果再決定。</p>
+
+    <div class="action-list amber-list">
+      <div class="action-row"><div class="ix">A1</div><div class="sel">.units-section padding-top<small>對齊其他 section 80px 節奏</small></div><div class="from">60px</div><div class="to">72px</div></div>
+      <div class="action-row"><div class="ix">A2</div><div class="sel">.spot-text h2 margin-bottom<small>main + quote 之間,主標升級後可考慮</small></div><div class="from">18px</div><div class="to">22px</div></div>
+      <div class="action-row"><div class="ix">A3</div><div class="sel">.donate-card mobile gap<small>stack 後兩欄太鬆</small></div><div class="from">40px</div><div class="to">32px</div></div>
+      <div class="action-row"><div class="ix">A4</div><div class="sel">.banner-slide .h-title padding<small>hero 升到 44px 後下方可微加</small></div><div class="from">48px 56px</div><div class="to">52px 56px</div></div>
+      <div class="action-row"><div class="ix">A5</div><div class="sel">.app-nav a padding<small>主導覽更舒適點擊區</small></div><div class="from">0 22px</div><div class="to">0 24px</div></div>
+      <div class="action-row"><div class="ix">A6</div><div class="sel">.act .arr margin-top<small>內文 17px 後接 cta arrow,可呼吸</small></div><div class="from">14px</div><div class="to">18px</div></div>
+    </div>
+  </section>
+
+  <!-- ========================= 6. GREEN LIST ========================= -->
+  <section class="s">
+    <div class="s-head">
+      <div class="nm">§ 06</div>
+      <h2>刻意不動 (GREEN)</h2>
+      <p class="desc">Looked at, decided to keep. Editorial density is intentional.</p>
+    </div>
+
+    <p class="lede">以下 spacing 仔細看過,刻意保留 —— 字級升級後仍合理,或調整反而破壞「編輯密度」感。逐一列舉,讓你看出我「沒漏掉」哪些。</p>
+
+    <ul style="border-top:1px solid var(--line);margin-top:24px;list-style:none">
+      <li style="display:grid;grid-template-columns:1fr 2fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.7">
+        <code style="background:none;padding:0;color:var(--ink);font-weight:600;font-size:13px">section.section padding: 80px 0</code>
+        <span>section 之間 80px 上下 = 4.4× 內文,落在編輯型網站的典型 64–96px 區間,不該再加。</span>
+      </li>
+      <li style="display:grid;grid-template-columns:1fr 2fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.7">
+        <code style="background:none;padding:0;color:var(--ink);font-weight:600;font-size:13px">.donate-band padding: 80px 0</code>
+        <span>跟主 section 同節奏,合理。</span>
+      </li>
+      <li style="display:grid;grid-template-columns:1fr 2fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.7">
+        <code style="background:none;padding:0;color:var(--ink);font-weight:600;font-size:13px">.banner-slider padding: 32px 0 0</code>
+        <span>banner 與 header 之間留 32px,字升級後仍夠。</span>
+      </li>
+      <li style="display:grid;grid-template-columns:1fr 2fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.7">
+        <code style="background:none;padding:0;color:var(--ink);font-weight:600;font-size:13px">.donate-card padding: 64px</code>
+        <span>主視覺面板,字升級後 h2 48px,padding 64px 仍有 16px 緩衝。再加會稀釋密度。</span>
+      </li>
+      <li style="display:grid;grid-template-columns:1fr 2fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.7">
+        <code style="background:none;padding:0;color:var(--ink);font-weight:600;font-size:13px">.spot-text padding: 48px 56px</code>
+        <span>本就為大字級設計的 panel,字升級後仍對。</span>
+      </li>
+      <li style="display:grid;grid-template-columns:1fr 2fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.7">
+        <code style="background:none;padding:0;color:var(--ink);font-weight:600;font-size:13px">.article-grid gap: 56px row × 32px col</code>
+        <span>row 56 給 9:5 大圖呼吸,col 32 維持卡片密度。報導型網站典型。</span>
+      </li>
+      <li style="display:grid;grid-template-columns:1fr 2fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.7">
+        <code style="background:none;padding:0;color:var(--ink);font-weight:600;font-size:13px">.actions-grid gap: 1px</code>
+        <span>用 line color 模擬 divider 的特殊結構,不是 spacing,不動。</span>
+      </li>
+      <li style="display:grid;grid-template-columns:1fr 2fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.7">
+        <code style="background:none;padding:0;color:var(--ink);font-weight:600;font-size:13px">.unit-row gap: 64px (桌機)</code>
+        <span>故事列圖文之間 64px,字升級後仍是清晰分隔。</span>
+      </li>
+      <li style="display:grid;grid-template-columns:1fr 2fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.7">
+        <code style="background:none;padding:0;color:var(--ink);font-weight:600;font-size:13px">所有 container max-width</code>
+        <span>1320 / 760 / 680 / 640 / 480 各有功能,字升級後欄寬比例仍在中文舒適區。</span>
+      </li>
+      <li style="display:grid;grid-template-columns:1fr 2fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.7">
+        <code style="background:none;padding:0;color:var(--ink);font-weight:600;font-size:13px">所有 mobile override padding</code>
+        <span>已是最小可行,字升級後仍能容納內容,再縮會貼邊,再放會變相對小。Sweet spot。</span>
+      </li>
+      <li style="display:grid;grid-template-columns:1fr 2fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.7">
+        <code style="background:none;padding:0;color:var(--ink);font-weight:600;font-size:13px">.app-header .row padding: 18px 40px</code>
+        <span>header 高度由 logo 撐,字升級不影響。</span>
+      </li>
+      <li style="display:grid;grid-template-columns:1fr 2fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.7">
+        <code style="background:none;padding:0;color:var(--ink);font-weight:600;font-size:13px">.app-footer padding: 64px 40px 36px</code>
+        <span>外緣 padding 仍能容納升級後的內容群高度。</span>
+      </li>
+      <li style="display:grid;grid-template-columns:1fr 2fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.7">
+        <code style="background:none;padding:0;color:var(--ink);font-weight:600;font-size:13px">eyebrow / Serif label 的 letter-spacing</code>
+        <span>2.5–3.5px 對拉丁 uppercase 必要,中文部分共用,但因為字數短(2–6 字)影響有限,保留。</span>
+      </li>
+    </ul>
+    <p class="body" style="margin-top:24px;color:var(--muted)"><i>(尚有 10+ 處 spacing 用了「對的初始值」,字升級後仍對,不另列。)</i></p>
+  </section>
+
+  <!-- ========================= 7. ROLLOUT ========================= -->
+  <section class="s">
+    <div class="s-head">
+      <div class="nm">§ 07</div>
+      <h2>實作參考</h2>
+      <p class="desc">What the diff looks like — just the most-touched values.</p>
+    </div>
+
+    <p class="lede"><span style="background:var(--amber-bg);color:var(--amber);padding:3px 10px;font-family:'IBM Plex Serif',serif;font-size:11px;letter-spacing:2px;font-weight:700;margin-right:8px">SUPERSEDED</span>原版主張 <b>不引入 token</b>。經討論後改採方向 (c) —— 全套 token + refactor。下方節錄保留原始 hardcoded diff 思路作為參考。實際落地版本見 § 09。</p>
+
+    <div class="code-block">
+<span class="c">/* ============ § 04 RED — index.html + actions.html + actions-dimuer.html ============ */</span>
+
+<span class="c">/* R1 + R2: section-head */</span>
+<span class="k">.section-head</span> {
+  <span class="strike">padding-bottom:18px;</span>      <span class="br">padding-bottom:28px;</span>
+  <span class="strike">margin-bottom:48px;</span>      margin-bottom:48px;  <span class="c">/* unchanged */</span>
+}
+<span class="k">.section-head .titles</span> {
+  <span class="strike">gap:8px;</span>                 <span class="br">gap:12px;</span>
+}
+
+<span class="c">/* R3: page-hero (actions) */</span>
+<span class="k">.page-hero</span> {
+  <span class="strike">padding:72px 0 40px;</span>     <span class="br">padding:80px 0 56px;</span>
+}
+
+<span class="c">/* R4: .act .body */</span>
+<span class="k">.act .body</span> {
+  <span class="strike">padding:22px 24px 28px;</span> <span class="br">padding:28px 28px 32px;</span>
+}
+
+<span class="c">/* R5 + R6: title / meta margin-bottom */</span>
+<span class="k">.act h4</span>,
+<span class="k">.article-card .title</span> {
+  <span class="strike">margin-bottom:10px;</span>      <span class="br">margin-bottom:14px;</span>
+}
+<span class="k">.act .cat</span>,
+<span class="k">.article-card .meta</span> {
+  <span class="strike">margin-bottom:10px;</span>      <span class="br">margin-bottom:12px;</span>
+}
+
+<span class="c">/* R7: donate-text h2 */</span>
+<span class="k">.donate-text h2</span> {
+  <span class="strike">margin-bottom:20px;</span>      <span class="br">margin-bottom:28px;</span>
+}
+
+<span class="c">/* R8: footer-giro */</span>
+<span class="k">.footer-giro</span> {
+  <span class="strike">padding:12px 24px;</span>       <span class="br">padding:16px 28px;</span>
+}
+
+<span class="c">/* R9: line-height 收斂(範例) */</span>
+<span class="k">.story-body p</span>           { <span class="strike">line-height:2.05;</span> <span class="br">line-height:1.85;</span> }
+<span class="k">.donate-method p</span>        { <span class="strike">line-height:1.75;</span> <span class="br">line-height:1.75;</span> } <span class="c">/* unchanged */</span>
+<span class="k">.spot-text .quote</span>       { <span class="strike">line-height:1.85;</span> <span class="br">line-height:1.85;</span> } <span class="c">/* unchanged */</span>
+<span class="k">.page-hero .lead</span>        { <span class="strike">line-height:1.85;</span> <span class="br">line-height:1.85;</span> } <span class="c">/* unchanged */</span>
+<span class="k">.story-body .sec-h</span>      { line-height:1.35; } <span class="c">/* tighten section */</span>
+<span class="k">.story-title .story-sub</span> { <span class="strike">line-height:1.65;</span> <span class="br">line-height:1.75;</span> }
+
+<span class="c">/* R10: 中文 letter-spacing 歸零 */</span>
+<span class="k">.app-nav a</span>             { <span class="strike">letter-spacing:1px;</span>    <span class="br">letter-spacing:0;</span> }
+<span class="k">.footer-address</span>        { <span class="strike">letter-spacing:1.5px;</span>  <span class="br">letter-spacing:0;</span> }
+<span class="k">.footer-contact</span>        { <span class="strike">letter-spacing:.5px;</span>   <span class="br">letter-spacing:0;</span> }
+<span class="k">.footer-links a</span>        { <span class="strike">letter-spacing:1px;</span>    <span class="br">letter-spacing:0;</span> }
+<span class="k">.unit-body .description</span> { <span class="strike">letter-spacing:.5px;</span>   <span class="br">letter-spacing:0;</span> }
+<span class="k">.spot-text .quote</span>      { <span class="strike">letter-spacing:.5px;</span>   <span class="br">letter-spacing:0;</span> }
+<span class="k">.donate-method p</span>       { letter-spacing:0; } <span class="c">/* 已是 0 */</span>
+<span class="k">.drawer-nav a</span>          { <span class="strike">letter-spacing:3px;</span>    <span class="br">letter-spacing:1px;</span> }
+    </div>
+  </section>
+
+  <!-- ========================= 8. OPEN QUESTIONS ========================= -->
+  <section class="s">
+    <div class="s-head">
+      <div class="nm">§ 08</div>
+      <h2>下一步討論</h2>
+      <p class="desc">Questions before we ship.</p>
+    </div>
+
+    <p class="lede">這份審計刻意「保守」 —— 字級升級後我傾向<b>動小、看效果、再決定要不要動多</b>。落地前有幾個方向要對齊。</p>
+
+    <div class="qs">
+      <div class="q">
+        <div class="n">01</div>
+        <div class="body-q">
+          <h4>RED + AMBER 一起出,還是只先做 RED?</h4>
+          <p>RED 10 處是「字升後明顯失衡」必動。AMBER 6 處是「動了會更好,但不動也不壞」。建議:<b>RED 全做,AMBER 看完 RED 效果再決定</b>。如果想一次到位,16 處一起出也可。</p>
+        </div>
+      </div>
+      <div class="q">
+        <div class="n">02</div>
+        <div class="body-q">
+          <h4>line-height 收斂要做到多徹底?</h4>
+          <p>把 14 個值收到 6 個是大改動。徹底做 = 15+ 個選擇器逐個改。輕度做 = 只動有「明顯太鬆」的(例如 line-height:2.05 → 1.85)。前者更乾淨,後者風險低。傾向徹底做,因為 14 種太多。</p>
+        </div>
+      </div>
+      <div class="q">
+        <div class="n">03</div>
+        <div class="body-q">
+          <h4>中文 letter-spacing 歸零會不會「太密」?</h4>
+          <p>不會。中文字方塊本身就有等寬距離,letter-spacing 加在中文上等於「字塊之間又多一個縫」,讓字看起來散、不實心。歸零是回到中文「該長的樣子」 —— NYT 中文版、報導者、端傳媒中文內文都是 ls 0。</p>
+        </div>
+      </div>
+      <div class="q">
+        <div class="n">04</div>
+        <div class="body-q">
+          <h4>要不要趁這次也檢查色彩 / 對比?</h4>
+          <p>中老年友善的下一塊是「對比度」。muted 色 <code>#9A9A9A</code> 配白底是 2.8:1,低於 WCAG AA 4.5:1。如果同意,下一份審計可以做色彩。本次不涉及。</p>
+        </div>
+      </div>
+      <div class="q">
+        <div class="n">05</div>
+        <div class="body-q">
+          <h4>導入方式:全站一次換 vs 分檔測試?</h4>
+          <p>跟 typography 一樣建議<b>三檔同時換</b>。基金會官網規模小,「混搭期」反而怪。週末完成。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= 9. ACTUAL ROLLOUT (option C) ========================= -->
+  <section class="s">
+    <div class="s-head">
+      <div class="nm">§ 09</div>
+      <h2>實際落地 — Option C(token + 全 refactor)</h2>
+      <p class="desc">After discussion: we shipped the full token system, not the hardcoded patch.</p>
+    </div>
+
+    <p class="lede">原始提案主張「不引入 token,直接硬編碼修補」。在跟你討論「3 頁理由是否足夠」後,改採 <b>方向 C — 全套 spacing token + refactor 所有 padding/margin/gap</b>。下方記錄實際落地內容。</p>
+
+    <h3 style="font-size:18px;font-weight:700;margin:32px 0 12px;letter-spacing:.5px">A. Spacing token scale(10 階)</h3>
+    <p class="body">三檔 <code>:root</code> 同步加入。8-step 為基礎,中間有半階給卡內距精細控制。</p>
+
+    <div class="code-block">
+<span class="c">/* :root —— index.html / actions.html / actions-dimuer.html 共用 */</span>
+<span class="br">--sp-1</span>:  <span class="v">4px</span>;    <span class="c">/* icon gap, tight inline */</span>
+<span class="br">--sp-2</span>:  <span class="v">8px</span>;    <span class="c">/* inline meta gap */</span>
+<span class="br">--sp-3</span>:  <span class="v">12px</span>;   <span class="c">/* small margin-bottom */</span>
+<span class="br">--sp-4</span>:  <span class="v">16px</span>;   <span class="c">/* default text gap, header padding */</span>
+<span class="br">--sp-5</span>:  <span class="v">24px</span>;   <span class="c">/* card body padding, section gap */</span>
+<span class="br">--sp-6</span>:  <span class="v">32px</span>;   <span class="c">/* card outer gap, mid section */</span>
+<span class="br">--sp-7</span>:  <span class="v">48px</span>;   <span class="c">/* panel padding, hero internal */</span>
+<span class="br">--sp-8</span>:  <span class="v">64px</span>;   <span class="c">/* large panel, donate card */</span>
+<span class="br">--sp-9</span>:  <span class="v">80px</span>;   <span class="c">/* section vertical padding */</span>
+<span class="br">--sp-10</span>: <span class="v">96px</span>;   <span class="c">/* generous breathing */</span>
+    </div>
+
+    <h3 style="font-size:18px;font-weight:700;margin:36px 0 12px;letter-spacing:.5px">B. 強制對齊的值(rounding)</h3>
+    <p class="body">原本散落的非標準值,全部對齊到 token。視覺微變但結構乾淨。</p>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin:8px 0">
+      <tr><th style="font-family:'IBM Plex Serif',serif;text-align:left;padding:8px 0;border-bottom:1px solid var(--line);letter-spacing:1px;font-size:11px;text-transform:uppercase;color:var(--muted)">原值</th><th style="font-family:'IBM Plex Serif',serif;text-align:left;padding:8px 0;border-bottom:1px solid var(--line);letter-spacing:1px;font-size:11px;text-transform:uppercase;color:var(--muted)">→ Token</th><th style="font-family:'IBM Plex Serif',serif;text-align:left;padding:8px 0;border-bottom:1px solid var(--line);letter-spacing:1px;font-size:11px;text-transform:uppercase;color:var(--muted)">變動</th></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif">14px</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif;color:var(--brand);font-weight:700">--sp-4 (16px)</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-size:12px;color:var(--body)">+2(gap、卡縫微擴)</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif">18px</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif;color:var(--brand);font-weight:700">--sp-4 (16px)</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-size:12px;color:var(--body)">-2(微縮)</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif">20px</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif;color:var(--brand);font-weight:700">--sp-4 (16px)</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-size:12px;color:var(--body)">-4(mobile gutter)</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif">22px</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif;color:var(--brand);font-weight:700">--sp-5 (24px)</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-size:12px;color:var(--body)">+2</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif">28px</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif;color:var(--brand);font-weight:700">--sp-6 (32px)</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-size:12px;color:var(--body)">+4(也對齊 RED .act .body)</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif">36px</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif;color:var(--brand);font-weight:700">--sp-6 (32px)</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-size:12px;color:var(--body)">-4</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif">40px</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif;color:var(--brand);font-weight:700">--sp-7 (48px)</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-size:12px;color:var(--body)">+8</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif">56px</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif;color:var(--brand);font-weight:700">--sp-7 (48px)</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-size:12px;color:var(--body)">-8(banner/spot padding)</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif">60px</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif;color:var(--brand);font-weight:700">--sp-8 (64px)</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-size:12px;color:var(--body)">+4</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif">72px</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif;color:var(--brand);font-weight:700">--sp-9 (80px)</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-size:12px;color:var(--body)">+8(RED .page-hero)</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif">120px</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif;color:var(--brand);font-weight:700">--sp-10 (96px)</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-size:12px;color:var(--body)">-24(empty-state placeholder)</td></tr>
+    </table>
+
+    <h3 style="font-size:18px;font-weight:700;margin:36px 0 12px;letter-spacing:.5px">C. RED 之手動 override(token 自動對齊不足以表達意圖)</h3>
+    <p class="body">部分 RED 選擇器透過 bulk tokenize 後仍需手動升一階,以充分表達字級升級後該有的呼吸感。</p>
+
+    <div class="code-block">
+<span class="k">.section-head</span> { padding-bottom: <span class="strike">var(--sp-4)</span> <span class="br">var(--sp-6)</span>; }    <span class="c">/* 18→16→32 */</span>
+<span class="k">.section-head .titles</span> { gap: <span class="strike">var(--sp-2)</span> <span class="br">var(--sp-3)</span>; }   <span class="c">/* 8→8→12 */</span>
+<span class="k">.act .body</span> { padding: <span class="strike">var(--sp-5) var(--sp-5) var(--sp-6)</span> <span class="br">var(--sp-6)</span>; }
+<span class="k">.act h4</span>, <span class="k">.article-card .title</span> { margin-bottom: <span class="strike">var(--sp-3)</span> <span class="br">var(--sp-4)</span>; }
+<span class="k">.donate-text h2</span> { margin-bottom: <span class="strike">var(--sp-4)</span> <span class="br">var(--sp-6)</span>; }
+<span class="k">.footer-giro</span> { padding: <span class="strike">var(--sp-3) var(--sp-5)</span> <span class="br">var(--sp-4) var(--sp-6)</span>; }
+<span class="k">.spot-text h2</span> { margin-bottom: <span class="strike">var(--sp-4)</span> <span class="br">var(--sp-5)</span>; }  <span class="c">/* AMBER A2 */</span>
+    </div>
+
+    <h3 style="font-size:18px;font-weight:700;margin:36px 0 12px;letter-spacing:.5px">D. Line-height 收斂(14 個 → 6 個)</h3>
+    <p class="body">徹底版執行。整檔以 perl 批次替換,然後手動修一處 1.65。</p>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin:8px 0">
+      <tr><th style="font-family:'IBM Plex Serif',serif;text-align:left;padding:8px 0;border-bottom:1px solid var(--line);letter-spacing:1px;font-size:11px;text-transform:uppercase;color:var(--muted)">最終 6 個值</th><th style="font-family:'IBM Plex Serif',serif;text-align:left;padding:8px 0;border-bottom:1px solid var(--line);letter-spacing:1px;font-size:11px;text-transform:uppercase;color:var(--muted)">用途</th><th style="font-family:'IBM Plex Serif',serif;text-align:left;padding:8px 0;border-bottom:1px solid var(--line);letter-spacing:1px;font-size:11px;text-transform:uppercase;color:var(--muted)">取代</th></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif;color:var(--brand);font-weight:700">1</td><td style="padding:8px 0;border-bottom:1px dotted var(--line)">icon / 純數字 / 按鈕</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-size:12px;color:var(--muted)">維持</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif;color:var(--brand);font-weight:700">1.25</td><td style="padding:8px 0;border-bottom:1px dotted var(--line)">Display / Hero</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-size:12px;color:var(--muted)">1.2, 1.25</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif;color:var(--brand);font-weight:700">1.35</td><td style="padding:8px 0;border-bottom:1px dotted var(--line)">Section / 中型標題</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-size:12px;color:var(--muted)">1.3, 1.35, 1.4</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif;color:var(--brand);font-weight:700">1.5</td><td style="padding:8px 0;border-bottom:1px dotted var(--line)">卡片標題</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-size:12px;color:var(--muted)">1.45, 1.5</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif;color:var(--brand);font-weight:700">1.75</td><td style="padding:8px 0;border-bottom:1px dotted var(--line)">meta / nav / 緊湊內文</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-size:12px;color:var(--muted)">1.6, 1.65, 1.7, 1.75, 1.8</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-family:'IBM Plex Serif',serif;color:var(--brand);font-weight:700">1.85</td><td style="padding:8px 0;border-bottom:1px dotted var(--line)">內文 / 引言 ⭐</td><td style="padding:8px 0;border-bottom:1px dotted var(--line);font-size:12px;color:var(--muted)">1.85, 1.9, 1.95, 2, 2.05</td></tr>
+    </table>
+
+    <h3 style="font-size:18px;font-weight:700;margin:36px 0 12px;letter-spacing:.5px">E. 中文 letter-spacing 歸零(完成)</h3>
+    <p class="body">以下選擇器的 ls 歸 0(原本 .3–1.5px):<code>.app-nav a</code>、<code>.footer-address</code>、<code>.footer-contact</code>、<code>.footer-contact a</code>、<code>.footer-links a</code>、<code>.spot-text .quote</code>、<code>.unit-body .quote</code>、<code>.unit-body .excerpt</code>、<code>.empty-state p</code>、<code>.page-hero .lead</code>、<code>ul.keywords</code>、<code>.gallery figcaption</code>、<code>.story-body p</code>、<code>.story-title .story-sub</code>(mobile)。</p>
+    <p class="body"><code>.drawer-nav a</code> 從 3px → 1px(mobile drawer 是大字 + 視覺空間夠,留少量 ls)。Serif uppercase 標籤、按鈕、跨語言 footer giro cell 全部維持原 ls。</p>
+
+    <h3 style="font-size:18px;font-weight:700;margin:36px 0 12px;letter-spacing:.5px">F. 落地統計</h3>
+    <div class="tally">
+      <div class="t red">
+        <div class="v">3</div>
+        <div class="k">檔同步</div>
+        <div class="nt">index / actions / actions-dimuer 一致 token 體系。</div>
+      </div>
+      <div class="t amber">
+        <div class="v">~150</div>
+        <div class="k">處 spacing 重寫</div>
+        <div class="nt">padding / margin / gap 全 token 化。</div>
+      </div>
+      <div class="t green">
+        <div class="v">~30</div>
+        <div class="k">處 typography 收斂</div>
+        <div class="nt">line-height + letter-spacing。</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:18px;font-weight:700;margin:36px 0 12px;letter-spacing:.5px">G. 保留的硬編碼例外</h3>
+    <ul style="padding-left:18px;list-style:disc;font-size:14px;line-height:1.85">
+      <li style="margin-bottom:6px"><code>gap:1px</code> in <code>.actions-grid</code> — 用 line color 模擬 divider,非 spacing</li>
+      <li style="margin-bottom:6px"><code>padding-bottom:3px</code> in <code>.article-action</code> — border-bottom 文字下緣微調,非 spacing</li>
+      <li style="margin-bottom:6px"><code>padding:88px</code> / <code>120px</code> 等少數 hero-like 區塊已重新對齊到 sp-10 (96)</li>
+    </ul>
+
+    <h3 style="font-size:18px;font-weight:700;margin:36px 0 12px;letter-spacing:.5px">H. 已知 trade-off</h3>
+    <p class="body">部分 RED 落地值與最初提案略有出入(token 對齊優先):</p>
+    <ul style="padding-left:18px;list-style:disc;font-size:14px;line-height:1.85">
+      <li style="margin-bottom:6px"><b>R3 .page-hero padding-bottom</b>:RED 提 40→56,實際 40→48(sp-7)。少 8px 但仍 +8 from 現況</li>
+      <li style="margin-bottom:6px"><b>R4 .act .body padding</b>:RED 提 22/24/28→28/28/32,實際 22/24/28→32/32/32(全 sp-6)。略大於 RED 提案,呼吸更足</li>
+      <li style="margin-bottom:6px"><b>R7 .donate-text h2 margin-bottom</b>:RED 提 20→28,實際 20→32(sp-6)。略大</li>
+      <li style="margin-bottom:6px"><b>R8 .footer-giro padding</b>:RED 提 12/24→16/28,實際 12/24→16/32(sp-4 sp-6)。x 軸略大</li>
+    </ul>
+    <p class="body" style="color:var(--muted);font-style:italic">結論:全部 trade-off 皆為「等於或略大於」RED 提案,沒有不足。</p>
+  </section>
+
+  <footer class="doc-footer">
+    <div class="l">Audit 2026-05-21 · Option C(token + refactor) shipped 2026-05-21.</div>
+    <div class="r">LHF · Spacing v2.0 — tokenized</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

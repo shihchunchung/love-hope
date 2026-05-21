@@ -1,0 +1,45 @@
+/* ============================================================
+   Love Hope Foundation — design tokens
+   Single source of truth for colors, typography, spacing.
+   Referenced by index.html, actions.html, actions-dimuer.html.
+   ============================================================ */
+
+:root{
+  /* ===== Brand & neutrals ===== */
+  --brand:#8C0A0A;
+  --brand-dark:#5C0606;
+  --brand-tint:#FBEEEE;
+  --ink:#111111;
+  --body:#333333;
+  --muted:#9A9A9A;
+  --line:#E8E8E8;
+  --line-soft:#F4F4F4;
+  --bg:#ffffff;
+
+  /* ===== Typography tokens ===== */
+  --t-caption:13px;
+  --t-eyebrow:13px;
+  --t-meta:14px;
+  --t-body-s:17px;
+  --t-body:18px;
+  --t-body-l:20px;
+  --t-title-s:19px;
+  --t-title:22px;
+  --t-title-l:28px;
+  --t-section:clamp(28px, 3.4vw, 38px);
+  --t-display:clamp(30px, 3.6vw, 44px);
+  --t-display-l:clamp(34px, 4.6vw, 48px);
+  --t-hero:clamp(40px, 5.6vw, 64px);   /* only used on dimuer story page (reserved) */
+
+  /* ===== Spacing tokens ===== */
+  --sp-1:4px;
+  --sp-2:8px;
+  --sp-3:12px;
+  --sp-4:16px;
+  --sp-5:24px;
+  --sp-6:32px;
+  --sp-7:48px;
+  --sp-8:64px;
+  --sp-9:80px;
+  --sp-10:96px;
+}
