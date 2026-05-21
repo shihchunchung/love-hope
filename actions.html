@@ -187,53 +187,21 @@
     margin:0 0 22px;letter-spacing:.3px;
   }
 
-  /* keywords：關鍵字標籤（CMS 上的 keywords[]）— 現況（unit 4-7 維持此式樣作對照） */
-  .unit-body .keywords{
-    font-family:"IBM Plex Serif",sans-serif;
-    font-size:var(--t-meta);color:var(--muted);
-    letter-spacing:1.5px;margin:0 0 20px;
-  }
-
-  /* ===== KEYWORDS · 三個 CMS 化變體（套用於 unit 1,2,3 對照）=====
-     現況問題：純字串 div、無語意、不可篩選、與 meta 視覺撞
-     共通改進：<ul><li> 語意化、後台 max 4 個、未來可掛 tag 索引頁
-     hover 視覺一律由 .unit-row 觸發（避免外層 <a> 嵌套） */
-
-  /* 暫用對照標籤（正式上線移除） */
-  .kw-anno{
-    display:inline-block;
-    font-family:"IBM Plex Serif",sans-serif;
-    font-size:11px;letter-spacing:2px;text-transform:uppercase;
-    color:var(--brand);background:var(--brand-tint);
-    padding:3px 10px;margin-bottom:10px;font-weight:600;
-  }
-  ul.keywords{list-style:none;padding:0;margin:0 0 20px}
-
-  /* --- A · 隔點純文字（語意化）— 改 sans-serif 中文與 meta 拉開層級 --- */
-  ul.keywords--a{
-    display:flex;flex-wrap:wrap;
-    font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
-    font-size:var(--t-meta);color:var(--muted);letter-spacing:.5px;
-    transition:color .2s;
-  }
-  .keywords--a li{display:inline-flex;align-items:center}
-  .keywords--a li:not(:last-child)::after{content:"·";margin:0 10px;color:#CFCFCF}
-  .unit-row:hover .keywords--a{color:var(--body)}
-
-  /* --- B · 文字 tag（# 風格）— 襯線 # 標 + sans 中文 --- */
-  ul.keywords--b{
+  /* keywords：CMS keywords[] — # tag 樣式，襯線 # + sans 中文 */
+  ul.keywords{
+    list-style:none;padding:0;margin:0 0 20px;
     display:flex;flex-wrap:wrap;gap:18px;
     font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
     font-size:var(--t-meta);color:var(--muted);letter-spacing:.5px;
     transition:color .2s;
   }
-  .keywords--b li{display:inline-flex;align-items:baseline;gap:4px}
-  .keywords--b li::before{
+  .keywords li{display:inline-flex;align-items:baseline;gap:4px}
+  .keywords li::before{
     content:"#";font-family:"IBM Plex Serif",sans-serif;
     color:#C9B9B9;font-weight:500;transition:color .2s;
   }
-  .unit-row:hover .keywords--b{color:var(--brand)}
-  .unit-row:hover .keywords--b li::before{color:var(--brand)}
+  .unit-row:hover .keywords{color:var(--brand)}
+  .unit-row:hover .keywords li::before{color:var(--brand)}
 
 
   /* CTA：抄 index .article-action */
@@ -533,8 +501,7 @@
           <h3 class="title">愛唱歌的學校 — 地磨兒國小</h3>
           <p class="quote">不求奪標，只求開心</p>
           <p class="excerpt">2007 年的毛毛細雨中，洪蘭老師帶薛伯輝基金會拜訪地磨兒國小。孩子們的歌聲深深感動了董事長，開啟了長達 16 年的合唱團、圖書館與教師合唱團陪伴。</p>
-          <span class="kw-anno">方案 A · 隔點純文字（語意化）</span>
-          <ul class="keywords keywords--a">
+          <ul class="keywords">
             <li>合唱團</li>
             <li>愛的圖書館</li>
             <li>教師合唱團</li>
@@ -552,8 +519,7 @@
           <h3 class="title">一心推動融合教育 — 伯利恆文教基金會</h3>
           <p class="quote">用愛讓慢飛的天使，譜出屬於他們的未來</p>
           <p class="excerpt">由甘惠忠神父於 1997 年創立。在慈母幼兒園推行融合教育，讓 110 位一般幼童與慢飛天使一起成長，承辦溪北區嬰幼兒中心與早期療育服務。</p>
-          <span class="kw-anno">方案 B · 文字 tag（# 風格）</span>
-          <ul class="keywords keywords--b">
+          <ul class="keywords">
             <li>融合教育</li>
             <li>早期療育</li>
             <li>嬰幼兒服務</li>
@@ -571,7 +537,11 @@
           <h3 class="title">牽起社區的手 — 天主教德蘭啟智中心</h3>
           <p class="quote">當我的心尋著你的心，當我的手牽上你的手</p>
           <p class="excerpt">位於台南玉井山區，提供日間托育、到宅療育與社區家園服務。2011 年贈車後拓展至新住民家庭與山區長者照護，目前經常性服務約 150 人。</p>
-          <div class="keywords">校車 · 新住民計畫 · 長者照顧</div>
+          <ul class="keywords">
+            <li>校車</li>
+            <li>新住民計畫</li>
+            <li>長者照顧</li>
+          </ul>
           <span class="article-action">繼續閱讀 →</span>
         </div>
       </a>
@@ -585,7 +555,11 @@
           <h3 class="title">慢飛天使一生的守護 — 天主教蘆葦啟智中心</h3>
           <p class="quote">壓傷的蘆葦，祂不折斷；將熄的燈芯，祂不吹滅</p>
           <p class="excerpt">由邱修女集合八千多人愛心建成，提供 0-6 歲早期療育與 16 歲以上心智障礙日間照顧、就業支持，機構內 150 人、社區另 264 人。</p>
-          <div class="keywords">特殊教育 · 身障日照 · 獎學金</div>
+          <ul class="keywords">
+            <li>特殊教育</li>
+            <li>身障日照</li>
+            <li>獎學金</li>
+          </ul>
           <span class="article-action">繼續閱讀 →</span>
         </div>
       </a>
@@ -599,7 +573,11 @@
           <h3 class="title">漫漫漁光 — 天主教瑞復益智中心</h3>
           <p class="quote">有人的地方就有愛，有愛的地方就有希望</p>
           <p class="excerpt">漁光里被稱為最美的特教中心，服務遲緩嬰幼兒與多重障礙人士，日托 220 多人、社區另約 300 人。2014 年贈送煎餅行動車，讓青年走上街頭、開創職能。</p>
-          <div class="keywords">多元職能 · 煎餅行動車 · 社區回饋</div>
+          <ul class="keywords">
+            <li>多元職能</li>
+            <li>煎餅行動車</li>
+            <li>社區回饋</li>
+          </ul>
           <span class="article-action">繼續閱讀 →</span>
         </div>
       </a>
@@ -613,7 +591,11 @@
           <h3 class="title">扎根菊島、用愛照顧 — 天主教惠民啟智中心</h3>
           <p class="quote">凡你們對我這些最小兄弟中的一個所做的，就是對我做的</p>
           <p class="excerpt">澎湖唯一的啟智中心，服務擴展至七美、望安等三級離島。鑼鼓班與喜樂屋讓天使找到舞台與工作機會，2014 年加入音樂與藝術治療服務。</p>
-          <div class="keywords">離島早療 · 音樂治療 · 喜樂屋</div>
+          <ul class="keywords">
+            <li>離島早療</li>
+            <li>音樂治療</li>
+            <li>喜樂屋</li>
+          </ul>
           <span class="article-action">繼續閱讀 →</span>
         </div>
       </a>
@@ -627,7 +609,11 @@
           <h3 class="title">泰山奇蹟之家 — 天主教主顧修女會</h3>
           <p class="quote">播下善的種子，讓愛無限延伸</p>
           <p class="excerpt">由主顧修女會經營、位於泰山的長者關懷據點，提供日照、送餐與居家照顧。基金會協助長輩美學教育課程，2013 年加裝採光雨棚守護長輩安全。</p>
-          <div class="keywords">長者關懷 · 日間照顧 · 美學教育</div>
+          <ul class="keywords">
+            <li>長者關懷</li>
+            <li>日間照顧</li>
+            <li>美學教育</li>
+          </ul>
           <span class="article-action">繼續閱讀 →</span>
         </div>
       </a>
