@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>公益行動｜偏鄉美學教育 — 薛伯輝基金會</title>
+<title>愛唱歌的學校 — 地磨兒國小｜偏鄉美學教育｜薛伯輝基金會</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,6 @@
     --line-soft:#F4F4F4;
     --bg:#ffffff;
 
-    /* ===== Typography tokens ===== */
     --t-caption:12px;
     --t-eyebrow:12px;
     --t-meta:13px;
@@ -32,6 +31,7 @@
     --t-section:clamp(26px, 3.2vw, 34px);
     --t-display:clamp(24px, 3.6vw, 38px);
     --t-display-l:clamp(28px, 4.4vw, 42px);
+    --t-hero:clamp(34px, 5.2vw, 56px);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{font-size:var(--t-body);font-feature-settings:"palt";background:var(--bg);color:var(--body);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
@@ -40,12 +40,12 @@
   a{color:inherit;text-decoration:none}
   img{display:block;max-width:100%}
   button{cursor:pointer;font-family:inherit;border:none;background:none;color:inherit}
-  ul{list-style:none}
+  ul,ol{list-style:none}
 
   .lat{font-family:"IBM Plex Serif",sans-serif}
   .wrap{max-width:1320px;margin:0 auto;padding:0 40px}
 
-  /* ============ HEADER ============ */
+  /* ============ HEADER（沿用 actions.html）============ */
   .app-header{background:#fff;position:sticky;top:0;z-index:50}
   .app-header .row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px 40px;gap:32px}
   .app-header .left{display:flex;align-items:center;gap:18px}
@@ -68,26 +68,12 @@
   .app-nav a{display:flex;align-items:center;padding:0 22px;font-size:var(--t-body);font-weight:500;color:var(--ink);position:relative;letter-spacing:1px;transition:color .15s,background .2s}
   .app-nav a:not(:last-child)::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:14px;background:var(--line)}
   .app-nav a:hover,.app-nav a.active{color:var(--brand)}
-
   .app-nav a.is-external{color:#6B4423;gap:6px}
   .app-nav a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-body-s);font-weight:400;display:inline-block;transition:transform .25s,opacity .2s;line-height:1;opacity:.6}
   .app-nav a.is-external:hover{color:#6B4423;background:#F4EDE0}
   .app-nav a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
 
-  .app-footer .footer-links a.is-external{color:#D9B889;display:inline-flex;align-items:center;gap:5px}
-  .app-footer .footer-links a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);font-weight:400;opacity:.6;transition:transform .25s,opacity .2s;line-height:1}
-  .app-footer .footer-links a.is-external:hover{color:#E5C99D}
-  .app-footer .footer-links a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
-  .drawer-nav a.is-external{color:#F4EDE0;gap:10px}
-  .drawer-nav a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-body);font-weight:400;opacity:.7;transition:transform .25s,opacity .2s;line-height:1;margin-left:auto;padding-right:6px}
-  .drawer-nav a.is-external:hover .ext-mark,.drawer-nav a.is-external.active .ext-mark{transform:translate(2px,-2px);opacity:1}
-
-  /* ============ SUB-NAV (A · 鏡像主 nav) ============
-     - 字級 12px / 字距 1.5px（明確比主 nav 14/2 小一級）
-     - 上下 padding 13/19，無自身底邊（主 nav 品牌色底邊即為上邊）
-     - sticky top 140 = header 86 + 主 nav 54
-     - active：品牌色字 + 1px 細短橫（緊貼文字下方）
-     - todo：#BBB 淺灰字 */
+  /* ============ SUB-NAV（沿用 actions.html，但 detail 上用 <a> 連回 list）============ */
   .sub-nav{
     background:#fff;
     position:sticky;
@@ -108,15 +94,11 @@
     line-height:1.6;
     cursor:pointer;
     transition:color .18s;
-    background:none;
-    border:0;
-    font-family:inherit;
   }
   .sub-nav .item:hover{color:var(--brand)}
   .sub-nav .item.todo{color:#BBB}
   .sub-nav .item.todo:hover{color:#999}
   .sub-nav .item.on{color:var(--brand);font-weight:700}
-  /* active 短橫：複用 .subtitle::before 24×1px 記憶點，置中 */
   .sub-nav .item.on::after{
     content:"";
     position:absolute;
@@ -128,125 +110,130 @@
     background:var(--brand);
   }
 
-  /* ============ PAGE HERO ============ */
-  .page-hero{padding:72px 0 40px;background:#fff;border-bottom:1px solid var(--ink)}
-  .page-hero .wrap{max-width:1320px;margin:0 auto;padding:0 40px}
-  .page-hero h1{font-size:var(--t-display-l);letter-spacing:3px;font-weight:700;color:var(--ink);line-height:1.25;margin-bottom:18px}
-  .page-hero .lead{font-size:var(--t-title-s);color:var(--body);line-height:2;max-width:640px;letter-spacing:.5px}
+  /* ============ STORY HERO（純圖片、無文字 overlay）============ */
+  .story-hero{position:relative;height:clamp(360px,52vh,560px);background:#0f0f0f;overflow:hidden}
+  .story-hero .hero-image{position:absolute;inset:0;background:linear-gradient(135deg,#2a1818 0%,#1a0a0a 50%,#0a0202 100%)}
 
-  /* ============ UNITS LIST (editorial 列表：圖左文右、大圖) ============ */
-  .units-section{padding:60px 0 96px;background:#fff}
-  [hidden]{display:none !important}
-  .unit-list{display:flex;flex-direction:column}
-  .unit-row{
-    display:grid;grid-template-columns:720px 1fr;gap:64px;
-    padding:20px;margin:0 -20px 4px;
-    align-items:center;transition:background .2s;
+  /* ============ STORY TITLE（hero 下方的白底標題區）============ */
+  .story-title{padding:56px 0 40px;background:#fff;border-bottom:1px solid var(--line-soft)}
+  .story-title .back-link{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:"IBM Plex Serif",sans-serif;
+    font-size:var(--t-meta);letter-spacing:2.5px;
+    color:var(--muted);font-weight:600;
+    margin-bottom:32px;transition:color .2s;
   }
-  .unit-row:last-child{margin-bottom:0}
-  .unit-row:hover{background:var(--line-soft)}
+  .story-title .back-link .arrow{
+    font-weight:400;line-height:1;display:inline-block;
+    transition:transform .25s;
+  }
+  .story-title .back-link:hover{color:var(--brand)}
+  .story-title .back-link:hover .arrow{transform:translateX(-3px)}
+  .story-title .meta{
+    display:inline-flex;align-items:center;gap:14px;flex-wrap:wrap;
+    font-family:"IBM Plex Serif",sans-serif;
+    font-size:var(--t-meta);letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--muted);font-weight:600;margin-bottom:20px;
+  }
+  .story-title .meta .loc{color:var(--brand);font-weight:700;letter-spacing:2.5px}
+  .story-title .meta .sep{opacity:.4}
+  .story-title .story-h1{
+    font-size:var(--t-display-l);letter-spacing:3px;line-height:1.25;
+    color:var(--ink);margin-bottom:24px;font-weight:700;max-width:880px;
+  }
+  .story-title .story-sub{
+    font-size:var(--t-title-l);line-height:1.65;
+    color:var(--body);letter-spacing:1.5px;
+    padding-left:18px;border-left:2px solid var(--brand);
+    max-width:640px;
+  }
 
-  .unit-image{
-    aspect-ratio:16/9;overflow:hidden;position:relative;
+  /* ============ STORY BODY（編輯閱讀區）============ */
+  .story-body{padding:60px 0 88px;background:#fff}
+  .story-body .body-col{max-width:760px}
+  .story-body p{
+    font-size:var(--t-body-l);line-height:2.05;color:var(--body);
+    margin-bottom:1.4em;letter-spacing:.3px;
+  }
+  .story-body .sec-h{
+    font-size:var(--t-title);letter-spacing:2px;color:var(--ink);
+    margin:56px 0 28px;display:flex;align-items:center;gap:16px;font-weight:700;
+  }
+  .story-body .sec-h::before{
+    content:"";width:32px;height:1px;background:var(--brand);flex-shrink:0;
+  }
+
+  /* ============ SECTION HEAD（共用：Gallery 等用）============ */
+  .section-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:1px solid var(--ink);padding-bottom:18px;margin-bottom:48px;
+  }
+  .section-head .titles{display:flex;flex-direction:column;gap:8px}
+  .section-head .subtitle{
+    font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);
+    letter-spacing:3.5px;color:var(--brand);font-weight:600;
+    text-transform:uppercase;display:flex;align-items:center;gap:14px;
+  }
+  .section-head .subtitle::before{content:"";width:24px;height:1px;background:var(--brand)}
+  .section-head h2.section-title{
+    font-size:var(--t-section);font-weight:700;color:var(--ink);
+    letter-spacing:2.5px;line-height:1.2;
+  }
+  .section-head .head-note{
+    font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);
+    color:var(--muted);letter-spacing:1.5px;
+  }
+
+  /* ============ GALLERY ============ */
+  .gallery-section{padding:96px 0;background:var(--line-soft);border-top:1px solid var(--line-soft)}
+  .gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:48px 32px}
+  .gallery-grid figure{display:block}
+  .gallery-grid .g-image{
+    aspect-ratio:4/3;margin-bottom:16px;position:relative;overflow:hidden;
     background:linear-gradient(135deg,#2a2a2a,#0f0f0f);
   }
-  .unit-image .img-fill{
-    position:absolute;inset:0;background:inherit;
-    transition:transform .55s cubic-bezier(.25,.46,.45,.94);
-  }
-  .unit-row:hover .unit-image .img-fill{transform:scale(1.05)}
-  .unit-image::after{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.45) 100%);
-    pointer-events:none;z-index:1;
-  }
-  .unit-body{min-width:0;padding-right:24px}
-  /* 地點：上提到標題之前當 eyebrow */
-  .unit-body .meta{
-    display:flex;gap:12px;font-family:"IBM Plex Serif",sans-serif;
-    font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;
-    color:var(--muted);margin-bottom:14px;
-  }
-  .unit-body .meta .cat{color:var(--brand);font-weight:700}
-
-  .unit-body .title{font-size:var(--t-title-l);line-height:1.45;font-weight:700;letter-spacing:1.5px;
-    color:var(--ink);margin-bottom:18px;transition:color .2s;
-  }
-  .unit-row:hover .title{color:var(--brand)}
-
-  /* 引文：拿掉 italic、2px 品牌色左 border + 16px 內縮，完整顯示不 clamp */
-  .unit-body .quote{
-    font-size:var(--t-title-s);line-height:1.95;color:var(--body);
-    margin:0 0 22px;border-left:2px solid var(--brand);padding-left:16px;
-    letter-spacing:.5px;
+  /* 各圖不同 placeholder 色 */
+  .gallery-grid figure:nth-child(1) .g-image{background:linear-gradient(135deg,#3a1818,#0a0202)}
+  .gallery-grid figure:nth-child(2) .g-image{background:linear-gradient(135deg,#a89070,#604530)}
+  .gallery-grid figure:nth-child(3) .g-image{background:linear-gradient(135deg,#5a3a2a,#1a1010)}
+  .gallery-grid figure:nth-child(4) .g-image{background:linear-gradient(135deg,#3a3a3a,#0a0a0a)}
+  .gallery-grid figcaption{
+    font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);
+    color:var(--muted);letter-spacing:.5px;line-height:1.85;max-width:90%;
   }
 
-  /* 導讀 excerpt：60–80 字摘要，CMS 欄位 */
-  .unit-body .excerpt{
-    font-size:var(--t-body-s);line-height:1.95;color:var(--body);
-    margin:0 0 22px;letter-spacing:.3px;
+  /* ============ UNIT NAV（前後單位 + 回列表）============ */
+  .unit-nav{padding:64px 0 80px;background:#fff;border-top:1px solid var(--line)}
+  .unit-nav-row{
+    display:grid;grid-template-columns:1fr auto 1fr;gap:32px;align-items:center;
   }
+  .unit-nav .nav-link{
+    display:flex;flex-direction:column;gap:8px;
+    transition:color .2s;color:var(--muted);
+  }
+  .unit-nav .nav-link .nav-eyebrow{
+    font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);
+    letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);
+    font-weight:600;display:flex;align-items:center;gap:8px;
+  }
+  .unit-nav .nav-link .nav-name{
+    font-size:var(--t-title-s);color:var(--ink);
+    letter-spacing:1.5px;font-weight:500;
+  }
+  .unit-nav .prev{align-items:flex-start}
+  .unit-nav .next{align-items:flex-end;text-align:right}
+  .unit-nav .nav-link:hover .nav-name{color:var(--brand)}
+  .unit-nav .nav-link:hover .nav-eyebrow{color:var(--brand)}
+  .unit-nav .back{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:13px 24px;border:1px solid var(--ink);color:var(--ink);
+    font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);
+    letter-spacing:2.5px;text-transform:uppercase;font-weight:600;
+    transition:all .2s;
+  }
+  .unit-nav .back:hover{background:var(--ink);color:#fff}
 
-  /* keywords：CMS keywords[] — # tag 樣式，襯線 # + sans 中文 */
-  ul.keywords{
-    list-style:none;padding:0;margin:0 0 20px;
-    display:flex;flex-wrap:wrap;gap:18px;
-    font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
-    font-size:var(--t-meta);color:var(--muted);letter-spacing:.5px;
-    transition:color .2s;
-  }
-  .keywords li{display:inline-flex;align-items:baseline;gap:4px}
-  .keywords li::before{
-    content:"#";font-family:"IBM Plex Serif",sans-serif;
-    color:#C9B9B9;font-weight:500;transition:color .2s;
-  }
-  .unit-row:hover .keywords{color:var(--brand)}
-  .unit-row:hover .keywords li::before{color:var(--brand)}
-
-
-  /* CTA：抄 index .article-action */
-  .unit-body .article-action{
-    font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;
-    text-transform:uppercase;color:var(--ink);font-weight:600;
-    border-bottom:1px solid var(--ink);padding-bottom:3px;
-    display:inline-block;transition:.2s;
-  }
-  .unit-row:hover .article-action{color:var(--brand);border-color:var(--brand)}
-
-  /* ============ EMPTY STATE (籌備中分類) ============ */
-  .empty-state{
-    padding:120px 0;
-    text-align:center;
-    color:var(--muted);
-  }
-  .empty-state .e-lat{
-    font-family:"IBM Plex Serif",sans-serif;
-    font-size:var(--t-caption);
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:var(--muted);
-    margin-bottom:14px;
-    display:flex;align-items:center;justify-content:center;gap:14px;
-  }
-  .empty-state .e-lat::before,.empty-state .e-lat::after{
-    content:"";width:24px;height:1px;background:var(--line);
-  }
-  .empty-state h3{font-size:var(--t-title-l); letter-spacing:1.5px;
-    color:#999;
-    font-weight:500;
-    margin-bottom:14px;
-    line-height:1.5;
-  }
-  .empty-state p{
-    font-size:var(--t-body);
-    color:var(--muted);
-    line-height:1.9;
-    max-width:480px;
-    margin:0 auto;
-    letter-spacing:.5px;
-  }
-
-  /* ============ DONATE CARD (contained, not full-bleed) ============ */
+  /* ============ DONATE BAND（沿用 actions.html）============ */
   .donate-band{padding:80px 0;background:#fff}
   .donate-card{background:var(--brand);color:#fff;border-radius:4px;padding:64px;display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center;position:relative;overflow:hidden}
   .donate-card::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 85% 15%,rgba(0,0,0,.18) 0,transparent 60%);pointer-events:none}
@@ -270,7 +257,7 @@
   .donate-method p{font-size:var(--t-body-s);color:rgba(255,255,255,.78);line-height:1.75;margin:0}
   .donate-method b{color:#fff;font-weight:700}
 
-  /* ============ FOOTER (深色基座 + 法人聯絡資訊) ============ */
+  /* ============ FOOTER（沿用 actions.html）============ */
   .app-footer{background:var(--ink);color:#fff;padding:64px 40px 36px;text-align:center;border-top:none}
   .app-footer .footer-info{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:42px}
   .app-footer .footer-address{font-size:var(--t-body-s);color:#fff;letter-spacing:1.5px;font-weight:500}
@@ -287,6 +274,10 @@
   .app-footer .footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:22px}
   .app-footer .footer-links a{font-size:var(--t-body-s);color:#fff;letter-spacing:1px;font-weight:500;transition:color .2s}
   .app-footer .footer-links a:hover{color:#f4d8d8}
+  .app-footer .footer-links a.is-external{color:#D9B889;display:inline-flex;align-items:center;gap:5px}
+  .app-footer .footer-links a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);font-weight:400;opacity:.6;transition:transform .25s,opacity .2s;line-height:1}
+  .app-footer .footer-links a.is-external:hover{color:#E5C99D}
+  .app-footer .footer-links a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
   .app-footer .footer-copy{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;color:rgba(255,255,255,.4);text-transform:uppercase}
 
   /* ============ BACK TO TOP ============ */
@@ -294,21 +285,11 @@
   .cd-top.on{opacity:1;transform:translateY(0);pointer-events:auto}
   .cd-top:hover{background:var(--brand)}
 
-  /* ============ COOKIE ============ */
-  .cookie{position:fixed;bottom:24px;left:24px;right:24px;max-width:680px;margin:0 auto;background:#fff;padding:18px 24px;display:flex;align-items:center;gap:24px;font-size:var(--t-body-s);color:var(--body);box-shadow:0 12px 40px rgba(0,0,0,.12);border-top:3px solid var(--brand);z-index:99}
-  .cookie .ctext{flex:1;line-height:1.7}
-  .cookie .ctext strong{display:block;color:var(--ink);font-size:var(--t-body);margin-bottom:4px;letter-spacing:1px;font-weight:700}
-  .cookie .ctext a{color:var(--brand);text-decoration:underline;text-underline-offset:2px}
-  .cookie button{padding:9px 18px;font-size:var(--t-meta);letter-spacing:2px;background:var(--brand);color:#fff;font-weight:500}
-  .cookie button:hover{background:var(--brand-dark)}
-
-  /* ============ MOBILE DRAWER ============ */
+  /* ============ MOBILE DRAWER（沿用 actions.html）============ */
   .nav-toggle{display:none;width:36px;height:36px;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;cursor:pointer;background:transparent;border:0}
   .nav-toggle span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .25s}
-
   .drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .3s;z-index:90}
   .drawer-backdrop.on{opacity:1;pointer-events:auto}
-
   .drawer{position:fixed;top:0;right:0;bottom:0;width:min(380px,88vw);background:var(--brand);color:#fff;z-index:91;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow-y:auto;box-shadow:-12px 0 40px rgba(0,0,0,.18)}
   .drawer.on{transform:translateX(0)}
   .drawer-head{display:flex;justify-content:space-between;align-items:center;padding:22px 28px;border-bottom:1px solid rgba(255,255,255,.12)}
@@ -323,62 +304,9 @@
   .drawer-nav a::before{content:"";width:0;height:1px;background:#fff;transition:width .25s}
   .drawer-nav a:hover,.drawer-nav a.active{padding-left:6px}
   .drawer-nav a:hover::before,.drawer-nav a.active::before{width:24px}
-
-  /* drawer 二級展開（公益行動 5 個子項） */
-  .drawer-group{border-bottom:1px solid rgba(255,255,255,.1)}
-  .drawer-group > .drawer-group-head{
-    position:relative;
-    padding:16px 0;
-    font-size:var(--t-body-l);
-    color:#fff;
-    letter-spacing:3px;
-    font-weight:500;
-    transition:padding .25s;
-    display:flex;align-items:center;gap:14px;
-    cursor:pointer;
-    background:none;border:0;width:100%;text-align:left;
-    font-family:inherit;
-  }
-  .drawer-group > .drawer-group-head::before{content:"";width:0;height:1px;background:#fff;transition:width .25s}
-  .drawer-group.on > .drawer-group-head,
-  .drawer-group > .drawer-group-head:hover{padding-left:6px}
-  .drawer-group.on > .drawer-group-head::before,
-  .drawer-group > .drawer-group-head:hover::before{width:24px}
-  .drawer-group > .drawer-group-head .label{flex:1}
-  .drawer-group > .drawer-group-head .caret{
-    font-family:"IBM Plex Serif",sans-serif;
-    font-size:var(--t-body);
-    opacity:.7;
-    transition:transform .25s;
-  }
-  .drawer-group.on > .drawer-group-head .caret{transform:rotate(180deg)}
-  .drawer-group .drawer-group-body{
-    max-height:0;
-    overflow:hidden;
-    transition:max-height .3s ease;
-  }
-  .drawer-group.on .drawer-group-body{max-height:360px}
-  .drawer-group .drawer-group-body .sub-item{
-    display:block;
-    padding:12px 0 12px 18px;
-    font-size:var(--t-body);
-    color:rgba(255,255,255,.88);
-    letter-spacing:2px;
-    border:0;
-    background:none;
-    text-align:left;
-    width:100%;
-    font-family:inherit;
-    cursor:pointer;
-    border-bottom:1px solid rgba(255,255,255,.06);
-    transition:color .2s,padding .2s;
-  }
-  .drawer-group .drawer-group-body .sub-item:last-child{border-bottom:none}
-  .drawer-group .drawer-group-body .sub-item:hover{color:#fff;padding-left:24px}
-  .drawer-group .drawer-group-body .sub-item.on{color:#fff;font-weight:700}
-  .drawer-group .drawer-group-body .sub-item.todo{color:rgba(255,255,255,.5)}
-  .drawer-group .drawer-group-body .sub-item.todo:hover{color:rgba(255,255,255,.75)}
-
+  .drawer-nav a.is-external{color:#F4EDE0;gap:10px}
+  .drawer-nav a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-body);font-weight:400;opacity:.7;transition:transform .25s,opacity .2s;line-height:1;margin-left:auto;padding-right:6px}
+  .drawer-nav a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
   .drawer-foot{padding:22px 28px 32px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;gap:18px}
   .drawer-donate{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px;background:#fff;color:var(--brand);font-size:var(--t-body-s);letter-spacing:2.5px;font-weight:600;transition:background .2s}
   .drawer-donate::after{content:"→"}
@@ -389,16 +317,14 @@
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 1100px){
-    .sub-nav{padding:11px 20px 16px}
+    .sub-nav{padding:11px 20px 16px;position:static}
     .sub-nav .item{padding:0 18px;letter-spacing:1px;font-size:11.5px}
-    /* 短橫 1100 維持置中、寬度略縮 */
     .sub-nav .item.on::after{width:20px}
     .app-nav,.app-header{position:static}
-    .sub-nav{position:static}
-    .page-hero{padding:56px 0 36px}
-    .unit-row{grid-template-columns:480px 1fr;gap:40px;padding:16px;margin:0 -16px 3px}
-    .unit-body{padding-right:0}
-    .unit-body .title{font-size:var(--t-title);letter-spacing:1.5px}
+    .story-hero{height:clamp(320px,45vh,460px)}
+    .story-title{padding:48px 0 32px}
+    .story-title .story-h1{letter-spacing:2px}
+    .story-body{padding:48px 0 72px}
     .donate-card{grid-template-columns:1fr;gap:40px;padding:48px;border-radius:4px}
     .donate-text{padding:0}
     .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:32px}
@@ -408,23 +334,28 @@
     .header-socials,.header-utility{display:none}
     .donate-btn{padding:9px 14px;font-size:var(--t-meta);letter-spacing:2px}
     .app-nav{display:none}
-    .sub-nav{display:none}    /* 手機不顯示 sub-nav，收進 drawer */
+    .sub-nav{display:none}
     .nav-toggle{display:flex}
     .wrap{padding:0 20px}
-    .page-hero{padding:44px 0 28px}
-    .page-hero .lead{font-size:var(--t-body);line-height:1.9}
-    .units-section{padding:36px 0 64px}
-    .unit-row{grid-template-columns:1fr;gap:20px;padding:14px;margin:0 -14px 3px}
-    .unit-body .title{font-size:var(--t-title);letter-spacing:1px;margin-bottom:14px}
-    .unit-body .quote{font-size:var(--t-body);line-height:1.85;margin-bottom:18px}
+    .story-hero{height:280px}
+    .story-title .back-link{margin-bottom:24px;font-size:11.5px;letter-spacing:1.5px}
+    .story-title{padding:36px 0 24px}
+    .story-title .story-h1{font-size:var(--t-display);letter-spacing:1.5px}
+    .story-title .story-sub{font-size:var(--t-title-s);letter-spacing:.5px}
+    .story-body{padding:36px 0 60px}
+    .story-body p{font-size:var(--t-body);line-height:1.95}
+    .story-body .sec-h{margin:36px 0 20px;font-size:var(--t-title-s)}
+    .gallery-section{padding:60px 0}
+    .gallery-grid{grid-template-columns:1fr;gap:36px}
+    .unit-nav{padding:48px 0 60px}
+    .unit-nav-row{grid-template-columns:1fr;gap:24px;text-align:center}
+    .unit-nav .prev,.unit-nav .next{align-items:center;text-align:center}
+    .unit-nav .back{justify-self:center}
     .donate-band{padding:40px 20px}
     .donate-card{padding:32px 24px;gap:28px}
-    .donate-text{padding:48px 20px}
     .donate-stats{padding-top:24px}
-    .empty-state{padding:80px 20px}
-    .empty-state h3{font-size:var(--t-title);letter-spacing:3px}
+    .section-head{flex-direction:column;align-items:flex-start;gap:14px}
   }
-
 </style>
 </head>
 <body>
@@ -468,164 +399,100 @@
   </div>
 </nav>
 
-<!-- ===== SUB-NAV (5 公益行動分類) ===== -->
-<nav class="sub-nav" id="subNav" aria-label="公益行動分類">
-  <button type="button" class="item todo" data-cat="transition">特殊生轉銜職場</button>
-  <button type="button" class="item todo" data-cat="outsider">自閉症原生藝術</button>
-  <button type="button" class="item on"   data-cat="aesthetic">偏鄉美學教育</button>
-  <button type="button" class="item todo" data-cat="music">奧兒福音樂會</button>
-  <button type="button" class="item todo" data-cat="elder">老人服務</button>
-  <button type="button" class="item todo" data-cat="other">其他</button>
+<!-- ===== SUB-NAV (5 公益行動分類) — detail 上用 <a> 連回 actions.html#cat ===== -->
+<nav class="sub-nav" aria-label="公益行動分類">
+  <a class="item todo" href="actions.html#transition">特殊生轉銜職場</a>
+  <a class="item todo" href="actions.html#outsider">自閉症原生藝術</a>
+  <a class="item on"   href="actions.html#aesthetic">偏鄉美學教育</a>
+  <a class="item todo" href="actions.html#music">奧兒福音樂會</a>
+  <a class="item todo" href="actions.html#elder">老人服務</a>
+  <a class="item todo" href="actions.html#other">其他</a>
 </nav>
 
-<!-- ===== PAGE HERO ===== -->
-<section class="page-hero" id="pageHero">
+<!-- ===== STORY HERO（純圖、無文字）===== -->
+<section class="story-hero">
+  <div class="hero-image"></div>
+</section>
+
+<!-- ===== STORY TITLE（hero 下方的白底標題區 + 整合 back link）===== -->
+<section class="story-title">
   <div class="wrap">
-    <h1 id="heroTitle">陪伴力量大</h1>
-    <p class="lead" id="heroLead">以生活美學與文化底蘊，打造共學、共享、共榮的特別教育環境。</p>
+    <a class="back-link" href="actions.html#aesthetic">
+      <span class="arrow">←</span>
+      <span>返回 偏鄉美學教育</span>
+    </a>
+    <div class="meta">
+      <span class="loc">屏東三地門</span>
+      <span class="sep">·</span>
+      <span>Since 2007</span>
+    </div>
+    <h1 class="story-h1">愛唱歌的學校 — 地磨兒國小</h1>
+    <p class="story-sub">不求奪標，只求開心</p>
   </div>
 </section>
 
-<!-- ===== UNITS LIST (偏鄉美學教育 · 7 合作單位) ===== -->
-<section class="units-section" id="contentArea">
+<!-- ===== STORY BODY（內文，逐字使用原始資料）===== -->
+<article class="story-body">
   <div class="wrap">
+    <div class="body-col">
+      <p>2007 年，下著毛毛細雨的日子，洪蘭老師帶領著薛伯輝基金會董事長薛昌煥與執行長鍾蔡瑛珠，來到了位於屏東縣三地門的地磨兒國小，小朋友以優美的歌聲歡迎著大家，基金會董事長薛昌煥深深被孩子的歌聲感動著，希望三地國小成為愛唱歌的學校，這開啟了薛伯輝基金會多年來鼓勵孩子發揮所長與天賦的契機。</p>
 
-    <!-- 偏鄉美學教育 · 7 合作單位 -->
-    <div class="unit-list" id="aestheticList">
-      <a class="unit-row" href="actions-dimuer.html">
-        <figure class="unit-image">
-          <span class="img-fill"></span>
-        </figure>
-        <div class="unit-body">
-          <div class="meta"><span class="cat">屏東三地門</span></div>
-          <h3 class="title">愛唱歌的學校 — 地磨兒國小</h3>
-          <p class="quote">不求奪標，只求開心</p>
-          <p class="excerpt">2007 年的毛毛細雨中，洪蘭老師帶薛伯輝基金會拜訪地磨兒國小。孩子們的歌聲深深感動了董事長，開啟了長達 16 年的合唱團、圖書館與教師合唱團陪伴。</p>
-          <ul class="keywords">
-            <li>合唱團</li>
-            <li>愛的圖書館</li>
-            <li>教師合唱團</li>
-          </ul>
-          <span class="article-action">繼續閱讀 →</span>
-        </div>
+      <p>薛伯輝基金會從 2008 年開始鼓勵地磨兒國小合唱團的運行，至今仍然持續著。更在 2013 年開始，鼓勵催生三地國小教師合唱團。</p>
+
+      <p>優秀的孩子們在 2012 年獲得了「屏東縣鄉土歌謠比賽冠軍」、2013 年挑戰更上層樓的「全台鄉土歌謠比賽」。又於 2013 年蟬聯「屏東縣鄉土歌謠比賽冠軍」，2014 年獲得「全台鄉土歌謠比賽」冠軍。</p>
+
+      <h2 class="sec-h">愛的圖書館</h2>
+      <p>2008 年，薛伯輝基金會幫忙完成愛的圖書館。2013 年，鼓勵地磨兒國小於假日開放圖書館給社區民眾，讓愛的圖書館成為大人與孩子愛來、常來的地方，家長帶著孩子一同閱讀，愛上閱讀。</p>
+    </div>
+  </div>
+</article>
+
+<!-- ===== GALLERY ===== -->
+<section class="gallery-section">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="titles">
+        <span class="subtitle">Gallery</span>
+        <h2 class="section-title">影像紀錄</h2>
+      </div>
+      <span class="head-note">由薛伯輝基金會提供</span>
+    </header>
+
+    <div class="gallery-grid">
+      <figure>
+        <div class="g-image"></div>
+        <figcaption>地磨兒國小北上參加「全台鄉土歌謠比賽」，是薛伯輝基金會第一批貴賓。</figcaption>
+      </figure>
+      <figure>
+        <div class="g-image"></div>
+        <figcaption>每年創辦人陳惠如女士總要到地磨兒國小看看孩子。</figcaption>
+      </figure>
+      <figure>
+        <div class="g-image"></div>
+        <figcaption>加強社區與學校的關係，讓愛從學校擴散至社區。</figcaption>
+      </figure>
+      <figure>
+        <div class="g-image"></div>
+        <figcaption>創辦人鼓勵孩子們：「希望你們健康快樂的成長，也不要忘了用功讀書。」</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== UNIT NAV ===== -->
+<section class="unit-nav">
+  <div class="wrap">
+    <div class="unit-nav-row">
+      <a class="nav-link prev" href="actions.html">
+        <span class="nav-eyebrow">← 上一個單位</span>
+        <span class="nav-name">回到 偏鄉美學教育</span>
       </a>
-
-      <a class="unit-row" href="#">
-        <figure class="unit-image">
-          <span class="img-fill"></span>
-        </figure>
-        <div class="unit-body">
-          <div class="meta"><span class="cat">台南學甲</span></div>
-          <h3 class="title">一心推動融合教育 — 伯利恆文教基金會</h3>
-          <p class="quote">用愛讓慢飛的天使，譜出屬於他們的未來</p>
-          <p class="excerpt">由甘惠忠神父於 1997 年創立。在慈母幼兒園推行融合教育，讓 110 位一般幼童與慢飛天使一起成長，承辦溪北區嬰幼兒中心與早期療育服務。</p>
-          <ul class="keywords">
-            <li>融合教育</li>
-            <li>早期療育</li>
-            <li>嬰幼兒服務</li>
-          </ul>
-          <span class="article-action">繼續閱讀 →</span>
-        </div>
-      </a>
-
-      <a class="unit-row" href="#">
-        <figure class="unit-image">
-          <span class="img-fill"></span>
-        </figure>
-        <div class="unit-body">
-          <div class="meta"><span class="cat">台南玉井</span></div>
-          <h3 class="title">牽起社區的手 — 天主教德蘭啟智中心</h3>
-          <p class="quote">當我的心尋著你的心，當我的手牽上你的手</p>
-          <p class="excerpt">位於台南玉井山區，提供日間托育、到宅療育與社區家園服務。2011 年贈車後拓展至新住民家庭與山區長者照護，目前經常性服務約 150 人。</p>
-          <ul class="keywords">
-            <li>校車</li>
-            <li>新住民計畫</li>
-            <li>長者照顧</li>
-          </ul>
-          <span class="article-action">繼續閱讀 →</span>
-        </div>
-      </a>
-
-      <a class="unit-row" href="#">
-        <figure class="unit-image">
-          <span class="img-fill"></span>
-        </figure>
-        <div class="unit-body">
-          <div class="meta"><span class="cat">台南新市</span></div>
-          <h3 class="title">慢飛天使一生的守護 — 天主教蘆葦啟智中心</h3>
-          <p class="quote">壓傷的蘆葦，祂不折斷；將熄的燈芯，祂不吹滅</p>
-          <p class="excerpt">由邱修女集合八千多人愛心建成，提供 0-6 歲早期療育與 16 歲以上心智障礙日間照顧、就業支持，機構內 150 人、社區另 264 人。</p>
-          <ul class="keywords">
-            <li>特殊教育</li>
-            <li>身障日照</li>
-            <li>獎學金</li>
-          </ul>
-          <span class="article-action">繼續閱讀 →</span>
-        </div>
-      </a>
-
-      <a class="unit-row" href="#">
-        <figure class="unit-image">
-          <span class="img-fill"></span>
-        </figure>
-        <div class="unit-body">
-          <div class="meta"><span class="cat">台南安平漁光里</span></div>
-          <h3 class="title">漫漫漁光 — 天主教瑞復益智中心</h3>
-          <p class="quote">有人的地方就有愛，有愛的地方就有希望</p>
-          <p class="excerpt">漁光里被稱為最美的特教中心，服務遲緩嬰幼兒與多重障礙人士，日托 220 多人、社區另約 300 人。2014 年贈送煎餅行動車，讓青年走上街頭、開創職能。</p>
-          <ul class="keywords">
-            <li>多元職能</li>
-            <li>煎餅行動車</li>
-            <li>社區回饋</li>
-          </ul>
-          <span class="article-action">繼續閱讀 →</span>
-        </div>
-      </a>
-
-      <a class="unit-row" href="#">
-        <figure class="unit-image">
-          <span class="img-fill"></span>
-        </figure>
-        <div class="unit-body">
-          <div class="meta"><span class="cat">澎湖馬公</span></div>
-          <h3 class="title">扎根菊島、用愛照顧 — 天主教惠民啟智中心</h3>
-          <p class="quote">凡你們對我這些最小兄弟中的一個所做的，就是對我做的</p>
-          <p class="excerpt">澎湖唯一的啟智中心，服務擴展至七美、望安等三級離島。鑼鼓班與喜樂屋讓天使找到舞台與工作機會，2014 年加入音樂與藝術治療服務。</p>
-          <ul class="keywords">
-            <li>離島早療</li>
-            <li>音樂治療</li>
-            <li>喜樂屋</li>
-          </ul>
-          <span class="article-action">繼續閱讀 →</span>
-        </div>
-      </a>
-
-      <a class="unit-row" href="#">
-        <figure class="unit-image">
-          <span class="img-fill"></span>
-        </figure>
-        <div class="unit-body">
-          <div class="meta"><span class="cat">新北市泰山</span></div>
-          <h3 class="title">泰山奇蹟之家 — 天主教主顧修女會</h3>
-          <p class="quote">播下善的種子，讓愛無限延伸</p>
-          <p class="excerpt">由主顧修女會經營、位於泰山的長者關懷據點，提供日照、送餐與居家照顧。基金會協助長輩美學教育課程，2013 年加裝採光雨棚守護長輩安全。</p>
-          <ul class="keywords">
-            <li>長者關懷</li>
-            <li>日間照顧</li>
-            <li>美學教育</li>
-          </ul>
-          <span class="article-action">繼續閱讀 →</span>
-        </div>
+      <a class="back" href="actions.html">所有合作單位</a>
+      <a class="nav-link next" href="#">
+        <span class="nav-eyebrow">下一個單位 →</span>
+        <span class="nav-name">一心推動融合教育 — 伯利恆文教基金會</span>
       </a>
     </div>
-
-    <!-- 籌備中分類顯示：資料準備中（預設隱藏） -->
-    <div class="empty-state" id="emptyState" hidden>
-      <p class="e-lat">Coming Soon</p>
-      <h3 id="emptyTitle">資料準備中</h3>
-      <p>此分類的內容仍在整理中，敬請期待。<br>歡迎先閱覽「偏鄉美學教育」7 個合作單位的故事。</p>
-    </div>
-
   </div>
 </section>
 
@@ -710,21 +577,7 @@
   <nav class="drawer-nav">
     <a href="about.html">關於我們</a>
     <a href="people.html">慈善身影</a>
-    <!-- 公益行動：可展開二級 -->
-    <div class="drawer-group on" id="drawerActions">
-      <button type="button" class="drawer-group-head" id="drawerActionsToggle">
-        <span class="label">公益行動</span>
-        <span class="caret">▾</span>
-      </button>
-      <div class="drawer-group-body">
-        <button type="button" class="sub-item todo" data-cat="transition">特殊生轉銜職場</button>
-        <button type="button" class="sub-item todo" data-cat="outsider">自閉症原生藝術</button>
-        <button type="button" class="sub-item on"   data-cat="aesthetic">偏鄉美學教育</button>
-        <button type="button" class="sub-item todo" data-cat="music">奧兒福音樂會</button>
-        <button type="button" class="sub-item todo" data-cat="elder">老人服務</button>
-        <button type="button" class="sub-item todo" data-cat="other">其他</button>
-      </div>
-    </div>
+    <a href="actions.html" class="active">公益行動</a>
     <a href="true-love.html">真愛多多</a>
     <a href="news.html">最新消息</a>
     <a href="shop.html">文創小舖</a>
@@ -745,116 +598,7 @@
 <!-- ===== BACK TO TOP ===== -->
 <a class="cd-top" id="cdTop" href="#" title="回到頂部" aria-label="back to top">↑</a>
 
-<!-- ===== COOKIE ===== -->
-<div class="cookie" id="cookieBanner">
-  <div class="ctext">
-    <strong>Cookie 政策提示</strong>
-    本網站使用 Cookie 以提供更好的瀏覽體驗。繼續瀏覽即表示您同意 Cookie 使用。<a href="#">More info</a>
-  </div>
-  <button onclick="document.getElementById('cookieBanner').style.display='none'">同意並關閉</button>
-</div>
-
 <script>
-  // ============ SUB-NAV 切換 ============
-  (function(){
-    // 5 個分類資料：標題 / 副標 / 是否為偏鄉美學教育（有內容）
-    const CATEGORIES = {
-      transition: {
-        title:'特殊生轉銜職場',
-        lead:'陪伴特殊生從學習走向職場，透過培力、支持與實作，建立穩定生活的可能。',
-        ready:false
-      },
-      outsider: {
-        title:'自閉症原生藝術',
-        lead:'看見特殊創作者的獨特表達，讓藝術成為被理解、被欣賞、被支持的橋樑。',
-        ready:false
-      },
-      aesthetic: {
-        title:'陪伴力量大',
-        lead:'以生活美學與文化底蘊，打造共學、共享、共榮的特別教育環境。',
-        ready:true
-      },
-      music: {
-        title:'奧兒福音樂會',
-        lead:'讓音樂成為共融的語言，邀請孩子、家庭與社會共同聽見彼此的力量。',
-        ready:false
-      },
-      elder: {
-        title:'老人服務',
-        lead:'關懷長者生活、陪伴與安全需求，讓照顧不只停在服務，也保有美感與尊嚴。',
-        ready:false
-      },
-      other: {
-        title:'其他',
-        lead:'彙整不在主要分類中的其他支持與合作案例。',
-        ready:false
-      }
-    };
-
-    const subItems   = document.querySelectorAll('.sub-nav .item');
-    const drawerSubs = document.querySelectorAll('.drawer-group .sub-item');
-    const heroTitle  = document.getElementById('heroTitle');
-    const heroLead   = document.getElementById('heroLead');
-    const aesticList = document.getElementById('aestheticList');
-    const emptyState = document.getElementById('emptyState');
-    const emptyTitle = document.getElementById('emptyTitle');
-
-    function setActive(cat){
-      const c = CATEGORIES[cat];
-      if (!c) return;
-
-      // 切換 sub-nav 視覺
-      subItems.forEach(it => it.classList.toggle('on', it.dataset.cat === cat));
-      drawerSubs.forEach(it => it.classList.toggle('on', it.dataset.cat === cat));
-
-      // 切 hero 文案（hero 標題只顯示分類名，狀態交給下方 empty-state）
-      heroTitle.textContent = c.title;
-      heroLead.textContent  = c.lead;
-
-      // 切內容區
-      if (c.ready){
-        aesticList.hidden = false;
-        emptyState.hidden = true;
-      } else {
-        aesticList.hidden = true;
-        emptyState.hidden = false;
-        emptyTitle.textContent = c.title + ' · 資料準備中';
-      }
-    }
-
-    // 讀 URL hash 設定起始分類（從 detail page 的 sub-nav 連回時使用）
-    const initHash = location.hash.replace('#', '');
-    if (initHash && CATEGORIES[initHash]) {
-      setActive(initHash);
-    }
-
-    subItems.forEach(it => {
-      it.addEventListener('click', () => setActive(it.dataset.cat));
-    });
-    drawerSubs.forEach(it => {
-      it.addEventListener('click', () => {
-        setActive(it.dataset.cat);
-        // 子項點完關 drawer
-        const d = document.getElementById('drawer');
-        const b = document.getElementById('drawerBackdrop');
-        if (d && b){
-          d.classList.remove('on');
-          b.classList.remove('on');
-          d.setAttribute('aria-hidden','true');
-          document.body.style.overflow = '';
-        }
-      });
-    });
-  })();
-
-  // ============ DRAWER 二級展開 ============
-  (function(){
-    const head = document.getElementById('drawerActionsToggle');
-    const grp  = document.getElementById('drawerActions');
-    if (!head || !grp) return;
-    head.addEventListener('click', () => grp.classList.toggle('on'));
-  })();
-
   // ============ BACK TO TOP ============
   (function(){
     const btn = document.getElementById('cdTop');
@@ -901,8 +645,7 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && drawer.classList.contains('on')) shut();
     });
-    // 一般 link（非 sub-item / 非 group-head）點完關
-    drawer.querySelectorAll('.drawer-nav > a').forEach(a => {
+    drawer.querySelectorAll('.drawer-nav a').forEach(a => {
       a.addEventListener('click', shut);
     });
   })();
