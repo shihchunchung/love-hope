@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>最新消息 — 薛伯輝基金會</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{font-size:var(--t-body);font-feature-settings:"palt";background:var(--bg);color:var(--body);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.75;font-weight:400;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+  h1,h2,h3,h4,h5{color:var(--ink);font-weight:700;line-height:1.35}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  button{cursor:pointer;font-family:inherit;border:none;background:none;color:inherit}
+  ul{list-style:none}
+  [hidden]{display:none !important}
+
+  .lat{font-family:"IBM Plex Serif",sans-serif}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 var(--sp-7)}
+
+  /* ============ HEADER ============ */
+  .app-header{background:#fff;position:sticky;top:0;z-index:50}
+  .app-header .row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:var(--sp-4) var(--sp-7);gap:var(--sp-6)}
+  .app-header .left{display:flex;align-items:center;gap:var(--sp-4)}
+  .app-header .logo{justify-self:center;display:block}
+  .app-header .logo img{height:50px;width:auto}
+  .app-header .right{display:flex;justify-content:flex-end;align-items:center;gap:var(--sp-4)}
+  .header-socials{display:flex;align-items:center;gap:var(--sp-4)}
+  .header-socials a{width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);transition:color .2s}
+  .header-socials a:hover{color:var(--brand)}
+  .header-utility{display:flex;align-items:center;gap:var(--sp-4);padding-left:var(--sp-4);border-left:1px solid var(--line)}
+  .header-utility a{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);font-weight:600;transition:color .2s}
+  .header-utility a:hover{color:var(--brand)}
+  .donate-btn{display:inline-flex;align-items:center;gap:var(--sp-2);padding:var(--sp-3) var(--sp-5);background:var(--brand);color:#fff;font-size:var(--t-body-s);letter-spacing:3px;font-weight:500;transition:background .2s}
+  .donate-btn::after{content:"→";font-family:"IBM Plex Serif",sans-serif;font-weight:400}
+  .donate-btn:hover{background:var(--brand-dark)}
+
+  /* ============ NAV ============ */
+  .app-nav{border-top:1px solid var(--brand);border-bottom:1px solid var(--brand);background:#fff;position:sticky;top:86px;z-index:49}
+  .app-nav .row{display:flex;justify-content:center;align-items:stretch;height:54px}
+  .app-nav a{display:flex;align-items:center;padding:0 var(--sp-5);font-size:var(--t-body);font-weight:500;color:var(--ink);position:relative;letter-spacing:0;transition:color .15s,background .2s}
+  .app-nav a:not(:last-child)::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:14px;background:var(--line)}
+  .app-nav a:hover,.app-nav a.active{color:var(--brand)}
+  .app-nav a.is-external{color:#6B4423;gap:var(--sp-2)}
+  .app-nav a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-body-s);font-weight:400;display:inline-block;transition:transform .25s,opacity .2s;line-height:1;opacity:.6}
+  .app-nav a.is-external:hover{color:#6B4423;background:#F4EDE0}
+  .app-nav a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
+
+  /* ============ SUB-NAV (分類切換 — 跟 actions.html 同套) ============ */
+  .sub-nav{background:#fff;position:sticky;top:140px;z-index:48;display:flex;justify-content:center;align-items:stretch;padding:var(--sp-3) var(--sp-6) 19px;flex-wrap:wrap}
+  .sub-nav .item{padding:0 var(--sp-5);font-size:var(--t-meta);letter-spacing:1.5px;color:#666;font-weight:500;position:relative;line-height:1.75;cursor:pointer;transition:color .18s;background:none;border:0;font-family:inherit;text-decoration:none}
+  .sub-nav .item:hover{color:var(--brand)}
+  .sub-nav .item.on{color:var(--brand);font-weight:700}
+  .sub-nav .item.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-6px;width:24px;height:2px;background:var(--brand)}
+
+  /* ============ SUB-NAV (chip 變體) ============ */
+  body[data-cat-ui="chips"] .sub-nav{padding:var(--sp-5) var(--sp-6);gap:var(--sp-3);justify-content:center}
+  body[data-cat-ui="chips"] .sub-nav .item{padding:var(--sp-2) var(--sp-4);border:1px solid var(--line);border-radius:999px;color:var(--body);background:#fff;line-height:1.5;letter-spacing:1px}
+  body[data-cat-ui="chips"] .sub-nav .item:hover{border-color:var(--brand);color:var(--brand)}
+  body[data-cat-ui="chips"] .sub-nav .item.on{background:var(--brand);color:#fff;border-color:var(--brand);font-weight:600}
+  body[data-cat-ui="chips"] .sub-nav .item.on::after{display:none}
+
+  /* ============ SUB-NAV (年份 tabs 變體) ============ */
+  body[data-cat-ui="years"] .sub-nav{padding:var(--sp-3) var(--sp-6);gap:0;border-bottom:1px solid var(--line);font-family:"IBM Plex Serif",sans-serif}
+  body[data-cat-ui="years"] .sub-nav .item{padding:var(--sp-3) var(--sp-5);font-size:var(--t-body-s);letter-spacing:2px;font-weight:500}
+  body[data-cat-ui="years"] .sub-nav .item.on{font-weight:700}
+  body[data-cat-ui="years"] .sub-nav .item.on::after{bottom:-1px}
+
+  /* ============ LIST SECTION ============ */
+  .list-section{padding:var(--sp-8) 0 var(--sp-10);background:#fff}
+
+  /* ===== 置頂區塊 (variant: separated) — header + divider ===== */
+  .pinned-header{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink);padding-bottom:var(--sp-4);margin-bottom:var(--sp-6)}
+  .pinned-header h2{font-size:var(--t-title);font-weight:700;letter-spacing:1.5px;color:var(--ink);display:flex;align-items:center;gap:var(--sp-3)}
+  .pinned-header h2::before{content:"";display:inline-block;width:28px;height:28px;background:url('images/lucky-clover.jpg') center/contain no-repeat;flex-shrink:0}
+  .pinned-header .count{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;color:var(--muted);font-weight:600;text-transform:uppercase}
+  .pinned-divider{height:1px;background:var(--line);margin:var(--sp-8) 0 var(--sp-6)}
+  .list-header{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink);padding-bottom:var(--sp-4);margin-bottom:var(--sp-6)}
+  .list-header h2{font-size:var(--t-title);font-weight:700;letter-spacing:1.5px;color:var(--ink)}
+  .list-header .count{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;color:var(--muted);font-weight:600;text-transform:uppercase}
+
+  /* ===== ACTIONS-PATTERN (default structure): 圖左文右大列表 ===== */
+  .news-list{display:flex;flex-direction:column}
+  .news-row{
+    display:grid;grid-template-columns:480px 1fr;gap:var(--sp-7);
+    padding:var(--sp-4);margin:0 -var(--sp-4) var(--sp-1);
+    align-items:center;transition:background .2s;text-decoration:none;color:inherit;
+    position:relative;
+  }
+  .news-row:hover{background:var(--line-soft)}
+  .news-image{aspect-ratio:16/9;overflow:hidden;position:relative;background:linear-gradient(135deg,#3a3a3a,#0f0f0f)}
+  .news-image .img-fill{position:absolute;inset:0;background:inherit;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
+  .news-row:hover .news-image .img-fill{transform:scale(1.05)}
+  .news-image::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.4) 100%);pointer-events:none;z-index:1}
+  /* 不同分類給不同 hue, 一致 placeholder 樣式 */
+  .news-row[data-cat="announcement"] .news-image{background:linear-gradient(135deg,#5a0808,#1a0202)}
+  .news-row[data-cat="exhibition"]   .news-image{background:linear-gradient(135deg,#3a3a3a,#0a0a0a)}
+  .news-row[data-cat="literature"]   .news-image{background:linear-gradient(135deg,#604530,#2a1808)}
+  .news-row[data-cat="podcast"]      .news-image{background:linear-gradient(135deg,#3a2828,#1a0808)}
+  .news-row[data-cat="meinong"]      .news-image{background:linear-gradient(135deg,#a89070,#604530)}
+  .news-row[data-cat="true-love"]    .news-image{background:linear-gradient(135deg,#5a3a2a,#1a1010)}
+  .news-row[data-cat="charity"]      .news-image{background:linear-gradient(135deg,#704830,#2a1a0a)}
+  .news-row[data-cat="lecture"]      .news-image{background:linear-gradient(135deg,#888,#3a3a3a)}
+
+  .news-body{min-width:0;padding-right:var(--sp-4)}
+  .news-body .meta{display:flex;gap:var(--sp-3);align-items:center;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:var(--sp-4)}
+  .news-body .meta .cat{color:var(--brand);font-weight:700}
+  .news-body .meta .sep{color:var(--line)}
+  .news-body .title{font-size:var(--t-title);line-height:1.5;font-weight:700;letter-spacing:1px;color:var(--ink);margin-bottom:var(--sp-4);transition:color .2s;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .news-row:hover .title{color:var(--brand)}
+  .news-body .article-action{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);font-weight:600;border-bottom:1px solid var(--ink);padding-bottom:3px;display:inline-block;transition:.2s}
+  .news-row:hover .article-action{color:var(--brand);border-color:var(--brand)}
+
+  /* ===== GRID structure: 3 欄 9:5 ===== */
+  body[data-structure="grid"] .news-list{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-7) var(--sp-6)}
+  body[data-structure="grid"] .news-row{grid-template-columns:1fr;gap:var(--sp-4);padding:0;margin:0;align-items:stretch}
+  body[data-structure="grid"] .news-row:hover{background:transparent}
+  body[data-structure="grid"] .news-image{aspect-ratio:9/5}
+  body[data-structure="grid"] .news-body{padding:0}
+  body[data-structure="grid"] .news-body .title{font-size:var(--t-title-s);letter-spacing:.5px}
+  body[data-structure="grid"] .news-body .article-action{display:none}
+
+  /* ===== ARCHIVE structure: 編年體緊湊條列 ===== */
+  body[data-structure="archive"] .news-list{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+  body[data-structure="archive"] .news-row{display:grid;grid-template-columns:120px 1fr auto;gap:var(--sp-5);align-items:center;padding:var(--sp-4) var(--sp-2);margin:0;border-bottom:1px solid var(--line)}
+  body[data-structure="archive"] .news-row .news-image{display:none}
+  body[data-structure="archive"] .news-row .news-body{padding:0;display:contents}
+  body[data-structure="archive"] .news-row .meta{margin:0;font-size:var(--t-meta);letter-spacing:1.5px;text-transform:none}
+  body[data-structure="archive"] .news-row .meta .cat{display:none}
+  body[data-structure="archive"] .news-row .meta .sep{display:none}
+  body[data-structure="archive"] .news-row .title{font-size:var(--t-body);line-height:1.6;letter-spacing:0;margin:0;-webkit-line-clamp:1;font-weight:500}
+  body[data-structure="archive"] .news-row .article-action{font-size:var(--t-caption);border:0;padding:0;color:var(--muted)}
+  body[data-structure="archive"] .news-row:hover .article-action{color:var(--brand)}
+  body[data-structure="archive"] .pinned-header,
+  body[data-structure="archive"] .pinned-divider,
+  body[data-structure="archive"] .list-header{margin-bottom:var(--sp-4)}
+  .year-divider{display:flex;align-items:baseline;gap:var(--sp-4);padding:var(--sp-6) 0 var(--sp-3);border-bottom:1px solid var(--ink);margin-bottom:var(--sp-2)}
+  .year-divider .yr{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-title-l);font-weight:800;letter-spacing:-1px;color:var(--ink)}
+  .year-divider .lbl{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:600}
+  body:not([data-structure="archive"]) .year-divider{display:none}
+
+  /* ===== 圖片：混合策略 — 有圖→漸層 placeholder, 沒圖→文字卡 ===== */
+  .news-row[data-has-image="0"] .news-image{background:#F8F4EE !important;display:flex;align-items:center;justify-content:center;padding:var(--sp-5)}
+  .news-row[data-has-image="0"] .news-image::after{display:none}
+  .news-row[data-has-image="0"] .news-image::before{content:attr(data-cat-label);color:var(--brand);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:3px;text-transform:uppercase;font-weight:700;z-index:2}
+
+  /* ===== 置頂視覺變體 ===== */
+  /* V1 separated (default) — pinned-section 完整呈現 */
+  /* V2 badge inline — 不顯示 pinned-header / divider, pinned 卡掛 badge */
+  body[data-pin="badge"] .pinned-header,
+  body[data-pin="badge"] .pinned-divider,
+  body[data-pin="badge"] .list-header,
+  body[data-pin="border"] .pinned-header,
+  body[data-pin="border"] .pinned-divider,
+  body[data-pin="border"] .list-header,
+  body[data-pin="ribbon"] .pinned-header,
+  body[data-pin="ribbon"] .pinned-divider,
+  body[data-pin="ribbon"] .list-header{display:none}
+
+  body[data-pin="badge"] .news-row[data-pinned="1"]{background:var(--brand-tint)}
+  body[data-pin="badge"] .news-row[data-pinned="1"]:hover{background:#F5DCDC}
+  .pin-badge{display:none;align-items:center;gap:var(--sp-1);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-right:var(--sp-3)}
+  .pin-badge::before{content:"";display:inline-block;width:16px;height:16px;background:url('images/lucky-clover.jpg') center/contain no-repeat}
+  body[data-pin="badge"] .news-row[data-pinned="1"] .pin-badge{display:inline-flex}
+
+  body[data-pin="border"] .news-row[data-pinned="1"]{border-left:4px solid var(--brand);padding-left:var(--sp-5)}
+  body[data-structure="archive"] body[data-pin="border"] .news-row[data-pinned="1"]{padding-left:var(--sp-4)}
+
+  /* V4 hero: 第一筆 pinned 變大卡 hero, 其餘 pinned 用 separated 樣式但無 section header */
+  .pin-hero{display:none;text-decoration:none;color:inherit;margin-bottom:var(--sp-7)}
+  body[data-pin="hero"] .pin-hero{display:grid;grid-template-columns:1.4fr 1fr;min-height:380px;background:#fff;border:1px solid var(--line);transition:background .2s}
+  body[data-pin="hero"] .pin-hero:hover{background:var(--line-soft)}
+  .pin-hero-image{position:relative;overflow:hidden;background:linear-gradient(135deg,#5a0808,#1a0202)}
+  .pin-hero-image .img-fill{position:absolute;inset:0;background:inherit;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
+  .pin-hero:hover .pin-hero-image .img-fill{transform:scale(1.05)}
+  .pin-hero-image::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.5) 100%);z-index:1}
+  .pin-hero-image .pin-mark{position:absolute;top:24px;left:24px;display:inline-flex;align-items:center;gap:var(--sp-2);background:var(--brand);color:#fff;padding:var(--sp-2) var(--sp-3);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;font-weight:700;z-index:2}
+  .pin-hero-image .pin-mark::before{content:"";display:inline-block;width:8px;height:8px;background:#fff;transform:rotate(45deg)}
+  .pin-hero-text{padding:var(--sp-7);display:flex;flex-direction:column;justify-content:center}
+  .pin-hero-text .meta{display:flex;gap:var(--sp-3);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:var(--sp-4);align-items:center}
+  .pin-hero-text .meta .cat{color:var(--brand);font-weight:700}
+  .pin-hero-text h2{font-size:var(--t-display);line-height:1.35;font-weight:700;letter-spacing:1px;color:var(--ink);margin-bottom:var(--sp-5);transition:color .2s}
+  .pin-hero:hover h2{color:var(--brand)}
+  .pin-hero-text .article-action{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);font-weight:600;border-bottom:1px solid var(--ink);padding-bottom:3px;display:inline-block;align-self:flex-start;transition:.2s}
+  .pin-hero:hover .article-action{color:var(--brand);border-color:var(--brand)}
+  body[data-pin="hero"] .pinned-header,
+  body[data-pin="hero"] .pinned-divider,
+  body[data-pin="hero"] .list-header{display:none}
+
+  /* V5 ribbon — 卡角絲帶 */
+  .pin-ribbon{display:none;position:absolute;top:0;left:0;background:var(--brand);color:#fff;padding:var(--sp-2) var(--sp-4) var(--sp-2) var(--sp-3);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2px;text-transform:uppercase;font-weight:700;z-index:3;clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%)}
+  body[data-pin="ribbon"] .news-row[data-pinned="1"] .pin-ribbon{display:inline-block}
+  body[data-pin="ribbon"][data-structure="archive"] .news-row[data-pinned="1"] .pin-ribbon{display:none}
+  body[data-pin="ribbon"][data-structure="archive"] .news-row[data-pinned="1"]{background:var(--brand-tint)}
+
+  /* ===== Load more ===== */
+  .load-more-wrap{display:flex;justify-content:center;margin-top:var(--sp-7)}
+  .load-more-btn{display:inline-flex;align-items:center;gap:var(--sp-3);justify-content:center;padding:var(--sp-3) var(--sp-7);border:1px solid var(--ink);color:var(--ink);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:3px;text-transform:uppercase;font-weight:600;transition:all .2s;background:#fff}
+  .load-more-btn::after{content:"→"}
+  .load-more-btn:hover{background:var(--ink);color:#fff}
+
+  /* ===== Empty state (一般列表) ===== */
+  .empty-state{padding:var(--sp-10) 0;text-align:center;color:var(--muted)}
+  .empty-state .e-lat{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:var(--sp-4);display:flex;align-items:center;justify-content:center;gap:var(--sp-4)}
+  .empty-state .e-lat::before,.empty-state .e-lat::after{content:"";width:24px;height:1px;background:var(--line)}
+  .empty-state h3{font-size:var(--t-title-l);letter-spacing:1.5px;color:#999;font-weight:500;margin-bottom:var(--sp-4);line-height:1.5}
+  .empty-state p{font-size:var(--t-body);color:var(--muted);line-height:1.85;max-width:480px;margin:0 auto;letter-spacing:0}
+
+  /* ============ CONTROL PANEL (頁面內常駐切換條) ============ */
+  .ctl{position:fixed;right:24px;bottom:80px;z-index:90;background:#fff;border:1px solid var(--ink);box-shadow:0 12px 40px rgba(0,0,0,.18);width:320px;max-height:calc(100vh - 160px);display:flex;flex-direction:column;transform:translateX(calc(100% + 32px));transition:transform .3s cubic-bezier(.4,0,.2,1);font-family:"IBM Plex Serif",sans-serif}
+  .ctl.on{transform:translateX(0)}
+  .ctl-tab{position:absolute;top:-1px;right:100%;background:var(--ink);color:#fff;padding:var(--sp-3) var(--sp-3);writing-mode:vertical-rl;font-size:var(--t-caption);letter-spacing:2px;text-transform:uppercase;font-weight:600;cursor:pointer;border:0;border-right:1px solid var(--ink);height:auto;line-height:1.4}
+  .ctl-tab:hover{background:var(--brand)}
+  .ctl-head{padding:var(--sp-4) var(--sp-5);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+  .ctl-head h3{font-size:var(--t-body);letter-spacing:2px;text-transform:uppercase;color:var(--ink);font-weight:700;font-family:"IBM Plex Serif",sans-serif}
+  .ctl-head .reset{font-size:var(--t-caption);letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:600;cursor:pointer;background:none;border:0}
+  .ctl-head .reset:hover{color:var(--brand)}
+  .ctl-body{padding:var(--sp-3) var(--sp-5) var(--sp-5);overflow-y:auto;flex:1}
+  .ctl-group{padding:var(--sp-4) 0;border-bottom:1px solid var(--line-soft)}
+  .ctl-group:last-child{border-bottom:0}
+  .ctl-group .lbl{font-size:var(--t-caption);letter-spacing:2px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:var(--sp-3);display:block}
+  .ctl-opts{display:flex;flex-wrap:wrap;gap:var(--sp-1)}
+  .ctl-opts button{padding:var(--sp-1) var(--sp-3);font-size:var(--t-caption);letter-spacing:.5px;color:var(--body);border:1px solid var(--line);background:#fff;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.6;transition:all .15s;cursor:pointer}
+  .ctl-opts button:hover{border-color:var(--ink);color:var(--ink)}
+  .ctl-opts button.on{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:600}
+  .ctl-foot{padding:var(--sp-3) var(--sp-5);border-top:1px solid var(--line);font-size:var(--t-caption);letter-spacing:1px;color:var(--muted);text-align:center;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+  .ctl-foot a{color:var(--brand);font-weight:600}
+
+  /* ============ DONATE CARD ============ */
+  .donate-band{padding:var(--sp-9) 0;background:#fff}
+  .donate-card{background:var(--brand);color:#fff;border-radius:4px;padding:var(--sp-8);display:grid;grid-template-columns:1.2fr 1fr;gap:var(--sp-7);align-items:center;position:relative;overflow:hidden}
+  .donate-card::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 85% 15%,rgba(0,0,0,.18) 0,transparent 60%);pointer-events:none}
+  .donate-text{position:relative;z-index:1;padding:0}
+  .donate-text .label{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:3px;text-transform:uppercase;color:#f4d8d8;font-weight:700;margin-bottom:var(--sp-4);display:flex;align-items:center;gap:var(--sp-4)}
+  .donate-text .label::before{content:"";width:32px;height:1px;background:#f4d8d8}
+  .donate-text h2{font-size:var(--t-display-l);color:#fff;letter-spacing:1.5px;line-height:1.35;margin-bottom:var(--sp-6);font-weight:700}
+  .donate-text p{font-size:var(--t-title-s);color:rgba(255,255,255,.85);line-height:1.85;margin-bottom:var(--sp-6);max-width:480px}
+  .donate-text .actions{display:flex;gap:var(--sp-4);flex-wrap:wrap}
+  .donate-text .btn-w{display:inline-flex;align-items:center;gap:var(--sp-3);padding:var(--sp-3) var(--sp-6);background:#fff;color:var(--brand);font-size:var(--t-meta);letter-spacing:2.5px;font-weight:600;transition:background .2s}
+  .donate-text .btn-w::after{content:"→"}
+  .donate-text .btn-w:hover{background:#f4d8d8}
+  .donate-text .btn-wo{display:inline-flex;align-items:center;gap:var(--sp-3);padding:var(--sp-3) var(--sp-6);border:1px solid rgba(255,255,255,.5);color:#fff;font-size:var(--t-meta);letter-spacing:2.5px;font-weight:500;transition:all .2s}
+  .donate-text .btn-wo:hover{background:rgba(255,255,255,.12);border-color:#fff}
+  .donate-stats{position:relative;z-index:1;display:flex;flex-direction:column;border-left:1px solid rgba(255,255,255,.2);padding-left:var(--sp-7)}
+  .donate-method{padding:var(--sp-4) 0;border-bottom:1px solid rgba(255,255,255,.18)}
+  .donate-method:first-child{padding-top:0}
+  .donate-method:last-child{border-bottom:none;padding-bottom:0}
+  .donate-method .method-label{display:block;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:700;margin-bottom:var(--sp-2)}
+  .donate-method h3{font-size:var(--t-title-s);color:#fff;letter-spacing:1.5px;margin-bottom:var(--sp-2);font-weight:600}
+  .donate-method p{font-size:var(--t-body-s);color:rgba(255,255,255,.78);line-height:1.75;margin:0}
+  .donate-method b{color:#fff;font-weight:700}
+
+  /* ============ FOOTER ============ */
+  .app-footer{background:var(--ink);color:#fff;padding:var(--sp-8) var(--sp-7) var(--sp-6);text-align:center;border-top:none}
+  .app-footer .footer-info{display:flex;flex-direction:column;align-items:center;gap:var(--sp-4);margin-bottom:var(--sp-7)}
+  .app-footer .footer-address{font-size:var(--t-body-s);color:#fff;letter-spacing:0;font-weight:500}
+  .app-footer .footer-contact{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:var(--sp-2) var(--sp-4);font-size:var(--t-body-s);color:rgba(255,255,255,.75);letter-spacing:0}
+  .app-footer .footer-contact .lbl{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:2px;font-size:var(--t-meta);margin-right:var(--sp-2)}
+  .app-footer .footer-contact a{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-body-s);letter-spacing:0;color:rgba(255,255,255,.75);transition:color .2s}
+  .app-footer .footer-contact a:hover{color:#fff}
+  .app-footer .footer-contact .dot{color:rgba(255,255,255,.3)}
+  .app-footer .footer-giro{display:inline-flex;align-items:center;gap:var(--sp-4);padding:var(--sp-4) var(--sp-6);border-top:1px solid rgba(255,255,255,.15);border-bottom:1px solid rgba(255,255,255,.15);margin-top:var(--sp-2);flex-wrap:wrap;justify-content:center;font-size:var(--t-body-s)}
+  .app-footer .footer-giro .giro-label{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:3px;text-transform:uppercase;color:#fff;font-weight:700;padding:var(--sp-1) var(--sp-3);border:1px solid rgba(255,255,255,.4)}
+  .app-footer .footer-giro .giro-cell{color:rgba(255,255,255,.78);letter-spacing:.5px}
+  .app-footer .footer-giro .giro-cell b{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:#fff;letter-spacing:1.5px;margin-left:var(--sp-1)}
+  .app-footer .footer-giro .giro-sep{color:rgba(255,255,255,.2);font-weight:700}
+  .app-footer .footer-links{display:flex;justify-content:center;gap:var(--sp-5);flex-wrap:wrap;margin-bottom:var(--sp-5)}
+  .app-footer .footer-links a{font-size:var(--t-body-s);color:#fff;letter-spacing:0;font-weight:500;transition:color .2s}
+  .app-footer .footer-links a:hover{color:#f4d8d8}
+  .app-footer .footer-links a.is-external{color:#D9B889;display:inline-flex;align-items:center;gap:var(--sp-1)}
+  .app-footer .footer-links a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);font-weight:400;opacity:.6;transition:transform .25s,opacity .2s;line-height:1}
+  .app-footer .footer-links a.is-external:hover{color:#E5C99D}
+  .app-footer .footer-links a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
+  .app-footer .footer-copy{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;color:rgba(255,255,255,.4);text-transform:uppercase}
+
+  /* ============ BACK TO TOP ============ */
+  .cd-top{position:fixed;right:24px;bottom:24px;width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-title);line-height:1;z-index:80;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s,background .2s;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+  .cd-top.on{opacity:1;transform:translateY(0);pointer-events:auto}
+  .cd-top:hover{background:var(--brand)}
+
+  /* ============ COOKIE ============ */
+  .cookie{position:fixed;bottom:24px;left:24px;right:24px;max-width:680px;margin:0 auto;background:#fff;padding:var(--sp-4) var(--sp-5);display:flex;align-items:center;gap:var(--sp-5);font-size:var(--t-body-s);color:var(--body);box-shadow:0 12px 40px rgba(0,0,0,.12);border-top:3px solid var(--brand);z-index:99}
+  .cookie .ctext{flex:1;line-height:1.75}
+  .cookie .ctext strong{display:block;color:var(--ink);font-size:var(--t-body);margin-bottom:var(--sp-1);letter-spacing:1px;font-weight:700}
+  .cookie .ctext a{color:var(--brand);text-decoration:underline;text-underline-offset:2px}
+  .cookie button{padding:var(--sp-2) var(--sp-4);font-size:var(--t-meta);letter-spacing:2px;background:var(--brand);color:#fff;font-weight:500}
+  .cookie button:hover{background:var(--brand-dark)}
+
+  /* ============ MOBILE DRAWER ============ */
+  .nav-toggle{display:none;width:36px;height:36px;flex-direction:column;align-items:center;justify-content:center;gap:var(--sp-1);padding:0;cursor:pointer;background:transparent;border:0}
+  .nav-toggle span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .25s}
+  .drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .3s;z-index:90}
+  .drawer-backdrop.on{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:min(380px,88vw);background:var(--brand);color:#fff;z-index:91;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow-y:auto;box-shadow:-12px 0 40px rgba(0,0,0,.18)}
+  .drawer.on{transform:translateX(0)}
+  .drawer-head{display:flex;justify-content:space-between;align-items:center;padding:var(--sp-5) var(--sp-6);border-bottom:1px solid rgba(255,255,255,.12)}
+  .drawer-close{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:24px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;border:0;transition:background .2s}
+  .drawer-close:hover{background:rgba(255,255,255,.22)}
+  .drawer-utility{display:flex;align-items:center;gap:var(--sp-3);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2px;text-transform:uppercase;font-weight:600}
+  .drawer-utility a{color:rgba(255,255,255,.9)}
+  .drawer-utility .sep{color:rgba(255,255,255,.3)}
+  .drawer-nav{flex:1;padding:var(--sp-4) var(--sp-6);display:flex;flex-direction:column}
+  .drawer-nav a{position:relative;padding:var(--sp-4) 0;font-size:var(--t-body-l);color:#fff;letter-spacing:1px;font-weight:500;border-bottom:1px solid rgba(255,255,255,.1);transition:padding .25s;display:flex;align-items:center;gap:var(--sp-4)}
+  .drawer-nav a::before{content:"";width:0;height:1px;background:#fff;transition:width .25s}
+  .drawer-nav a:hover,.drawer-nav a.active{padding-left:var(--sp-2)}
+  .drawer-nav a:hover::before,.drawer-nav a.active::before{width:24px}
+  .drawer-nav a.is-external{color:#F4EDE0;gap:var(--sp-3)}
+  .drawer-nav a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-body);font-weight:400;opacity:.7;transition:transform .25s,opacity .2s;line-height:1;margin-left:auto;padding-right:var(--sp-2)}
+  .drawer-nav a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
+  .drawer-foot{padding:var(--sp-5) var(--sp-6) var(--sp-6);border-top:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;gap:var(--sp-4)}
+  .drawer-donate{display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-3);padding:var(--sp-4);background:#fff;color:var(--brand);font-size:var(--t-body-s);letter-spacing:2.5px;font-weight:600;transition:background .2s}
+  .drawer-donate::after{content:"→"}
+  .drawer-donate:hover{background:#f4d8d8}
+  .drawer-social{display:flex;justify-content:center;gap:var(--sp-4)}
+  .drawer-social a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);display:inline-flex;align-items:center;justify-content:center;color:#fff;transition:background .2s}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1100px){
+    .sub-nav{padding:var(--sp-3) var(--sp-4) var(--sp-4)}
+    .sub-nav .item{padding:0 var(--sp-4);letter-spacing:1px;font-size:11.5px}
+    .sub-nav .item.on::after{width:20px}
+    .app-nav,.app-header,.sub-nav{position:static}
+    .news-row{grid-template-columns:360px 1fr;gap:var(--sp-6)}
+    body[data-structure="grid"] .news-list{grid-template-columns:repeat(2,1fr)}
+    body[data-structure="archive"] .news-row{grid-template-columns:100px 1fr auto}
+    body[data-pin="hero"] .pin-hero{grid-template-columns:1fr;min-height:0}
+    .pin-hero-text{padding:var(--sp-6)}
+    .pin-hero-text h2{font-size:var(--t-display)}
+    .donate-card{grid-template-columns:1fr;gap:var(--sp-7);padding:var(--sp-7)}
+    .donate-stats{border-left:0;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:var(--sp-6)}
+    .ctl{width:280px}
+  }
+  @media (max-width: 720px){
+    .app-header .row{grid-template-columns:auto 1fr auto;gap:var(--sp-4);padding:var(--sp-4) var(--sp-4)}
+    .header-socials,.header-utility{display:none}
+    .donate-btn{padding:var(--sp-2) var(--sp-4);font-size:var(--t-meta);letter-spacing:2px}
+    .app-nav,.sub-nav{display:none}
+    .nav-toggle{display:flex}
+    .wrap{padding:0 var(--sp-4)}
+    .list-section{padding:var(--sp-6) 0 var(--sp-8)}
+    .news-row{grid-template-columns:1fr;gap:var(--sp-4);padding:var(--sp-4);margin:0 -var(--sp-4) 3px}
+    body[data-structure="grid"] .news-list{grid-template-columns:1fr;gap:var(--sp-5)}
+    body[data-structure="archive"] .news-row{grid-template-columns:auto 1fr;gap:var(--sp-3);padding:var(--sp-3) var(--sp-2)}
+    body[data-structure="archive"] .news-row .article-action{display:none}
+    body[data-pin="hero"] .pin-hero-text h2{font-size:var(--t-title-l)}
+    .donate-band{padding:var(--sp-7) var(--sp-4)}
+    .donate-card{padding:var(--sp-6) var(--sp-5);gap:var(--sp-6)}
+    .ctl{width:calc(100vw - 32px);right:16px;bottom:80px;max-height:60vh}
+    .ctl-tab{writing-mode:horizontal-tb;right:0;top:-40px;border-bottom:0}
+  }
+</style>
+</head>
+<body data-structure="actions" data-cat-ui="subnav" data-date-fmt="slash" data-pin="separated" data-cat="all">
+
+<!-- ===== HEADER ===== -->
+<header class="app-header">
+  <div class="row">
+    <div class="left">
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="header-socials">
+        <a aria-label="facebook" href="https://www.facebook.com/LoveHopeF" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
+        <a aria-label="instagram" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a aria-label="youtube" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
+        <a aria-label="line" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
+      </div>
+    </div>
+    <a class="logo" href="index.html"><img src="images/logo.png" alt="薛伯輝基金會 Love Hope Foundation"></a>
+    <div class="right">
+      <a class="donate-btn" href="donate.html">捐款支持</a>
+      <div class="header-utility">
+        <a href="#">EN</a>
+        <a href="#">登入</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="app-nav">
+  <div class="row">
+    <a href="about.html">關於我們</a>
+    <a href="people.html">慈善身影</a>
+    <a href="actions.html">公益行動</a>
+    <a href="true-love.html">真愛多多</a>
+    <a href="news.html" class="active">最新消息</a>
+    <a href="shop.html">文創小舖</a>
+    <a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
+    <a href="venue.html">場地租借</a>
+  </div>
+</nav>
+
+<!-- ===== SUB-NAV (8 主題群 + 全部) ===== -->
+<nav class="sub-nav" id="subNav" aria-label="最新消息分類">
+  <a class="item on"  href="#all"          data-cat="all">全部</a>
+  <a class="item"     href="#announcement" data-cat="announcement">公告</a>
+  <a class="item"     href="#literature"   data-cat="literature">文學閱讀</a>
+  <a class="item"     href="#podcast"      data-cat="podcast">Podcast</a>
+  <a class="item"     href="#exhibition"   data-cat="exhibition">共融藝術</a>
+  <a class="item"     href="#meinong"      data-cat="meinong">美濃搖籃</a>
+  <a class="item"     href="#true-love"    data-cat="true-love">真愛多多</a>
+  <a class="item"     href="#charity"      data-cat="charity">公益行動</a>
+  <a class="item"     href="#lecture"      data-cat="lecture">講堂課程</a>
+</nav>
+
+<!-- 年份 tabs (data-cat-ui=years 時切換出來) -->
+<nav class="sub-nav" id="yearNav" aria-label="年份" hidden>
+  <a class="item on" href="#all"  data-year="all">全部</a>
+  <a class="item"    href="#2024" data-year="2024">2024</a>
+  <a class="item"    href="#2022" data-year="2022">2022</a>
+  <a class="item"    href="#2018" data-year="2018">2018</a>
+  <a class="item"    href="#2017" data-year="2017">2017</a>
+  <a class="item"    href="#2016" data-year="2016">2016</a>
+  <a class="item"    href="#2015" data-year="2015">2015</a>
+  <a class="item"    href="#2014" data-year="2014">2014</a>
+</nav>
+
+<!-- ===== LIST SECTION ===== -->
+<section class="list-section">
+  <div class="wrap">
+
+    <!-- V4 hero (第一筆置頂) — 只在 data-pin=hero 時出現 -->
+    <a class="pin-hero" id="pinHero" href="#">
+      <div class="pin-hero-image">
+        <span class="img-fill"></span>
+        <span class="pin-mark">置頂</span>
+      </div>
+      <div class="pin-hero-text">
+        <div class="meta"><span class="cat"></span><span class="date"></span></div>
+        <h2></h2>
+        <span class="article-action">繼續閱讀 →</span>
+      </div>
+    </a>
+
+    <!-- 置頂區塊 (separated 變體用 header；其他變體 header 隱藏) -->
+    <div class="pinned-block" id="pinnedBlock">
+      <div class="pinned-header">
+        <h2>置頂消息 <span class="count" id="pinnedCount"></span></h2>
+      </div>
+      <div class="news-list" id="pinnedList"><!-- pinned items by JS --></div>
+      <div class="pinned-divider"></div>
+    </div>
+
+    <!-- 一般列表 -->
+    <div class="list-block">
+      <div class="list-header">
+        <h2 id="listTitle">全部消息</h2>
+        <span class="count" id="listCount"></span>
+      </div>
+      <div class="news-list" id="newsList"><!-- items by JS --></div>
+      <div class="empty-state" id="emptyState" hidden>
+        <p class="e-lat">No Items</p>
+        <h3>此分類目前無消息</h3>
+        <p>請切換其他分類，或檢視「全部」消息。</p>
+      </div>
+      <div class="load-more-wrap" id="loadMoreWrap" hidden>
+        <button class="load-more-btn" id="loadMoreBtn">看更多</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== CONTROL PANEL ===== -->
+<aside class="ctl" id="ctl" aria-label="設計變體切換">
+  <button class="ctl-tab" id="ctlTab" type="button">Design Controls</button>
+  <div class="ctl-head">
+    <h3>Design Variants</h3>
+    <button class="reset" id="ctlReset" type="button">Reset</button>
+  </div>
+  <div class="ctl-body">
+
+    <div class="ctl-group">
+      <span class="lbl">結構 Structure</span>
+      <div class="ctl-opts" data-state="structure">
+        <button data-val="actions">大列表</button>
+        <button data-val="grid">3 欄 grid</button>
+        <button data-val="archive">編年 archive</button>
+      </div>
+    </div>
+
+    <div class="ctl-group">
+      <span class="lbl">分類 UI</span>
+      <div class="ctl-opts" data-state="cat-ui">
+        <button data-val="subnav">sub-nav</button>
+        <button data-val="chips">chips</button>
+        <button data-val="years">年份 tabs</button>
+      </div>
+    </div>
+
+    <div class="ctl-group">
+      <span class="lbl">日期格式</span>
+      <div class="ctl-opts" data-state="date-fmt">
+        <button data-val="slash">2024 / 11 / 06</button>
+        <button data-val="dot">2024.11.06</button>
+        <button data-val="serif">Nov 6, 2024</button>
+        <button data-val="cn">2024 年 11 月 6 日</button>
+      </div>
+    </div>
+
+    <div class="ctl-group">
+      <span class="lbl">置頂視覺</span>
+      <div class="ctl-opts" data-state="pin">
+        <button data-val="separated">V1 分區塊</button>
+        <button data-val="badge">V2 inline badge</button>
+        <button data-val="border">V3 左邊條</button>
+        <button data-val="hero">V4 大卡 hero</button>
+        <button data-val="ribbon">V5 角絲帶</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="ctl-foot">
+    定稿後此面板會移除 · <a href="news-pin-compare.html">置頂 5 版並列頁 →</a>
+  </div>
+</aside>
+
+<!-- ===== DONATE BAND ===== -->
+<section class="donate-band">
+  <div class="wrap">
+    <div class="donate-card">
+      <div class="donate-text">
+        <div class="label">Donate</div>
+        <h2>捐款支持<br>愛與希望的延續</h2>
+        <p>每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
+        <div class="actions">
+          <a class="btn-w" href="donate.html">捐款方式</a>
+          <a class="btn-wo" href="donate.html">捐款徵信</a>
+        </div>
+      </div>
+      <div class="donate-stats" aria-label="捐款方式摘要">
+        <div class="donate-method">
+          <span class="method-label">Bank Transfer</span>
+          <h3>銀行匯款 / ATM 轉帳</h3>
+          <p>國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Postal Giro</span>
+          <h3>郵局劃撥</h3>
+          <p>帳號 <b>50067771</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Other Ways</span>
+          <h3>信用卡、支票與現場捐款</h3>
+          <p>歡迎透過信用卡授權書、支票或親臨基金會現場捐款，捐款徵信定期公開。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="app-footer">
+  <div class="footer-info">
+    <p class="footer-address">10043 台北市中正區博愛路 154 號 6 樓</p>
+    <p class="footer-contact">
+      <span><span class="lbl">TEL</span>(02) 2381-6678</span>
+      <span class="dot">·</span>
+      <span><span class="lbl">FAX</span>(02) 2381-3171</span>
+      <span class="dot">·</span>
+      <a href="mailto:love.hopech@gmail.com">love.hopech@gmail.com</a>
+    </p>
+    <div class="footer-giro">
+      <span class="giro-label">郵政劃撥</span>
+      <span class="giro-cell">帳號<b>50067771</b></span>
+      <span class="giro-sep">｜</span>
+      <span class="giro-cell">戶名<b>財團法人薛伯輝基金會</b></span>
+    </div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="about.html">關於我們</a></li>
+    <li><a href="people.html">慈善身影</a></li>
+    <li><a href="actions.html">公益行動</a></li>
+    <li><a href="true-love.html">真愛多多</a></li>
+    <li><a href="news.html">最新消息</a></li>
+    <li><a href="shop.html">文創小舖</a></li>
+    <li><a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a></li>
+    <li><a href="venue.html">場地租借</a></li>
+    <li><a href="mailto:love.hopech@gmail.com">聯絡我們</a></li>
+    <li><a href="privacy.html">隱私權政策</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Love Hope Foundation. All Rights Reserved.</p>
+</footer>
+
+<!-- ===== MOBILE DRAWER ===== -->
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <button class="drawer-close" id="drawerClose" type="button" aria-label="close menu">×</button>
+    <div class="drawer-utility">
+      <a href="#">EN</a>
+      <span class="sep">/</span>
+      <a href="#">登入</a>
+    </div>
+  </div>
+  <nav class="drawer-nav">
+    <a href="about.html">關於我們</a>
+    <a href="people.html">慈善身影</a>
+    <a href="actions.html">公益行動</a>
+    <a href="true-love.html">真愛多多</a>
+    <a href="news.html" class="active">最新消息</a>
+    <a href="shop.html">文創小舖</a>
+    <a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
+    <a href="venue.html">場地租借</a>
+  </nav>
+  <div class="drawer-foot">
+    <a class="drawer-donate" href="donate.html">捐款支持</a>
+    <div class="drawer-social">
+      <a aria-label="facebook" href="https://www.facebook.com/LoveHopeF" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
+      <a aria-label="instagram" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+      <a aria-label="youtube" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
+      <a aria-label="line" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== BACK TO TOP ===== -->
+<a class="cd-top" id="cdTop" href="#" title="回到頂部" aria-label="back to top">↑</a>
+
+<!-- ===== COOKIE ===== -->
+<div class="cookie" id="cookieBanner">
+  <div class="ctext">
+    <strong>Cookie 政策提示</strong>
+    本網站使用 Cookie 以提供更好的瀏覽體驗。繼續瀏覽即表示您同意 Cookie 使用。<a href="#">More info</a>
+  </div>
+  <button onclick="document.getElementById('cookieBanner').style.display='none'">同意並關閉</button>
+</div>
+
+<script>
+  /* ============================================================
+     CMS mock data — 對應後台資料結構
+     Shape: { id, date(ISO), cat, title, image?(url), excerpt?, isPinned, pinOrder }
+     ============================================================ */
+  const CATEGORY_LABELS = {
+    announcement: '公告',
+    exhibition:   '共融藝術展',
+    literature:   '文學閱讀月',
+    podcast:      'Podcast',
+    meinong:      '美濃 / 搖籃',
+    'true-love':  '真愛多多',
+    charity:      '公益行動',
+    lecture:      '愛的講堂',
+  };
+
+  const NEWS_ITEMS = [
+    { id:'2024-merge',           date:'2024-11-06', cat:'announcement', title:'【公告】蔡紹華慈善濟助事業基金會併入本會', isPinned:true,  pinOrder:1 },
+    { id:'2022-blackwhite',      date:'2022-12-23', cat:'exhibition',   title:'【共融藝術展】白與黑—王俠軍與原生藝術家', isPinned:true,  pinOrder:2, image:true  },
+    { id:'2022-yangmu-meinong',  date:'2022-12-21', cat:'meinong',      title:'楊牧書房在美濃', image:true  },
+    { id:'2022-yangmu-pod',      date:'2022-12-14', cat:'podcast',      title:'【Podcast】《楊牧的山風海雨》' },
+    { id:'2022-yangmu-online',   date:'2022-12-11', cat:'literature',   title:'線上閱讀楊牧老師 須文蔚老師與談' },
+    { id:'2022-zhongli',         date:'2022-11-29', cat:'literature',   title:'從鍾理和的天地書齋到楊牧書房', image:true  },
+    { id:'2022-yangmu-lecture',  date:'2022-11-28', cat:'literature',   title:'【線上講座資訊】楊牧的山風海雨', image:true  },
+    { id:'2022-huaxuan',         date:'2022-10-13', cat:'lecture',      title:'【課程資訊】繁花盛景的花園街景', image:true  },
+    { id:'2022-cradle-yc',       date:'2022-09-18', cat:'meinong',      title:'【講座資訊】我把辦公室變搖籃! 搖籃場', image:true  },
+    { id:'2022-cradle-ks',       date:'2022-09-06', cat:'meinong',      title:'【講座資訊】我把辦公室變搖籃! 高市圖場', image:true  },
+    { id:'2022-hakka',           date:'2022-07-28', cat:'lecture',      title:'【講座資訊】你是最後一代的客家人嗎？', image:true  },
+    { id:'2022-zhengchouyu',     date:'2022-07-22', cat:'literature',   title:'【文學＆共融藝術展】詩人 鄭愁予＆一樣的美', image:true  },
+    { id:'2022-zhengchouyu-pod', date:'2022-07-08', cat:'podcast',      title:'【Podcast】《鄭愁予的浪子傳奇》' },
+    { id:'2022-yaxian-pod',      date:'2022-06-20', cat:'podcast',      title:'【Podcast】《瘂弦的遠方與家鄉》' },
+    { id:'2022-yu-pod',          date:'2022-06-10', cat:'podcast',      title:'【Podcast】《余光中的愛與希望》' },
+    { id:'2022-fanwocun',        date:'2022-02-25', cat:'literature',   title:'余師母-范我存參訪「余光中的愛與希望」', image:true  },
+    { id:'2022-chenxinghui',     date:'2022-02-20', cat:'literature',   title:'余光中的愛與希望線上開講 陳幸蕙老師與談' },
+    { id:'2022-yu-online',       date:'2022-02-09', cat:'literature',   title:'【線上講座資訊】余光中的愛與希望', image:true  },
+    { id:'2018-bethlehem-open',  date:'2018-03-08', cat:'true-love',    title:'【敬邀】伯利恆早療暨融合教育中心落成典禮', isPinned:true,  pinOrder:3, image:true  },
+    { id:'2017-bethlehem-scene', date:'2017-10-25', cat:'true-love',    title:'「伯利恆早療暨融合教育中心」現場實景！', image:true  },
+    { id:'2017-rotary',          date:'2017-10-18', cat:'charity',      title:'一同走在愛與希望的路上—中央扶輪社', image:true  },
+    { id:'2017-luwei-car',       date:'2017-08-27', cat:'charity',      title:'真愛零距離 薛伯輝基金會贈車蘆葦啟智中心', image:true  },
+    { id:'2017-gan-id',          date:'2017-01-06', cat:'true-love',    title:'台灣有你揪甘心 林全院長頒發甘神父身分證', image:true  },
+    { id:'2016-bethlehem-beam',  date:'2016-10-17', cat:'true-love',    title:'永恆的印記—伯利恆早療暨融合教育中心上樑', image:true  },
+    { id:'2015-dimuer-award',    date:'2015-12-22', cat:'charity',      title:'地磨兒國小屏東縣鄉土歌謠比賽特優', image:true  },
+    { id:'2015-bethlehem-start', date:'2015-07-07', cat:'true-love',    title:'「伯利恆早療暨融合教育中心」歡喜開工！', image:true  },
+    { id:'2014-tainan-donate',   date:'2014-12-30', cat:'true-love',    title:'台南市長賴清德帶領慨捐甘惠忠神父 2,100 萬', image:true  },
+    { id:'2014-bethlehem-arch',  date:'2014-11-03', cat:'true-love',    title:'「伯利恆早療暨融合教育中心」建築發表會', image:true  },
+    { id:'2014-li',              date:'2014-07-30', cat:'lecture',      title:'【演講資訊】李家同《大量閱讀的重要性》', image:true  },
+    { id:'2014-hong',            date:'2014-05-17', cat:'lecture',      title:'【演講資訊】洪蘭《大腦與學習》' },
+  ];
+
+  /* ============================================================
+     STATE
+     ============================================================ */
+  const STORAGE_KEY = 'lh-news-state';
+  const DEFAULT_STATE = {
+    structure:'actions', 'cat-ui':'subnav',
+    'date-fmt':'slash', pin:'separated',
+  };
+
+  function loadState(){
+    try{ const raw = localStorage.getItem(STORAGE_KEY); if (raw) return Object.assign({}, DEFAULT_STATE, JSON.parse(raw)); }catch(e){}
+    return Object.assign({}, DEFAULT_STATE);
+  }
+  function saveState(s){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); }catch(e){}
+  }
+  const STATE = loadState();
+  let ACTIVE_CAT = 'all';   // sub-nav (cat) or year-nav (year)
+  let LIST_PAGE_SIZE = 8;
+  let LIST_SHOWN = LIST_PAGE_SIZE;
+
+  /* ============================================================
+     DATA helpers
+     ============================================================ */
+  function scopedItems(){
+    return NEWS_ITEMS.slice();
+  }
+  function pinnedItems(items){
+    return items.filter(it => it.isPinned).sort((a,b) => (a.pinOrder||0) - (b.pinOrder||0));
+  }
+  function regularItems(items){
+    const base = items.filter(it => !it.isPinned);
+    if (STATE['cat-ui'] === 'years'){
+      if (ACTIVE_CAT === 'all') return base;
+      return base.filter(it => it.date.startsWith(ACTIVE_CAT));
+    }
+    if (ACTIVE_CAT === 'all') return base;
+    return base.filter(it => it.cat === ACTIVE_CAT);
+  }
+  function formatDate(iso){
+    const [y,m,d] = iso.split('-');
+    const fmt = STATE['date-fmt'];
+    if (fmt === 'dot')   return `${y}.${m}.${d}`;
+    if (fmt === 'cn')    return `${y} 年 ${parseInt(m,10)} 月 ${parseInt(d,10)} 日`;
+    if (fmt === 'serif') {
+      const MN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return `${MN[parseInt(m,10)-1]} ${parseInt(d,10)}, ${y}`;
+    }
+    return `${y} / ${m} / ${d}`;
+  }
+
+  /* ============================================================
+     RENDER
+     ============================================================ */
+  function rowHtml(it, opts={}){
+    const cat = CATEGORY_LABELS[it.cat] || it.cat;
+    const date = formatDate(it.date);
+    const hasImage = it.image ? '1' : '0';
+    const isPinned = it.isPinned ? '1' : '0';
+    return `
+      <a class="news-row" href="news.html#${it.id}" data-cat="${it.cat}" data-has-image="${hasImage}" data-pinned="${isPinned}" data-cat-label="${cat}">
+        <span class="pin-ribbon">置頂</span>
+        <figure class="news-image">
+          <span class="img-fill"></span>
+        </figure>
+        <div class="news-body">
+          <div class="meta">
+            <span class="pin-badge">置頂</span>
+            <span class="cat">${cat}</span>
+            <span class="sep">·</span>
+            <span class="date">${date}</span>
+          </div>
+          <h3 class="title">${it.title}</h3>
+          <span class="article-action">繼續閱讀 →</span>
+        </div>
+      </a>
+    `;
+  }
+
+  function archiveListHtml(items){
+    // 編年體：依年份分群, 插入 year-divider
+    const byYear = {};
+    items.forEach(it => {
+      const y = it.date.slice(0,4);
+      (byYear[y] = byYear[y] || []).push(it);
+    });
+    const years = Object.keys(byYear).sort().reverse();
+    return years.map(y => {
+      const list = byYear[y].sort((a,b)=>b.date.localeCompare(a.date));
+      const count = list.length;
+      return `<div class="year-divider"><span class="yr">${y}</span><span class="lbl">${count} entries</span></div>` +
+             list.map(it => rowHtml(it)).join('');
+    }).join('');
+  }
+
+  function renderPinHero(pins){
+    const el = document.getElementById('pinHero');
+    if (!pins.length){ el.style.display = 'none'; return; }
+    const it = pins[0];
+    el.href = `news.html#${it.id}`;
+    el.querySelector('.cat').textContent = CATEGORY_LABELS[it.cat] || it.cat;
+    el.querySelector('.date').textContent = formatDate(it.date);
+    el.querySelector('h2').textContent = it.title;
+    el.querySelector('.pin-hero-image').style.background = ''; // reset
+    // 用 data-cat 對應的漸層
+    const gradients = {
+      announcement:'linear-gradient(135deg,#5a0808,#1a0202)',
+      exhibition:  'linear-gradient(135deg,#3a3a3a,#0a0a0a)',
+      literature:  'linear-gradient(135deg,#604530,#2a1808)',
+      podcast:     'linear-gradient(135deg,#3a2828,#1a0808)',
+      meinong:     'linear-gradient(135deg,#a89070,#604530)',
+      'true-love': 'linear-gradient(135deg,#5a3a2a,#1a1010)',
+      charity:     'linear-gradient(135deg,#704830,#2a1a0a)',
+      lecture:     'linear-gradient(135deg,#888,#3a3a3a)',
+    };
+    el.querySelector('.pin-hero-image').style.background = gradients[it.cat] || gradients.announcement;
+  }
+
+  function render(){
+    document.body.dataset.structure = STATE.structure;
+    document.body.dataset.catUi     = STATE['cat-ui'];
+    document.body.dataset.dateFmt   = STATE['date-fmt'];
+    document.body.dataset.pin       = STATE.pin;
+
+    // sub-nav vs year-nav 切換
+    const subNav  = document.getElementById('subNav');
+    const yearNav = document.getElementById('yearNav');
+    if (STATE['cat-ui'] === 'years'){
+      subNav.hidden = true;
+      yearNav.hidden = false;
+    } else {
+      subNav.hidden = false;
+      yearNav.hidden = true;
+    }
+    // 切換 nav UI 時 reset 當前選擇到 all
+    if ((STATE['cat-ui'] === 'years') !== (ACTIVE_CAT.match(/^\d{4}$/) !== null)){
+      ACTIVE_CAT = 'all';
+    }
+    document.querySelectorAll('#subNav .item').forEach(a => a.classList.toggle('on', a.dataset.cat === ACTIVE_CAT));
+    document.querySelectorAll('#yearNav .item').forEach(a => a.classList.toggle('on', a.dataset.year === ACTIVE_CAT));
+
+    const all = scopedItems();
+    const pins = pinnedItems(all);
+    const regs = regularItems(all);
+
+    // 1. PIN HERO (V4) — 只有 pin=hero 時可見, 渲染第一筆
+    renderPinHero(pins);
+
+    // 2. PINNED BLOCK
+    const pinnedBlock = document.getElementById('pinnedBlock');
+    const pinnedList  = document.getElementById('pinnedList');
+    const pinnedCount = document.getElementById('pinnedCount');
+    if (pins.length === 0){
+      pinnedBlock.hidden = true;
+    } else {
+      pinnedBlock.hidden = false;
+      pinnedCount.textContent = `${pins.length} items`;
+      // V4 hero 時, 第一筆已渲染成 hero, pinned list 只放剩下
+      let listPins = pins;
+      if (STATE.pin === 'hero') listPins = pins.slice(1);
+
+      if (STATE.structure === 'archive'){
+        pinnedList.innerHTML = archiveListHtml(listPins);
+      } else {
+        pinnedList.innerHTML = listPins.map(it => rowHtml(it)).join('');
+      }
+      // V4 hero 時若沒有剩下的, 整個 pinned block 隱藏
+      if (STATE.pin === 'hero' && listPins.length === 0){
+        pinnedBlock.hidden = true;
+      }
+    }
+
+    // V2/V3/V5 — 置頂跟一般合在同一份列表（pinned 先排在前）
+    const inlineMode = ['badge','border','ribbon'].includes(STATE.pin);
+    const newsList = document.getElementById('newsList');
+    const listTitle = document.getElementById('listTitle');
+    const listCount = document.getElementById('listCount');
+    const emptyState = document.getElementById('emptyState');
+    const loadMoreWrap = document.getElementById('loadMoreWrap');
+
+    let visible = regs;
+    if (inlineMode){
+      // 全部消息（含 pinned 排前）— 但 pinned 本身不被分類過濾, 永遠都在
+      visible = pins.concat(regs);
+      pinnedBlock.hidden = true;
+    }
+
+    // 分類標題
+    if (STATE['cat-ui'] === 'years'){
+      listTitle.textContent = ACTIVE_CAT === 'all' ? '全部消息' : `${ACTIVE_CAT} 年消息`;
+    } else {
+      listTitle.textContent = ACTIVE_CAT === 'all' ? '全部消息' : `${CATEGORY_LABELS[ACTIVE_CAT]}`;
+    }
+    listCount.textContent = `${visible.length} items`;
+
+    // 切分類時 reset paging
+    const shown = Math.min(LIST_SHOWN, visible.length);
+    const sliced = visible.slice(0, shown);
+
+    if (visible.length === 0){
+      newsList.innerHTML = '';
+      emptyState.hidden = false;
+      loadMoreWrap.hidden = true;
+    } else {
+      emptyState.hidden = true;
+      if (STATE.structure === 'archive'){
+        newsList.innerHTML = archiveListHtml(sliced);
+      } else {
+        newsList.innerHTML = sliced.map(it => rowHtml(it)).join('');
+      }
+      loadMoreWrap.hidden = shown >= visible.length;
+    }
+  }
+
+  /* ============================================================
+     CONTROL PANEL
+     ============================================================ */
+  function bindControl(){
+    document.querySelectorAll('.ctl-opts').forEach(grp => {
+      const key = grp.dataset.state;
+      grp.querySelectorAll('button').forEach(btn => {
+        btn.classList.toggle('on', STATE[key] === btn.dataset.val);
+        btn.addEventListener('click', () => {
+          STATE[key] = btn.dataset.val;
+          saveState(STATE);
+          // 重整按鈕狀態
+          grp.querySelectorAll('button').forEach(b => b.classList.toggle('on', b === btn));
+          // 切到 chips/subnav/years 時 reset paging
+          LIST_SHOWN = LIST_PAGE_SIZE;
+          render();
+        });
+      });
+    });
+    // 控制條開關
+    const ctl = document.getElementById('ctl');
+    const tab = document.getElementById('ctlTab');
+    // 預設打開, 方便對齊時看
+    ctl.classList.add('on');
+    tab.addEventListener('click', () => ctl.classList.toggle('on'));
+    // Reset
+    document.getElementById('ctlReset').addEventListener('click', () => {
+      Object.assign(STATE, DEFAULT_STATE);
+      saveState(STATE);
+      LIST_SHOWN = LIST_PAGE_SIZE;
+      ACTIVE_CAT = 'all';
+      // 重整 UI
+      document.querySelectorAll('.ctl-opts').forEach(grp => {
+        const key = grp.dataset.state;
+        grp.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.val === STATE[key]));
+      });
+      render();
+    });
+  }
+
+  /* ============================================================
+     SUB-NAV / YEAR-NAV / LOAD MORE
+     ============================================================ */
+  function bindNavs(){
+    document.querySelectorAll('#subNav .item').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        ACTIVE_CAT = a.dataset.cat;
+        LIST_SHOWN = LIST_PAGE_SIZE;
+        render();
+      });
+    });
+    document.querySelectorAll('#yearNav .item').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        ACTIVE_CAT = a.dataset.year;
+        LIST_SHOWN = LIST_PAGE_SIZE;
+        render();
+      });
+    });
+    document.getElementById('loadMoreBtn').addEventListener('click', () => {
+      LIST_SHOWN += LIST_PAGE_SIZE;
+      render();
+    });
+  }
+
+  /* ============================================================
+     SHARED — back to top, drawer
+     ============================================================ */
+  (function(){
+    const btn = document.getElementById('cdTop');
+    if (!btn) return;
+    btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { btn.classList.toggle('on', window.scrollY > 600); ticking = false; });
+    });
+  })();
+  (function(){
+    const toggle   = document.getElementById('navToggle');
+    const drawer   = document.getElementById('drawer');
+    const backdrop = document.getElementById('drawerBackdrop');
+    const close    = document.getElementById('drawerClose');
+    if (!toggle || !drawer || !backdrop) return;
+    function open(){ drawer.classList.add('on'); backdrop.classList.add('on'); drawer.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+    function shut(){ drawer.classList.remove('on'); backdrop.classList.remove('on'); drawer.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    toggle.addEventListener('click', open);
+    close && close.addEventListener('click', shut);
+    backdrop.addEventListener('click', shut);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && drawer.classList.contains('on')) shut(); });
+    drawer.querySelectorAll('.drawer-nav > a').forEach(a => a.addEventListener('click', shut));
+  })();
+
+  /* ============ INIT ============ */
+  bindControl();
+  bindNavs();
+  render();
+</script>
+
+</body>
+</html>

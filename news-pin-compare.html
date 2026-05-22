@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>置頂視覺 5 版並列比較 — 最新消息</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{font-size:var(--t-body);font-feature-settings:"palt";background:var(--bg);color:var(--body);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.75;font-weight:400;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{color:var(--ink);font-weight:700;line-height:1.35}
+  a{color:inherit;text-decoration:none}
+  button{cursor:pointer;font-family:inherit;border:0;background:none;color:inherit}
+  ul{list-style:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 var(--sp-7)}
+
+  /* ============ 頁頭 ============ */
+  .compare-header{background:var(--ink);color:#fff;padding:var(--sp-6) 0;position:sticky;top:0;z-index:50}
+  .compare-header .row{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-5);max-width:1200px;margin:0 auto;padding:0 var(--sp-7)}
+  .compare-header .left h1{color:#fff;font-size:var(--t-title-l);letter-spacing:1.5px;margin-bottom:var(--sp-1)}
+  .compare-header .left p{font-size:var(--t-body-s);color:rgba(255,255,255,.7);letter-spacing:.5px;line-height:1.5}
+  .compare-header .back{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:#fff;padding:var(--sp-3) var(--sp-5);border:1px solid rgba(255,255,255,.4);font-weight:600;transition:all .2s;white-space:nowrap}
+  .compare-header .back:hover{background:#fff;color:var(--ink)}
+
+  /* ============ 跳轉錨點選單 ============ */
+  .anchor-nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:88px;z-index:49}
+  .anchor-nav .row{display:flex;justify-content:center;gap:var(--sp-2);padding:var(--sp-3) var(--sp-7);flex-wrap:wrap;max-width:1200px;margin:0 auto}
+  .anchor-nav a{padding:var(--sp-2) var(--sp-4);font-size:var(--t-meta);letter-spacing:1px;color:var(--body);border:1px solid var(--line);transition:all .15s}
+  .anchor-nav a:hover{border-color:var(--brand);color:var(--brand)}
+
+  /* ============ 變體 section 共用 ============ */
+  .variant{padding:var(--sp-8) 0;border-bottom:1px solid var(--ink)}
+  .variant:last-of-type{border-bottom:0}
+  .variant.alt{background:#F8F4EE}
+  .variant-head{margin-bottom:var(--sp-6);display:flex;align-items:flex-start;justify-content:space-between;gap:var(--sp-6);padding-bottom:var(--sp-4);border-bottom:1px solid var(--ink)}
+  .variant-head .titles{flex:1}
+  .variant-head .vtag{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;background:var(--brand);color:#fff;font-family:"IBM Plex Serif",sans-serif;font-weight:700;font-size:var(--t-body);letter-spacing:1px;margin-bottom:var(--sp-4)}
+  .variant-head h2{font-size:var(--t-display);font-weight:700;letter-spacing:1px;line-height:1.25;margin-bottom:var(--sp-3);color:var(--ink)}
+  .variant-head .desc{font-size:var(--t-body-s);color:var(--body);line-height:1.85;max-width:640px}
+  .variant-head .pros-cons{display:flex;flex-direction:column;gap:var(--sp-2);min-width:260px;font-size:var(--t-meta);line-height:1.6}
+  .variant-head .pros-cons span{display:flex;gap:var(--sp-2)}
+  .variant-head .pros-cons .pro::before{content:"+";color:#2a7;font-weight:700;font-family:"IBM Plex Serif",sans-serif}
+  .variant-head .pros-cons .con::before{content:"−";color:#c43;font-weight:700;font-family:"IBM Plex Serif",sans-serif}
+
+  /* ============ 列表共用樣式 (簡化版 news.html) ============ */
+  .news-list{display:flex;flex-direction:column}
+  .news-row{display:grid;grid-template-columns:320px 1fr;gap:var(--sp-6);padding:var(--sp-3);margin:0 -var(--sp-3) var(--sp-1);align-items:center;transition:background .2s;position:relative}
+  .news-row:hover{background:rgba(0,0,0,.025)}
+  .news-image{aspect-ratio:16/9;overflow:hidden;position:relative;background:linear-gradient(135deg,#3a3a3a,#0f0f0f)}
+  .news-image .img-fill{position:absolute;inset:0;background:inherit;transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
+  .news-row:hover .news-image .img-fill{transform:scale(1.05)}
+  .news-image::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.4) 100%);pointer-events:none;z-index:1}
+  .news-row[data-cat="announcement"] .news-image{background:linear-gradient(135deg,#5a0808,#1a0202)}
+  .news-row[data-cat="exhibition"]   .news-image{background:linear-gradient(135deg,#3a3a3a,#0a0a0a)}
+  .news-row[data-cat="true-love"]    .news-image{background:linear-gradient(135deg,#5a3a2a,#1a1010)}
+  .news-row[data-cat="meinong"]      .news-image{background:linear-gradient(135deg,#a89070,#604530)}
+  .news-row[data-cat="podcast"]      .news-image{background:linear-gradient(135deg,#3a2828,#1a0808)}
+  .news-row[data-cat="literature"]   .news-image{background:linear-gradient(135deg,#604530,#2a1808)}
+  .news-row[data-cat="charity"]      .news-image{background:linear-gradient(135deg,#704830,#2a1a0a)}
+  .news-body{min-width:0}
+  .news-body .meta{display:flex;gap:var(--sp-3);align-items:center;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:var(--sp-3)}
+  .news-body .meta .cat{color:var(--brand);font-weight:700}
+  .news-body .meta .sep{color:var(--line)}
+  .news-body .title{font-size:var(--t-title-s);line-height:1.5;font-weight:700;letter-spacing:.5px;color:var(--ink);margin-bottom:var(--sp-3)}
+  .news-body .action{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2px;text-transform:uppercase;color:var(--ink);font-weight:600;border-bottom:1px solid var(--ink);padding-bottom:2px;display:inline-block}
+
+  /* ============ V1: separated section ============ */
+  .v1 .pin-section-head{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink);padding-bottom:var(--sp-3);margin-bottom:var(--sp-5)}
+  .v1 .pin-section-head h3{font-size:var(--t-title-s);font-weight:700;letter-spacing:1.5px;display:flex;align-items:center;gap:var(--sp-3)}
+  .v1 .pin-section-head h3::before{content:"";display:inline-block;width:24px;height:24px;background:url('images/lucky-clover.jpg') center/contain no-repeat;flex-shrink:0}
+  .v1 .pin-section-head .count{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2px;color:var(--muted);font-weight:600;text-transform:uppercase}
+  .v1 .divider{height:1px;background:var(--line);margin:var(--sp-6) 0}
+  .v1 .list-section-head{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink);padding-bottom:var(--sp-3);margin-bottom:var(--sp-5)}
+  .v1 .list-section-head h3{font-size:var(--t-title-s);font-weight:700;letter-spacing:1.5px}
+
+  /* ============ V2: inline badge + tinted bg ============ */
+  .v2 .news-row[data-pinned="1"]{background:var(--brand-tint)}
+  .v2 .news-row[data-pinned="1"]:hover{background:#F5DCDC}
+  .v2 .pin-badge{display:none}
+  .v2 .news-row[data-pinned="1"] .pin-badge{display:inline-flex;align-items:center;gap:var(--sp-1);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-right:var(--sp-3)}
+  .v2 .news-row[data-pinned="1"] .pin-badge::before{content:"";display:inline-block;width:16px;height:16px;background:url('images/lucky-clover.jpg') center/contain no-repeat}
+
+  /* ============ V3: brand left border ============ */
+  .v3 .news-row[data-pinned="1"]{border-left:4px solid var(--brand);padding-left:var(--sp-5)}
+  .v3 .pin-badge{display:none}
+
+  /* ============ V4: hero (大卡) ============ */
+  .v4 .pin-hero{display:grid;grid-template-columns:1.4fr 1fr;min-height:320px;background:#fff;border:1px solid var(--line);margin-bottom:var(--sp-6);transition:background .2s;position:relative}
+  .v4 .pin-hero:hover{background:var(--line-soft)}
+  .v4 .pin-hero-image{position:relative;overflow:hidden;background:linear-gradient(135deg,#5a0808,#1a0202)}
+  .v4 .pin-hero-image::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.5) 100%);z-index:1}
+  .v4 .pin-hero-image .pin-mark{position:absolute;top:20px;left:20px;display:inline-flex;align-items:center;gap:var(--sp-2);background:var(--brand);color:#fff;padding:var(--sp-2) var(--sp-3);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;font-weight:700;z-index:2}
+  .v4 .pin-hero-image .pin-mark::before{content:"";display:inline-block;width:8px;height:8px;background:#fff;transform:rotate(45deg)}
+  .v4 .pin-hero-text{padding:var(--sp-7);display:flex;flex-direction:column;justify-content:center}
+  .v4 .pin-hero-text .meta{display:flex;gap:var(--sp-3);align-items:center;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:var(--sp-3)}
+  .v4 .pin-hero-text .meta .cat{color:var(--brand);font-weight:700}
+  .v4 .pin-hero-text h3{font-size:var(--t-title-l);font-weight:700;letter-spacing:1px;color:var(--ink);margin-bottom:var(--sp-5);line-height:1.35}
+  .v4 .pin-hero-text .action{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);font-weight:600;border-bottom:1px solid var(--ink);padding-bottom:2px;display:inline-block;align-self:flex-start}
+  .v4 .pin-secondary{display:flex;gap:var(--sp-5);margin-bottom:var(--sp-7);padding-bottom:var(--sp-6);border-bottom:1px solid var(--line)}
+  .v4 .pin-secondary .news-row{flex:1;grid-template-columns:140px 1fr;gap:var(--sp-4);padding:0;margin:0}
+  .v4 .pin-secondary .news-row .news-image{aspect-ratio:1/1}
+  .v4 .pin-secondary .news-row .title{font-size:var(--t-body);-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
+  .v4 .pin-secondary .news-row .action{display:none}
+  .v4 .pin-secondary .news-row .pin-mini{display:inline-flex;align-items:center;gap:var(--sp-1);font-family:"IBM Plex Serif",sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-right:var(--sp-2)}
+  .v4 .pin-secondary .news-row .pin-mini::before{content:"";display:inline-block;width:14px;height:14px;background:url('images/lucky-clover.jpg') center/contain no-repeat}
+
+  /* ============ V5: corner ribbon ============ */
+  .v5 .news-row{padding-top:var(--sp-3);padding-bottom:var(--sp-3)}
+  .v5 .pin-ribbon{display:none;position:absolute;top:0;left:0;background:var(--brand);color:#fff;padding:var(--sp-1) var(--sp-4) var(--sp-1) var(--sp-3);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2px;text-transform:uppercase;font-weight:700;z-index:3;clip-path:polygon(0 0,100% 0,calc(100% - 10px) 100%,0 100%)}
+  .v5 .news-row[data-pinned="1"] .pin-ribbon{display:inline-block}
+
+  /* 隱藏不該顯示的 pin 元件 */
+  .v1 .pin-ribbon,.v3 .pin-ribbon,.v4 .pin-ribbon{display:none}
+  .v1 .pin-badge,.v4 .pin-badge,.v5 .pin-badge{display:none}
+
+  /* ============ FOOTER 簡化 ============ */
+  .compare-footer{padding:var(--sp-7) 0;background:var(--ink);color:#fff;text-align:center}
+  .compare-footer p{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:var(--sp-4)}
+  .compare-footer .back{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:#fff;padding:var(--sp-3) var(--sp-6);border:1px solid #fff;font-weight:600;transition:all .2s;display:inline-block}
+  .compare-footer .back:hover{background:#fff;color:var(--ink)}
+
+  @media (max-width: 1100px){
+    .variant-head{flex-direction:column;gap:var(--sp-4)}
+    .news-row{grid-template-columns:240px 1fr;gap:var(--sp-5)}
+    .v4 .pin-hero{grid-template-columns:1fr;min-height:0}
+    .v4 .pin-secondary{flex-direction:column}
+  }
+  @media (max-width: 720px){
+    .wrap{padding:0 var(--sp-4)}
+    .compare-header .row{flex-direction:column;align-items:flex-start;padding:0 var(--sp-4);gap:var(--sp-3)}
+    .anchor-nav{top:auto;position:static}
+    .anchor-nav .row{padding:var(--sp-3) var(--sp-4);gap:var(--sp-2)}
+    .anchor-nav a{padding:var(--sp-1) var(--sp-3);font-size:13px}
+    .news-row{grid-template-columns:1fr;gap:var(--sp-3)}
+    .v4 .pin-hero-text{padding:var(--sp-5)}
+    .v4 .pin-hero-text h3{font-size:var(--t-title)}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="compare-header">
+  <div class="row">
+    <div class="left">
+      <h1>置頂視覺 · 5 版並列比較</h1>
+      <p>同一筆資料、同一基底結構，只切換置頂的呈現方式</p>
+    </div>
+    <a class="back" href="news.html">← 回最新消息</a>
+  </div>
+</header>
+
+<nav class="anchor-nav">
+  <div class="row">
+    <a href="#v1">V1 · 分區塊</a>
+    <a href="#v2">V2 · inline badge</a>
+    <a href="#v3">V3 · 左品牌邊條</a>
+    <a href="#v4">V4 · 大卡 hero</a>
+    <a href="#v5">V5 · 角絲帶</a>
+  </div>
+</nav>
+
+<!-- ============================================================
+     V1 — 分區塊
+     ============================================================ -->
+<section class="variant v1" id="v1">
+  <div class="wrap">
+    <header class="variant-head">
+      <div class="titles">
+        <span class="vtag">V1</span>
+        <h2>分區塊 — 置頂消息獨立 section</h2>
+        <p class="desc">置頂條目放在頂部獨立 section，有標題列「置頂消息」+ 計數，與一般列表用 divider 隔開。資訊架構最清楚。</p>
+      </div>
+      <div class="pros-cons">
+        <span class="pro">使用者一眼分得出「重要」與「時序」</span>
+        <span class="pro">置頂多筆時不會壓掉一般列表</span>
+        <span class="con">頁面變長、視覺切割感較強</span>
+      </div>
+    </header>
+
+    <div class="pin-section-head">
+      <h3>置頂消息 <span class="count">3 items</span></h3>
+    </div>
+    <div class="news-list">
+      <a class="news-row" href="#" data-cat="announcement" data-pinned="1">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">公告</span><span class="sep">·</span><span>2024 / 11 / 06</span></div>
+          <h4 class="title">【公告】蔡紹華慈善濟助事業基金會併入本會</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="exhibition" data-pinned="1">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">共融藝術展</span><span class="sep">·</span><span>2022 / 12 / 23</span></div>
+          <h4 class="title">【共融藝術展】白與黑—王俠軍與原生藝術家</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="true-love" data-pinned="1">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">真愛多多</span><span class="sep">·</span><span>2018 / 03 / 08</span></div>
+          <h4 class="title">【敬邀】伯利恆早療暨融合教育中心落成典禮</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+    </div>
+    <div class="divider"></div>
+    <div class="list-section-head"><h3>全部消息</h3></div>
+    <div class="news-list">
+      <a class="news-row" href="#" data-cat="meinong">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">美濃 / 搖籃</span><span class="sep">·</span><span>2022 / 12 / 21</span></div>
+          <h4 class="title">楊牧書房在美濃</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="podcast">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">Podcast</span><span class="sep">·</span><span>2022 / 12 / 14</span></div>
+          <h4 class="title">【Podcast】《楊牧的山風海雨》</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="literature">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">文學閱讀月</span><span class="sep">·</span><span>2022 / 11 / 29</span></div>
+          <h4 class="title">從鍾理和的天地書齋到楊牧書房</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     V2 — inline badge + tinted bg
+     ============================================================ -->
+<section class="variant v2 alt" id="v2">
+  <div class="wrap">
+    <header class="variant-head">
+      <div class="titles">
+        <span class="vtag">V2</span>
+        <h2>Inline badge — 行內排序、淡色底</h2>
+        <p class="desc">置頂條目融入一般列表（只是排序在前），加上「置頂」小標籤與淡品牌色底。視覺最輕、節奏連貫。</p>
+      </div>
+      <div class="pros-cons">
+        <span class="pro">頁面節奏連貫、不切段</span>
+        <span class="pro">置頂多筆時自然延伸</span>
+        <span class="con">「置頂」訊號相對弱，掃讀時可能漏看</span>
+      </div>
+    </header>
+
+    <div class="news-list">
+      <a class="news-row" href="#" data-cat="announcement" data-pinned="1">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="pin-badge">置頂</span><span class="cat">公告</span><span class="sep">·</span><span>2024 / 11 / 06</span></div>
+          <h4 class="title">【公告】蔡紹華慈善濟助事業基金會併入本會</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="exhibition" data-pinned="1">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="pin-badge">置頂</span><span class="cat">共融藝術展</span><span class="sep">·</span><span>2022 / 12 / 23</span></div>
+          <h4 class="title">【共融藝術展】白與黑—王俠軍與原生藝術家</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="true-love" data-pinned="1">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="pin-badge">置頂</span><span class="cat">真愛多多</span><span class="sep">·</span><span>2018 / 03 / 08</span></div>
+          <h4 class="title">【敬邀】伯利恆早療暨融合教育中心落成典禮</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="meinong">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">美濃 / 搖籃</span><span class="sep">·</span><span>2022 / 12 / 21</span></div>
+          <h4 class="title">楊牧書房在美濃</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="podcast">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">Podcast</span><span class="sep">·</span><span>2022 / 12 / 14</span></div>
+          <h4 class="title">【Podcast】《楊牧的山風海雨》</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="literature">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">文學閱讀月</span><span class="sep">·</span><span>2022 / 11 / 29</span></div>
+          <h4 class="title">從鍾理和的天地書齋到楊牧書房</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     V3 — 左品牌邊條
+     ============================================================ -->
+<section class="variant v3" id="v3">
+  <div class="wrap">
+    <header class="variant-head">
+      <div class="titles">
+        <span class="vtag">V3</span>
+        <h2>左品牌邊條 — 4px brand-color border</h2>
+        <p class="desc">置頂條目跟一般卡長一樣，只多一條左邊品牌色 4px 邊條。最低調的差異化，視覺很乾淨。</p>
+      </div>
+      <div class="pros-cons">
+        <span class="pro">最克制、印刷感、編輯品味高</span>
+        <span class="pro">置頂多筆時不會顯眼到喧賓奪主</span>
+        <span class="con">無標籤文字，第一次來的使用者不知道意義</span>
+      </div>
+    </header>
+
+    <div class="news-list">
+      <a class="news-row" href="#" data-cat="announcement" data-pinned="1">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">公告</span><span class="sep">·</span><span>2024 / 11 / 06</span></div>
+          <h4 class="title">【公告】蔡紹華慈善濟助事業基金會併入本會</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="exhibition" data-pinned="1">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">共融藝術展</span><span class="sep">·</span><span>2022 / 12 / 23</span></div>
+          <h4 class="title">【共融藝術展】白與黑—王俠軍與原生藝術家</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="true-love" data-pinned="1">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">真愛多多</span><span class="sep">·</span><span>2018 / 03 / 08</span></div>
+          <h4 class="title">【敬邀】伯利恆早療暨融合教育中心落成典禮</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="meinong">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">美濃 / 搖籃</span><span class="sep">·</span><span>2022 / 12 / 21</span></div>
+          <h4 class="title">楊牧書房在美濃</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="podcast">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">Podcast</span><span class="sep">·</span><span>2022 / 12 / 14</span></div>
+          <h4 class="title">【Podcast】《楊牧的山風海雨》</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     V4 — 大卡 hero (第一筆) + 其餘 pinned 為次級
+     ============================================================ -->
+<section class="variant v4 alt" id="v4">
+  <div class="wrap">
+    <header class="variant-head">
+      <div class="titles">
+        <span class="vtag">V4</span>
+        <h2>大卡 hero — 第一筆置頂變成 featured</h2>
+        <p class="desc">最新一筆置頂（pinOrder 第一）變成大卡 hero，其餘置頂排成次級的小卡列，下方接一般列表。最有編輯雜誌感。</p>
+      </div>
+      <div class="pros-cons">
+        <span class="pro">視覺層次最強、訊號最明確</span>
+        <span class="pro">很適合搭配一張重點圖</span>
+        <span class="con">置頂只有 1 筆時 OK，&gt;3 筆時 secondary 列會擠</span>
+        <span class="con">需要好的主圖</span>
+      </div>
+    </header>
+
+    <!-- Hero: 第一筆 -->
+    <a class="pin-hero" href="#" data-cat="announcement">
+      <div class="pin-hero-image">
+        <span class="img-fill" style="background:linear-gradient(135deg,#5a0808,#1a0202)"></span>
+        <span class="pin-mark">置頂</span>
+      </div>
+      <div class="pin-hero-text">
+        <div class="meta"><span class="cat">公告</span><span class="sep">·</span><span>2024 / 11 / 06</span></div>
+        <h3>【公告】蔡紹華慈善濟助事業基金會併入本會</h3>
+        <span class="action">繼續閱讀 →</span>
+      </div>
+    </a>
+
+    <!-- Secondary: 剩下的 pinned (2 筆) -->
+    <div class="pin-secondary">
+      <a class="news-row" href="#" data-cat="exhibition" data-pinned="1">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="pin-mini">置頂</span><span class="cat">共融藝術展</span></div>
+          <h4 class="title">【共融藝術展】白與黑—王俠軍與原生藝術家</h4>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="true-love" data-pinned="1">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="pin-mini">置頂</span><span class="cat">真愛多多</span></div>
+          <h4 class="title">【敬邀】伯利恆早療暨融合教育中心落成典禮</h4>
+        </div>
+      </a>
+    </div>
+
+    <div class="news-list">
+      <a class="news-row" href="#" data-cat="meinong">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">美濃 / 搖籃</span><span class="sep">·</span><span>2022 / 12 / 21</span></div>
+          <h4 class="title">楊牧書房在美濃</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="podcast">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">Podcast</span><span class="sep">·</span><span>2022 / 12 / 14</span></div>
+          <h4 class="title">【Podcast】《楊牧的山風海雨》</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="literature">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">文學閱讀月</span><span class="sep">·</span><span>2022 / 11 / 29</span></div>
+          <h4 class="title">從鍾理和的天地書齋到楊牧書房</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     V5 — 角絲帶 corner ribbon
+     ============================================================ -->
+<section class="variant v5" id="v5">
+  <div class="wrap">
+    <header class="variant-head">
+      <div class="titles">
+        <span class="vtag">V5</span>
+        <h2>角絲帶 — 卡角 corner ribbon</h2>
+        <p class="desc">置頂條目左上角斜切 ribbon「置頂」字樣，視覺像郵票或標籤。最有「裝飾感」、辨識度最高。</p>
+      </div>
+      <div class="pros-cons">
+        <span class="pro">辨識度最高、不用看文字就知道是置頂</span>
+        <span class="pro">符合「公益機構」溫度感</span>
+        <span class="con">最華麗，跟 La Vie 編輯系極簡感最遠</span>
+        <span class="con">archive 編年體模式下不適用</span>
+      </div>
+    </header>
+
+    <div class="news-list">
+      <a class="news-row" href="#" data-cat="announcement" data-pinned="1">
+        <span class="pin-ribbon">置頂</span>
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">公告</span><span class="sep">·</span><span>2024 / 11 / 06</span></div>
+          <h4 class="title">【公告】蔡紹華慈善濟助事業基金會併入本會</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="exhibition" data-pinned="1">
+        <span class="pin-ribbon">置頂</span>
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">共融藝術展</span><span class="sep">·</span><span>2022 / 12 / 23</span></div>
+          <h4 class="title">【共融藝術展】白與黑—王俠軍與原生藝術家</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="true-love" data-pinned="1">
+        <span class="pin-ribbon">置頂</span>
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">真愛多多</span><span class="sep">·</span><span>2018 / 03 / 08</span></div>
+          <h4 class="title">【敬邀】伯利恆早療暨融合教育中心落成典禮</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="meinong">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">美濃 / 搖籃</span><span class="sep">·</span><span>2022 / 12 / 21</span></div>
+          <h4 class="title">楊牧書房在美濃</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+      <a class="news-row" href="#" data-cat="podcast">
+        <figure class="news-image"><span class="img-fill"></span></figure>
+        <div class="news-body">
+          <div class="meta"><span class="cat">Podcast</span><span class="sep">·</span><span>2022 / 12 / 14</span></div>
+          <h4 class="title">【Podcast】《楊牧的山風海雨》</h4>
+          <span class="action">繼續閱讀 →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="compare-footer">
+  <p>挑出方向後告訴我，會把選定版本套回 news.html 並移除設計控制條</p>
+  <a class="back" href="news.html">← 回最新消息</a>
+</footer>
+
+</body>
+</html>
