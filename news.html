@@ -50,30 +50,17 @@
   .app-nav a.is-external:hover{color:#6B4423;background:#F4EDE0}
   .app-nav a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
 
-  /* ============ SUB-NAV (分類切換 — 跟 actions.html 同套) ============ */
-  .sub-nav{background:#fff;position:sticky;top:140px;z-index:48;display:flex;justify-content:center;align-items:stretch;padding:var(--sp-3) var(--sp-6) 19px;flex-wrap:wrap}
-  .sub-nav .item{padding:0 var(--sp-5);font-size:var(--t-meta);letter-spacing:1.5px;color:#666;font-weight:500;position:relative;line-height:1.75;cursor:pointer;transition:color .18s;background:none;border:0;font-family:inherit;text-decoration:none}
+  /* ============ SUB-NAV (年份 tabs) ============ */
+  .sub-nav{background:#fff;position:sticky;top:140px;z-index:48;display:flex;justify-content:center;align-items:stretch;padding:var(--sp-3) var(--sp-6);flex-wrap:wrap;border-bottom:1px solid var(--line);font-family:"IBM Plex Serif",sans-serif}
+  .sub-nav .item{padding:var(--sp-3) var(--sp-5);font-size:var(--t-body-s);letter-spacing:2px;color:#666;font-weight:500;position:relative;cursor:pointer;transition:color .18s;background:none;border:0;font-family:inherit;text-decoration:none}
   .sub-nav .item:hover{color:var(--brand)}
   .sub-nav .item.on{color:var(--brand);font-weight:700}
-  .sub-nav .item.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-6px;width:24px;height:2px;background:var(--brand)}
-
-  /* ============ SUB-NAV (chip 變體) ============ */
-  body[data-cat-ui="chips"] .sub-nav{padding:var(--sp-5) var(--sp-6);gap:var(--sp-3);justify-content:center}
-  body[data-cat-ui="chips"] .sub-nav .item{padding:var(--sp-2) var(--sp-4);border:1px solid var(--line);border-radius:999px;color:var(--body);background:#fff;line-height:1.5;letter-spacing:1px}
-  body[data-cat-ui="chips"] .sub-nav .item:hover{border-color:var(--brand);color:var(--brand)}
-  body[data-cat-ui="chips"] .sub-nav .item.on{background:var(--brand);color:#fff;border-color:var(--brand);font-weight:600}
-  body[data-cat-ui="chips"] .sub-nav .item.on::after{display:none}
-
-  /* ============ SUB-NAV (年份 tabs 變體) ============ */
-  body[data-cat-ui="years"] .sub-nav{padding:var(--sp-3) var(--sp-6);gap:0;border-bottom:1px solid var(--line);font-family:"IBM Plex Serif",sans-serif}
-  body[data-cat-ui="years"] .sub-nav .item{padding:var(--sp-3) var(--sp-5);font-size:var(--t-body-s);letter-spacing:2px;font-weight:500}
-  body[data-cat-ui="years"] .sub-nav .item.on{font-weight:700}
-  body[data-cat-ui="years"] .sub-nav .item.on::after{bottom:-1px}
+  .sub-nav .item.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-1px;width:24px;height:2px;background:var(--brand)}
 
   /* ============ LIST SECTION ============ */
   .list-section{padding:var(--sp-8) 0 var(--sp-10);background:#fff}
 
-  /* ===== 置頂區塊 (variant: separated) — header + divider ===== */
+  /* ===== 置頂區塊 ===== */
   .pinned-header{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink);padding-bottom:var(--sp-4);margin-bottom:var(--sp-6)}
   .pinned-header h2{font-size:var(--t-title);font-weight:700;letter-spacing:1.5px;color:var(--ink);display:flex;align-items:center;gap:var(--sp-3)}
   .pinned-header h2::before{content:"";display:inline-block;width:28px;height:28px;background:url('images/lucky-clover.jpg') center/contain no-repeat;flex-shrink:0}
@@ -83,10 +70,10 @@
   .list-header h2{font-size:var(--t-title);font-weight:700;letter-spacing:1.5px;color:var(--ink)}
   .list-header .count{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;color:var(--muted);font-weight:600;text-transform:uppercase}
 
-  /* ===== ACTIONS-PATTERN (default structure): 圖左文右大列表 ===== */
+  /* ===== 大列表 row (跟 actions.html 同尺寸：720×405 16:9) ===== */
   .news-list{display:flex;flex-direction:column}
   .news-row{
-    display:grid;grid-template-columns:480px 1fr;gap:var(--sp-7);
+    display:grid;grid-template-columns:720px 1fr;gap:var(--sp-8);
     padding:var(--sp-4);margin:0 -var(--sp-4) var(--sp-1);
     align-items:center;transition:background .2s;text-decoration:none;color:inherit;
     position:relative;
@@ -106,7 +93,7 @@
   .news-row[data-cat="charity"]      .news-image{background:linear-gradient(135deg,#704830,#2a1a0a)}
   .news-row[data-cat="lecture"]      .news-image{background:linear-gradient(135deg,#888,#3a3a3a)}
 
-  .news-body{min-width:0;padding-right:var(--sp-4)}
+  .news-body{min-width:0;padding-right:var(--sp-5)}
   .news-body .meta{display:flex;gap:var(--sp-3);align-items:center;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:var(--sp-4)}
   .news-body .meta .cat{color:var(--brand);font-weight:700}
   .news-body .meta .sep{color:var(--line)}
@@ -115,87 +102,10 @@
   .news-body .article-action{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);font-weight:600;border-bottom:1px solid var(--ink);padding-bottom:3px;display:inline-block;transition:.2s}
   .news-row:hover .article-action{color:var(--brand);border-color:var(--brand)}
 
-  /* ===== GRID structure: 3 欄 9:5 ===== */
-  body[data-structure="grid"] .news-list{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-7) var(--sp-6)}
-  body[data-structure="grid"] .news-row{grid-template-columns:1fr;gap:var(--sp-4);padding:0;margin:0;align-items:stretch}
-  body[data-structure="grid"] .news-row:hover{background:transparent}
-  body[data-structure="grid"] .news-image{aspect-ratio:9/5}
-  body[data-structure="grid"] .news-body{padding:0}
-  body[data-structure="grid"] .news-body .title{font-size:var(--t-title-s);letter-spacing:.5px}
-  body[data-structure="grid"] .news-body .article-action{display:none}
-
-  /* ===== ARCHIVE structure: 編年體緊湊條列 ===== */
-  body[data-structure="archive"] .news-list{display:flex;flex-direction:column;border-top:1px solid var(--line)}
-  body[data-structure="archive"] .news-row{display:grid;grid-template-columns:120px 1fr auto;gap:var(--sp-5);align-items:center;padding:var(--sp-4) var(--sp-2);margin:0;border-bottom:1px solid var(--line)}
-  body[data-structure="archive"] .news-row .news-image{display:none}
-  body[data-structure="archive"] .news-row .news-body{padding:0;display:contents}
-  body[data-structure="archive"] .news-row .meta{margin:0;font-size:var(--t-meta);letter-spacing:1.5px;text-transform:none}
-  body[data-structure="archive"] .news-row .meta .cat{display:none}
-  body[data-structure="archive"] .news-row .meta .sep{display:none}
-  body[data-structure="archive"] .news-row .title{font-size:var(--t-body);line-height:1.6;letter-spacing:0;margin:0;-webkit-line-clamp:1;font-weight:500}
-  body[data-structure="archive"] .news-row .article-action{font-size:var(--t-caption);border:0;padding:0;color:var(--muted)}
-  body[data-structure="archive"] .news-row:hover .article-action{color:var(--brand)}
-  body[data-structure="archive"] .pinned-header,
-  body[data-structure="archive"] .pinned-divider,
-  body[data-structure="archive"] .list-header{margin-bottom:var(--sp-4)}
-  .year-divider{display:flex;align-items:baseline;gap:var(--sp-4);padding:var(--sp-6) 0 var(--sp-3);border-bottom:1px solid var(--ink);margin-bottom:var(--sp-2)}
-  .year-divider .yr{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-title-l);font-weight:800;letter-spacing:-1px;color:var(--ink)}
-  .year-divider .lbl{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:600}
-  body:not([data-structure="archive"]) .year-divider{display:none}
-
   /* ===== 圖片：混合策略 — 有圖→漸層 placeholder, 沒圖→文字卡 ===== */
   .news-row[data-has-image="0"] .news-image{background:#F8F4EE !important;display:flex;align-items:center;justify-content:center;padding:var(--sp-5)}
   .news-row[data-has-image="0"] .news-image::after{display:none}
   .news-row[data-has-image="0"] .news-image::before{content:attr(data-cat-label);color:var(--brand);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:3px;text-transform:uppercase;font-weight:700;z-index:2}
-
-  /* ===== 置頂視覺變體 ===== */
-  /* V1 separated (default) — pinned-section 完整呈現 */
-  /* V2 badge inline — 不顯示 pinned-header / divider, pinned 卡掛 badge */
-  body[data-pin="badge"] .pinned-header,
-  body[data-pin="badge"] .pinned-divider,
-  body[data-pin="badge"] .list-header,
-  body[data-pin="border"] .pinned-header,
-  body[data-pin="border"] .pinned-divider,
-  body[data-pin="border"] .list-header,
-  body[data-pin="ribbon"] .pinned-header,
-  body[data-pin="ribbon"] .pinned-divider,
-  body[data-pin="ribbon"] .list-header{display:none}
-
-  body[data-pin="badge"] .news-row[data-pinned="1"]{background:var(--brand-tint)}
-  body[data-pin="badge"] .news-row[data-pinned="1"]:hover{background:#F5DCDC}
-  .pin-badge{display:none;align-items:center;gap:var(--sp-1);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-right:var(--sp-3)}
-  .pin-badge::before{content:"";display:inline-block;width:16px;height:16px;background:url('images/lucky-clover.jpg') center/contain no-repeat}
-  body[data-pin="badge"] .news-row[data-pinned="1"] .pin-badge{display:inline-flex}
-
-  body[data-pin="border"] .news-row[data-pinned="1"]{border-left:4px solid var(--brand);padding-left:var(--sp-5)}
-  body[data-structure="archive"] body[data-pin="border"] .news-row[data-pinned="1"]{padding-left:var(--sp-4)}
-
-  /* V4 hero: 第一筆 pinned 變大卡 hero, 其餘 pinned 用 separated 樣式但無 section header */
-  .pin-hero{display:none;text-decoration:none;color:inherit;margin-bottom:var(--sp-7)}
-  body[data-pin="hero"] .pin-hero{display:grid;grid-template-columns:1.4fr 1fr;min-height:380px;background:#fff;border:1px solid var(--line);transition:background .2s}
-  body[data-pin="hero"] .pin-hero:hover{background:var(--line-soft)}
-  .pin-hero-image{position:relative;overflow:hidden;background:linear-gradient(135deg,#5a0808,#1a0202)}
-  .pin-hero-image .img-fill{position:absolute;inset:0;background:inherit;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
-  .pin-hero:hover .pin-hero-image .img-fill{transform:scale(1.05)}
-  .pin-hero-image::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.5) 100%);z-index:1}
-  .pin-hero-image .pin-mark{position:absolute;top:24px;left:24px;display:inline-flex;align-items:center;gap:var(--sp-2);background:var(--brand);color:#fff;padding:var(--sp-2) var(--sp-3);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;font-weight:700;z-index:2}
-  .pin-hero-image .pin-mark::before{content:"";display:inline-block;width:8px;height:8px;background:#fff;transform:rotate(45deg)}
-  .pin-hero-text{padding:var(--sp-7);display:flex;flex-direction:column;justify-content:center}
-  .pin-hero-text .meta{display:flex;gap:var(--sp-3);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:var(--sp-4);align-items:center}
-  .pin-hero-text .meta .cat{color:var(--brand);font-weight:700}
-  .pin-hero-text h2{font-size:var(--t-display);line-height:1.35;font-weight:700;letter-spacing:1px;color:var(--ink);margin-bottom:var(--sp-5);transition:color .2s}
-  .pin-hero:hover h2{color:var(--brand)}
-  .pin-hero-text .article-action{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);font-weight:600;border-bottom:1px solid var(--ink);padding-bottom:3px;display:inline-block;align-self:flex-start;transition:.2s}
-  .pin-hero:hover .article-action{color:var(--brand);border-color:var(--brand)}
-  body[data-pin="hero"] .pinned-header,
-  body[data-pin="hero"] .pinned-divider,
-  body[data-pin="hero"] .list-header{display:none}
-
-  /* V5 ribbon — 卡角絲帶 */
-  .pin-ribbon{display:none;position:absolute;top:0;left:0;background:var(--brand);color:#fff;padding:var(--sp-2) var(--sp-4) var(--sp-2) var(--sp-3);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2px;text-transform:uppercase;font-weight:700;z-index:3;clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%)}
-  body[data-pin="ribbon"] .news-row[data-pinned="1"] .pin-ribbon{display:inline-block}
-  body[data-pin="ribbon"][data-structure="archive"] .news-row[data-pinned="1"] .pin-ribbon{display:none}
-  body[data-pin="ribbon"][data-structure="archive"] .news-row[data-pinned="1"]{background:var(--brand-tint)}
 
   /* ===== Load more ===== */
   .load-more-wrap{display:flex;justify-content:center;margin-top:var(--sp-7)}
@@ -203,32 +113,12 @@
   .load-more-btn::after{content:"→"}
   .load-more-btn:hover{background:var(--ink);color:#fff}
 
-  /* ===== Empty state (一般列表) ===== */
+  /* ===== Empty state ===== */
   .empty-state{padding:var(--sp-10) 0;text-align:center;color:var(--muted)}
   .empty-state .e-lat{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:var(--sp-4);display:flex;align-items:center;justify-content:center;gap:var(--sp-4)}
   .empty-state .e-lat::before,.empty-state .e-lat::after{content:"";width:24px;height:1px;background:var(--line)}
   .empty-state h3{font-size:var(--t-title-l);letter-spacing:1.5px;color:#999;font-weight:500;margin-bottom:var(--sp-4);line-height:1.5}
   .empty-state p{font-size:var(--t-body);color:var(--muted);line-height:1.85;max-width:480px;margin:0 auto;letter-spacing:0}
-
-  /* ============ CONTROL PANEL (頁面內常駐切換條) ============ */
-  .ctl{position:fixed;right:24px;bottom:80px;z-index:90;background:#fff;border:1px solid var(--ink);box-shadow:0 12px 40px rgba(0,0,0,.18);width:320px;max-height:calc(100vh - 160px);display:flex;flex-direction:column;transform:translateX(calc(100% + 32px));transition:transform .3s cubic-bezier(.4,0,.2,1);font-family:"IBM Plex Serif",sans-serif}
-  .ctl.on{transform:translateX(0)}
-  .ctl-tab{position:absolute;top:-1px;right:100%;background:var(--ink);color:#fff;padding:var(--sp-3) var(--sp-3);writing-mode:vertical-rl;font-size:var(--t-caption);letter-spacing:2px;text-transform:uppercase;font-weight:600;cursor:pointer;border:0;border-right:1px solid var(--ink);height:auto;line-height:1.4}
-  .ctl-tab:hover{background:var(--brand)}
-  .ctl-head{padding:var(--sp-4) var(--sp-5);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
-  .ctl-head h3{font-size:var(--t-body);letter-spacing:2px;text-transform:uppercase;color:var(--ink);font-weight:700;font-family:"IBM Plex Serif",sans-serif}
-  .ctl-head .reset{font-size:var(--t-caption);letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:600;cursor:pointer;background:none;border:0}
-  .ctl-head .reset:hover{color:var(--brand)}
-  .ctl-body{padding:var(--sp-3) var(--sp-5) var(--sp-5);overflow-y:auto;flex:1}
-  .ctl-group{padding:var(--sp-4) 0;border-bottom:1px solid var(--line-soft)}
-  .ctl-group:last-child{border-bottom:0}
-  .ctl-group .lbl{font-size:var(--t-caption);letter-spacing:2px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:var(--sp-3);display:block}
-  .ctl-opts{display:flex;flex-wrap:wrap;gap:var(--sp-1)}
-  .ctl-opts button{padding:var(--sp-1) var(--sp-3);font-size:var(--t-caption);letter-spacing:.5px;color:var(--body);border:1px solid var(--line);background:#fff;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.6;transition:all .15s;cursor:pointer}
-  .ctl-opts button:hover{border-color:var(--ink);color:var(--ink)}
-  .ctl-opts button.on{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:600}
-  .ctl-foot{padding:var(--sp-3) var(--sp-5);border-top:1px solid var(--line);font-size:var(--t-caption);letter-spacing:1px;color:var(--muted);text-align:center;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
-  .ctl-foot a{color:var(--brand);font-weight:600}
 
   /* ============ DONATE CARD ============ */
   .donate-band{padding:var(--sp-9) 0;background:#fff}
@@ -320,19 +210,15 @@
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 1100px){
-    .sub-nav{padding:var(--sp-3) var(--sp-4) var(--sp-4)}
-    .sub-nav .item{padding:0 var(--sp-4);letter-spacing:1px;font-size:11.5px}
+    .sub-nav{padding:var(--sp-3) var(--sp-4)}
+    .sub-nav .item{padding:var(--sp-3) var(--sp-4);letter-spacing:1.5px}
     .sub-nav .item.on::after{width:20px}
     .app-nav,.app-header,.sub-nav{position:static}
-    .news-row{grid-template-columns:360px 1fr;gap:var(--sp-6)}
-    body[data-structure="grid"] .news-list{grid-template-columns:repeat(2,1fr)}
-    body[data-structure="archive"] .news-row{grid-template-columns:100px 1fr auto}
-    body[data-pin="hero"] .pin-hero{grid-template-columns:1fr;min-height:0}
-    .pin-hero-text{padding:var(--sp-6)}
-    .pin-hero-text h2{font-size:var(--t-display)}
+    .news-row{grid-template-columns:480px 1fr;gap:var(--sp-7)}
+    .news-body{padding-right:0}
+    .news-body .title{font-size:var(--t-title);letter-spacing:1.5px}
     .donate-card{grid-template-columns:1fr;gap:var(--sp-7);padding:var(--sp-7)}
     .donate-stats{border-left:0;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:var(--sp-6)}
-    .ctl{width:280px}
   }
   @media (max-width: 720px){
     .app-header .row{grid-template-columns:auto 1fr auto;gap:var(--sp-4);padding:var(--sp-4) var(--sp-4)}
@@ -343,18 +229,14 @@
     .wrap{padding:0 var(--sp-4)}
     .list-section{padding:var(--sp-6) 0 var(--sp-8)}
     .news-row{grid-template-columns:1fr;gap:var(--sp-4);padding:var(--sp-4);margin:0 -var(--sp-4) 3px}
-    body[data-structure="grid"] .news-list{grid-template-columns:1fr;gap:var(--sp-5)}
-    body[data-structure="archive"] .news-row{grid-template-columns:auto 1fr;gap:var(--sp-3);padding:var(--sp-3) var(--sp-2)}
-    body[data-structure="archive"] .news-row .article-action{display:none}
-    body[data-pin="hero"] .pin-hero-text h2{font-size:var(--t-title-l)}
+    .news-body .title{font-size:var(--t-title);letter-spacing:1px;margin-bottom:var(--sp-4)}
     .donate-band{padding:var(--sp-7) var(--sp-4)}
     .donate-card{padding:var(--sp-6) var(--sp-5);gap:var(--sp-6)}
-    .ctl{width:calc(100vw - 32px);right:16px;bottom:80px;max-height:60vh}
-    .ctl-tab{writing-mode:horizontal-tb;right:0;top:-40px;border-bottom:0}
+    .empty-state{padding:var(--sp-9) var(--sp-4)}
   }
 </style>
 </head>
-<body data-structure="actions" data-cat-ui="subnav" data-date-fmt="slash" data-pin="separated" data-cat="all">
+<body>
 
 <!-- ===== HEADER ===== -->
 <header class="app-header">
@@ -395,21 +277,8 @@
   </div>
 </nav>
 
-<!-- ===== SUB-NAV (8 主題群 + 全部) ===== -->
-<nav class="sub-nav" id="subNav" aria-label="最新消息分類">
-  <a class="item on"  href="#all"          data-cat="all">全部</a>
-  <a class="item"     href="#announcement" data-cat="announcement">公告</a>
-  <a class="item"     href="#literature"   data-cat="literature">文學閱讀</a>
-  <a class="item"     href="#podcast"      data-cat="podcast">Podcast</a>
-  <a class="item"     href="#exhibition"   data-cat="exhibition">共融藝術</a>
-  <a class="item"     href="#meinong"      data-cat="meinong">美濃搖籃</a>
-  <a class="item"     href="#true-love"    data-cat="true-love">真愛多多</a>
-  <a class="item"     href="#charity"      data-cat="charity">公益行動</a>
-  <a class="item"     href="#lecture"      data-cat="lecture">講堂課程</a>
-</nav>
-
-<!-- 年份 tabs (data-cat-ui=years 時切換出來) -->
-<nav class="sub-nav" id="yearNav" aria-label="年份" hidden>
+<!-- ===== SUB-NAV (年份 tabs) ===== -->
+<nav class="sub-nav" id="yearNav" aria-label="年份">
   <a class="item on" href="#all"  data-year="all">全部</a>
   <a class="item"    href="#2024" data-year="2024">2024</a>
   <a class="item"    href="#2022" data-year="2022">2022</a>
@@ -424,39 +293,26 @@
 <section class="list-section">
   <div class="wrap">
 
-    <!-- V4 hero (第一筆置頂) — 只在 data-pin=hero 時出現 -->
-    <a class="pin-hero" id="pinHero" href="#">
-      <div class="pin-hero-image">
-        <span class="img-fill"></span>
-        <span class="pin-mark">置頂</span>
-      </div>
-      <div class="pin-hero-text">
-        <div class="meta"><span class="cat"></span><span class="date"></span></div>
-        <h2></h2>
-        <span class="article-action">繼續閱讀 →</span>
-      </div>
-    </a>
-
-    <!-- 置頂區塊 (separated 變體用 header；其他變體 header 隱藏) -->
+    <!-- 置頂區塊 — 全站置頂永遠最上, 不受年份過濾 -->
     <div class="pinned-block" id="pinnedBlock">
       <div class="pinned-header">
         <h2>置頂消息 <span class="count" id="pinnedCount"></span></h2>
       </div>
-      <div class="news-list" id="pinnedList"><!-- pinned items by JS --></div>
+      <div class="news-list" id="pinnedList"></div>
       <div class="pinned-divider"></div>
     </div>
 
-    <!-- 一般列表 -->
+    <!-- 一般列表 — 受年份過濾 -->
     <div class="list-block">
       <div class="list-header">
         <h2 id="listTitle">全部消息</h2>
         <span class="count" id="listCount"></span>
       </div>
-      <div class="news-list" id="newsList"><!-- items by JS --></div>
+      <div class="news-list" id="newsList"></div>
       <div class="empty-state" id="emptyState" hidden>
         <p class="e-lat">No Items</p>
-        <h3>此分類目前無消息</h3>
-        <p>請切換其他分類，或檢視「全部」消息。</p>
+        <h3>此年份目前無消息</h3>
+        <p>請切換其他年份，或檢視「全部」消息。</p>
       </div>
       <div class="load-more-wrap" id="loadMoreWrap" hidden>
         <button class="load-more-btn" id="loadMoreBtn">看更多</button>
@@ -465,60 +321,6 @@
 
   </div>
 </section>
-
-<!-- ===== CONTROL PANEL ===== -->
-<aside class="ctl" id="ctl" aria-label="設計變體切換">
-  <button class="ctl-tab" id="ctlTab" type="button">Design Controls</button>
-  <div class="ctl-head">
-    <h3>Design Variants</h3>
-    <button class="reset" id="ctlReset" type="button">Reset</button>
-  </div>
-  <div class="ctl-body">
-
-    <div class="ctl-group">
-      <span class="lbl">結構 Structure</span>
-      <div class="ctl-opts" data-state="structure">
-        <button data-val="actions">大列表</button>
-        <button data-val="grid">3 欄 grid</button>
-        <button data-val="archive">編年 archive</button>
-      </div>
-    </div>
-
-    <div class="ctl-group">
-      <span class="lbl">分類 UI</span>
-      <div class="ctl-opts" data-state="cat-ui">
-        <button data-val="subnav">sub-nav</button>
-        <button data-val="chips">chips</button>
-        <button data-val="years">年份 tabs</button>
-      </div>
-    </div>
-
-    <div class="ctl-group">
-      <span class="lbl">日期格式</span>
-      <div class="ctl-opts" data-state="date-fmt">
-        <button data-val="slash">2024 / 11 / 06</button>
-        <button data-val="dot">2024.11.06</button>
-        <button data-val="serif">Nov 6, 2024</button>
-        <button data-val="cn">2024 年 11 月 6 日</button>
-      </div>
-    </div>
-
-    <div class="ctl-group">
-      <span class="lbl">置頂視覺</span>
-      <div class="ctl-opts" data-state="pin">
-        <button data-val="separated">V1 分區塊</button>
-        <button data-val="badge">V2 inline badge</button>
-        <button data-val="border">V3 左邊條</button>
-        <button data-val="hero">V4 大卡 hero</button>
-        <button data-val="ribbon">V5 角絲帶</button>
-      </div>
-    </div>
-
-  </div>
-  <div class="ctl-foot">
-    定稿後此面板會移除 · <a href="news-pin-compare.html">置頂 5 版並列頁 →</a>
-  </div>
-</aside>
 
 <!-- ===== DONATE BAND ===== -->
 <section class="donate-band">
@@ -647,107 +449,66 @@
     lecture:      '愛的講堂',
   };
 
+  /* image: true = 有真實照片（CMS 上有上圖）; 無 image 欄位 = 純文字（公告/Podcast/online 講座） */
   const NEWS_ITEMS = [
     { id:'2024-merge',           date:'2024-11-06', cat:'announcement', title:'【公告】蔡紹華慈善濟助事業基金會併入本會', isPinned:true,  pinOrder:1 },
-    { id:'2022-blackwhite',      date:'2022-12-23', cat:'exhibition',   title:'【共融藝術展】白與黑—王俠軍與原生藝術家', isPinned:true,  pinOrder:2, image:true  },
-    { id:'2022-yangmu-meinong',  date:'2022-12-21', cat:'meinong',      title:'楊牧書房在美濃', image:true  },
+    { id:'2022-blackwhite',      date:'2022-12-23', cat:'exhibition',   title:'【共融藝術展】白與黑—王俠軍與原生藝術家', isPinned:true,  pinOrder:2, image:true },
+    { id:'2022-yangmu-meinong',  date:'2022-12-21', cat:'meinong',      title:'楊牧書房在美濃', image:true },
     { id:'2022-yangmu-pod',      date:'2022-12-14', cat:'podcast',      title:'【Podcast】《楊牧的山風海雨》' },
     { id:'2022-yangmu-online',   date:'2022-12-11', cat:'literature',   title:'線上閱讀楊牧老師 須文蔚老師與談' },
-    { id:'2022-zhongli',         date:'2022-11-29', cat:'literature',   title:'從鍾理和的天地書齋到楊牧書房', image:true  },
-    { id:'2022-yangmu-lecture',  date:'2022-11-28', cat:'literature',   title:'【線上講座資訊】楊牧的山風海雨', image:true  },
-    { id:'2022-huaxuan',         date:'2022-10-13', cat:'lecture',      title:'【課程資訊】繁花盛景的花園街景', image:true  },
-    { id:'2022-cradle-yc',       date:'2022-09-18', cat:'meinong',      title:'【講座資訊】我把辦公室變搖籃! 搖籃場', image:true  },
-    { id:'2022-cradle-ks',       date:'2022-09-06', cat:'meinong',      title:'【講座資訊】我把辦公室變搖籃! 高市圖場', image:true  },
-    { id:'2022-hakka',           date:'2022-07-28', cat:'lecture',      title:'【講座資訊】你是最後一代的客家人嗎？', image:true  },
-    { id:'2022-zhengchouyu',     date:'2022-07-22', cat:'literature',   title:'【文學＆共融藝術展】詩人 鄭愁予＆一樣的美', image:true  },
+    { id:'2022-zhongli',         date:'2022-11-29', cat:'literature',   title:'從鍾理和的天地書齋到楊牧書房', image:true },
+    { id:'2022-yangmu-lecture',  date:'2022-11-28', cat:'literature',   title:'【線上講座資訊】楊牧的山風海雨', image:true },
+    { id:'2022-huaxuan',         date:'2022-10-13', cat:'lecture',      title:'【課程資訊】繁花盛景的花園街景', image:true },
+    { id:'2022-cradle-yc',       date:'2022-09-18', cat:'meinong',      title:'【講座資訊】我把辦公室變搖籃! 搖籃場', image:true },
+    { id:'2022-cradle-ks',       date:'2022-09-06', cat:'meinong',      title:'【講座資訊】我把辦公室變搖籃! 高市圖場', image:true },
+    { id:'2022-hakka',           date:'2022-07-28', cat:'lecture',      title:'【講座資訊】你是最後一代的客家人嗎？', image:true },
+    { id:'2022-zhengchouyu',     date:'2022-07-22', cat:'literature',   title:'【文學＆共融藝術展】詩人 鄭愁予＆一樣的美', image:true },
     { id:'2022-zhengchouyu-pod', date:'2022-07-08', cat:'podcast',      title:'【Podcast】《鄭愁予的浪子傳奇》' },
     { id:'2022-yaxian-pod',      date:'2022-06-20', cat:'podcast',      title:'【Podcast】《瘂弦的遠方與家鄉》' },
     { id:'2022-yu-pod',          date:'2022-06-10', cat:'podcast',      title:'【Podcast】《余光中的愛與希望》' },
-    { id:'2022-fanwocun',        date:'2022-02-25', cat:'literature',   title:'余師母-范我存參訪「余光中的愛與希望」', image:true  },
+    { id:'2022-fanwocun',        date:'2022-02-25', cat:'literature',   title:'余師母-范我存參訪「余光中的愛與希望」', image:true },
     { id:'2022-chenxinghui',     date:'2022-02-20', cat:'literature',   title:'余光中的愛與希望線上開講 陳幸蕙老師與談' },
-    { id:'2022-yu-online',       date:'2022-02-09', cat:'literature',   title:'【線上講座資訊】余光中的愛與希望', image:true  },
-    { id:'2018-bethlehem-open',  date:'2018-03-08', cat:'true-love',    title:'【敬邀】伯利恆早療暨融合教育中心落成典禮', isPinned:true,  pinOrder:3, image:true  },
-    { id:'2017-bethlehem-scene', date:'2017-10-25', cat:'true-love',    title:'「伯利恆早療暨融合教育中心」現場實景！', image:true  },
-    { id:'2017-rotary',          date:'2017-10-18', cat:'charity',      title:'一同走在愛與希望的路上—中央扶輪社', image:true  },
-    { id:'2017-luwei-car',       date:'2017-08-27', cat:'charity',      title:'真愛零距離 薛伯輝基金會贈車蘆葦啟智中心', image:true  },
-    { id:'2017-gan-id',          date:'2017-01-06', cat:'true-love',    title:'台灣有你揪甘心 林全院長頒發甘神父身分證', image:true  },
-    { id:'2016-bethlehem-beam',  date:'2016-10-17', cat:'true-love',    title:'永恆的印記—伯利恆早療暨融合教育中心上樑', image:true  },
-    { id:'2015-dimuer-award',    date:'2015-12-22', cat:'charity',      title:'地磨兒國小屏東縣鄉土歌謠比賽特優', image:true  },
-    { id:'2015-bethlehem-start', date:'2015-07-07', cat:'true-love',    title:'「伯利恆早療暨融合教育中心」歡喜開工！', image:true  },
-    { id:'2014-tainan-donate',   date:'2014-12-30', cat:'true-love',    title:'台南市長賴清德帶領慨捐甘惠忠神父 2,100 萬', image:true  },
-    { id:'2014-bethlehem-arch',  date:'2014-11-03', cat:'true-love',    title:'「伯利恆早療暨融合教育中心」建築發表會', image:true  },
-    { id:'2014-li',              date:'2014-07-30', cat:'lecture',      title:'【演講資訊】李家同《大量閱讀的重要性》', image:true  },
+    { id:'2022-yu-online',       date:'2022-02-09', cat:'literature',   title:'【線上講座資訊】余光中的愛與希望', image:true },
+    { id:'2018-bethlehem-open',  date:'2018-03-08', cat:'true-love',    title:'【敬邀】伯利恆早療暨融合教育中心落成典禮', isPinned:true,  pinOrder:3, image:true },
+    { id:'2017-bethlehem-scene', date:'2017-10-25', cat:'true-love',    title:'「伯利恆早療暨融合教育中心」現場實景！', image:true },
+    { id:'2017-rotary',          date:'2017-10-18', cat:'charity',      title:'一同走在愛與希望的路上—中央扶輪社', image:true },
+    { id:'2017-luwei-car',       date:'2017-08-27', cat:'charity',      title:'真愛零距離 薛伯輝基金會贈車蘆葦啟智中心', image:true },
+    { id:'2017-gan-id',          date:'2017-01-06', cat:'true-love',    title:'台灣有你揪甘心 林全院長頒發甘神父身分證', image:true },
+    { id:'2016-bethlehem-beam',  date:'2016-10-17', cat:'true-love',    title:'永恆的印記—伯利恆早療暨融合教育中心上樑', image:true },
+    { id:'2015-dimuer-award',    date:'2015-12-22', cat:'charity',      title:'地磨兒國小屏東縣鄉土歌謠比賽特優', image:true },
+    { id:'2015-bethlehem-start', date:'2015-07-07', cat:'true-love',    title:'「伯利恆早療暨融合教育中心」歡喜開工！', image:true },
+    { id:'2014-tainan-donate',   date:'2014-12-30', cat:'true-love',    title:'台南市長賴清德帶領慨捐甘惠忠神父 2,100 萬', image:true },
+    { id:'2014-bethlehem-arch',  date:'2014-11-03', cat:'true-love',    title:'「伯利恆早療暨融合教育中心」建築發表會', image:true },
+    { id:'2014-li',              date:'2014-07-30', cat:'lecture',      title:'【演講資訊】李家同《大量閱讀的重要性》', image:true },
     { id:'2014-hong',            date:'2014-05-17', cat:'lecture',      title:'【演講資訊】洪蘭《大腦與學習》' },
   ];
 
-  /* ============================================================
-     STATE
-     ============================================================ */
-  const STORAGE_KEY = 'lh-news-state';
-  const DEFAULT_STATE = {
-    structure:'actions', 'cat-ui':'subnav',
-    'date-fmt':'slash', pin:'separated',
-  };
-
-  function loadState(){
-    try{ const raw = localStorage.getItem(STORAGE_KEY); if (raw) return Object.assign({}, DEFAULT_STATE, JSON.parse(raw)); }catch(e){}
-    return Object.assign({}, DEFAULT_STATE);
-  }
-  function saveState(s){
-    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); }catch(e){}
-  }
-  const STATE = loadState();
-  let ACTIVE_CAT = 'all';   // sub-nav (cat) or year-nav (year)
-  let LIST_PAGE_SIZE = 8;
+  let ACTIVE_YEAR = 'all';
+  const LIST_PAGE_SIZE = 8;
   let LIST_SHOWN = LIST_PAGE_SIZE;
 
-  /* ============================================================
-     DATA helpers
-     ============================================================ */
-  function scopedItems(){
-    return NEWS_ITEMS.slice();
+  function pinnedItems(){
+    return NEWS_ITEMS.filter(it => it.isPinned).sort((a,b) => (a.pinOrder||0) - (b.pinOrder||0));
   }
-  function pinnedItems(items){
-    return items.filter(it => it.isPinned).sort((a,b) => (a.pinOrder||0) - (b.pinOrder||0));
-  }
-  function regularItems(items){
-    const base = items.filter(it => !it.isPinned);
-    if (STATE['cat-ui'] === 'years'){
-      if (ACTIVE_CAT === 'all') return base;
-      return base.filter(it => it.date.startsWith(ACTIVE_CAT));
-    }
-    if (ACTIVE_CAT === 'all') return base;
-    return base.filter(it => it.cat === ACTIVE_CAT);
+  function regularItems(){
+    const base = NEWS_ITEMS.filter(it => !it.isPinned);
+    if (ACTIVE_YEAR === 'all') return base;
+    return base.filter(it => it.date.startsWith(ACTIVE_YEAR));
   }
   function formatDate(iso){
     const [y,m,d] = iso.split('-');
-    const fmt = STATE['date-fmt'];
-    if (fmt === 'dot')   return `${y}.${m}.${d}`;
-    if (fmt === 'cn')    return `${y} 年 ${parseInt(m,10)} 月 ${parseInt(d,10)} 日`;
-    if (fmt === 'serif') {
-      const MN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      return `${MN[parseInt(m,10)-1]} ${parseInt(d,10)}, ${y}`;
-    }
-    return `${y} / ${m} / ${d}`;
+    return `${y}.${m}.${d}`;
   }
 
-  /* ============================================================
-     RENDER
-     ============================================================ */
-  function rowHtml(it, opts={}){
+  function rowHtml(it){
     const cat = CATEGORY_LABELS[it.cat] || it.cat;
     const date = formatDate(it.date);
     const hasImage = it.image ? '1' : '0';
-    const isPinned = it.isPinned ? '1' : '0';
     return `
-      <a class="news-row" href="news.html#${it.id}" data-cat="${it.cat}" data-has-image="${hasImage}" data-pinned="${isPinned}" data-cat-label="${cat}">
-        <span class="pin-ribbon">置頂</span>
-        <figure class="news-image">
-          <span class="img-fill"></span>
-        </figure>
+      <a class="news-row" href="news.html#${it.id}" data-cat="${it.cat}" data-has-image="${hasImage}" data-cat-label="${cat}">
+        <figure class="news-image"><span class="img-fill"></span></figure>
         <div class="news-body">
           <div class="meta">
-            <span class="pin-badge">置頂</span>
             <span class="cat">${cat}</span>
             <span class="sep">·</span>
             <span class="date">${date}</span>
@@ -759,76 +520,13 @@
     `;
   }
 
-  function archiveListHtml(items){
-    // 編年體：依年份分群, 插入 year-divider
-    const byYear = {};
-    items.forEach(it => {
-      const y = it.date.slice(0,4);
-      (byYear[y] = byYear[y] || []).push(it);
-    });
-    const years = Object.keys(byYear).sort().reverse();
-    return years.map(y => {
-      const list = byYear[y].sort((a,b)=>b.date.localeCompare(a.date));
-      const count = list.length;
-      return `<div class="year-divider"><span class="yr">${y}</span><span class="lbl">${count} entries</span></div>` +
-             list.map(it => rowHtml(it)).join('');
-    }).join('');
-  }
-
-  function renderPinHero(pins){
-    const el = document.getElementById('pinHero');
-    if (!pins.length){ el.style.display = 'none'; return; }
-    const it = pins[0];
-    el.href = `news.html#${it.id}`;
-    el.querySelector('.cat').textContent = CATEGORY_LABELS[it.cat] || it.cat;
-    el.querySelector('.date').textContent = formatDate(it.date);
-    el.querySelector('h2').textContent = it.title;
-    el.querySelector('.pin-hero-image').style.background = ''; // reset
-    // 用 data-cat 對應的漸層
-    const gradients = {
-      announcement:'linear-gradient(135deg,#5a0808,#1a0202)',
-      exhibition:  'linear-gradient(135deg,#3a3a3a,#0a0a0a)',
-      literature:  'linear-gradient(135deg,#604530,#2a1808)',
-      podcast:     'linear-gradient(135deg,#3a2828,#1a0808)',
-      meinong:     'linear-gradient(135deg,#a89070,#604530)',
-      'true-love': 'linear-gradient(135deg,#5a3a2a,#1a1010)',
-      charity:     'linear-gradient(135deg,#704830,#2a1a0a)',
-      lecture:     'linear-gradient(135deg,#888,#3a3a3a)',
-    };
-    el.querySelector('.pin-hero-image').style.background = gradients[it.cat] || gradients.announcement;
-  }
-
   function render(){
-    document.body.dataset.structure = STATE.structure;
-    document.body.dataset.catUi     = STATE['cat-ui'];
-    document.body.dataset.dateFmt   = STATE['date-fmt'];
-    document.body.dataset.pin       = STATE.pin;
+    document.querySelectorAll('#yearNav .item').forEach(a => a.classList.toggle('on', a.dataset.year === ACTIVE_YEAR));
 
-    // sub-nav vs year-nav 切換
-    const subNav  = document.getElementById('subNav');
-    const yearNav = document.getElementById('yearNav');
-    if (STATE['cat-ui'] === 'years'){
-      subNav.hidden = true;
-      yearNav.hidden = false;
-    } else {
-      subNav.hidden = false;
-      yearNav.hidden = true;
-    }
-    // 切換 nav UI 時 reset 當前選擇到 all
-    if ((STATE['cat-ui'] === 'years') !== (ACTIVE_CAT.match(/^\d{4}$/) !== null)){
-      ACTIVE_CAT = 'all';
-    }
-    document.querySelectorAll('#subNav .item').forEach(a => a.classList.toggle('on', a.dataset.cat === ACTIVE_CAT));
-    document.querySelectorAll('#yearNav .item').forEach(a => a.classList.toggle('on', a.dataset.year === ACTIVE_CAT));
+    const pins = pinnedItems();
+    const regs = regularItems();
 
-    const all = scopedItems();
-    const pins = pinnedItems(all);
-    const regs = regularItems(all);
-
-    // 1. PIN HERO (V4) — 只有 pin=hero 時可見, 渲染第一筆
-    renderPinHero(pins);
-
-    // 2. PINNED BLOCK
+    // 置頂區塊 — 永遠最上, 不被年份過濾
     const pinnedBlock = document.getElementById('pinnedBlock');
     const pinnedList  = document.getElementById('pinnedList');
     const pinnedCount = document.getElementById('pinnedCount');
@@ -837,132 +535,48 @@
     } else {
       pinnedBlock.hidden = false;
       pinnedCount.textContent = `${pins.length} items`;
-      // V4 hero 時, 第一筆已渲染成 hero, pinned list 只放剩下
-      let listPins = pins;
-      if (STATE.pin === 'hero') listPins = pins.slice(1);
-
-      if (STATE.structure === 'archive'){
-        pinnedList.innerHTML = archiveListHtml(listPins);
-      } else {
-        pinnedList.innerHTML = listPins.map(it => rowHtml(it)).join('');
-      }
-      // V4 hero 時若沒有剩下的, 整個 pinned block 隱藏
-      if (STATE.pin === 'hero' && listPins.length === 0){
-        pinnedBlock.hidden = true;
-      }
+      pinnedList.innerHTML = pins.map(rowHtml).join('');
     }
 
-    // V2/V3/V5 — 置頂跟一般合在同一份列表（pinned 先排在前）
-    const inlineMode = ['badge','border','ribbon'].includes(STATE.pin);
-    const newsList = document.getElementById('newsList');
-    const listTitle = document.getElementById('listTitle');
-    const listCount = document.getElementById('listCount');
-    const emptyState = document.getElementById('emptyState');
+    // 一般列表
+    const newsList     = document.getElementById('newsList');
+    const listTitle    = document.getElementById('listTitle');
+    const listCount    = document.getElementById('listCount');
+    const emptyState   = document.getElementById('emptyState');
     const loadMoreWrap = document.getElementById('loadMoreWrap');
 
-    let visible = regs;
-    if (inlineMode){
-      // 全部消息（含 pinned 排前）— 但 pinned 本身不被分類過濾, 永遠都在
-      visible = pins.concat(regs);
-      pinnedBlock.hidden = true;
-    }
+    listTitle.textContent = ACTIVE_YEAR === 'all' ? '全部消息' : `${ACTIVE_YEAR} 年消息`;
+    listCount.textContent = `${regs.length} items`;
 
-    // 分類標題
-    if (STATE['cat-ui'] === 'years'){
-      listTitle.textContent = ACTIVE_CAT === 'all' ? '全部消息' : `${ACTIVE_CAT} 年消息`;
-    } else {
-      listTitle.textContent = ACTIVE_CAT === 'all' ? '全部消息' : `${CATEGORY_LABELS[ACTIVE_CAT]}`;
-    }
-    listCount.textContent = `${visible.length} items`;
+    const shown = Math.min(LIST_SHOWN, regs.length);
+    const sliced = regs.slice(0, shown);
 
-    // 切分類時 reset paging
-    const shown = Math.min(LIST_SHOWN, visible.length);
-    const sliced = visible.slice(0, shown);
-
-    if (visible.length === 0){
+    if (regs.length === 0){
       newsList.innerHTML = '';
       emptyState.hidden = false;
       loadMoreWrap.hidden = true;
     } else {
       emptyState.hidden = true;
-      if (STATE.structure === 'archive'){
-        newsList.innerHTML = archiveListHtml(sliced);
-      } else {
-        newsList.innerHTML = sliced.map(it => rowHtml(it)).join('');
-      }
-      loadMoreWrap.hidden = shown >= visible.length;
+      newsList.innerHTML = sliced.map(rowHtml).join('');
+      loadMoreWrap.hidden = shown >= regs.length;
     }
   }
 
-  /* ============================================================
-     CONTROL PANEL
-     ============================================================ */
-  function bindControl(){
-    document.querySelectorAll('.ctl-opts').forEach(grp => {
-      const key = grp.dataset.state;
-      grp.querySelectorAll('button').forEach(btn => {
-        btn.classList.toggle('on', STATE[key] === btn.dataset.val);
-        btn.addEventListener('click', () => {
-          STATE[key] = btn.dataset.val;
-          saveState(STATE);
-          // 重整按鈕狀態
-          grp.querySelectorAll('button').forEach(b => b.classList.toggle('on', b === btn));
-          // 切到 chips/subnav/years 時 reset paging
-          LIST_SHOWN = LIST_PAGE_SIZE;
-          render();
-        });
-      });
-    });
-    // 控制條開關
-    const ctl = document.getElementById('ctl');
-    const tab = document.getElementById('ctlTab');
-    // 預設打開, 方便對齊時看
-    ctl.classList.add('on');
-    tab.addEventListener('click', () => ctl.classList.toggle('on'));
-    // Reset
-    document.getElementById('ctlReset').addEventListener('click', () => {
-      Object.assign(STATE, DEFAULT_STATE);
-      saveState(STATE);
+  /* ============ NAV / LOAD MORE ============ */
+  document.querySelectorAll('#yearNav .item').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      ACTIVE_YEAR = a.dataset.year;
       LIST_SHOWN = LIST_PAGE_SIZE;
-      ACTIVE_CAT = 'all';
-      // 重整 UI
-      document.querySelectorAll('.ctl-opts').forEach(grp => {
-        const key = grp.dataset.state;
-        grp.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.val === STATE[key]));
-      });
       render();
     });
-  }
+  });
+  document.getElementById('loadMoreBtn').addEventListener('click', () => {
+    LIST_SHOWN += LIST_PAGE_SIZE;
+    render();
+  });
 
-  /* ============================================================
-     SUB-NAV / YEAR-NAV / LOAD MORE
-     ============================================================ */
-  function bindNavs(){
-    document.querySelectorAll('#subNav .item').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        ACTIVE_CAT = a.dataset.cat;
-        LIST_SHOWN = LIST_PAGE_SIZE;
-        render();
-      });
-    });
-    document.querySelectorAll('#yearNav .item').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        ACTIVE_CAT = a.dataset.year;
-        LIST_SHOWN = LIST_PAGE_SIZE;
-        render();
-      });
-    });
-    document.getElementById('loadMoreBtn').addEventListener('click', () => {
-      LIST_SHOWN += LIST_PAGE_SIZE;
-      render();
-    });
-  }
-
-  /* ============================================================
-     SHARED — back to top, drawer
-     ============================================================ */
+  /* ============ BACK TO TOP ============ */
   (function(){
     const btn = document.getElementById('cdTop');
     if (!btn) return;
@@ -974,6 +588,8 @@
       requestAnimationFrame(() => { btn.classList.toggle('on', window.scrollY > 600); ticking = false; });
     });
   })();
+
+  /* ============ MOBILE DRAWER ============ */
   (function(){
     const toggle   = document.getElementById('navToggle');
     const drawer   = document.getElementById('drawer');
@@ -989,9 +605,6 @@
     drawer.querySelectorAll('.drawer-nav > a').forEach(a => a.addEventListener('click', shut));
   })();
 
-  /* ============ INIT ============ */
-  bindControl();
-  bindNavs();
   render();
 </script>
 

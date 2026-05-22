@@ -446,8 +446,7 @@
 
 <!-- ===== SUB-NAV (5 公益行動分類) — markup 與 detail page 統一用 <a>，JS 攔截 click ===== -->
 <nav class="sub-nav" id="subNav" aria-label="公益行動分類">
-  <a class="item todo" href="actions.html#transition" data-cat="transition">特殊生轉銜職場</a>
-  <a class="item todo" href="actions.html#outsider"  data-cat="outsider">自閉症原生藝術</a>
+  <a class="item todo" href="actions.html#care-garden" data-cat="care-garden">特別青年教養花園</a>
   <a class="item on"   href="actions.html#aesthetic" data-cat="aesthetic">偏鄉美學教育</a>
   <a class="item todo" href="actions.html#music"     data-cat="music">奧兒福音樂會</a>
   <a class="item todo" href="actions.html#elder"     data-cat="elder">老人服務</a>
@@ -693,8 +692,7 @@
         <span class="caret">▾</span>
       </button>
       <div class="drawer-group-body">
-        <button type="button" class="sub-item todo" data-cat="transition">特殊生轉銜職場</button>
-        <button type="button" class="sub-item todo" data-cat="outsider">自閉症原生藝術</button>
+        <button type="button" class="sub-item todo" data-cat="care-garden">特別青年教養花園</button>
         <button type="button" class="sub-item on"   data-cat="aesthetic">偏鄉美學教育</button>
         <button type="button" class="sub-item todo" data-cat="music">奧兒福音樂會</button>
         <button type="button" class="sub-item todo" data-cat="elder">老人服務</button>
@@ -735,14 +733,9 @@
   (function(){
     // 5 個分類資料：標題 / 副標 / 是否為偏鄉美學教育（有內容）
     const CATEGORIES = {
-      transition: {
-        title:'特殊生轉銜職場',
-        lead:'陪伴特殊生從學習走向職場，透過培力、支持與實作，建立穩定生活的可能。',
-        ready:false
-      },
-      outsider: {
-        title:'自閉症原生藝術',
-        lead:'看見特殊創作者的獨特表達，讓藝術成為被理解、被欣賞、被支持的橋樑。',
+      'care-garden': {
+        title:'特別青年教養花園',
+        lead:'為特別青年打造日常生活的庇護與成長空間，以照顧、陪伴與實作，孕育安穩的可能。',
         ready:false
       },
       aesthetic: {
