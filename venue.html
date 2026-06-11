@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>場地租借｜薛伯輝基金會</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{font-size:var(--t-body);font-feature-settings:"palt";background:var(--bg);color:var(--body);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.75;font-weight:400;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+  h1,h2,h3,h4,h5{color:var(--ink);font-weight:700;line-height:1.35}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  button{cursor:pointer;font-family:inherit;border:none;background:none;color:inherit}
+  ul,ol{list-style:none}
+  .lat{font-family:"IBM Plex Serif",sans-serif}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 var(--sp-7)}
+
+  /* ============ HEADER ============ */
+  .app-header{background:#fff;position:sticky;top:0;z-index:50}
+  .app-header .row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:var(--sp-4) var(--sp-7);gap:var(--sp-6)}
+  .app-header .left{display:flex;align-items:center;gap:var(--sp-4)}
+  .app-header .logo{justify-self:center;display:block}
+  .app-header .logo img{height:50px;width:auto}
+  .app-header .right{display:flex;justify-content:flex-end;align-items:center;gap:var(--sp-4)}
+  .header-socials{display:flex;align-items:center;gap:var(--sp-4)}
+  .header-socials a{width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);transition:color .2s}
+  .header-socials a:hover{color:var(--brand)}
+  .header-utility{display:flex;align-items:center;gap:var(--sp-4);padding-left:var(--sp-4);border-left:1px solid var(--line)}
+  .header-utility a{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);font-weight:600;transition:color .2s}
+  .header-utility a:hover{color:var(--brand)}
+  .donate-btn{display:inline-flex;align-items:center;gap:var(--sp-2);padding:var(--sp-3) var(--sp-5);background:var(--brand);color:#fff;font-size:var(--t-body-s);letter-spacing:3px;font-weight:500;transition:background .2s}
+  .donate-btn::after{content:"→";font-family:"IBM Plex Serif",sans-serif;font-weight:400}
+  .donate-btn:hover{background:var(--brand-dark)}
+
+  /* ============ NAV ============ */
+  .app-nav{border-top:1px solid var(--brand);border-bottom:1px solid var(--brand);background:#fff;position:sticky;top:86px;z-index:49}
+  .app-nav .row{display:flex;justify-content:center;align-items:stretch;height:54px}
+  .app-nav a{display:flex;align-items:center;padding:0 var(--sp-5);font-size:var(--t-body);font-weight:500;color:var(--ink);position:relative;letter-spacing:0;transition:color .15s,background .2s}
+  .app-nav a:not(:last-child)::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:14px;background:var(--line)}
+  .app-nav a:hover,.app-nav a.active{color:var(--brand)}
+  .app-nav a.is-external{color:#6B4423;gap:var(--sp-2)}
+  .app-nav a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-body-s);font-weight:400;display:inline-block;transition:transform .25s,opacity .2s;line-height:1;opacity:.6}
+  .app-nav a.is-external:hover{color:#6B4423;background:#F4EDE0}
+  .app-nav a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
+
+  /* ============ SUB-NAV（三空間錨點）============ */
+  .sub-nav{background:#fff;position:sticky;top:140px;z-index:48;display:flex;justify-content:center;align-items:stretch;padding:var(--sp-3) var(--sp-6) 19px;border-bottom:1px solid var(--line-soft)}
+  .sub-nav .item{padding:0 var(--sp-5);font-size:var(--t-meta);letter-spacing:1.5px;color:#666;font-weight:500;position:relative;line-height:1.75;cursor:pointer;transition:color .18s;background:none}
+  .sub-nav .item:hover{color:var(--brand)}
+  .sub-nav .item.on{color:var(--brand);font-weight:700}
+  .sub-nav .item.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-6px;width:24px;height:2px;background:var(--brand)}
+
+  /* ============ HERO（全幅實拍）============ */
+  .venue-hero{position:relative;height:clamp(440px,64vh,640px);overflow:hidden;background:#0f0f0f}
+  .venue-hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 58%}
+  .venue-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,4,4,.42) 0%,rgba(12,4,4,.10) 38%,rgba(12,4,4,.74) 100%)}
+  .venue-hero .hero-inner{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:var(--sp-9)}
+  .venue-hero .eyebrow{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:600;margin-bottom:var(--sp-4);display:flex;align-items:center;gap:var(--sp-4)}
+  .venue-hero .eyebrow::before{content:"";width:36px;height:1px;background:rgba(255,255,255,.7)}
+  .venue-hero h1{font-size:var(--t-hero);color:#fff;letter-spacing:6px;line-height:1.1;font-weight:700;margin-bottom:var(--sp-5)}
+  .venue-hero .lead{font-size:var(--t-title-l);color:rgba(255,255,255,.92);letter-spacing:1.5px;font-weight:300;max-width:720px;line-height:1.7}
+
+  /* ============ INTRO ============ */
+  .venue-intro{padding:var(--sp-9) 0 var(--sp-7);background:#fff;text-align:center}
+  .venue-intro p{font-size:var(--t-body-l);color:var(--body);line-height:1.95;max-width:720px;margin:0 auto;letter-spacing:.5px;text-wrap:pretty}
+  .venue-intro .count{font-family:"IBM Plex Serif",sans-serif;color:var(--brand);font-weight:600}
+
+  /* ============ SPACE SECTION（核心版型）============ */
+  .space-sec{padding:var(--sp-10) 0;border-top:1px solid var(--line-soft)}
+  .space-sec:first-of-type{border-top:none;padding-top:var(--sp-7)}
+  .space-row{display:grid;grid-template-columns:minmax(260px,0.62fr) minmax(0,1.38fr);gap:var(--sp-8);align-items:start}
+  .space-text .space-eyebrow{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:4px;text-transform:uppercase;color:var(--brand);font-weight:600;margin-bottom:var(--sp-3);display:block}
+  .space-text .slogan{font-size:var(--t-title-l);color:var(--ink);letter-spacing:1.5px;font-weight:700;line-height:1.4;margin-bottom:var(--sp-3)}
+  .space-text h2{font-size:var(--t-section);color:var(--ink);letter-spacing:2px;line-height:1.2;margin-bottom:var(--sp-3);font-weight:700}
+  .space-text .space-meta{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:1px;color:var(--brand-dark);font-weight:500;margin-bottom:var(--sp-5)}
+  .space-chips{display:flex;flex-wrap:wrap;gap:var(--sp-2) var(--sp-3);margin-bottom:var(--sp-5)}
+  .space-chips .chip{font-size:var(--t-meta);letter-spacing:1px;color:var(--brand-dark);background:var(--brand-tint);padding:var(--sp-1) var(--sp-3);font-weight:600;border-radius:2px}
+  .space-desc{font-size:var(--t-body);color:var(--body);line-height:1.9;margin-bottom:var(--sp-6);letter-spacing:.3px;text-wrap:pretty;max-width:440px}
+  .space-block{margin-bottom:var(--sp-5)}
+  .space-block .blk-label{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:var(--sp-3);display:flex;align-items:center;gap:var(--sp-3)}
+  .space-block .blk-label::before{content:"";width:18px;height:1px;background:var(--muted)}
+  .tag-row{display:flex;flex-wrap:wrap;gap:var(--sp-2)}
+  .tag-row li{font-size:var(--t-meta);color:var(--body);border:1px solid var(--line);padding:3px var(--sp-3);letter-spacing:.5px;border-radius:2px}
+  .equip-row{display:flex;flex-wrap:wrap;gap:var(--sp-1) var(--sp-4);font-size:var(--t-body-s);color:var(--body)}
+  .equip-row li{position:relative;padding-left:var(--sp-4)}
+  .equip-row li::before{content:"·";position:absolute;left:4px;color:var(--brand);font-weight:700}
+  .more-link{display:inline-flex;align-items:center;gap:var(--sp-3);margin-top:var(--sp-2);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);font-weight:600;transition:gap .2s,color .2s}
+  .more-link svg{width:11px;height:auto}
+  .more-link:hover{color:var(--brand);gap:var(--sp-4)}
+
+  /* ============ MARQUEE（橫向照片帶 → 燈箱）============ */
+  .marquee-col{display:flex;flex-direction:column}
+  .marquee-wrap{position:relative;overflow:hidden;width:100%;height:clamp(300px,30vw,400px)}
+  .marquee-track{position:absolute;top:0;left:0;height:100%;display:flex;width:max-content;animation:scrollx linear infinite}
+  .marquee-track img{height:100%;width:auto;object-fit:cover;cursor:pointer;flex:none;margin-right:var(--sp-4);background:#1a0a0a;transition:filter .25s,transform .25s}
+  .marquee-track img:hover{filter:brightness(1.06)}
+  .marquee-wrap:hover .marquee-track{animation-play-state:paused}
+  @keyframes scrollx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .marquee-hint{margin-top:var(--sp-3);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:1.5px;color:var(--muted);display:flex;align-items:center;gap:var(--sp-2)}
+  @media (prefers-reduced-motion: reduce){.marquee-track{animation:none;flex-wrap:nowrap;overflow-x:auto}}
+
+  /* ============ LIGHTBOX ============ */
+  .lightbox{position:fixed;inset:0;background:rgba(10,4,4,.95);z-index:100;display:none;align-items:center;justify-content:center}
+  .lightbox.on{display:flex}
+  .lightbox figure{max-width:92vw;max-height:88vh;display:flex;flex-direction:column;align-items:center;gap:var(--sp-4)}
+  .lightbox img{max-width:92vw;max-height:80vh;object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .lightbox figcaption{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:1.5px;color:rgba(255,255,255,.72)}
+  .lb-btn{position:absolute;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;line-height:1;transition:background .2s;z-index:2}
+  .lb-btn:hover{background:rgba(255,255,255,.25)}
+  .lb-close{top:24px;right:24px;font-family:"IBM Plex Serif",sans-serif}
+  .lb-prev{left:24px;top:50%;transform:translateY(-50%)}
+  .lb-next{right:24px;top:50%;transform:translateY(-50%)}
+
+  /* ============ BOOKING / 收費 ============ */
+  .booking{padding:var(--sp-10) 0;background:var(--line-soft);border-top:1px solid var(--line-soft)}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--ink);padding-bottom:var(--sp-6);margin-bottom:var(--sp-7)}
+  .section-head .titles{display:flex;flex-direction:column;gap:var(--sp-3)}
+  .section-head .subtitle{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:3.5px;color:var(--brand);font-weight:600;text-transform:uppercase;display:flex;align-items:center;gap:var(--sp-4)}
+  .section-head .subtitle::before{content:"";width:24px;height:1px;background:var(--brand)}
+  .section-head h2.section-title{font-size:var(--t-section);font-weight:700;color:var(--ink);letter-spacing:1.5px;line-height:1.25}
+  .section-head .head-note{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);color:var(--muted);letter-spacing:1.5px}
+
+  .process{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-5);margin-bottom:var(--sp-9)}
+  .step{position:relative;padding-top:var(--sp-6)}
+  .step::before{content:attr(data-n);position:absolute;top:0;left:0;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-title-l);font-weight:600;color:var(--brand)}
+  .step::after{content:"";position:absolute;top:13px;left:38px;right:0;height:1px;background:var(--line)}
+  .step:last-child::after{display:none}
+  .step h4{font-size:var(--t-title-s);color:var(--ink);letter-spacing:1px;margin-bottom:var(--sp-2);font-weight:700}
+  .step p{font-size:var(--t-body-s);color:var(--body);line-height:1.75}
+
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-5);margin-bottom:var(--sp-6)}
+  .price-card{background:#fff;border:1px solid var(--line);padding:var(--sp-6)}
+  .price-card h4{font-size:var(--t-title-s);color:var(--ink);letter-spacing:1.5px;margin-bottom:var(--sp-4);font-weight:700;display:flex;align-items:baseline;gap:var(--sp-3)}
+  .price-card h4 .cap{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);color:var(--muted);font-weight:500;letter-spacing:1px}
+  .price-rows{display:flex;flex-direction:column;gap:var(--sp-3)}
+  .price-rows .pr{display:flex;justify-content:space-between;align-items:baseline;font-size:var(--t-body-s);padding-bottom:var(--sp-3);border-bottom:1px dashed var(--line)}
+  .price-rows .pr:last-child{border-bottom:none;padding-bottom:0}
+  .price-rows .pr .k{color:var(--muted);letter-spacing:.5px}
+  .price-rows .pr .v{font-family:"IBM Plex Serif",sans-serif;font-weight:600;color:var(--ink);letter-spacing:.5px}
+  .price-rows .pr .v b{color:var(--brand-dark)}
+  .pc-equip{margin-top:var(--sp-4);padding-top:var(--sp-4);border-top:1px solid var(--line);font-size:var(--t-caption);line-height:1.7;color:var(--muted);letter-spacing:.3px}
+  .pc-equip b{font-family:"IBM Plex Serif",sans-serif;color:var(--body);font-weight:600;letter-spacing:1px;margin-right:var(--sp-2)}
+
+  .booking-foot{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-6);flex-wrap:wrap;padding-top:var(--sp-6);border-top:1px solid var(--line)}
+  .notice-list{display:flex;flex-wrap:wrap;gap:var(--sp-2) var(--sp-5);font-size:var(--t-body-s);color:var(--body);max-width:780px}
+  .notice-list li{position:relative;padding-left:var(--sp-4)}
+  .notice-list li::before{content:"·";position:absolute;left:4px;color:var(--brand);font-weight:700}
+  .price-caveat{font-size:var(--t-caption);color:var(--muted);letter-spacing:.5px;margin-top:var(--sp-4)}
+  .pdf-btn{display:inline-flex;align-items:center;gap:var(--sp-3);padding:var(--sp-4) var(--sp-6);border:1px solid var(--ink);color:var(--ink);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:all .2s;white-space:nowrap}
+  .pdf-btn::after{content:"↓"}
+  .pdf-btn:hover{background:var(--ink);color:#fff}
+
+  /* ============ 申請洽詢表單 ============ */
+  .enquiry{padding:var(--sp-10) 0;background:#fff}
+  .enquiry-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:var(--sp-9)}
+  .enq-form{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-5)}
+  .field{display:flex;flex-direction:column;gap:var(--sp-2)}
+  .field.full{grid-column:1/-1}
+  .field label{font-size:var(--t-meta);letter-spacing:1px;color:var(--ink);font-weight:600}
+  .field label .req{color:var(--brand);margin-left:2px}
+  .field input,.field select,.field textarea{font-family:inherit;font-size:var(--t-body-s);color:var(--ink);border:1px solid var(--line);background:#fff;padding:var(--sp-3) var(--sp-4);transition:border-color .2s;border-radius:2px}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--brand)}
+  .field textarea{resize:vertical;min-height:96px;line-height:1.7}
+  .submit-btn{grid-column:1/-1;justify-self:start;display:inline-flex;align-items:center;gap:var(--sp-3);padding:var(--sp-4) var(--sp-8);background:var(--brand);color:#fff;font-size:var(--t-body-s);letter-spacing:3px;font-weight:500;transition:background .2s;margin-top:var(--sp-2)}
+  .submit-btn::after{content:"→";font-family:"IBM Plex Serif",sans-serif}
+  .submit-btn:hover{background:var(--brand-dark)}
+  .enq-note{grid-column:1/-1;font-size:var(--t-caption);color:var(--muted);letter-spacing:.5px}
+  .enq-aside{border-left:1px solid var(--line);padding-left:var(--sp-8);display:flex;flex-direction:column;gap:var(--sp-6)}
+  .enq-aside .blk-label{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:var(--sp-2)}
+  .enq-aside .tel{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-display);color:var(--brand);font-weight:600;letter-spacing:1px;line-height:1.1}
+  .enq-aside p{font-size:var(--t-body-s);color:var(--body);line-height:1.8}
+
+  /* ============ 交通與位置 ============ */
+  .transit{padding:var(--sp-10) 0;background:var(--line-soft);border-top:1px solid var(--line-soft)}
+  .transit-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--sp-8);align-items:stretch}
+  .map-embed{min-height:380px;background:#e6e1da;overflow:hidden;border:1px solid var(--line)}
+  .map-embed iframe{width:100%;height:100%;min-height:380px;border:0;display:block;filter:grayscale(.25)}
+  .transit-info{display:flex;flex-direction:column;gap:var(--sp-5)}
+  .ti-block .ti-label{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:var(--sp-2);display:flex;align-items:center;gap:var(--sp-3)}
+  .ti-block .ti-label::before{content:"";width:16px;height:1px;background:var(--brand)}
+  .ti-block p{font-size:var(--t-body-s);color:var(--body);line-height:1.8}
+  .ti-block p b{color:var(--ink);font-weight:700}
+  .ti-block + .ti-block{padding-top:var(--sp-5);border-top:1px solid var(--line)}
+
+  /* ============ DONATE BAND ============ */
+  .donate-band{padding:var(--sp-9) 0;background:#fff;border-top:1px solid var(--line-soft)}
+  .donate-card{background:var(--brand);color:#fff;border-radius:4px;padding:var(--sp-8);display:grid;grid-template-columns:1.2fr 1fr;gap:var(--sp-7);align-items:center;position:relative;overflow:hidden}
+  .donate-card::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 85% 15%,rgba(0,0,0,.18) 0,transparent 60%);pointer-events:none}
+  .donate-text{position:relative;z-index:1}
+  .donate-text .label{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:3px;text-transform:uppercase;color:#f4d8d8;font-weight:700;margin-bottom:var(--sp-4);display:flex;align-items:center;gap:var(--sp-4)}
+  .donate-text .label::before{content:"";width:32px;height:1px;background:#f4d8d8}
+  .donate-text h2{font-size:var(--t-display-l);color:#fff;letter-spacing:1.5px;line-height:1.35;margin-bottom:var(--sp-6);font-weight:700}
+  .donate-text p{font-size:var(--t-title-s);color:rgba(255,255,255,.85);line-height:1.85;margin-bottom:var(--sp-6);max-width:480px}
+  .donate-text .actions{display:flex;gap:var(--sp-4);flex-wrap:wrap}
+  .donate-text .btn-w{display:inline-flex;align-items:center;gap:var(--sp-3);padding:var(--sp-3) var(--sp-6);background:#fff;color:var(--brand);font-size:var(--t-meta);letter-spacing:2.5px;font-weight:600;transition:background .2s}
+  .donate-text .btn-w::after{content:"→"}
+  .donate-text .btn-w:hover{background:#f4d8d8}
+  .donate-text .btn-wo{display:inline-flex;align-items:center;gap:var(--sp-3);padding:var(--sp-3) var(--sp-6);border:1px solid rgba(255,255,255,.5);color:#fff;font-size:var(--t-meta);letter-spacing:2.5px;font-weight:500;transition:all .2s}
+  .donate-text .btn-wo:hover{background:rgba(255,255,255,.12);border-color:#fff}
+  .donate-stats{position:relative;z-index:1;display:flex;flex-direction:column;border-left:1px solid rgba(255,255,255,.2);padding-left:var(--sp-7)}
+  .donate-method{padding:var(--sp-4) 0;border-bottom:1px solid rgba(255,255,255,.18)}
+  .donate-method:first-child{padding-top:0}
+  .donate-method:last-child{border-bottom:none;padding-bottom:0}
+  .donate-method .method-label{display:block;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:700;margin-bottom:var(--sp-2)}
+  .donate-method h3{font-size:var(--t-title-s);color:#fff;letter-spacing:1.5px;margin-bottom:var(--sp-2);font-weight:600}
+  .donate-method p{font-size:var(--t-body-s);color:rgba(255,255,255,.78);line-height:1.75;margin:0}
+  .donate-method b{color:#fff;font-weight:700}
+
+  /* ============ FOOTER ============ */
+  .app-footer{background:var(--ink);color:#fff;padding:var(--sp-8) var(--sp-7) var(--sp-6);text-align:center}
+  .app-footer .footer-info{display:flex;flex-direction:column;align-items:center;gap:var(--sp-4);margin-bottom:var(--sp-7)}
+  .app-footer .footer-address{font-size:var(--t-body-s);color:#fff;font-weight:500}
+  .app-footer .footer-contact{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:var(--sp-2) var(--sp-4);font-size:var(--t-body-s);color:rgba(255,255,255,.75)}
+  .app-footer .footer-contact .lbl{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:2px;font-size:var(--t-meta);margin-right:var(--sp-2)}
+  .app-footer .footer-contact a{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-body-s);color:rgba(255,255,255,.75);transition:color .2s}
+  .app-footer .footer-contact a:hover{color:#fff}
+  .app-footer .footer-contact .dot{color:rgba(255,255,255,.3)}
+  .app-footer .footer-giro{display:inline-flex;align-items:center;gap:var(--sp-4);padding:var(--sp-4) var(--sp-6);border-top:1px solid rgba(255,255,255,.15);border-bottom:1px solid rgba(255,255,255,.15);margin-top:var(--sp-2);flex-wrap:wrap;justify-content:center;font-size:var(--t-body-s)}
+  .app-footer .footer-giro .giro-label{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:3px;text-transform:uppercase;color:#fff;font-weight:700;padding:var(--sp-1) var(--sp-3);border:1px solid rgba(255,255,255,.4)}
+  .app-footer .footer-giro .giro-cell{color:rgba(255,255,255,.78);letter-spacing:.5px}
+  .app-footer .footer-giro .giro-cell b{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:#fff;letter-spacing:1.5px;margin-left:var(--sp-1)}
+  .app-footer .footer-giro .giro-sep{color:rgba(255,255,255,.2);font-weight:700}
+  .app-footer .footer-links{display:flex;justify-content:center;gap:var(--sp-5);flex-wrap:wrap;margin-bottom:var(--sp-5)}
+  .app-footer .footer-links a{font-size:var(--t-body-s);color:#fff;font-weight:500;transition:color .2s}
+  .app-footer .footer-links a:hover{color:#f4d8d8}
+  .app-footer .footer-links a.is-external{color:#D9B889;display:inline-flex;align-items:center;gap:var(--sp-1)}
+  .app-footer .footer-links a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);font-weight:400;opacity:.6;transition:transform .25s,opacity .2s;line-height:1}
+  .app-footer .footer-links a.is-external:hover{color:#E5C99D}
+  .app-footer .footer-links a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
+  .app-footer .footer-copy{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;color:rgba(255,255,255,.4);text-transform:uppercase}
+
+  /* ============ BACK TO TOP ============ */
+  .cd-top{position:fixed;right:24px;bottom:24px;width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-title);line-height:1;z-index:80;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s,background .2s;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+  .cd-top.on{opacity:1;transform:translateY(0);pointer-events:auto}
+  .cd-top:hover{background:var(--brand)}
+
+  /* ============ MOBILE DRAWER ============ */
+  .nav-toggle{display:none;width:36px;height:36px;flex-direction:column;align-items:center;justify-content:center;gap:var(--sp-1);padding:0;cursor:pointer;background:transparent;border:0}
+  .nav-toggle span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .25s}
+  .drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .3s;z-index:90}
+  .drawer-backdrop.on{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:min(380px,88vw);background:var(--brand);color:#fff;z-index:91;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow-y:auto;box-shadow:-12px 0 40px rgba(0,0,0,.18)}
+  .drawer.on{transform:translateX(0)}
+  .drawer-head{display:flex;justify-content:space-between;align-items:center;padding:var(--sp-5) var(--sp-6);border-bottom:1px solid rgba(255,255,255,.12)}
+  .drawer-close{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:24px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;border:0;transition:background .2s}
+  .drawer-close:hover{background:rgba(255,255,255,.22)}
+  .drawer-utility{display:flex;align-items:center;gap:var(--sp-3);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2px;text-transform:uppercase;font-weight:600}
+  .drawer-utility a{color:rgba(255,255,255,.9);transition:color .2s}
+  .drawer-utility a:hover{color:#fff}
+  .drawer-utility .sep{color:rgba(255,255,255,.3)}
+  .drawer-nav{flex:1;padding:var(--sp-4) var(--sp-6);display:flex;flex-direction:column}
+  .drawer-nav a{position:relative;padding:var(--sp-4) 0;font-size:var(--t-body-l);color:#fff;letter-spacing:1px;font-weight:500;border-bottom:1px solid rgba(255,255,255,.1);transition:padding .25s;display:flex;align-items:center;gap:var(--sp-4)}
+  .drawer-nav a::before{content:"";width:0;height:1px;background:#fff;transition:width .25s}
+  .drawer-nav a:hover,.drawer-nav a.active{padding-left:var(--sp-2)}
+  .drawer-nav a:hover::before,.drawer-nav a.active::before{width:24px}
+  .drawer-nav a.is-external{color:#F4EDE0;gap:var(--sp-3)}
+  .drawer-nav a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-body);font-weight:400;opacity:.7;transition:transform .25s,opacity .2s;line-height:1;margin-left:auto;padding-right:var(--sp-2)}
+  .drawer-nav a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
+  .drawer-foot{padding:var(--sp-5) var(--sp-6) var(--sp-6);border-top:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;gap:var(--sp-4)}
+  .drawer-donate{display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-3);padding:var(--sp-4);background:#fff;color:var(--brand);font-size:var(--t-body-s);letter-spacing:2.5px;font-weight:600;transition:background .2s}
+  .drawer-donate::after{content:"→"}
+  .drawer-donate:hover{background:#f4d8d8}
+  .drawer-social{display:flex;justify-content:center;gap:var(--sp-4)}
+  .drawer-social a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);display:inline-flex;align-items:center;justify-content:center;color:#fff;transition:background .2s}
+  .drawer-social a:hover{background:rgba(255,255,255,.22)}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1100px){
+    .app-nav,.app-header,.sub-nav{position:static}
+    .venue-hero h1{letter-spacing:3px}
+    .space-row{grid-template-columns:1fr;gap:var(--sp-6)}
+    .marquee-col{order:-1}
+    .marquee-wrap{flex:none;height:clamp(260px,44vw,380px);min-height:0}
+    .space-desc{max-width:none}
+    .process{grid-template-columns:repeat(2,1fr);gap:var(--sp-6)}
+    .step::after{display:none}
+    .price-grid{grid-template-columns:1fr}
+    .enquiry-grid,.transit-grid{grid-template-columns:1fr;gap:var(--sp-7)}
+    .enq-aside{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:var(--sp-6)}
+    .donate-card{grid-template-columns:1fr;gap:var(--sp-7);padding:var(--sp-7)}
+    .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:var(--sp-6)}
+  }
+  @media (max-width: 720px){
+    .app-header .row{grid-template-columns:auto 1fr auto;gap:var(--sp-4);padding:var(--sp-4) var(--sp-4)}
+    .header-socials,.header-utility{display:none}
+    .donate-btn{padding:var(--sp-2) var(--sp-4);font-size:var(--t-meta);letter-spacing:2px}
+    .app-nav,.sub-nav{display:none}
+    .nav-toggle{display:flex}
+    .wrap{padding:0 var(--sp-4)}
+    .venue-hero{height:clamp(360px,56vh,460px)}
+    .venue-hero h1{font-size:var(--t-display-l);letter-spacing:2px}
+    .venue-hero .lead{font-size:var(--t-title-s)}
+    .space-sec{padding:var(--sp-8) 0}
+    .enq-form{grid-template-columns:1fr}
+    .marquee-wrap{height:230px}
+    .booking-foot{flex-direction:column;align-items:flex-start;gap:var(--sp-5)}
+    .donate-band{padding:var(--sp-7) var(--sp-4)}
+    .section-head{flex-direction:column;align-items:flex-start;gap:var(--sp-4)}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="app-header">
+  <div class="row">
+    <div class="left">
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="open menu"><span></span><span></span><span></span></button>
+      <div class="header-socials">
+        <a aria-label="facebook" href="https://www.facebook.com/LoveHopeF" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
+        <a aria-label="instagram" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a aria-label="youtube" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
+        <a aria-label="line" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
+      </div>
+    </div>
+    <a class="logo" href="index.html"><img src="images/logo.png" alt="薛伯輝基金會 Love Hope Foundation"></a>
+    <div class="right">
+      <a class="donate-btn" href="donate.html">捐款支持</a>
+      <div class="header-utility"><a href="#">EN</a><a href="#">登入</a></div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="app-nav">
+  <div class="row">
+    <a href="about.html">關於我們</a>
+    <a href="people.html">慈善身影</a>
+    <a href="actions.html">公益行動</a>
+    <a href="true-love.html">真愛多多</a>
+    <a href="news.html">最新消息</a>
+    <a href="shop.html">公益小舖</a>
+    <a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
+    <a href="venue.html" class="active">場地租借</a>
+  </div>
+</nav>
+
+<!-- ===== SUB-NAV（三空間錨點）===== -->
+<nav class="sub-nav" aria-label="場地分類">
+  <button class="item" data-target="hall">愛的講堂</button>
+  <button class="item" data-target="huiru">惠如美學教室</button>
+  <button class="item" data-target="food">遇見輕食</button>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="venue-hero">
+  <img src="images/venue/hall-02.jpg" alt="愛的講堂" fetchpriority="high">
+  <div class="hero-inner">
+    <div class="wrap">
+      <h1>場地租借</h1>
+      <p class="lead">在繁華城市中，一處寧靜而優雅的停靠站。<br>三個空間，承接演講、研習、美學與相聚。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SPACE 01 · 愛的講堂 ===== -->
+<section class="space-sec" id="hall">
+  <div class="wrap">
+    <div class="space-row">
+      <div class="space-text">
+        <p class="slogan">談教養，凡事皆教養。</p>
+        <h2>愛的講堂</h2>
+        <p class="space-meta">約 35 坪 · 可容納 100–120 人</p>
+        <p class="space-desc">可舉辦演講、座談會、研習、教學、小型音樂會、小型舞蹈發表會、藝文展覽、美學教育等活動。</p>
+        <a class="more-link" href="薛伯輝基金會場地使用辦法.pdf" target="_blank" rel="noopener">查看設備與收費<svg viewBox="0 0 12.65 23.89" fill="none" stroke="currentColor" stroke-width="2"><polyline points="0.35 23.53 11.95 11.95 0.35 0.35"/></svg></a>
+      </div>
+      <div class="marquee-col">
+        <div class="marquee-wrap" data-space="hall"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SPACE 02 · 惠如美學教室 ===== -->
+<section class="space-sec" id="huiru">
+  <div class="wrap">
+    <div class="space-row">
+      <div class="space-text">
+        <p class="slogan">談美學，生活即美學。</p>
+        <h2>惠如美學教室</h2>
+        <p class="space-meta">約 8 坪 · 可容納 10–20 人</p>
+        <p class="space-desc">凝聚更多共識，可舉辦小型的會議、座談與美學教育等活動。</p>
+        <a class="more-link" href="薛伯輝基金會場地使用辦法.pdf" target="_blank" rel="noopener">查看設備與收費<svg viewBox="0 0 12.65 23.89" fill="none" stroke="currentColor" stroke-width="2"><polyline points="0.35 23.53 11.95 11.95 0.35 0.35"/></svg></a>
+      </div>
+      <div class="marquee-col">
+        <div class="marquee-wrap" data-space="huiru"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SPACE 03 · 遇見輕食 ===== -->
+<section class="space-sec" id="food">
+  <div class="wrap">
+    <div class="space-row">
+      <div class="space-text">
+        <p class="slogan">輕食，是一種簡單哲學。</p>
+        <h2>遇見輕食</h2>
+        <p class="space-meta">白色家用廚房 · 可容納 10–30 人</p>
+        <p class="space-desc">用清爽無負擔的食材分享健康，可舉辦小型烹飪教學、社團活動與家庭溫馨聚會等。</p>
+        <a class="more-link" href="薛伯輝基金會場地使用辦法.pdf" target="_blank" rel="noopener">查看設備與收費<svg viewBox="0 0 12.65 23.89" fill="none" stroke="currentColor" stroke-width="2"><polyline points="0.35 23.53 11.95 11.95 0.35 0.35"/></svg></a>
+      </div>
+      <div class="marquee-col">
+        <div class="marquee-wrap" data-space="food"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DONATE BAND ===== -->
+<section class="donate-band">
+  <div class="wrap">
+    <div class="donate-card">
+      <div class="donate-text">
+        <div class="label">Donate</div>
+        <h2>捐款支持<br>愛與希望的延續</h2>
+        <p>每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
+        <div class="actions">
+          <a class="btn-w" href="donate.html">捐款方式</a>
+          <a class="btn-wo" href="donate.html">捐款徵信</a>
+        </div>
+      </div>
+      <div class="donate-stats" aria-label="捐款方式摘要">
+        <div class="donate-method">
+          <span class="method-label">Bank Transfer</span>
+          <h3>銀行匯款 / ATM 轉帳</h3>
+          <p>國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Postal Giro</span>
+          <h3>郵局劃撥</h3>
+          <p>帳號 <b>50067771</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="app-footer">
+  <div class="footer-info">
+    <p class="footer-address">10043 台北市中正區博愛路 154 號 6 樓</p>
+    <p class="footer-contact">
+      <span><span class="lbl">TEL</span>(02) 2381-6678</span>
+      <span class="dot">·</span>
+      <span><span class="lbl">FAX</span>(02) 2381-3171</span>
+      <span class="dot">·</span>
+      <a href="mailto:love.hopech@gmail.com">love.hopech@gmail.com</a>
+    </p>
+    <div class="footer-giro">
+      <span class="giro-label">郵政劃撥</span>
+      <span class="giro-cell">帳號<b>50067771</b></span>
+      <span class="giro-sep">｜</span>
+      <span class="giro-cell">戶名<b>財團法人薛伯輝基金會</b></span>
+    </div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="about.html">關於我們</a></li>
+    <li><a href="people.html">慈善身影</a></li>
+    <li><a href="actions.html">公益行動</a></li>
+    <li><a href="true-love.html">真愛多多</a></li>
+    <li><a href="news.html">最新消息</a></li>
+    <li><a href="shop.html">公益小舖</a></li>
+    <li><a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a></li>
+    <li><a href="venue.html">場地租借</a></li>
+    <li><a href="mailto:love.hopech@gmail.com">聯絡我們</a></li>
+    <li><a href="privacy.html">隱私權政策</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Love Hope Foundation. All Rights Reserved.</p>
+</footer>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="照片檢視">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="關閉">×</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="上一張">‹</button>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="下一張">›</button>
+  <figure>
+    <img id="lbImg" src="" alt="">
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+</div>
+
+<!-- ===== MOBILE DRAWER ===== -->
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <button class="drawer-close" id="drawerClose" type="button" aria-label="close menu">×</button>
+    <div class="drawer-utility"><a href="#">EN</a><span class="sep">/</span><a href="#">登入</a></div>
+  </div>
+  <nav class="drawer-nav">
+    <a href="about.html">關於我們</a>
+    <a href="people.html">慈善身影</a>
+    <a href="actions.html">公益行動</a>
+    <a href="true-love.html">真愛多多</a>
+    <a href="news.html">最新消息</a>
+    <a href="shop.html">公益小舖</a>
+    <a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
+    <a href="venue.html" class="active">場地租借</a>
+  </nav>
+  <div class="drawer-foot">
+    <a class="drawer-donate" href="donate.html">捐款支持</a>
+    <div class="drawer-social">
+      <a aria-label="facebook" href="https://www.facebook.com/LoveHopeF" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
+      <a aria-label="instagram" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+      <a aria-label="youtube" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
+      <a aria-label="line" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
+    </div>
+  </div>
+</aside>
+
+<a class="cd-top" id="cdTop" href="#" title="回到頂部" aria-label="back to top">↑</a>
+
+<script>
+  // ===== 照片資料（依空間，含攝影師署名）=====
+  const VENUE_PHOTOS = {
+    hall: [
+      {s:'images/venue/hall-02.jpg', c:'愛的講堂 ｜ 王采元 攝'},
+      {s:'images/venue/hall-01.jpg', c:'愛的講堂 ｜ 張美滿 攝'},
+      {s:'images/venue/hall-03.jpg', c:'愛的講堂 ｜ 王采元 攝'},
+      {s:'images/venue/hall-04.jpg', c:'愛的講堂 ｜ 黃菱娸 攝'},
+      {s:'images/venue/hall-05.jpg', c:'愛的講堂 ｜ 黃菱娸 攝'},
+      {s:'images/venue/hall-06.jpg', c:'愛的講堂 ｜ 黃菱娸 攝'},
+      {s:'images/venue/hall-07.jpg', c:'愛的講堂 ｜ 黃菱娸 攝'},
+      {s:'images/venue/hall-08.jpg', c:'愛的講堂 ｜ 黃菱娸 攝'},
+      {s:'images/venue/hall-09.jpg', c:'愛的講堂 ｜ 黃菱娸 攝'}
+    ],
+    huiru: [
+      {s:'images/venue/huiru-01.jpg', c:'惠如美學教室 ｜ 王采元 攝'},
+      {s:'images/venue/huiru-02.jpg', c:'惠如美學教室 ｜ 黃菱娸 攝'}
+    ],
+    food: [
+      {s:'images/venue/food-02.jpg', c:'遇見輕食 ｜ 王采元 攝'},
+      {s:'images/venue/food-01.jpg', c:'遇見輕食 ｜ 李佳陵 攝'},
+      {s:'images/venue/food-03.jpg', c:'遇見輕食 ｜ 王采元 攝'},
+      {s:'images/venue/food-04.jpg', c:'遇見輕食 ｜ 蔡宗昇 攝'}
+    ]
+  };
+
+  // ===== 建立照片圖帶（marquee，重複一份以無縫循環）=====
+  // 三組共用同一捲動速度（px/秒），duration 依各自軌道寬度換算 → 視覺速度一致
+  const MARQUEE_SPEED = 70;
+  function applyMarqueeSpeed(){
+    document.querySelectorAll('.marquee-track').forEach(track => {
+      const copyW = track.scrollWidth / 2;          // 內容重複兩份，取一份寬度
+      if (copyW > 0) track.style.animationDuration = (copyW / MARQUEE_SPEED).toFixed(1) + 's';
+    });
+  }
+  (function buildMarquees(){
+    document.querySelectorAll('.marquee-wrap').forEach(wrap => {
+      const key = wrap.dataset.space;
+      const photos = VENUE_PHOTOS[key] || [];
+      if (!photos.length) return;
+      const track = document.createElement('div');
+      track.className = 'marquee-track';
+      track.style.animationDuration = '40s';        // 圖片載入前的暫定值
+      const make = (p, i) => {
+        const img = document.createElement('img');
+        img.src = p.s; img.alt = p.c; img.loading = 'lazy';
+        img.addEventListener('click', () => openLightbox(key, i));
+        img.addEventListener('load', applyMarqueeSpeed);   // 載入後依實寬重算
+        return img;
+      };
+      photos.forEach((p,i) => track.appendChild(make(p,i)));     // 第一份
+      photos.forEach((p,i) => track.appendChild(make(p,i)));     // 第二份（循環用）
+      wrap.appendChild(track);
+    });
+    window.addEventListener('load', applyMarqueeSpeed);
+    window.addEventListener('resize', applyMarqueeSpeed);
+  })();
+
+  // ===== 燈箱 =====
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCap = document.getElementById('lbCap');
+  let lbSet = [], lbIdx = 0;
+  function openLightbox(key, idx){
+    lbSet = VENUE_PHOTOS[key] || [];
+    lbIdx = idx % lbSet.length;
+    renderLightbox();
+    lb.classList.add('on');
+    document.body.style.overflow = 'hidden';
+  }
+  function renderLightbox(){
+    const p = lbSet[lbIdx];
+    if (!p) return;
+    lbImg.src = p.s; lbImg.alt = p.c; lbCap.textContent = p.c;
+  }
+  function lbStep(d){ lbIdx = (lbIdx + d + lbSet.length) % lbSet.length; renderLightbox(); }
+  function lbCloseFn(){ lb.classList.remove('on'); document.body.style.overflow = ''; }
+  document.getElementById('lbClose').addEventListener('click', lbCloseFn);
+  document.getElementById('lbPrev').addEventListener('click', () => lbStep(-1));
+  document.getElementById('lbNext').addEventListener('click', () => lbStep(1));
+  lb.addEventListener('click', e => { if (e.target === lb) lbCloseFn(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('on')) return;
+    if (e.key === 'Escape') lbCloseFn();
+    if (e.key === 'ArrowLeft') lbStep(-1);
+    if (e.key === 'ArrowRight') lbStep(1);
+  });
+
+  // ===== SUB-NAV：平滑捲動 + scrollspy =====
+  (function(){
+    const items = Array.from(document.querySelectorAll('.sub-nav .item'));
+    items.forEach(btn => btn.addEventListener('click', () => {
+      const el = document.getElementById(btn.dataset.target);
+      if (el) window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 170, behavior:'smooth'});
+    }));
+    const sections = items.map(b => document.getElementById(b.dataset.target)).filter(Boolean);
+    const spy = () => {
+      const y = window.scrollY + 200;
+      let cur = -1;
+      sections.forEach((s,i) => { if (s.offsetTop <= y) cur = i; });
+      items.forEach((b,i) => b.classList.toggle('on', i === cur));
+    };
+    let t = false;
+    window.addEventListener('scroll', () => { if (t) return; t = true; requestAnimationFrame(() => { spy(); t = false; }); });
+    spy();
+  })();
+
+  // ===== BACK TO TOP =====
+  (function(){
+    const btn = document.getElementById('cdTop');
+    btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(() => { btn.classList.toggle('on', window.scrollY > 600); ticking = false; });
+    });
+  })();
+
+  // ===== MOBILE DRAWER =====
+  (function(){
+    const toggle = document.getElementById('navToggle');
+    const drawer = document.getElementById('drawer');
+    const backdrop = document.getElementById('drawerBackdrop');
+    const close = document.getElementById('drawerClose');
+    if (!toggle || !drawer || !backdrop) return;
+    const open = () => { drawer.classList.add('on'); backdrop.classList.add('on'); drawer.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; };
+    const shut = () => { drawer.classList.remove('on'); backdrop.classList.remove('on'); drawer.setAttribute('aria-hidden','true'); document.body.style.overflow=''; };
+    toggle.addEventListener('click', open);
+    close && close.addEventListener('click', shut);
+    backdrop.addEventListener('click', shut);
+    document.addEventListener('keydown', e => { if (e.key==='Escape' && drawer.classList.contains('on')) shut(); });
+    drawer.querySelectorAll('.drawer-nav a').forEach(a => a.addEventListener('click', shut));
+  })();
+</script>
+
+</body>
+</html>

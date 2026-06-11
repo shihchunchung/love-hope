@@ -3,3 +3,6 @@
 node_modules/
 .vscode/
 .idea/
+
+# 場地照片全解析原檔（保留本機備份，不入庫；網頁使用 images/venue/*.jpg 壓縮版）
+images/venue/originals/
