@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>公益小舖｜薛伯輝基金會（方案 1 · 編輯式網格）</title>
+<title>公益小舖｜薛伯輝基金會</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,23 +12,38 @@
 <style>
   /* base · header · nav → app.css */
 
-  /* ============ PAGE HERO ============ */
-  .page-hero{padding:var(--sp-9) 0 var(--sp-7);background:#fff;border-bottom:1px solid var(--ink)}
-  .page-hero h1{font-size:var(--t-display-l);letter-spacing:1.5px;font-weight:700;color:var(--ink);line-height:1.25;margin-bottom:var(--sp-4)}
-  .page-hero .lead{font-size:var(--t-title-s);color:var(--body);font-weight:500;line-height:1.85;max-width:680px;letter-spacing:0}
-  .page-hero .eyebrow{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:4px;text-transform:uppercase;color:var(--brand);font-weight:600;margin-bottom:var(--sp-4);display:flex;align-items:center;gap:var(--sp-4)}
-  .page-hero .eyebrow::before{content:"";width:32px;height:1px;background:var(--brand)}
+  /* ============ FEATURED（本月主打：威宏）============ */
+  .featured{background:var(--brand-tint);padding:var(--sp-9) 0;border-bottom:1px solid #F0DADA}
+  .featured-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--sp-8);align-items:center}
+  .featured-img{aspect-ratio:5/4;position:relative;overflow:hidden;background:linear-gradient(160deg,#5a0808,#1a0202);border-radius:2px}
+  .featured-img .img-fill{position:absolute;inset:0;background:inherit;transition:transform .6s cubic-bezier(.25,.46,.45,.94)}
+  .featured-img:hover .img-fill{transform:scale(1.04)}
+  .featured-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.42) 100%);pointer-events:none}
+  .featured-img .ph-mark{position:absolute;bottom:18px;left:18px;z-index:2;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:600}
+  .featured-text .eyebrow{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:4px;text-transform:uppercase;color:var(--brand);font-weight:600;margin-bottom:var(--sp-4);display:flex;align-items:center;gap:var(--sp-4)}
+  .featured-text .eyebrow::before{content:"";width:32px;height:1px;background:var(--brand)}
+  .featured-text .maker-line{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:2px;color:var(--brand-dark);font-weight:500;margin-bottom:var(--sp-3)}
+  .featured-text h1{font-size:var(--t-display);letter-spacing:1.5px;color:var(--ink);line-height:1.2;margin-bottom:var(--sp-5);font-weight:700}
+  .featured-text .story{font-size:var(--t-body);color:var(--body);line-height:1.95;margin-bottom:var(--sp-6);max-width:520px;text-wrap:pretty}
+  .featured-text .f-foot{display:flex;align-items:center;gap:var(--sp-6);flex-wrap:wrap}
+  .featured-text .f-price{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-title);color:var(--brand-dark);font-weight:600;letter-spacing:.5px}
+  .featured-text .actions{display:flex;gap:var(--sp-4);flex-wrap:wrap}
+  .btn-fill{display:inline-flex;align-items:center;gap:var(--sp-2);padding:var(--sp-3) var(--sp-6);background:var(--brand);color:#fff;font-size:var(--t-body-s);letter-spacing:2px;font-weight:500;transition:background .2s}
+  .btn-fill::after{content:"→";font-family:"IBM Plex Serif",sans-serif}
+  .btn-fill:hover{background:var(--brand-dark)}
+  .btn-line{display:inline-flex;align-items:center;gap:var(--sp-2);padding:var(--sp-3) var(--sp-6);border:1px solid var(--ink);color:var(--ink);font-size:var(--t-body-s);letter-spacing:2px;font-weight:500;transition:all .2s}
+  .btn-line:hover{background:var(--ink);color:#fff}
 
-  /* ============ FILTER ROW ============ */
-  .filter-row{background:#fff;border-bottom:1px solid var(--line-soft);position:sticky;top:140px;z-index:48}
-  .filter-row .wrap{display:flex;align-items:center;gap:var(--sp-2);padding-top:var(--sp-4);padding-bottom:var(--sp-4);flex-wrap:wrap}
-  .filter-row .f-label{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-right:var(--sp-3)}
-  .filter-btn{font-size:var(--t-meta);letter-spacing:1px;color:#666;font-weight:500;padding:var(--sp-2) var(--sp-4);border:1px solid var(--line);background:#fff;border-radius:2px;transition:all .18s}
-  .filter-btn:hover{border-color:var(--brand);color:var(--brand)}
-  .filter-btn.on{background:var(--brand);border-color:var(--brand);color:#fff}
+  /* ============ SECTION HEAD ============ */
+  .shop-list{padding:var(--sp-9) 0 var(--sp-10);background:#fff}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--ink);padding-bottom:var(--sp-5);margin-bottom:var(--sp-8)}
+  .section-head .titles{display:flex;flex-direction:column;gap:var(--sp-3)}
+  .section-head .subtitle{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:3.5px;color:var(--brand);font-weight:600;text-transform:uppercase;display:flex;align-items:center;gap:var(--sp-4)}
+  .section-head .subtitle::before{content:"";width:24px;height:1px;background:var(--brand)}
+  .section-head h2.section-title{font-size:var(--t-section);font-weight:700;color:var(--ink);letter-spacing:1.5px;line-height:1.25}
+  .section-head .head-note{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);color:var(--muted);letter-spacing:1.5px}
 
   /* ============ PRODUCT GRID ============ */
-  .shop-list{padding:var(--sp-8) 0 var(--sp-10);background:#fff}
   .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-8) var(--sp-6)}
   .p-card{display:flex;flex-direction:column;cursor:pointer}
   .p-thumb{aspect-ratio:4/5;overflow:hidden;position:relative;background:linear-gradient(135deg,#3a1818,#1a0202);margin-bottom:var(--sp-4)}
@@ -50,7 +65,9 @@
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 1100px){
-    .app-nav,.app-header,.filter-row{position:static}
+    .app-nav,.app-header{position:static}
+    .featured-grid{grid-template-columns:1fr;gap:var(--sp-6)}
+    .featured-img{order:-1}
     .product-grid{grid-template-columns:repeat(2,1fr);gap:var(--sp-7) var(--sp-5)}
     .donate-card{grid-template-columns:1fr;gap:var(--sp-7);padding:var(--sp-7)}
     .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:var(--sp-6)}
@@ -62,10 +79,11 @@
     .app-nav{display:none}
     .nav-toggle{display:flex}
     .wrap{padding:0 var(--sp-4)}
-    .page-hero{padding:var(--sp-7) 0 var(--sp-6)}
-    .page-hero h1{font-size:var(--t-display)}
+    .featured{padding:var(--sp-7) 0}
+    .featured-text h1{font-size:var(--t-display-l)}
     .product-grid{grid-template-columns:1fr;gap:var(--sp-7)}
     .p-thumb{aspect-ratio:3/2}
+    .section-head{flex-direction:column;align-items:flex-start;gap:var(--sp-4)}
     .donate-band{padding:var(--sp-7) var(--sp-4)}
   }
 </style>
@@ -106,29 +124,38 @@
   </div>
 </nav>
 
-<!-- ===== PAGE HERO ===== -->
-<section class="page-hero">
+<!-- ===== FEATURED · 本月主打（威宏的紅包袋）===== -->
+<section class="featured">
   <div class="wrap">
-    <h1>公益小舖</h1>
-    <p class="eyebrow">Love Hope Shop</p>
-    <p class="lead">以文創品、出版品與公益合作商品，讓支持化為日常生活中的一份心意。<br>你買下的每一件，都是對一位創作者、一個單位的祝福。</p>
+    <div class="featured-grid">
+      <figure class="featured-img"><span class="img-fill"></span><span class="ph-mark">商品照片</span></figure>
+      <div class="featured-text">
+        <p class="eyebrow">本月主打 · Featured</p>
+        <p class="maker-line">創作者 ｜ 威宏</p>
+        <h1>威宏的紅包袋</h1>
+        <p class="story">威宏用畫筆把心裡的世界畫出來，這些圖樣化成一張張紅包袋。每一筆收入，都回到威宏與基金會陪伴的孩子身上 —— 你送出的祝福，也成了他們繼續創作的力量。</p>
+        <div class="f-foot">
+          <span class="f-price">NT$ 280 起</span>
+          <div class="actions">
+            <a class="btn-fill" href="shop-weihong.html">我想支持</a>
+            <a class="btn-line" href="shop-weihong.html">看威宏的故事</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ===== FILTER ROW（分類，靜態示意）===== -->
-<div class="filter-row">
-  <div class="wrap">
-    <span class="f-label">分類</span>
-    <button class="filter-btn on" type="button">全部</button>
-    <button class="filter-btn" type="button">文創品</button>
-    <button class="filter-btn" type="button">出版品</button>
-    <button class="filter-btn" type="button">公益合作商品</button>
-  </div>
-</div>
-
-<!-- ===== PRODUCT GRID ===== -->
+<!-- ===== 全部商品 ===== -->
 <section class="shop-list">
   <div class="wrap">
+    <div class="section-head">
+      <div class="titles">
+        <h2 class="section-title">小舖裡的每一件好物</h2>
+        <p class="subtitle"><span>All Goods</span></p>
+      </div>
+      <span class="head-note">文創品 · 出版品 · 公益合作商品</span>
+    </div>
     <div class="product-grid" id="productGrid"></div>
   </div>
 </section>
@@ -231,16 +258,15 @@
 <a class="cd-top" id="cdTop" href="#" title="回到頂部" aria-label="back to top">↑</a>
 
 <script>
-  // ===== 商品資料（佔位；實際商品照之後放入 images/shop/）=====
+  // ===== 商品資料（佔位；威宏已置於上方主打，列表顯示其餘）=====
   const PRODUCTS = [
-    {name:'威宏的紅包袋',     maker:'威宏',         cat:'文創品',     tagline:'把祝福，畫進每一個紅包。', price:'NT$ 280 起', href:'shop-weihong.html'},
     {name:'地磨兒手繪明信片組', maker:'地磨兒國小',   cat:'文創品',     tagline:'山裡孩子的歌聲，化成一張張畫。', price:'NT$ 150', href:'#'},
     {name:'惠民鑼鼓班帆布袋',   maker:'惠民啟智中心', cat:'文創品',     tagline:'咚咚鼓聲裡，找到自信的天使們。', price:'NT$ 380', href:'#'},
     {name:'《愛與希望》紀念文集', maker:'薛伯輝基金會', cat:'出版品',    tagline:'二十年陪伴的故事，集結成冊。', price:'NT$ 350', href:'#'},
     {name:'瑞復手作煎餅禮盒',   maker:'瑞復益智中心', cat:'公益合作商品', tagline:'行動煎餅車上，最暖的滋味。', price:'NT$ 420', href:'#'},
     {name:'搖籃咖啡｜美濃精選豆', maker:'搖籃咖啡',   cat:'公益合作商品', tagline:'一杯咖啡，一次愛的循環。', price:'NT$ 450', href:'#'}
   ];
-  const GRADS = ['linear-gradient(135deg,#3a1818,#1a0202)','linear-gradient(135deg,#a89070,#604530)','linear-gradient(135deg,#888,#3a3a3a)','linear-gradient(135deg,#c4a880,#704830)','linear-gradient(135deg,#5a3a2a,#1a1010)','linear-gradient(135deg,#8C0A0A,#3a1818)'];
+  const GRADS = ['linear-gradient(135deg,#a89070,#604530)','linear-gradient(135deg,#888,#3a3a3a)','linear-gradient(135deg,#c4a880,#704830)','linear-gradient(135deg,#5a3a2a,#1a1010)','linear-gradient(135deg,#8C0A0A,#3a1818)'];
   const grid = document.getElementById('productGrid');
   grid.innerHTML = PRODUCTS.map((p,i) => `
     <a class="p-card" href="${p.href}">
@@ -276,17 +302,6 @@
     backdrop.addEventListener('click', shut);
     document.addEventListener('keydown', e => { if (e.key==='Escape' && drawer.classList.contains('on')) shut(); });
     drawer.querySelectorAll('.drawer-nav a').forEach(a => a.addEventListener('click', shut));
-
-    // 分類篩選（示意：純前端 active 切換）
-    document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('on'));
-      btn.classList.add('on');
-      const cat = btn.textContent.trim();
-      document.querySelectorAll('.p-card').forEach((card,i) => {
-        const show = cat === '全部' || PRODUCTS[i].cat === cat;
-        card.style.display = show ? '' : 'none';
-      });
-    }));
   })();
 </script>
 

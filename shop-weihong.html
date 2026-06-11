@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>威宏的紅包袋｜公益小舖 — 薛伯輝基金會</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="app.css">
+<style>
+  /* ============ BREADCRUMB ============ */
+  .pd-crumb{border-bottom:1px solid var(--line-soft);background:#fff}
+  .pd-crumb .wrap{display:flex;align-items:center;gap:var(--sp-3);padding-top:var(--sp-4);padding-bottom:var(--sp-4)}
+  .pd-crumb a,.pd-crumb span{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+  .pd-crumb a{transition:color .2s}
+  .pd-crumb a:hover{color:var(--brand)}
+  .pd-crumb .arr{color:var(--line)}
+  .pd-crumb .cur{color:var(--ink);font-weight:600}
+
+  /* ============ PRODUCT HERO ============ */
+  .pd{padding:var(--sp-8) 0 var(--sp-9);background:#fff}
+  .pd-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:var(--sp-8);align-items:start}
+  .pd-main{aspect-ratio:4/5;position:relative;overflow:hidden;background:linear-gradient(135deg,#8C0A0A,#3a1010);cursor:zoom-in}
+  .pd-main::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.45) 100%);pointer-events:none;z-index:1}
+  .pd-main .ph-mark{position:absolute;bottom:18px;left:18px;z-index:2;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:600}
+  .pd-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-3);margin-top:var(--sp-3)}
+  .pd-thumb{aspect-ratio:1/1;position:relative;overflow:hidden;cursor:pointer;opacity:.62;outline:2px solid transparent;outline-offset:-2px;transition:opacity .2s,outline-color .2s}
+  .pd-thumb:hover{opacity:.85}
+  .pd-thumb.on{opacity:1;outline-color:var(--brand)}
+
+  .pd-info{padding-top:var(--sp-2)}
+  .pd-eyebrow{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:4px;text-transform:uppercase;color:var(--brand);font-weight:600;margin-bottom:var(--sp-4);display:flex;align-items:center;gap:var(--sp-4)}
+  .pd-eyebrow::before{content:"";width:32px;height:1px;background:var(--brand)}
+  .pd-info h1{font-size:var(--t-display);letter-spacing:1.5px;color:var(--ink);line-height:1.18;margin-bottom:var(--sp-3);font-weight:700}
+  .pd-maker{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:2px;color:var(--brand-dark);font-weight:500;margin-bottom:var(--sp-5)}
+  .pd-price{display:block;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-title-l);color:var(--brand-dark);font-weight:600;letter-spacing:.5px;margin-bottom:var(--sp-5)}
+  .pd-desc{font-size:var(--t-body);color:var(--body);line-height:1.95;margin-bottom:var(--sp-6);max-width:480px;text-wrap:pretty}
+  .pd-chips{display:flex;flex-wrap:wrap;gap:var(--sp-2) var(--sp-3);margin-bottom:var(--sp-6)}
+  .pd-chips .chip{font-size:var(--t-meta);letter-spacing:1px;color:var(--brand-dark);background:var(--brand-tint);padding:var(--sp-1) var(--sp-3);font-weight:600;border-radius:2px}
+  .pd-actions{display:flex;gap:var(--sp-4);flex-wrap:wrap;align-items:center;padding-top:var(--sp-6);border-top:1px solid var(--line)}
+  .btn-fill{display:inline-flex;align-items:center;gap:var(--sp-2);padding:var(--sp-4) var(--sp-7);background:var(--brand);color:#fff;font-size:var(--t-body-s);letter-spacing:2px;font-weight:500;transition:background .2s}
+  .btn-fill::after{content:"→";font-family:"IBM Plex Serif",sans-serif}
+  .btn-fill:hover{background:var(--brand-dark)}
+  .btn-line{display:inline-flex;align-items:center;gap:var(--sp-2);padding:var(--sp-4) var(--sp-6);border:1px solid var(--ink);color:var(--ink);font-size:var(--t-body-s);letter-spacing:2px;font-weight:500;transition:all .2s}
+  .btn-line:hover{background:var(--ink);color:#fff}
+  .pd-note{font-size:var(--t-caption);color:var(--muted);letter-spacing:.5px;margin-top:var(--sp-4);line-height:1.7}
+
+  /* ============ STORY ============ */
+  .story{padding:var(--sp-10) 0;background:var(--line-soft);border-top:1px solid var(--line-soft)}
+  .story-row{display:grid;grid-template-columns:.92fr 1.08fr;gap:var(--sp-8);align-items:center}
+  .story-text .eyebrow{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:4px;text-transform:uppercase;color:var(--brand);font-weight:600;margin-bottom:var(--sp-4);display:flex;align-items:center;gap:var(--sp-4)}
+  .story-text .eyebrow::before{content:"";width:32px;height:1px;background:var(--brand)}
+  .story-text h2{font-size:var(--t-section);letter-spacing:1.5px;color:var(--ink);line-height:1.25;margin-bottom:var(--sp-5);font-weight:700}
+  .story-text p{font-size:var(--t-body);color:var(--body);line-height:1.95;margin-bottom:var(--sp-5);text-wrap:pretty}
+  .story-text p:last-child{margin-bottom:0}
+  .story-text .pull{color:var(--brand-dark);font-weight:600}
+  .story-photo{aspect-ratio:4/3;position:relative;overflow:hidden;background:linear-gradient(135deg,#5a3a2a,#1a1010);cursor:zoom-in}
+  .story-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.4) 100%)}
+  .story-photo .ph-mark{position:absolute;bottom:18px;left:18px;z-index:2;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:600}
+
+  /* ============ SPECS ============ */
+  .specs{padding:var(--sp-9) 0;background:#fff}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid var(--ink);padding-bottom:var(--sp-5);margin-bottom:var(--sp-7)}
+  .sec-head .subtitle{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:3.5px;color:var(--brand);font-weight:600;text-transform:uppercase;display:flex;align-items:center;gap:var(--sp-4);margin-top:var(--sp-3);order:2}
+  .sec-head .subtitle::before{content:"";width:24px;height:1px;background:var(--brand)}
+  .sec-head .titles{display:flex;flex-direction:column;gap:var(--sp-3)}
+  .sec-head h2{font-size:var(--t-section);font-weight:700;color:var(--ink);letter-spacing:1.5px;line-height:1.25}
+  .spec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-5) var(--sp-8)}
+  .spec{display:flex;justify-content:space-between;align-items:baseline;gap:var(--sp-4);padding-bottom:var(--sp-4);border-bottom:1px dashed var(--line)}
+  .spec .k{font-size:var(--t-body-s);color:var(--muted);letter-spacing:1px;white-space:nowrap}
+  .spec .v{font-size:var(--t-body-s);color:var(--ink);font-weight:500;text-align:right}
+
+  /* ============ SUPPORT ============ */
+  .support{padding:var(--sp-9) 0;background:var(--brand-tint);border-top:1px solid #F0DADA}
+  .support .wrap{max-width:680px;text-align:center}
+  .support .eyebrow{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:4px;text-transform:uppercase;color:var(--brand);font-weight:600;margin-bottom:var(--sp-4);display:inline-flex;align-items:center;gap:var(--sp-4)}
+  .support .eyebrow::before,.support .eyebrow::after{content:"";width:24px;height:1px;background:var(--brand)}
+  .support h2{font-size:var(--t-title-l);letter-spacing:1px;color:var(--ink);line-height:1.4;margin-bottom:var(--sp-4);font-weight:700}
+  .support p{font-size:var(--t-body);color:var(--body);line-height:1.9;margin-bottom:var(--sp-6);text-wrap:pretty}
+  .support .ways{display:flex;gap:var(--sp-4);justify-content:center;flex-wrap:wrap}
+
+  /* ============ LIGHTBOX ============ */
+  .lightbox{position:fixed;inset:0;background:rgba(10,4,4,.95);z-index:100;display:none;align-items:center;justify-content:center}
+  .lightbox.on{display:flex}
+  .lightbox figure{max-width:92vw;max-height:88vh;display:flex;flex-direction:column;align-items:center;gap:var(--sp-4)}
+  .lb-stage{width:min(72vh,88vw);aspect-ratio:4/5;max-width:88vw;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .lightbox figcaption{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:1.5px;color:rgba(255,255,255,.72)}
+  .lb-btn{position:absolute;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;line-height:1;transition:background .2s;z-index:2}
+  .lb-btn:hover{background:rgba(255,255,255,.25)}
+  .lb-close{top:24px;right:24px;font-family:"IBM Plex Serif",sans-serif}
+  .lb-prev{left:24px;top:50%;transform:translateY(-50%)}
+  .lb-next{right:24px;top:50%;transform:translateY(-50%)}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1100px){
+    .app-nav,.app-header{position:static}
+    .pd-grid{grid-template-columns:1fr;gap:var(--sp-6);max-width:620px;margin:0 auto}
+    .story-row{grid-template-columns:1fr;gap:var(--sp-6)}
+    .story-photo{order:-1}
+    .donate-card{grid-template-columns:1fr;gap:var(--sp-7);padding:var(--sp-7)}
+    .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:var(--sp-6)}
+  }
+  @media (max-width: 720px){
+    .app-header .row{grid-template-columns:auto 1fr auto;gap:var(--sp-4);padding:var(--sp-4) var(--sp-4)}
+    .header-socials,.header-utility{display:none}
+    .donate-btn{padding:var(--sp-2) var(--sp-4);font-size:var(--t-meta);letter-spacing:2px}
+    .app-nav{display:none}
+    .nav-toggle{display:flex}
+    .wrap{padding:0 var(--sp-4)}
+    .pd-info h1{font-size:var(--t-display-l)}
+    .spec-grid{grid-template-columns:1fr}
+    .sec-head{flex-direction:column;align-items:flex-start;gap:var(--sp-4)}
+    .donate-band{padding:var(--sp-7) var(--sp-4)}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="app-header">
+  <div class="row">
+    <div class="left">
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="open menu"><span></span><span></span><span></span></button>
+      <div class="header-socials">
+        <a aria-label="facebook" href="https://www.facebook.com/LoveHopeF" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
+        <a aria-label="instagram" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a aria-label="youtube" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
+        <a aria-label="line" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
+      </div>
+    </div>
+    <a class="logo" href="index.html"><img src="images/logo.png" alt="薛伯輝基金會 Love Hope Foundation"></a>
+    <div class="right">
+      <a class="donate-btn" href="donate.html">捐款支持</a>
+      <div class="header-utility"><a href="#">EN</a><a href="#">登入</a></div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="app-nav">
+  <div class="row">
+    <a href="about.html">關於我們</a>
+    <a href="people.html">慈善身影</a>
+    <a href="actions.html">公益行動</a>
+    <a href="true-love.html">真愛多多</a>
+    <a href="news.html">最新消息</a>
+    <a href="shop.html" class="active">公益小舖</a>
+    <a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
+    <a href="venue.html">場地租借</a>
+  </div>
+</nav>
+
+<!-- ===== BREADCRUMB ===== -->
+<nav class="pd-crumb" aria-label="breadcrumb">
+  <div class="wrap">
+    <a href="shop.html">公益小舖</a>
+    <span class="arr">/</span>
+    <span class="cur">威宏的紅包袋</span>
+  </div>
+</nav>
+
+<!-- ===== PRODUCT HERO ===== -->
+<section class="pd">
+  <div class="wrap">
+    <div class="pd-grid">
+      <div class="pd-gallery">
+        <figure class="pd-main" id="pdMain" tabindex="0" aria-label="放大檢視商品照片"><span class="ph-mark">商品照片</span></figure>
+        <div class="pd-thumbs" id="pdThumbs"></div>
+      </div>
+      <div class="pd-info">
+        <p class="pd-eyebrow">公益小舖 · 文創品</p>
+        <h1>威宏的紅包袋</h1>
+        <p class="pd-maker">創作者 ｜ 威宏</p>
+        <span class="pd-price">NT$ 280 <small>／ 套</small></span>
+        <p class="pd-desc">威宏用畫筆把心裡的世界畫出來，那些線條與色彩被印成一張張紅包袋。把這份純粹的祝福，裝進你的年節與日常。</p>
+        <div class="pd-chips">
+          <span class="chip">一套 6 入</span>
+          <span class="chip">3 款圖樣</span>
+          <span class="chip">原創手繪</span>
+        </div>
+        <div class="pd-actions">
+          <a class="btn-fill" href="#">我想支持</a>
+          <a class="btn-line" href="#story">看威宏的故事</a>
+        </div>
+        <p class="pd-note">＊購買方式即將開放；在此之前，歡迎來信 <a href="mailto:love.hopech@gmail.com" style="color:var(--brand-dark);font-weight:600">love.hopech@gmail.com</a> 或來電 (02) 2381-6678 洽詢與團購。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORY ===== -->
+<section class="story" id="story">
+  <div class="wrap">
+    <div class="story-row">
+      <div class="story-text">
+        <p class="eyebrow">The Maker</p>
+        <h2>畫，是威宏說話的方式</h2>
+        <p>對威宏來說，畫筆是他與世界交流的語言。那些反覆描繪的線條與大膽的用色，是他看待世界的方式，也是他最自在的表達。</p>
+        <p>在基金會的陪伴下，威宏的畫被印製成一張張紅包袋——讓更多人能把這份純粹而溫暖的祝福，帶進自己的生活裡。</p>
+        <p class="pull">你的每一次支持，都化為威宏與更多孩子繼續創作的力量。</p>
+      </div>
+      <figure class="story-photo" data-lb="story" tabindex="0" aria-label="放大檢視"><span class="ph-mark">創作者照片</span></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SPECS ===== -->
+<section class="specs">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="titles">
+        <h2>商品細節</h2>
+        <p class="subtitle"><span>Details</span></p>
+      </div>
+    </div>
+    <div class="spec-grid">
+      <div class="spec"><span class="k">內容物</span><span class="v">紅包袋 6 入（3 款圖樣各 2）</span></div>
+      <div class="spec"><span class="k">尺寸</span><span class="v">約 9 × 17 cm</span></div>
+      <div class="spec"><span class="k">材質</span><span class="v">美術紙</span></div>
+      <div class="spec"><span class="k">圖樣</span><span class="v">威宏原創手繪</span></div>
+      <div class="spec"><span class="k">產地</span><span class="v">台灣印製</span></div>
+      <div class="spec"><span class="k">公益用途</span><span class="v">收入支持創作者與基金會公益</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SUPPORT ===== -->
+<section class="support">
+  <div class="wrap">
+    <p class="eyebrow">Support</p>
+    <h2>把祝福，分送出去</h2>
+    <p>無論是個人收藏、年節送禮，或是企業團購，每一份心意都會回到創作者與基金會的公益行動。線上購買即將開放，現在就歡迎與我們聯繫。</p>
+    <div class="ways">
+      <a class="btn-fill" href="mailto:love.hopech@gmail.com">來信洽詢</a>
+      <a class="btn-line" href="shop.html">回公益小舖</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DONATE BAND ===== -->
+<section class="donate-band">
+  <div class="wrap">
+    <div class="donate-card">
+      <div class="donate-text">
+        <div class="label">Donate</div>
+        <h2>捐款支持<br>愛與希望的延續</h2>
+        <p>每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
+        <div class="actions">
+          <a class="btn-w" href="donate.html">捐款方式</a>
+          <a class="btn-wo" href="donate.html">捐款徵信</a>
+        </div>
+      </div>
+      <div class="donate-stats" aria-label="捐款方式摘要">
+        <div class="donate-method">
+          <span class="method-label">銀行匯款</span>
+          <h3>銀行匯款 / ATM 轉帳</h3>
+          <p>國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">郵政劃撥</span>
+          <h3>郵局劃撥</h3>
+          <p>帳號 <b>50067771</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">其他方式</span>
+          <h3>信用卡、支票與現場捐款</h3>
+          <p>歡迎透過信用卡授權書、支票或親臨基金會現場捐款，捐款徵信定期公開。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="app-footer">
+  <div class="footer-info">
+    <p class="footer-address">10043 台北市中正區博愛路 154 號 6 樓</p>
+    <p class="footer-contact">
+      <span><span class="lbl">電話</span>(02) 2381-6678</span>
+      <span class="dot">·</span>
+      <span><span class="lbl">傳真</span>(02) 2381-3171</span>
+      <span class="dot">·</span>
+      <a href="mailto:love.hopech@gmail.com">love.hopech@gmail.com</a>
+    </p>
+    <div class="footer-giro">
+      <span class="giro-label">郵政劃撥</span>
+      <span class="giro-cell">帳號<b>50067771</b></span>
+      <span class="giro-sep">｜</span>
+      <span class="giro-cell">戶名<b>財團法人薛伯輝基金會</b></span>
+    </div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="about.html">關於我們</a></li>
+    <li><a href="people.html">慈善身影</a></li>
+    <li><a href="actions.html">公益行動</a></li>
+    <li><a href="true-love.html">真愛多多</a></li>
+    <li><a href="news.html">最新消息</a></li>
+    <li><a href="shop.html">公益小舖</a></li>
+    <li><a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a></li>
+    <li><a href="venue.html">場地租借</a></li>
+    <li><a href="mailto:love.hopech@gmail.com">聯絡我們</a></li>
+    <li><a href="privacy.html">隱私權政策</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 財團法人薛伯輝基金會　版權所有</p>
+</footer>
+
+<!-- ===== MOBILE DRAWER ===== -->
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <button class="drawer-close" id="drawerClose" type="button" aria-label="close menu">×</button>
+    <div class="drawer-utility"><a href="#">EN</a><span class="sep">/</span><a href="#">登入</a></div>
+  </div>
+  <nav class="drawer-nav">
+    <a href="about.html">關於我們</a>
+    <a href="people.html">慈善身影</a>
+    <a href="actions.html">公益行動</a>
+    <a href="true-love.html">真愛多多</a>
+    <a href="news.html">最新消息</a>
+    <a href="shop.html" class="active">公益小舖</a>
+    <a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
+    <a href="venue.html">場地租借</a>
+  </nav>
+  <div class="drawer-foot">
+    <a class="drawer-donate" href="donate.html">捐款支持</a>
+    <div class="drawer-social">
+      <a aria-label="facebook" href="https://www.facebook.com/LoveHopeF" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
+      <a aria-label="instagram" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+      <a aria-label="youtube" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
+      <a aria-label="line" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
+    </div>
+  </div>
+</aside>
+
+<a class="cd-top" id="cdTop" href="#" title="回到頂部" aria-label="back to top">↑</a>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="照片檢視">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="關閉">×</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="上一張">‹</button>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="下一張">›</button>
+  <figure>
+    <div class="lb-stage" id="lbStage"></div>
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+</div>
+
+<script>
+  // ===== 商品照片（佔位漸層；之後換成 images/shop/ 內真實照片）=====
+  const GRADS = [
+    'linear-gradient(135deg,#8C0A0A,#3a1010)',
+    'linear-gradient(135deg,#a8454a,#5C0606)',
+    'linear-gradient(135deg,#c4a880,#704830)',
+    'linear-gradient(135deg,#3a3a3a,#0f0f0f)'
+  ];
+  const CAP = '威宏的紅包袋 ｜ 商品照片';
+  const main = document.getElementById('pdMain');
+  const thumbsWrap = document.getElementById('pdThumbs');
+  let active = 0;
+  function setActive(i){
+    active = i;
+    main.style.background = GRADS[i];
+    thumbsWrap.querySelectorAll('.pd-thumb').forEach((t,k)=>t.classList.toggle('on', k===i));
+  }
+  GRADS.forEach((g,i)=>{
+    const t = document.createElement('div');
+    t.className = 'pd-thumb' + (i===0?' on':'');
+    t.style.background = g;
+    t.setAttribute('role','button');
+    t.setAttribute('aria-label','照片 '+(i+1));
+    t.addEventListener('click', ()=>setActive(i));
+    thumbsWrap.appendChild(t);
+  });
+  setActive(0);
+
+  // ===== 燈箱 =====
+  const lb = document.getElementById('lightbox');
+  const lbStage = document.getElementById('lbStage');
+  const lbCap = document.getElementById('lbCap');
+  let lbMode = 'product';
+  function renderLb(){
+    if (lbMode === 'story'){
+      lbStage.style.background = 'linear-gradient(135deg,#5a3a2a,#1a1010)';
+      lbStage.style.aspectRatio = '4/3';
+      lbCap.textContent = '威宏 ｜ 創作者照片';
+    } else {
+      lbStage.style.background = GRADS[active];
+      lbStage.style.aspectRatio = '4/5';
+      lbCap.textContent = CAP;
+    }
+  }
+  function openLb(mode){ lbMode = mode; renderLb(); lb.classList.add('on'); document.body.style.overflow='hidden'; }
+  function closeLb(){ lb.classList.remove('on'); document.body.style.overflow=''; }
+  main.addEventListener('click', ()=>openLb('product'));
+  main.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();openLb('product');} });
+  document.querySelector('.story-photo').addEventListener('click', ()=>openLb('story'));
+  document.querySelector('.story-photo').addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();openLb('story');} });
+  function lbStep(d){ if(lbMode!=='product') return; setActive((active+d+GRADS.length)%GRADS.length); renderLb(); }
+  document.getElementById('lbClose').addEventListener('click', closeLb);
+  document.getElementById('lbPrev').addEventListener('click', ()=>lbStep(-1));
+  document.getElementById('lbNext').addEventListener('click', ()=>lbStep(1));
+  lb.addEventListener('click', e=>{ if(e.target===lb) closeLb(); });
+  document.addEventListener('keydown', e=>{
+    if(!lb.classList.contains('on')) return;
+    if(e.key==='Escape') closeLb();
+    if(e.key==='ArrowLeft') lbStep(-1);
+    if(e.key==='ArrowRight') lbStep(1);
+  });
+
+  // ===== BACK TO TOP =====
+  (function(){
+    const btn = document.getElementById('cdTop');
+    btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(() => { btn.classList.toggle('on', window.scrollY > 600); ticking = false; });
+    });
+  })();
+
+  // ===== MOBILE DRAWER =====
+  (function(){
+    const toggle = document.getElementById('navToggle');
+    const drawer = document.getElementById('drawer');
+    const backdrop = document.getElementById('drawerBackdrop');
+    const close = document.getElementById('drawerClose');
+    if (!toggle || !drawer || !backdrop) return;
+    const open = () => { drawer.classList.add('on'); backdrop.classList.add('on'); drawer.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; };
+    const shut = () => { drawer.classList.remove('on'); backdrop.classList.remove('on'); drawer.setAttribute('aria-hidden','true'); document.body.style.overflow=''; };
+    toggle.addEventListener('click', open);
+    close && close.addEventListener('click', shut);
+    backdrop.addEventListener('click', shut);
+    document.addEventListener('keydown', e => { if (e.key==='Escape' && drawer.classList.contains('on')) shut(); });
+    drawer.querySelectorAll('.drawer-nav a').forEach(a => a.addEventListener('click', shut));
+  })();
+</script>
+
+</body>
+</html>
