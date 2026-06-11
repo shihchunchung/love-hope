@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>公益小舖｜薛伯輝基金會（方案 3 · 分類沉浸）</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{font-size:var(--t-body);font-feature-settings:"palt";background:var(--bg);color:var(--body);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.75;font-weight:400;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+  h1,h2,h3,h4,h5{color:var(--ink);font-weight:700;line-height:1.35}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  button{cursor:pointer;font-family:inherit;border:none;background:none;color:inherit}
+  ul{list-style:none}
+  .lat{font-family:"IBM Plex Serif",sans-serif}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 var(--sp-7)}
+
+  /* ============ HEADER ============ */
+  .app-header{background:#fff;position:sticky;top:0;z-index:50}
+  .app-header .row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:var(--sp-4) var(--sp-7);gap:var(--sp-6)}
+  .app-header .left{display:flex;align-items:center;gap:var(--sp-4)}
+  .app-header .logo{justify-self:center;display:block}
+  .app-header .logo img{height:50px;width:auto}
+  .app-header .right{display:flex;justify-content:flex-end;align-items:center;gap:var(--sp-4)}
+  .header-socials{display:flex;align-items:center;gap:var(--sp-4)}
+  .header-socials a{width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);transition:color .2s}
+  .header-socials a:hover{color:var(--brand)}
+  .header-utility{display:flex;align-items:center;gap:var(--sp-4);padding-left:var(--sp-4);border-left:1px solid var(--line)}
+  .header-utility a{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);font-weight:600;transition:color .2s}
+  .header-utility a:hover{color:var(--brand)}
+  .donate-btn{display:inline-flex;align-items:center;gap:var(--sp-2);padding:var(--sp-3) var(--sp-5);background:var(--brand);color:#fff;font-size:var(--t-body-s);letter-spacing:3px;font-weight:500;transition:background .2s}
+  .donate-btn::after{content:"→";font-family:"IBM Plex Serif",sans-serif;font-weight:400}
+  .donate-btn:hover{background:var(--brand-dark)}
+
+  /* ============ NAV ============ */
+  .app-nav{border-top:1px solid var(--brand);border-bottom:1px solid var(--brand);background:#fff;position:sticky;top:86px;z-index:49}
+  .app-nav .row{display:flex;justify-content:center;align-items:stretch;height:54px}
+  .app-nav a{display:flex;align-items:center;padding:0 var(--sp-5);font-size:var(--t-body);font-weight:500;color:var(--ink);position:relative;letter-spacing:0;transition:color .15s,background .2s}
+  .app-nav a:not(:last-child)::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:14px;background:var(--line)}
+  .app-nav a:hover,.app-nav a.active{color:var(--brand)}
+  .app-nav a.is-external{color:#6B4423;gap:var(--sp-2)}
+  .app-nav a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-body-s);font-weight:400;display:inline-block;transition:transform .25s,opacity .2s;line-height:1;opacity:.6}
+  .app-nav a.is-external:hover{color:#6B4423;background:#F4EDE0}
+  .app-nav a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
+
+  /* ============ SUB-NAV（分類錨點）============ */
+  .sub-nav{background:#fff;position:sticky;top:140px;z-index:48;display:flex;justify-content:center;align-items:stretch;padding:var(--sp-3) var(--sp-6) 19px;border-bottom:1px solid var(--line-soft)}
+  .sub-nav .item{padding:0 var(--sp-5);font-size:var(--t-meta);letter-spacing:1.5px;color:#666;font-weight:500;position:relative;line-height:1.75;cursor:pointer;transition:color .18s;background:none}
+  .sub-nav .item:hover{color:var(--brand)}
+  .sub-nav .item.on{color:var(--brand);font-weight:700}
+  .sub-nav .item.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-6px;width:24px;height:2px;background:var(--brand)}
+
+  /* ============ HERO（全幅）============ */
+  .shop-hero{position:relative;height:clamp(380px,52vh,520px);overflow:hidden;background:linear-gradient(135deg,#8C0A0A 0%,#5C0606 60%,#3d0404 100%)}
+  .shop-hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 18% 30%,rgba(255,255,255,.06) 0,transparent 38%),radial-gradient(circle at 82% 75%,rgba(0,0,0,.28) 0,transparent 55%)}
+  .shop-hero .hero-inner{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:var(--sp-9)}
+  .shop-hero .eyebrow{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:600;margin-bottom:var(--sp-4);display:flex;align-items:center;gap:var(--sp-4)}
+  .shop-hero .eyebrow::before{content:"";width:36px;height:1px;background:rgba(255,255,255,.7)}
+  .shop-hero h1{font-size:clamp(40px,5.6vw,64px);color:#fff;letter-spacing:6px;line-height:1.1;font-weight:700;margin-bottom:var(--sp-5)}
+  .shop-hero .lead{font-size:var(--t-title-l);color:rgba(255,255,255,.92);letter-spacing:1.5px;font-weight:300;max-width:680px;line-height:1.7}
+
+  /* ============ INTRO ============ */
+  .shop-intro{padding:var(--sp-9) 0 var(--sp-7);background:#fff;text-align:center}
+  .shop-intro p{font-size:var(--t-body-l);color:var(--body);line-height:1.95;max-width:720px;margin:0 auto;letter-spacing:.5px;text-wrap:pretty}
+  .shop-intro .accent{font-family:"IBM Plex Serif",sans-serif;color:var(--brand);font-weight:600}
+
+  /* ============ CATEGORY SECTION ============ */
+  .cat-sec{padding:var(--sp-10) 0;background:#fff;border-top:1px solid var(--line-soft)}
+  .cat-sec.tint{background:var(--brand-tint);border-top:1px solid #F0DADA}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--ink);padding-bottom:var(--sp-5);margin-bottom:var(--sp-8)}
+  .section-head .titles{display:flex;flex-direction:column;gap:var(--sp-3)}
+  .section-head .subtitle{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:3.5px;color:var(--brand);font-weight:600;text-transform:uppercase;display:flex;align-items:center;gap:var(--sp-4)}
+  .section-head .subtitle::before{content:"";width:24px;height:1px;background:var(--brand)}
+  .section-head h2.section-title{font-size:var(--t-section);font-weight:700;color:var(--ink);letter-spacing:1.5px;line-height:1.25}
+  .section-head .head-note{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);color:var(--muted);letter-spacing:1.5px}
+
+  /* ============ PRODUCT GRID ============ */
+  .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-8) var(--sp-6)}
+  .p-card{display:flex;flex-direction:column;cursor:pointer}
+  .p-thumb{aspect-ratio:4/5;overflow:hidden;position:relative;background:linear-gradient(135deg,#3a1818,#1a0202);margin-bottom:var(--sp-4)}
+  .p-thumb .img-fill{position:absolute;inset:0;background:inherit;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
+  .p-card:hover .p-thumb .img-fill{transform:scale(1.05)}
+  .p-thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.45) 100%);pointer-events:none;z-index:1}
+  .p-thumb .ph-mark{position:absolute;bottom:16px;left:16px;z-index:2;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:600}
+  .p-card .meta{display:flex;gap:var(--sp-3);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:var(--sp-3)}
+  .p-card .meta .cat{color:var(--brand);font-weight:700}
+  .p-card .title{font-size:var(--t-title);line-height:1.5;font-weight:700;letter-spacing:0;color:var(--ink);margin-bottom:var(--sp-3);transition:color .2s}
+  .p-card:hover .title{color:var(--brand)}
+  .p-line{font-size:var(--t-body);line-height:1.85;color:var(--body);margin:0 0 var(--sp-4);text-wrap:pretty}
+  .p-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding-top:var(--sp-4);border-top:1px solid var(--line)}
+  .tint .p-foot{border-top-color:#EAD2D2}
+  .p-price{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-body);color:var(--brand-dark);font-weight:600;letter-spacing:.5px}
+  .article-action{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);font-weight:600;border-bottom:1px solid var(--ink);padding-bottom:3px;display:inline-block;transition:.2s}
+  .p-card:hover .article-action{color:var(--brand);border-color:var(--brand)}
+
+  /* ============ DONATE BAND ============ */
+  .donate-band{padding:var(--sp-9) 0;background:var(--line-soft);border-top:1px solid var(--line-soft)}
+  .donate-card{background:var(--brand);color:#fff;border-radius:4px;padding:var(--sp-8);display:grid;grid-template-columns:1.2fr 1fr;gap:var(--sp-7);align-items:center;position:relative;overflow:hidden}
+  .donate-card::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 85% 15%,rgba(0,0,0,.18) 0,transparent 60%);pointer-events:none}
+  .donate-text{position:relative;z-index:1}
+  .donate-text .label{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:3px;text-transform:uppercase;color:#f4d8d8;font-weight:700;margin-bottom:var(--sp-4);display:flex;align-items:center;gap:var(--sp-4)}
+  .donate-text .label::before{content:"";width:32px;height:1px;background:#f4d8d8}
+  .donate-text h2{font-size:var(--t-display-l);color:#fff;letter-spacing:1.5px;line-height:1.35;margin-bottom:var(--sp-6);font-weight:700}
+  .donate-text p{font-size:var(--t-title-s);color:rgba(255,255,255,.85);line-height:1.85;margin-bottom:var(--sp-6);max-width:480px}
+  .donate-text .actions{display:flex;gap:var(--sp-4);flex-wrap:wrap}
+  .donate-text .btn-w{display:inline-flex;align-items:center;gap:var(--sp-3);padding:var(--sp-3) var(--sp-6);background:#fff;color:var(--brand);font-size:var(--t-meta);letter-spacing:2.5px;font-weight:600;transition:background .2s}
+  .donate-text .btn-w::after{content:"→"}
+  .donate-text .btn-w:hover{background:#f4d8d8}
+  .donate-text .btn-wo{display:inline-flex;align-items:center;gap:var(--sp-3);padding:var(--sp-3) var(--sp-6);border:1px solid rgba(255,255,255,.5);color:#fff;font-size:var(--t-meta);letter-spacing:2.5px;font-weight:500;transition:all .2s}
+  .donate-text .btn-wo:hover{background:rgba(255,255,255,.12);border-color:#fff}
+  .donate-stats{position:relative;z-index:1;display:flex;flex-direction:column;border-left:1px solid rgba(255,255,255,.2);padding-left:var(--sp-7)}
+  .donate-method{padding:var(--sp-4) 0;border-bottom:1px solid rgba(255,255,255,.18)}
+  .donate-method:first-child{padding-top:0}
+  .donate-method:last-child{border-bottom:none;padding-bottom:0}
+  .donate-method .method-label{display:block;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:700;margin-bottom:var(--sp-2)}
+  .donate-method h3{font-size:var(--t-title-s);color:#fff;letter-spacing:1.5px;margin-bottom:var(--sp-2);font-weight:600}
+  .donate-method p{font-size:var(--t-body-s);color:rgba(255,255,255,.78);line-height:1.75;margin:0}
+  .donate-method b{color:#fff;font-weight:700}
+
+  /* ============ FOOTER ============ */
+  .app-footer{background:var(--ink);color:#fff;padding:var(--sp-8) var(--sp-7) var(--sp-6);text-align:center}
+  .app-footer .footer-info{display:flex;flex-direction:column;align-items:center;gap:var(--sp-4);margin-bottom:var(--sp-7)}
+  .app-footer .footer-address{font-size:var(--t-body-s);color:#fff;font-weight:500}
+  .app-footer .footer-contact{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:var(--sp-2) var(--sp-4);font-size:var(--t-body-s);color:rgba(255,255,255,.75)}
+  .app-footer .footer-contact .lbl{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:2px;font-size:var(--t-meta);margin-right:var(--sp-2)}
+  .app-footer .footer-contact a{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-body-s);color:rgba(255,255,255,.75);transition:color .2s}
+  .app-footer .footer-contact a:hover{color:#fff}
+  .app-footer .footer-contact .dot{color:rgba(255,255,255,.3)}
+  .app-footer .footer-giro{display:inline-flex;align-items:center;gap:var(--sp-4);padding:var(--sp-4) var(--sp-6);border-top:1px solid rgba(255,255,255,.15);border-bottom:1px solid rgba(255,255,255,.15);margin-top:var(--sp-2);flex-wrap:wrap;justify-content:center;font-size:var(--t-body-s)}
+  .app-footer .footer-giro .giro-label{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:3px;text-transform:uppercase;color:#fff;font-weight:700;padding:var(--sp-1) var(--sp-3);border:1px solid rgba(255,255,255,.4)}
+  .app-footer .footer-giro .giro-cell{color:rgba(255,255,255,.78);letter-spacing:.5px}
+  .app-footer .footer-giro .giro-cell b{font-family:"IBM Plex Serif",sans-serif;font-weight:700;color:#fff;letter-spacing:1.5px;margin-left:var(--sp-1)}
+  .app-footer .footer-giro .giro-sep{color:rgba(255,255,255,.2);font-weight:700}
+  .app-footer .footer-links{display:flex;justify-content:center;gap:var(--sp-5);flex-wrap:wrap;margin-bottom:var(--sp-5)}
+  .app-footer .footer-links a{font-size:var(--t-body-s);color:#fff;font-weight:500;transition:color .2s}
+  .app-footer .footer-links a:hover{color:#f4d8d8}
+  .app-footer .footer-links a.is-external{color:#D9B889;display:inline-flex;align-items:center;gap:var(--sp-1)}
+  .app-footer .footer-links a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);font-weight:400;opacity:.6;transition:transform .25s,opacity .2s;line-height:1}
+  .app-footer .footer-links a.is-external:hover{color:#E5C99D}
+  .app-footer .footer-links a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
+  .app-footer .footer-copy{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;color:rgba(255,255,255,.4);text-transform:uppercase}
+
+  /* ============ BACK TO TOP ============ */
+  .cd-top{position:fixed;right:24px;bottom:24px;width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-title);line-height:1;z-index:80;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s,background .2s;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+  .cd-top.on{opacity:1;transform:translateY(0);pointer-events:auto}
+  .cd-top:hover{background:var(--brand)}
+
+  /* ============ MOBILE DRAWER ============ */
+  .nav-toggle{display:none;width:36px;height:36px;flex-direction:column;align-items:center;justify-content:center;gap:var(--sp-1);padding:0;cursor:pointer;background:transparent;border:0}
+  .nav-toggle span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .25s}
+  .drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .3s;z-index:90}
+  .drawer-backdrop.on{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:min(380px,88vw);background:var(--brand);color:#fff;z-index:91;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow-y:auto;box-shadow:-12px 0 40px rgba(0,0,0,.18)}
+  .drawer.on{transform:translateX(0)}
+  .drawer-head{display:flex;justify-content:space-between;align-items:center;padding:var(--sp-5) var(--sp-6);border-bottom:1px solid rgba(255,255,255,.12)}
+  .drawer-close{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:24px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;border:0;transition:background .2s}
+  .drawer-close:hover{background:rgba(255,255,255,.22)}
+  .drawer-utility{display:flex;align-items:center;gap:var(--sp-3);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2px;text-transform:uppercase;font-weight:600}
+  .drawer-utility a{color:rgba(255,255,255,.9);transition:color .2s}
+  .drawer-utility a:hover{color:#fff}
+  .drawer-utility .sep{color:rgba(255,255,255,.3)}
+  .drawer-nav{flex:1;padding:var(--sp-4) var(--sp-6);display:flex;flex-direction:column}
+  .drawer-nav a{position:relative;padding:var(--sp-4) 0;font-size:var(--t-body-l);color:#fff;letter-spacing:1px;font-weight:500;border-bottom:1px solid rgba(255,255,255,.1);transition:padding .25s;display:flex;align-items:center;gap:var(--sp-4)}
+  .drawer-nav a::before{content:"";width:0;height:1px;background:#fff;transition:width .25s}
+  .drawer-nav a:hover,.drawer-nav a.active{padding-left:var(--sp-2)}
+  .drawer-nav a:hover::before,.drawer-nav a.active::before{width:24px}
+  .drawer-nav a.is-external{color:#F4EDE0;gap:var(--sp-3)}
+  .drawer-nav a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-body);font-weight:400;opacity:.7;transition:transform .25s,opacity .2s;line-height:1;margin-left:auto;padding-right:var(--sp-2)}
+  .drawer-nav a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
+  .drawer-foot{padding:var(--sp-5) var(--sp-6) var(--sp-6);border-top:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;gap:var(--sp-4)}
+  .drawer-donate{display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-3);padding:var(--sp-4);background:#fff;color:var(--brand);font-size:var(--t-body-s);letter-spacing:2.5px;font-weight:600;transition:background .2s}
+  .drawer-donate::after{content:"→"}
+  .drawer-donate:hover{background:#f4d8d8}
+  .drawer-social{display:flex;justify-content:center;gap:var(--sp-4)}
+  .drawer-social a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);display:inline-flex;align-items:center;justify-content:center;color:#fff;transition:background .2s}
+  .drawer-social a:hover{background:rgba(255,255,255,.22)}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1100px){
+    .app-nav,.app-header,.sub-nav{position:static}
+    .product-grid{grid-template-columns:repeat(2,1fr);gap:var(--sp-7) var(--sp-5)}
+    .donate-card{grid-template-columns:1fr;gap:var(--sp-7);padding:var(--sp-7)}
+    .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:var(--sp-6)}
+  }
+  @media (max-width: 720px){
+    .app-header .row{grid-template-columns:auto 1fr auto;gap:var(--sp-4);padding:var(--sp-4) var(--sp-4)}
+    .header-socials,.header-utility{display:none}
+    .donate-btn{padding:var(--sp-2) var(--sp-4);font-size:var(--t-meta);letter-spacing:2px}
+    .app-nav,.sub-nav{display:none}
+    .nav-toggle{display:flex}
+    .wrap{padding:0 var(--sp-4)}
+    .shop-hero{height:clamp(320px,46vh,420px)}
+    .shop-hero h1{letter-spacing:3px}
+    .cat-sec{padding:var(--sp-8) 0}
+    .product-grid{grid-template-columns:1fr;gap:var(--sp-7)}
+    .p-thumb{aspect-ratio:3/2}
+    .section-head{flex-direction:column;align-items:flex-start;gap:var(--sp-4)}
+    .donate-band{padding:var(--sp-7) var(--sp-4)}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="app-header">
+  <div class="row">
+    <div class="left">
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="open menu"><span></span><span></span><span></span></button>
+      <div class="header-socials">
+        <a aria-label="facebook" href="https://www.facebook.com/LoveHopeF" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
+        <a aria-label="instagram" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a aria-label="youtube" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
+        <a aria-label="line" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
+      </div>
+    </div>
+    <a class="logo" href="index.html"><img src="images/logo.png" alt="薛伯輝基金會 Love Hope Foundation"></a>
+    <div class="right">
+      <a class="donate-btn" href="donate.html">捐款支持</a>
+      <div class="header-utility"><a href="#">EN</a><a href="#">登入</a></div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="app-nav">
+  <div class="row">
+    <a href="about.html">關於我們</a>
+    <a href="people.html">慈善身影</a>
+    <a href="actions.html">公益行動</a>
+    <a href="true-love.html">真愛多多</a>
+    <a href="news.html">最新消息</a>
+    <a href="shop.html" class="active">公益小舖</a>
+    <a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
+    <a href="venue.html">場地租借</a>
+  </div>
+</nav>
+
+<!-- ===== SUB-NAV（分類錨點）===== -->
+<nav class="sub-nav" aria-label="商品分類">
+  <button class="item" data-target="craft">文創品</button>
+  <button class="item" data-target="pub">出版品</button>
+  <button class="item" data-target="collab">公益合作商品</button>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="shop-hero">
+  <div class="hero-inner">
+    <div class="wrap">
+      <p class="eyebrow">Love Hope Shop</p>
+      <h1>公益小舖</h1>
+      <p class="lead">以文創品、出版品與公益合作商品，<br>讓支持化為日常生活中的一份心意。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INTRO ===== -->
+<section class="shop-intro">
+  <div class="wrap">
+    <p>這裡的每一件作品，背後都有一個人、一段故事。<br>你買下的不只是一份物件，更是<span class="accent">對創作者與公益的支持</span> —— 讓愛與希望，繼續延續下去。</p>
+  </div>
+</section>
+
+<!-- ===== 分類商品區（JS 注入）===== -->
+<div id="catArea"></div>
+
+<!-- ===== DONATE BAND ===== -->
+<section class="donate-band">
+  <div class="wrap">
+    <div class="donate-card">
+      <div class="donate-text">
+        <div class="label">Donate</div>
+        <h2>捐款支持<br>愛與希望的延續</h2>
+        <p>每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
+        <div class="actions">
+          <a class="btn-w" href="donate.html">捐款方式</a>
+          <a class="btn-wo" href="donate.html">捐款徵信</a>
+        </div>
+      </div>
+      <div class="donate-stats" aria-label="捐款方式摘要">
+        <div class="donate-method">
+          <span class="method-label">Bank Transfer</span>
+          <h3>銀行匯款 / ATM 轉帳</h3>
+          <p>國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Postal Giro</span>
+          <h3>郵局劃撥</h3>
+          <p>帳號 <b>50067771</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="app-footer">
+  <div class="footer-info">
+    <p class="footer-address">10043 台北市中正區博愛路 154 號 6 樓</p>
+    <p class="footer-contact">
+      <span><span class="lbl">TEL</span>(02) 2381-6678</span>
+      <span class="dot">·</span>
+      <span><span class="lbl">FAX</span>(02) 2381-3171</span>
+      <span class="dot">·</span>
+      <a href="mailto:love.hopech@gmail.com">love.hopech@gmail.com</a>
+    </p>
+    <div class="footer-giro">
+      <span class="giro-label">郵政劃撥</span>
+      <span class="giro-cell">帳號<b>50067771</b></span>
+      <span class="giro-sep">｜</span>
+      <span class="giro-cell">戶名<b>財團法人薛伯輝基金會</b></span>
+    </div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="about.html">關於我們</a></li>
+    <li><a href="people.html">慈善身影</a></li>
+    <li><a href="actions.html">公益行動</a></li>
+    <li><a href="true-love.html">真愛多多</a></li>
+    <li><a href="news.html">最新消息</a></li>
+    <li><a href="shop.html">公益小舖</a></li>
+    <li><a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a></li>
+    <li><a href="venue.html">場地租借</a></li>
+    <li><a href="mailto:love.hopech@gmail.com">聯絡我們</a></li>
+    <li><a href="privacy.html">隱私權政策</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Love Hope Foundation. All Rights Reserved.</p>
+</footer>
+
+<!-- ===== MOBILE DRAWER ===== -->
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <button class="drawer-close" id="drawerClose" type="button" aria-label="close menu">×</button>
+    <div class="drawer-utility"><a href="#">EN</a><span class="sep">/</span><a href="#">登入</a></div>
+  </div>
+  <nav class="drawer-nav">
+    <a href="about.html">關於我們</a>
+    <a href="people.html">慈善身影</a>
+    <a href="actions.html">公益行動</a>
+    <a href="true-love.html">真愛多多</a>
+    <a href="news.html">最新消息</a>
+    <a href="shop.html" class="active">公益小舖</a>
+    <a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
+    <a href="venue.html">場地租借</a>
+  </nav>
+  <div class="drawer-foot">
+    <a class="drawer-donate" href="donate.html">捐款支持</a>
+    <div class="drawer-social">
+      <a aria-label="facebook" href="https://www.facebook.com/LoveHopeF" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
+      <a aria-label="instagram" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+      <a aria-label="youtube" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
+      <a aria-label="line" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
+    </div>
+  </div>
+</aside>
+
+<a class="cd-top" id="cdTop" href="#" title="回到頂部" aria-label="back to top">↑</a>
+
+<script>
+  // ===== 分類 + 商品資料（佔位；實際商品照之後放入 images/shop/）=====
+  const CATS = [
+    {key:'craft',  zh:'文創品',       en:'Craft & Art',   note:'創作者親手而成的日常小物'},
+    {key:'pub',    zh:'出版品',       en:'Publications',  note:'文字與影像，記錄陪伴的故事'},
+    {key:'collab', zh:'公益合作商品', en:'Collaborations',note:'與夥伴單位攜手，把好物送到你手中'}
+  ];
+  const PRODUCTS = [
+    {name:'威宏的紅包袋',     maker:'威宏',         cat:'craft',  tagline:'把祝福，畫進每一個紅包。', price:'NT$ 280 起', href:'shop-weihong.html'},
+    {name:'地磨兒手繪明信片組', maker:'地磨兒國小',   cat:'craft',  tagline:'山裡孩子的歌聲，化成一張張畫。', price:'NT$ 150', href:'#'},
+    {name:'惠民鑼鼓班帆布袋',   maker:'惠民啟智中心', cat:'craft',  tagline:'咚咚鼓聲裡，找到自信的天使們。', price:'NT$ 380', href:'#'},
+    {name:'《愛與希望》紀念文集', maker:'薛伯輝基金會', cat:'pub',    tagline:'二十年陪伴的故事，集結成冊。', price:'NT$ 350', href:'#'},
+    {name:'瑞復手作煎餅禮盒',   maker:'瑞復益智中心', cat:'collab', tagline:'行動煎餅車上，最暖的滋味。', price:'NT$ 420', href:'#'},
+    {name:'搖籃咖啡｜美濃精選豆', maker:'搖籃咖啡',   cat:'collab', tagline:'一杯咖啡，一次愛的循環。', price:'NT$ 450', href:'#'}
+  ];
+  const GRADS = ['linear-gradient(135deg,#3a1818,#1a0202)','linear-gradient(135deg,#a89070,#604530)','linear-gradient(135deg,#888,#3a3a3a)','linear-gradient(135deg,#c4a880,#704830)','linear-gradient(135deg,#5a3a2a,#1a1010)','linear-gradient(135deg,#8C0A0A,#3a1818)'];
+  let gi = 0;
+  const cardHTML = p => `
+    <a class="p-card" href="${p.href}">
+      <figure class="p-thumb" style="background:${GRADS[gi++ % GRADS.length]}"><span class="img-fill"></span><span class="ph-mark">商品照片</span></figure>
+      <div class="meta"><span class="cat">${p.maker}</span></div>
+      <h3 class="title">${p.name}</h3>
+      <p class="p-line">${p.tagline}</p>
+      <div class="p-foot"><span class="p-price">${p.price}</span><span class="article-action">我想支持 →</span></div>
+    </a>`;
+
+  document.getElementById('catArea').innerHTML = CATS.map((c,i) => {
+    const items = PRODUCTS.filter(p => p.cat === c.key).map(cardHTML).join('');
+    return `
+    <section class="cat-sec${i % 2 === 1 ? ' tint' : ''}" id="${c.key}">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="titles">
+            <span class="subtitle">${c.en}</span>
+            <h2 class="section-title">${c.zh}</h2>
+          </div>
+          <span class="head-note">${c.note}</span>
+        </div>
+        <div class="product-grid">${items}</div>
+      </div>
+    </section>`;
+  }).join('');
+
+  // ===== SUB-NAV：平滑捲動 + scrollspy =====
+  (function(){
+    const items = Array.from(document.querySelectorAll('.sub-nav .item'));
+    items.forEach(btn => btn.addEventListener('click', () => {
+      const el = document.getElementById(btn.dataset.target);
+      if (el) window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 170, behavior:'smooth'});
+    }));
+    const spy = () => {
+      const y = window.scrollY + 220;
+      let cur = -1;
+      items.forEach((b,i) => { const s = document.getElementById(b.dataset.target); if (s && s.offsetTop <= y) cur = i; });
+      items.forEach((b,i) => b.classList.toggle('on', i === cur));
+    };
+    let t = false;
+    window.addEventListener('scroll', () => { if (t) return; t = true; requestAnimationFrame(() => { spy(); t = false; }); });
+    spy();
+  })();
+
+  // ===== BACK TO TOP =====
+  (function(){
+    const btn = document.getElementById('cdTop');
+    btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(() => { btn.classList.toggle('on', window.scrollY > 600); ticking = false; });
+    });
+  })();
+
+  // ===== MOBILE DRAWER =====
+  (function(){
+    const toggle = document.getElementById('navToggle');
+    const drawer = document.getElementById('drawer');
+    const backdrop = document.getElementById('drawerBackdrop');
+    const close = document.getElementById('drawerClose');
+    if (!toggle || !drawer || !backdrop) return;
+    const open = () => { drawer.classList.add('on'); backdrop.classList.add('on'); drawer.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; };
+    const shut = () => { drawer.classList.remove('on'); backdrop.classList.remove('on'); drawer.setAttribute('aria-hidden','true'); document.body.style.overflow=''; };
+    toggle.addEventListener('click', open);
+    close && close.addEventListener('click', shut);
+    backdrop.addEventListener('click', shut);
+    document.addEventListener('keydown', e => { if (e.key==='Escape' && drawer.classList.contains('on')) shut(); });
+    drawer.querySelectorAll('.drawer-nav a').forEach(a => a.addEventListener('click', shut));
+  })();
+</script>
+
+</body>
+</html>
