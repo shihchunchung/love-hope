@@ -1,0 +1,255 @@
+---
+permalink: donate.html
+title: "捐款支持｜薛伯輝基金會"
+active: donate
+---
+{% extends "base.njk" %}
+
+{% block styles %}
+<style>
+  /* ============ 捐款頁（沿用全站紅卡 donate-band 當頁首，下方補完整資訊）============ */
+  html{scroll-behavior:smooth}
+
+  /* 頁首紅卡：直接沿用 app.css 的 .donate-band / .donate-card，僅做兩處頁面專屬調整 */
+  .dn-hero-band{padding:var(--sp-9) 0 var(--sp-8)}
+  .dn-hero-band .donate-text .btn-w::after{content:"↓"}   /* 此頁的「其他捐款方式」是往下捲，箭頭改朝下 */
+  /* 紅卡內「劃撥單範例」小連結（白底紅卡上的半透明白字，hover 轉純白）*/
+  .donate-method .giro-sample{display:inline-flex;align-items:center;gap:var(--sp-2);margin-top:var(--sp-3);font-size:var(--t-caption);letter-spacing:1px;color:rgba(255,255,255,.7);font-weight:600;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:2px;transition:color .2s,border-color .2s}
+  .donate-method .giro-sample::after{content:"↗"}
+  .donate-method .giro-sample:hover{color:#fff;border-color:#fff}
+
+  /* ---- 其他捐款方式（2×2 緊湊小卡）---- */
+  .dn-methods{padding:var(--sp-8) 0 var(--sp-9);scroll-margin-top:160px}
+  .methods-head{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:3px;color:var(--brand);font-weight:600;margin-bottom:var(--sp-5);display:flex;align-items:center;gap:var(--sp-3)}
+  .methods-head::before{content:"";width:24px;height:1px;background:var(--brand)}
+  .method-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-5)}
+  .method-card{background:#fff;border:1px solid var(--line);padding:var(--sp-6);display:flex;flex-direction:column}
+  .method-card .m-en{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:var(--sp-2)}
+  .method-card h3{font-size:var(--t-title-s);color:var(--ink);letter-spacing:1px;margin-bottom:var(--sp-3);font-weight:700}
+  .method-card .m-desc{font-size:var(--t-body-s);color:var(--body);line-height:1.8;text-wrap:pretty}
+  .method-card .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:var(--sp-3);flex-wrap:wrap;padding-top:var(--sp-4);margin-top:var(--sp-5);border-top:1px solid var(--line)}
+  .fee{font-size:var(--t-caption);letter-spacing:.5px;color:var(--body)}
+  .fee b{color:var(--brand-dark);font-weight:700}
+  .m-link{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);font-weight:600;display:inline-flex;align-items:center;gap:var(--sp-2);transition:gap .2s,color .2s}
+  .m-link::after{content:"↓"}
+  .m-link:hover{color:var(--brand);gap:var(--sp-3)}
+  .method-note{margin-top:var(--sp-6);font-size:var(--t-body-s);color:var(--muted);letter-spacing:.3px;padding-top:var(--sp-5);border-top:1px solid var(--line)}
+
+  /* ---- 稅務與收據 ---- */
+  .dn-tax{padding:var(--sp-9) 0;background:var(--line-soft);border-top:1px solid var(--line)}
+  .section-head{border-bottom:1px solid var(--ink);padding-bottom:var(--sp-5);margin-bottom:var(--sp-7)}
+  .section-head .subtitle{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:3.5px;color:var(--brand);font-weight:600;text-transform:uppercase;display:flex;align-items:center;gap:var(--sp-4);margin-bottom:var(--sp-3)}
+  .section-head .subtitle::before{content:"";width:24px;height:1px;background:var(--brand)}
+  .section-head h2{font-size:var(--t-section);font-weight:700;color:var(--ink);letter-spacing:1.5px;line-height:1.25}
+  .tax-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-7)}
+  .tax-block .t-label{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:var(--sp-3);display:flex;align-items:center;gap:var(--sp-3)}
+  .tax-block .t-label::before{content:"";width:18px;height:1px;background:var(--brand)}
+  .tax-block h3{font-size:var(--t-title-s);color:var(--ink);letter-spacing:1px;margin-bottom:var(--sp-3);font-weight:700}
+  .tax-block p{font-size:var(--t-body-s);color:var(--body);line-height:1.9;text-wrap:pretty}
+
+  /* ---- FAQ 手風琴 ---- */
+  .dn-faq{padding:var(--sp-10) 0}
+  .faq-group{margin-bottom:var(--sp-8)}
+  .faq-group:last-child{margin-bottom:0}
+  .faq-group .g-title{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:3px;text-transform:uppercase;color:var(--brand);font-weight:600;padding-bottom:var(--sp-3);margin-bottom:var(--sp-2);border-bottom:1px solid var(--line)}
+  .acc-item{border-bottom:1px solid var(--line)}
+  .acc-q{width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:var(--sp-5);padding:var(--sp-5) 0;font-size:var(--t-title-s);color:var(--ink);font-weight:600;letter-spacing:.5px;transition:color .2s}
+  .acc-q:hover{color:var(--brand)}
+  .acc-q .mk{flex:none;width:20px;height:20px;position:relative;transition:transform .3s}
+  .acc-q .mk::before,.acc-q .mk::after{content:"";position:absolute;background:var(--brand);transition:opacity .3s}
+  .acc-q .mk::before{top:9px;left:0;width:20px;height:2px}
+  .acc-q .mk::after{top:0;left:9px;width:2px;height:20px}
+  .acc-item.open .acc-q .mk::after{opacity:0}
+  .acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s ease}
+  .acc-item.open .acc-panel{grid-template-rows:1fr}
+  .acc-panel>div{overflow:hidden}
+  .acc-panel p{font-size:var(--t-body-s);color:var(--body);line-height:1.95;padding:0 0 var(--sp-5);max-width:760px;letter-spacing:.3px;text-wrap:pretty}
+  .acc-panel a{color:var(--brand);font-weight:600}
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width:1100px){
+    /* 紅卡手機版收合（與其他用到 donate-band 的頁面一致）*/
+    .donate-card{grid-template-columns:1fr;gap:var(--sp-7);padding:var(--sp-7)}
+    .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:var(--sp-6)}
+    .tax-grid{grid-template-columns:1fr;gap:var(--sp-6)}
+  }
+  @media (max-width:720px){
+    .wrap{padding:0 var(--sp-4)}
+    .method-grid{grid-template-columns:1fr}
+    .dn-methods,.dn-faq{padding:var(--sp-8) 0}
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ===== 頁首紅卡（沿用全站 donate-band 元件）===== -->
+<section class="donate-band dn-hero-band">
+  <div class="wrap">
+    <div class="donate-card">
+      <div class="donate-text">
+        <div class="label">Donate</div>
+        <h1>捐款支持<br>愛與希望的延續</h1>
+        <p>每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
+        <div class="actions">
+          <a class="btn-w" href="#more-methods">其他捐款方式</a>
+          <a class="btn-wo" href="transparency.html">捐款徵信</a>
+        </div>
+      </div>
+      <div class="donate-stats" aria-label="主要捐款管道">
+        <div class="donate-method">
+          <span class="method-label">Bank Transfer</span>
+          <h3>銀行匯款 / ATM 轉帳</h3>
+          <p>國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Postal Giro</span>
+          <h3>郵局劃撥</h3>
+          <p>帳號 <b>50067771</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
+          <a class="giro-sample" href="pdfs/postal-giro-slip.pdf" target="_blank" rel="noopener">劃撥單範例</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 其他捐款方式 ===== -->
+<section class="dn-methods" id="more-methods">
+  <div class="wrap">
+    <div class="methods-head">其他捐款方式</div>
+
+    <div class="method-grid">
+      <div class="method-card">
+        <span class="m-en">ACH · 定期捐款</span>
+        <h3>銀行自動轉帳</h3>
+        <p class="m-desc">歡迎來電 (02) 2381-6678 索取或自行下載授權書，列印一式三份（捐款人自留一份），正本填寫並簽章（須與存款印鑑相同）後郵寄至本會。</p>
+        <div class="foot">
+          <span class="fee">手續費 <b>每筆 5 元</b>（由本會負擔）</span>
+          <a class="m-link" href="#">授權書</a>
+        </div>
+      </div>
+
+      <div class="method-card">
+        <span class="m-en">Credit Card</span>
+        <h3>信用卡捐款</h3>
+        <p class="m-desc">下載並完整填寫「信用卡授權書」後，傳真或郵寄至本會。</p>
+        <div class="foot">
+          <span class="fee">手續費 <b>每筆 1.75%</b></span>
+          <a class="m-link" href="pdfs/credit-card-authorization.pdf" target="_blank" rel="noopener">授權書</a>
+        </div>
+      </div>
+
+      <div class="method-card">
+        <span class="m-en">Cheque</span>
+        <h3>支票捐款</h3>
+        <p class="m-desc">抬頭「財團法人薛伯輝基金會」。填妥金額與抬頭後，以掛號郵寄至本會。</p>
+      </div>
+
+      <div class="method-card">
+        <span class="m-en">In Person</span>
+        <h3>現場捐款</h3>
+        <p class="m-desc">親自前來本會櫃台辦理。<br>10043 台北市中正區博愛路 154 號 6 樓。</p>
+      </div>
+    </div>
+
+    <p class="method-note">單筆捐款亦可使用「7-11 ibon」或「全家 FamiPort」公益捐款，免手續費。待捐款確認後，本會將開立正式收據。</p>
+  </div>
+</section>
+
+<!-- ===== 稅務與收據 ===== -->
+<section class="dn-tax">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="subtitle">Tax &amp; Receipt</div>
+      <h2>稅務與收據</h2>
+    </div>
+    <div class="tax-grid">
+      <div class="tax-block">
+        <div class="t-label">國稅局歸戶</div>
+        <h3>免附紙本收據申報</h3>
+        <p>您若已提供身分證字號（或統一編號），本會即將您的捐款資料提供給國稅局辦理捐贈資料歸戶；日後申報減除捐贈扣除額時，免再檢具紙本捐款收據即可完成申報。</p>
+      </div>
+      <div class="tax-block">
+        <div class="t-label">收據開立</div>
+        <h3>寄送時程</h3>
+        <p>基金會在收到捐款後 1 個月內寄出當次收據，或於每年 3 月上旬統一郵寄前一年度的整年收據。</p>
+      </div>
+      <div class="tax-block">
+        <div class="t-label">指定抬頭</div>
+        <h3>可指定收據抬頭</h3>
+        <p>可指定收據抬頭，但請確保抬頭姓名與辦理稅務申報上傳的姓名一致。收據可用於申報所得稅時扣抵。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="dn-faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="subtitle">FAQ</div>
+      <h2>常見問題</h2>
+    </div>
+
+    <div class="faq-group">
+      <div class="g-title">捐款相關</div>
+      <div class="acc-item">
+        <button class="acc-q" aria-expanded="false">我要如何捐款？<span class="mk"></span></button>
+        <div class="acc-panel"><div><p>您可以透過官網捐款、郵政劃撥、信用卡、郵局轉帳、銀行轉帳、現金或支票等方式進行捐款。</p></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-q" aria-expanded="false">哪種捐款方式可以節省基金會的手續費支出？<span class="mk"></span></button>
+        <div class="acc-panel"><div><p>定期捐款建議使用「ACH 銀行轉帳定期捐款授權書」，每筆手續費僅 5 元；單筆捐款建議使用「7-11 ibon」或「全家 FamiPort」公益捐款，可免手續費。</p></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-q" aria-expanded="false">如果信用卡換卡或想修改個人資料（地址、電話、姓名）該怎麼辦？<span class="mk"></span></button>
+        <div class="acc-panel"><div><p>請電洽 (02) 2381-6678，由財務部協助，或透過電子郵件（<a href="mailto:love.hopech@gmail.com">love.hopech@gmail.com</a>）及粉絲團告知。</p></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-q" aria-expanded="false">如果忘記捐款或想要終止捐款，該如何處理？<span class="mk"></span></button>
+        <div class="acc-panel"><div><p>您可以來電確認捐款情況，若需補捐可在通知後的下一個請款日辦理；若需終止捐款，請務必來電或來信告知，以便基金會重新分配資源。</p></div></div>
+      </div>
+    </div>
+
+    <div class="faq-group">
+      <div class="g-title">捐款收據相關</div>
+      <div class="acc-item">
+        <button class="acc-q" aria-expanded="false">捐款會有收據嗎？可以抵稅嗎？<span class="mk"></span></button>
+        <div class="acc-panel"><div><p>會開立收據，且該收據可以用於申報所得稅時扣抵。</p></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-q" aria-expanded="false">捐款後何時會收到收據？<span class="mk"></span></button>
+        <div class="acc-panel"><div><p>基金會在收到捐款後 1 個月內會寄出當次收據，或於每年 3 月上旬統一郵寄前一年度的整年收據。</p></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-q" aria-expanded="false">可以指定收據抬頭嗎？<span class="mk"></span></button>
+        <div class="acc-panel"><div><p>可以，但請確保指定的收據抬頭姓名與辦理稅務申報上傳的姓名一致。</p></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-q" aria-expanded="false">如果收據遺失、未收到或需要更改抬頭，該如何處理？<span class="mk"></span></button>
+        <div class="acc-panel"><div><p>請撥打 (02) 2381-6678 聯繫財務部，將有專人為您查詢並協助補發或更正作業。</p></div></div>
+      </div>
+    </div>
+
+    <div class="faq-group">
+      <div class="g-title">財務徵信</div>
+      <div class="acc-item">
+        <button class="acc-q" aria-expanded="false">我要如何知道基金會的捐款執行狀況？<span class="mk"></span></button>
+        <div class="acc-panel"><div><p>您可以至本會的<a href="transparency.html">「捐款徵信」</a>頁面查閱歷年捐款人名單、捐助單位、政府補助與專案收支等報告。</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // FAQ 手風琴：點題目展開／收合（預設全收合）
+  document.querySelectorAll('.acc-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.acc-item');
+      const open = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+</script>
+{% endblock %}

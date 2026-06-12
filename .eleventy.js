@@ -7,6 +7,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("app.js");
   eleventyConfig.addPassthroughCopy("images");
   eleventyConfig.addPassthroughCopy("薛伯輝基金會場地使用辦法.pdf");
+  eleventyConfig.addPassthroughCopy("pdfs");
 
   return {
     dir: {
