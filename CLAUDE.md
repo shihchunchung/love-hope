@@ -48,8 +48,8 @@ active: news                  # 對應導覽列高亮的 key;首頁用 home(=不
 
 - 載入順序(`base.njk` 的 `<head>` 已固定):`tokens.css`(變數)→ `app.css`(chrome)→ 頁面 `{% block styles %}`。
 - `tokens.css` 是色彩/字級/間距的唯一來源;**用變數,不要寫死色碼**。
-- 共用 chrome 樣式只住在 `app.css`,別 inline 進頁面。
-- ⚠️ 已知殘留債:chrome 的**響應式 `@media`** 目前仍分散在各頁 `{% block styles %}`(尚未收進 app.css)。
+- 共用 chrome 樣式只住在 `app.css`,別 inline 進頁面 —— 包含 chrome 的**響應式 `@media`**(header/nav/donate 在 1100px / 720px 的覆寫)。
+- 頁面 `{% block styles %}` 只放**該頁專屬**的樣式與 `@media`(hero、grid、sub-nav 等)。
 
 ## 品牌色
 
