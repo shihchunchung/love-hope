@@ -139,3 +139,17 @@ ul,ol{list-style:none}
 .cookie .ctext a{color:var(--brand);text-decoration:underline;text-underline-offset:2px}
 .cookie button{padding:var(--sp-2) var(--sp-4);font-size:var(--t-meta);letter-spacing:2px;background:var(--brand);color:#fff;font-weight:500}
 .cookie button:hover{background:var(--brand-dark)}
+
+/* ============ CHROME RESPONSIVE ============ */
+/* Site-wide responsive overrides for the chrome. Page-specific @media
+   (hero, grids, sub-nav, etc.) still lives in each page's own block. */
+@media (max-width: 1100px){
+  .app-header,.app-nav{position:static}
+}
+@media (max-width: 720px){
+  .app-header .row{grid-template-columns:auto 1fr auto;gap:var(--sp-4);padding:var(--sp-4) var(--sp-4)}
+  .header-socials,.header-utility{display:none}
+  .donate-btn{padding:var(--sp-2) var(--sp-4);font-size:var(--t-meta);letter-spacing:2px}
+  .app-nav{display:none}
+  .nav-toggle{display:flex}
+}

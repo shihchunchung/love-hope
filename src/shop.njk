@@ -62,7 +62,6 @@ active: shop
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 1100px){
-    .app-nav,.app-header{position:static}
     .featured-grid{grid-template-columns:1fr;gap:var(--sp-6)}
     .featured-img{order:-1}
     .product-grid{grid-template-columns:repeat(2,1fr);gap:var(--sp-7) var(--sp-5)}
@@ -70,11 +69,6 @@ active: shop
     .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:var(--sp-6)}
   }
   @media (max-width: 720px){
-    .app-header .row{grid-template-columns:auto 1fr auto;gap:var(--sp-4);padding:var(--sp-4) var(--sp-4)}
-    .header-socials,.header-utility{display:none}
-    .donate-btn{padding:var(--sp-2) var(--sp-4);font-size:var(--t-meta);letter-spacing:2px}
-    .app-nav{display:none}
-    .nav-toggle{display:flex}
     .wrap{padding:0 var(--sp-4)}
     .featured{padding:var(--sp-7) 0}
     .featured-text h1{font-size:var(--t-display-l)}
