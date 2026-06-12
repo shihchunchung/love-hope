@@ -131,3 +131,11 @@ ul,ol{list-style:none}
 .drawer-social{display:flex;justify-content:center;gap:var(--sp-4)}
 .drawer-social a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);display:inline-flex;align-items:center;justify-content:center;color:#fff;transition:background .2s}
 .drawer-social a:hover{background:rgba(255,255,255,.22)}
+
+/* ============ COOKIE NOTICE ============ */
+.cookie{position:fixed;bottom:24px;left:24px;right:24px;max-width:680px;margin:0 auto;background:#fff;padding:var(--sp-4) var(--sp-5);display:flex;align-items:center;gap:var(--sp-5);font-size:var(--t-body-s);color:var(--body);box-shadow:0 12px 40px rgba(0,0,0,.12);border-top:3px solid var(--brand);z-index:99}
+.cookie .ctext{flex:1;line-height:1.75}
+.cookie .ctext strong{display:block;color:var(--ink);font-size:var(--t-body);margin-bottom:var(--sp-1);letter-spacing:1px;font-weight:700}
+.cookie .ctext a{color:var(--brand);text-decoration:underline;text-underline-offset:2px}
+.cookie button{padding:var(--sp-2) var(--sp-4);font-size:var(--t-meta);letter-spacing:2px;background:var(--brand);color:#fff;font-weight:500}
+.cookie button:hover{background:var(--brand-dark)}

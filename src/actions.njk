@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-<meta charset="UTF-8">
-<title>公益行動｜偏鄉教育花園 — 薛伯輝基金會</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="tokens.css">
-<link rel="stylesheet" href="app.css">
-<style>
+---
+permalink: actions.html
+title: "公益行動｜偏鄉教育花園 — 薛伯輝基金會"
+active: actions
+---
+{% extends "base.njk" %}
 
+{% block styles %}
+<style>
   /* ============ SUB-NAV (A · 鏡像主 nav) ============
      - 字級 12px / 字距 1.5px（明確比主 nav 14/2 小一級）
      - 上下 padding 13/19，無自身底邊（主 nav 品牌色底邊即為上邊）
@@ -175,12 +171,6 @@
   }
 
   /* ============ COOKIE ============ */
-  .cookie{position:fixed;bottom:24px;left:24px;right:24px;max-width:680px;margin:0 auto;background:#fff;padding:var(--sp-4) var(--sp-5);display:flex;align-items:center;gap:var(--sp-5);font-size:var(--t-body-s);color:var(--body);box-shadow:0 12px 40px rgba(0,0,0,.12);border-top:3px solid var(--brand);z-index:99}
-  .cookie .ctext{flex:1;line-height:1.75}
-  .cookie .ctext strong{display:block;color:var(--ink);font-size:var(--t-body);margin-bottom:var(--sp-1);letter-spacing:1px;font-weight:700}
-  .cookie .ctext a{color:var(--brand);text-decoration:underline;text-underline-offset:2px}
-  .cookie button{padding:var(--sp-2) var(--sp-4);font-size:var(--t-meta);letter-spacing:2px;background:var(--brand);color:#fff;font-weight:500}
-  .cookie button:hover{background:var(--brand-dark)}
 
   /* drawer 二級展開（公益行動 5 個子項） */
   .drawer-group{border-bottom:1px solid rgba(255,255,255,.1)}
@@ -274,50 +264,10 @@
     .empty-state{padding:var(--sp-9) var(--sp-4)}
     .empty-state h3{font-size:var(--t-title);letter-spacing:3px}
   }
-
 </style>
-</head>
-<body>
+{% endblock %}
 
-<!-- ===== HEADER ===== -->
-<header class="app-header">
-  <div class="row">
-    <div class="left">
-      <button class="nav-toggle" id="navToggle" type="button" aria-label="open menu">
-        <span></span><span></span><span></span>
-      </button>
-      <div class="header-socials">
-        <a aria-label="facebook" href="https://www.facebook.com/LoveHopeF" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
-        <a aria-label="instagram" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
-        <a aria-label="youtube" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
-        <a aria-label="line" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
-      </div>
-    </div>
-    <a class="logo" href="index.html"><img src="images/logo.png" alt="薛伯輝基金會 Love Hope Foundation"></a>
-    <div class="right">
-      <a class="donate-btn" href="donate.html">捐款支持</a>
-      <div class="header-utility">
-        <a href="#">EN</a>
-        <a href="#">登入</a>
-      </div>
-    </div>
-  </div>
-</header>
-
-<!-- ===== NAV ===== -->
-<nav class="app-nav">
-  <div class="row">
-    <a href="about.html">關於我們</a>
-    <a href="people.html">慈善身影</a>
-    <a href="actions.html" class="active">公益行動</a>
-    <a href="true-love.html">真愛多多</a>
-    <a href="news.html">最新消息</a>
-    <a href="shop.html">公益小舖</a>
-    <a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
-    <a href="venue.html">場地租借</a>
-  </div>
-</nav>
-
+{% block content %}
 <!-- ===== SUB-NAV (5 公益行動分類) — markup 與 detail page 統一用 <a>，JS 攔截 click ===== -->
 <nav class="sub-nav" id="subNav" aria-label="公益行動分類">
   <a class="item todo" href="actions.html#care-garden" data-cat="care-garden">特別青年教養花園</a>
@@ -511,99 +461,11 @@
     </div>
   </div>
 </section>
+{% endblock %}
 
-<!-- ===== FOOTER ===== -->
-<footer class="app-footer">
-  <div class="footer-info">
-    <p class="footer-address">10043 台北市中正區博愛路 154 號 6 樓</p>
-    <p class="footer-contact">
-      <span><span class="lbl">TEL</span>(02) 2381-6678</span>
-      <span class="dot">·</span>
-      <span><span class="lbl">FAX</span>(02) 2381-3171</span>
-      <span class="dot">·</span>
-      <a href="mailto:love.hopech@gmail.com">love.hopech@gmail.com</a>
-    </p>
-    <div class="footer-giro">
-      <span class="giro-label">郵政劃撥</span>
-      <span class="giro-cell">帳號<b>50067771</b></span>
-      <span class="giro-sep">｜</span>
-      <span class="giro-cell">戶名<b>財團法人薛伯輝基金會</b></span>
-    </div>
-  </div>
-  <ul class="footer-links">
-    <li><a href="about.html">關於我們</a></li>
-    <li><a href="people.html">慈善身影</a></li>
-    <li><a href="actions.html">公益行動</a></li>
-    <li><a href="true-love.html">真愛多多</a></li>
-    <li><a href="news.html">最新消息</a></li>
-    <li><a href="shop.html">公益小舖</a></li>
-    <li><a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a></li>
-    <li><a href="venue.html">場地租借</a></li>
-    <li><a href="mailto:love.hopech@gmail.com">聯絡我們</a></li>
-    <li><a href="privacy.html">隱私權政策</a></li>
-  </ul>
-  <p class="footer-copy">© 2026 Love Hope Foundation. All Rights Reserved.</p>
-</footer>
-
-<!-- ===== MOBILE DRAWER ===== -->
-<div class="drawer-backdrop" id="drawerBackdrop"></div>
-<aside class="drawer" id="drawer" aria-hidden="true">
-  <div class="drawer-head">
-    <button class="drawer-close" id="drawerClose" type="button" aria-label="close menu">×</button>
-    <div class="drawer-utility">
-      <a href="#">EN</a>
-      <span class="sep">/</span>
-      <a href="#">登入</a>
-    </div>
-  </div>
-  <nav class="drawer-nav">
-    <a href="about.html">關於我們</a>
-    <a href="people.html">慈善身影</a>
-    <!-- 公益行動：可展開二級 -->
-    <div class="drawer-group on" id="drawerActions">
-      <button type="button" class="drawer-group-head" id="drawerActionsToggle">
-        <span class="label">公益行動</span>
-        <span class="caret">▾</span>
-      </button>
-      <div class="drawer-group-body">
-        <button type="button" class="sub-item todo" data-cat="care-garden">特別青年教養花園</button>
-        <button type="button" class="sub-item on"   data-cat="aesthetic">偏鄉教育花園</button>
-        <button type="button" class="sub-item todo" data-cat="music">奧兒福音樂會</button>
-        <button type="button" class="sub-item todo" data-cat="elder">老人服務</button>
-        <button type="button" class="sub-item todo" data-cat="other">其他</button>
-      </div>
-    </div>
-    <a href="true-love.html">真愛多多</a>
-    <a href="news.html">最新消息</a>
-    <a href="shop.html">公益小舖</a>
-    <a href="https://www.facebook.com/LoveHopeYLC/" class="is-external" target="_blank" rel="noopener">搖籃咖啡 <span class="ext-mark">↗</span></a>
-    <a href="venue.html">場地租借</a>
-  </nav>
-  <div class="drawer-foot">
-    <a class="drawer-donate" href="donate.html">捐款支持</a>
-    <div class="drawer-social">
-      <a aria-label="facebook" href="https://www.facebook.com/LoveHopeF" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.2.3-2 2-2H17V1c-.3 0-1.5-.2-2.8-.2C11.4.8 10 2.7 10 5.9V9H7v4h3v9h3z"/></svg></a>
-      <a aria-label="instagram" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
-      <a aria-label="youtube" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C15.9 4 12 4 12 4s-3.9 0-6.8.3c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.5c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.6.2 6.9.2 6.9.2s3.9 0 6.8-.3c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.5c0-1.7-.2-3.3-.2-3.3zM10 14V8l5 3-5 3z"/></svg></a>
-      <a aria-label="line" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.4 8.5 8 .3 0 .8.2.9.5.1.2.1.5 0 .8l-.1.6c-.1.2-.3.9.8.5 1.1-.5 5.8-3.4 7.9-5.8C21.5 14 22.5 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg></a>
-    </div>
-  </div>
-</aside>
-
-<!-- ===== BACK TO TOP ===== -->
-<a class="cd-top" id="cdTop" href="#" title="回到頂部" aria-label="back to top">↑</a>
-
-<!-- ===== COOKIE ===== -->
-<div class="cookie" id="cookieBanner">
-  <div class="ctext">
-    <strong>Cookie 政策提示</strong>
-    本網站使用 Cookie 以提供更好的瀏覽體驗。繼續瀏覽即表示您同意 Cookie 使用。<a href="#">More info</a>
-  </div>
-  <button onclick="document.getElementById('cookieBanner').style.display='none'">同意並關閉</button>
-</div>
-
+{% block scripts %}
 <script>
-  // ============ SUB-NAV 切換 ============
+// ============ SUB-NAV 切換 ============
   (function(){
     // 5 個分類資料：標題 / 副標 / 是否為偏鄉教育花園（有內容）
     const CATEGORIES = {
@@ -701,59 +563,5 @@
     if (!head || !grp) return;
     head.addEventListener('click', () => grp.classList.toggle('on'));
   })();
-
-  // ============ BACK TO TOP ============
-  (function(){
-    const btn = document.getElementById('cdTop');
-    if (!btn) return;
-    btn.addEventListener('click', e => {
-      e.preventDefault();
-      window.scrollTo({top:0, behavior:'smooth'});
-    });
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        btn.classList.toggle('on', window.scrollY > 600);
-        ticking = false;
-      });
-    });
-  })();
-
-  // ============ MOBILE DRAWER ============
-  (function(){
-    const toggle   = document.getElementById('navToggle');
-    const drawer   = document.getElementById('drawer');
-    const backdrop = document.getElementById('drawerBackdrop');
-    const close    = document.getElementById('drawerClose');
-    if (!toggle || !drawer || !backdrop) return;
-
-    function open(){
-      drawer.classList.add('on');
-      backdrop.classList.add('on');
-      drawer.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-    function shut(){
-      drawer.classList.remove('on');
-      backdrop.classList.remove('on');
-      drawer.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-
-    toggle.addEventListener('click', open);
-    close && close.addEventListener('click', shut);
-    backdrop.addEventListener('click', shut);
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && drawer.classList.contains('on')) shut();
-    });
-    // 一般 link（非 sub-item / 非 group-head）點完關
-    drawer.querySelectorAll('.drawer-nav > a').forEach(a => {
-      a.addEventListener('click', shut);
-    });
-  })();
 </script>
-
-</body>
-</html>
+{% endblock %}

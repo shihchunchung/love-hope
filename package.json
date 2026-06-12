@@ -1,0 +1,14 @@
+{
+  "name": "love-hope",
+  "version": "1.0.0",
+  "private": true,
+  "description": "薛伯輝基金會 Love Hope Foundation — static site (Eleventy)",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "clean": "rm -rf _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}
