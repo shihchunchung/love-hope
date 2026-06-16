@@ -7,60 +7,69 @@ active: transparency
 
 {% block styles %}
 <style>
-  /* ============ 捐款徵信頁（news 式：年度 sub-nav + 分區列表；內容靜態渲染，JS 只做年份過濾）============ */
+  /* ============ 捐款徵信頁（slide 改版：跨頁 sub-nav + 下拉查詢 + 結果表格；靜態渲染，JS 只做篩選）============ */
   [hidden]{display:none !important}
   html{scroll-behavior:smooth}
 
-  /* ---- 頁首（沿用 actions.njk 的 .page-hero）---- */
-  .page-hero{padding:var(--sp-9) 0 var(--sp-7);background:#fff;border-bottom:1px solid var(--ink)}
-  .page-hero h1{font-size:var(--t-display-l);letter-spacing:1.5px;font-weight:700;color:var(--ink);line-height:1.25;margin-bottom:var(--sp-4)}
-  .page-hero .lead{font-size:var(--t-title-s);color:var(--body);font-weight:500;line-height:1.85;max-width:640px;letter-spacing:0}
-  .page-hero .closing{margin-top:var(--sp-5);font-size:var(--t-body-s);color:var(--muted);line-height:1.9;max-width:680px;text-wrap:pretty}
+  /* ---- 頁首（標題置中、品牌紅；內文左對齊置中欄）---- */
+  .page-hero{padding:var(--sp-9) 0 var(--sp-6);background:#fff;text-align:center}
+  .page-hero h1{font-size:var(--t-display-l);letter-spacing:2px;font-weight:700;color:var(--brand);line-height:1.25;margin-bottom:var(--sp-5)}
+  .page-hero .lead{font-size:var(--t-body);color:var(--body);font-weight:500;line-height:1.95;max-width:760px;margin:0 auto;letter-spacing:0;text-align:left;text-wrap:pretty}
+  .page-hero .hero-dl{color:var(--brand);font-weight:700;border-bottom:1px solid var(--brand);white-space:nowrap}
+  .page-hero .hero-dl::after{content:"↓";margin-left:2px}
+  .hero-contact{list-style:none;margin:var(--sp-5) auto 0;padding:0;max-width:760px;display:flex;flex-wrap:wrap;gap:var(--sp-3) var(--sp-6);text-align:left;font-size:var(--t-body-s)}
+  .hero-contact li{display:flex;align-items:center;gap:var(--sp-3);color:var(--body)}
+  .hero-contact .k{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2px;color:var(--brand);font-weight:600}
+  .hero-contact a{color:var(--body);text-decoration:none;transition:color .18s}
+  .hero-contact a:hover{color:var(--brand)}
+  .hero-notes{max-width:760px;margin:var(--sp-5) auto 0;text-align:left;padding-top:var(--sp-5);border-top:1px solid var(--line)}
+  .hero-notes p{font-size:var(--t-body-s);color:var(--muted);line-height:1.85;text-wrap:pretty}
+  .hero-notes p+p{margin-top:var(--sp-3)}
 
-  /* ---- 年度 SUB-NAV（沿用 news.njk）---- */
-  .sub-nav{background:#fff;position:sticky;top:140px;z-index:48;display:flex;justify-content:center;align-items:stretch;padding:var(--sp-3) var(--sp-6);flex-wrap:wrap;border-bottom:1px solid var(--line);font-family:"IBM Plex Serif",sans-serif}
-  .sub-nav .item{padding:var(--sp-3) var(--sp-5);font-size:var(--t-body-s);letter-spacing:2px;color:#666;font-weight:500;position:relative;cursor:pointer;transition:color .18s;background:none;border:0;font-family:inherit;text-decoration:none}
-  .sub-nav .item:hover{color:var(--brand)}
-  .sub-nav .item.on{color:var(--brand);font-weight:700}
-  .sub-nav .item.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-1px;width:24px;height:2px;background:var(--brand)}
+  /* ---- 跨頁 SUB-NAV（徵信查詢 / 捐款方式與管道 / 捐款FAQ）---- */
+  .trans-nav{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;justify-content:center;flex-wrap:wrap;font-family:"IBM Plex Serif",sans-serif}
+  .trans-nav a{padding:var(--sp-4) var(--sp-6);font-size:var(--t-body-s);letter-spacing:1.5px;color:#666;font-weight:500;position:relative;text-decoration:none;transition:color .18s}
+  .trans-nav a:hover{color:var(--brand)}
+  .trans-nav a.on{color:var(--brand);font-weight:700}
+  .trans-nav a.on::after{content:"";position:absolute;left:var(--sp-6);right:var(--sp-6);bottom:-1px;height:2px;background:var(--brand)}
 
-  /* ---- 列表區（沿用 news.njk 的 .list-section / .list-header）---- */
-  .list-section{padding:var(--sp-8) 0 var(--sp-10);background:#fff}
-  .year-block{margin-bottom:var(--sp-9)}
-  .year-block:last-child{margin-bottom:0}
-  .list-header{display:flex;align-items:baseline;justify-content:space-between;gap:var(--sp-4);border-bottom:1px solid var(--ink);padding-bottom:var(--sp-4);margin-bottom:var(--sp-6)}
-  .list-header h2{font-size:var(--t-title);font-weight:700;letter-spacing:1.5px;color:var(--ink)}
-  .list-header .count{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;color:var(--muted);font-weight:600}
+  /* ---- 徵信查詢區 ---- */
+  .query-section{padding:var(--sp-8) 0 var(--sp-10);background:#fff}
+  .query-section h2{font-size:var(--t-title);font-weight:700;letter-spacing:1.5px;color:var(--ink);margin-bottom:var(--sp-5)}
+  .query-bar{display:flex;flex-wrap:wrap;gap:var(--sp-4);align-items:flex-end;padding-bottom:var(--sp-5);border-bottom:1px solid var(--ink);margin-bottom:var(--sp-5)}
+  .query-field{display:flex;flex-direction:column;gap:var(--sp-2)}
+  .query-field label{font-size:var(--t-caption);letter-spacing:2px;color:var(--muted);font-weight:600;font-family:"IBM Plex Serif",sans-serif}
+  .query-field select{font-size:var(--t-body-s);padding:var(--sp-3) var(--sp-4);border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink);min-width:220px;font-family:inherit;cursor:pointer}
+  .query-field select:focus{outline:2px solid var(--brand);border-color:var(--brand)}
+  .query-btn{padding:var(--sp-3) var(--sp-7);background:var(--brand);color:#fff;border:0;border-radius:4px;font-size:var(--t-body-s);letter-spacing:2px;font-weight:600;cursor:pointer;transition:background .18s;font-family:inherit}
+  .query-btn:hover{background:var(--brand-dark)}
 
-  /* ---- 年內子組（年度徵信 / 真愛多多專案）---- */
-  .rg{margin-bottom:var(--sp-6)}
-  .rg:last-child{margin-bottom:0}
-  .rg-title{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:2.5px;color:var(--brand);font-weight:600;padding-bottom:var(--sp-3);margin-bottom:var(--sp-3);border-bottom:1px solid var(--line)}
+  /* ---- 結果表格（點擊另開視窗 PDF）---- */
+  .result-hint{font-size:var(--t-body-s);color:var(--muted);margin-bottom:var(--sp-4);line-height:1.7}
+  .result-table{width:100%;border-collapse:collapse}
+  .result-table th{text-align:left;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2px;color:var(--brand);font-weight:600;padding:var(--sp-3) var(--sp-4);border-bottom:2px solid var(--brand)}
+  .result-table th.col-date{text-align:right}
+  .result-table td{padding:var(--sp-3) var(--sp-4);border-bottom:1px solid var(--line-soft);vertical-align:baseline}
+  .result-table tr:hover td{background:var(--brand-tint)}
+  .r-name a{color:var(--body);font-size:var(--t-body-s);line-height:1.55;text-decoration:none;transition:color .18s}
+  .r-name a::after{content:"↗";margin-left:var(--sp-2);color:var(--muted);font-weight:400}
+  .r-name a:hover{color:var(--brand)}
+  .r-name a:hover::after{color:var(--brand)}
+  .r-yr{display:inline-block;margin-left:var(--sp-3);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:1px;color:var(--muted)}
+  .r-date{text-align:right;white-space:nowrap;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-body-s);color:var(--muted)}
+  .q-empty{padding:var(--sp-7) 0;text-align:center;color:var(--muted);font-size:var(--t-body-s)}
 
-  /* ---- 報告清單（2 欄）---- */
-  .rlist{display:grid;grid-template-columns:repeat(2,1fr);gap:0 var(--sp-7);list-style:none;margin:0;padding:0}
-  .rlist li{margin:0}
-  .rlist li.r-rep{grid-column:1 / -1}
-  .rlist a{display:flex;align-items:baseline;gap:var(--sp-3);padding:var(--sp-3) 0;font-size:var(--t-body-s);color:var(--body);line-height:1.55;border-bottom:1px solid var(--line-soft);transition:color .2s,padding-left .2s;text-wrap:pretty}
-  .rlist a::after{content:"↗";margin-left:auto;padding-left:var(--sp-4);color:var(--muted);font-weight:400;transition:color .2s}
-  .rlist a:hover{color:var(--brand);padding-left:var(--sp-2)}
-  .rlist a:hover::after{color:var(--brand)}
-  .rlist li.r-rep a{font-weight:700;color:var(--ink)}
-  .rlist li.r-rep a:hover{color:var(--brand)}
-
-  /* ---- RESPONSIVE（沿用 news 斷點）---- */
-  @media (max-width:1100px){
-    .sub-nav{position:static;padding:var(--sp-3) var(--sp-4)}
-    .sub-nav .item{padding:var(--sp-3) var(--sp-4);letter-spacing:1.5px}
-    .sub-nav .item.on::after{width:20px}
-  }
+  /* ---- RESPONSIVE ---- */
   @media (max-width:720px){
-    .sub-nav{display:none}
     .wrap{padding:0 var(--sp-4)}
-    .page-hero{padding:var(--sp-7) 0 var(--sp-6)}
+    .page-hero{padding:var(--sp-7) 0 var(--sp-5)}
     .page-hero .lead{font-size:var(--t-body);line-height:1.85}
-    .list-section{padding:var(--sp-6) 0 var(--sp-8)}
-    .rlist{grid-template-columns:1fr;gap:0}
+    .trans-nav a{padding:var(--sp-3) var(--sp-4);letter-spacing:1px}
+    .trans-nav a.on::after{left:var(--sp-4);right:var(--sp-4)}
+    .query-field{flex:1 1 100%}
+    .query-field select{min-width:0;width:100%}
+    .query-btn{width:100%}
+    .result-table th.col-date,.r-date{font-size:var(--t-caption)}
   }
 </style>
 {% endblock %}
@@ -68,38 +77,39 @@ active: transparency
 {% block content %}
 {#- 真愛多多月報的共同字根，用來組規則檔名（2015–2018 月報皆為此型）。已對磁碟逐一驗證。 -#}
 {%- set projBase = "真愛多多!興建伯利恆早療暨融合教育中心捐款人名單徵信" -%}
-{#- 年度資料（新 → 舊）。annual=年度徵信；project=真愛多多專案（summary 收支/結案 + months 規則月報，或 monthsExplicit 不規則）。 -#}
+{#- 報告類型代碼：donor=捐款人名單 / gov=政府補助案明細 / unit=本會捐助單位名單 / project=真愛多多系列。 -#}
+{#- TODO(日期)：每筆可加 d:"yyyy/mm/dd" 欄位 → 結果表格日期欄；目前無資料，一律顯示「—」。 -#}
 {%- set years = [
   { year: "2024", annual: [
-    { l: "捐款人名單",       f: "2024年捐款人名冊.pdf" },
-    { l: "本會捐助單位",     f: "2024年度捐助名冊.pdf" },
-    { l: "政府補助案明細表", f: "2024政府補助款.pdf" }
+    { l: "捐款人名單",       f: "2024年捐款人名冊.pdf",                    t: "donor" },
+    { l: "本會捐助單位",     f: "2024年度捐助名冊.pdf",                    t: "unit" },
+    { l: "政府補助案明細表", f: "2024政府補助款.pdf",                      t: "gov" }
   ] },
   { year: "2023", annual: [
-    { l: "捐款人名單",   f: "2023年捐款人名冊.pdf" },
-    { l: "本會捐助單位", f: "2023捐款單位.pdf" }
+    { l: "捐款人名單",   f: "2023年捐款人名冊.pdf", t: "donor" },
+    { l: "本會捐助單位", f: "2023捐款單位.pdf",     t: "unit" }
   ] },
   { year: "2022", annual: [
-    { l: "捐款人名單",       f: "2022年度捐款人名單.pdf" },
-    { l: "政府補助案明細表", f: "2022年政府補助案明細表.pdf" }
+    { l: "捐款人名單",       f: "2022年度捐款人名單.pdf",      t: "donor" },
+    { l: "政府補助案明細表", f: "2022年政府補助案明細表.pdf",  t: "gov" }
   ] },
   { year: "2021", annual: [
-    { l: "捐款人名單",       f: "110年捐款人名冊.pdf" },
-    { l: "本會捐助單位",     f: "110年捐助單位.pdf" },
-    { l: "政府補助案明細表", f: "2021政府補助案明細表_薛伯輝基金會.pdf" }
+    { l: "捐款人名單",       f: "110年捐款人名冊.pdf",                       t: "donor" },
+    { l: "本會捐助單位",     f: "110年捐助單位.pdf",                         t: "unit" },
+    { l: "政府補助案明細表", f: "2021政府補助案明細表_薛伯輝基金會.pdf",     t: "gov" }
   ] },
   { year: "2020", annual: [
-    { l: "捐款人名單",   f: "109年捐款人名冊.pdf" },
-    { l: "本會捐助單位", f: "109年捐助單位.pdf" }
+    { l: "捐款人名單",   f: "109年捐款人名冊.pdf", t: "donor" },
+    { l: "本會捐助單位", f: "109年捐助單位.pdf",   t: "unit" }
   ] },
   { year: "2019", annual: [
-    { l: "捐款人名單",   f: "108年捐款人名冊.pdf" },
-    { l: "本會捐助單位", f: "108年捐助單位.pdf" }
+    { l: "捐款人名單",   f: "108年捐款人名冊.pdf", t: "donor" },
+    { l: "本會捐助單位", f: "108年捐助單位.pdf",   t: "unit" }
   ] },
   { year: "2018",
     annual: [
-      { l: "捐款人名單",   f: "107年捐款人名單.pdf" },
-      { l: "本會捐助單位", f: "107捐助單位.pdf" }
+      { l: "捐款人名單",   f: "107年捐款人名單.pdf", t: "donor" },
+      { l: "本會捐助單位", f: "107捐助單位.pdf",     t: "unit" }
     ],
     project: {
       yk: "2018",
@@ -160,94 +170,135 @@ active: transparency
     }
   },
   { year: "2013", annual: [
-    { l: "捐款人名單", f: "2013年度 薛伯輝基金會捐款人名單.pdf" }
+    { l: "捐款人名單", f: "2013年度 薛伯輝基金會捐款人名單.pdf", t: "donor" }
   ] },
   { year: "2008-2012", annual: [
-    { l: "捐款人名單", f: "2008-2012年度 薛伯輝基金會捐款人名單.pdf" }
+    { l: "捐款人名單", f: "2008-2012年度 薛伯輝基金會捐款人名單.pdf", t: "donor" }
   ] }
 ] -%}
 
-<!-- ===== 頁首 ===== -->
+<!-- ===== 頁首（文案來源：捐款徵信主頁.pages）===== -->
 <section class="page-hero">
   <div class="wrap">
     <h1>捐款徵信</h1>
-    <p class="lead">薛伯輝基金會依《公益勸募條例》定期公開財務徵信，列出歷年捐款人名單、本會捐助單位、政府補助案明細表，以及「真愛多多！」勸募專案的收支報告與每月捐款人名單徵信。</p>
-    <p class="closing">「真愛多多！」為興建「伯利恆早療暨融合教育中心」所發起的勸募專案，已於 2018 年執行完竣並結案，各年度收支報告與每月名單徵信列於下方對應年度。</p>
+    <p class="lead">依據「財團法人法」第 25 條規定，除捐贈者事先以書面表示反對外，本會須主動公開捐贈者之姓名及捐款金額。為因應相關法規規範，倘若您不希望公開捐款資訊，敬請下載 <a class="hero-dl" href="pdfs/公開資訊意願聲明書.pdf" target="_blank" rel="noopener">公開資訊意願聲明書</a>，填妥後以拍照、掃描、傳真等方式回傳至信箱；若您未主動回覆，將視為同意公開個人捐款資訊以利徵信。</p>
+    <ul class="hero-contact">
+      <li><span class="k">信箱</span><a href="mailto:love.hopech@gmail.com">love.hopech@gmail.com</a></li>
+      <li><span class="k">電話</span><a href="tel:+886223816678">(02) 2381-6678</a></li>
+      <li><span class="k">傳真</span>(02) 2381-3171</li>
+    </ul>
+    <div class="hero-notes">
+      <p>※ 若您同時以數個名義捐款，須請填具個別聲明書。</p>
+      <p>※ 捐款後因需人工入帳作業時間，需至次月才能上傳官網進行徵信；公開後之徵信紀錄若日後有變更捐款人抬頭、捐款金額異動等情事，系統無法自動更新徵信內容，請以「年度捐款收據」或「上傳國稅局資料」為主。</p>
+    </div>
   </div>
 </section>
 
-<!-- ===== 年度 SUB-NAV ===== -->
-<nav class="sub-nav" id="yearNav" aria-label="年度">
-  <a class="item on" data-year="all" href="#all">全部</a>
-  {%- for yr in years %}
-  <a class="item" data-year="{{ yr.year }}" href="#y{{ yr.year }}">{{ yr.year }}</a>
-  {%- endfor %}
+<!-- ===== 跨頁 SUB-NAV ===== -->
+<nav class="trans-nav" aria-label="捐款徵信">
+  <a class="on" href="transparency.html" aria-current="page">徵信查詢（捐款徵信主頁）</a>
+  <a href="donate.html">捐款方式與管道</a>
+  <a href="donate.html#faq">捐款ＦＡＱ</a>
 </nav>
 
-<!-- ===== 依年度分區列表（靜態渲染；JS 只切換顯示）===== -->
-<section class="list-section">
+<!-- ===== 徵信查詢 ===== -->
+<section class="query-section">
   <div class="wrap">
-    {%- for yr in years %}
-    {%- set cnt = 0 -%}
-    {%- if yr.annual %}{% set cnt = cnt + (yr.annual | length) %}{% endif -%}
-    {%- if yr.project %}
-      {%- set cnt = cnt + (yr.project.summary | length) -%}
-      {%- if yr.project.extra %}{% set cnt = cnt + (yr.project.extra | length) %}{% endif -%}
-      {%- if yr.project.monthsExplicit %}{% set cnt = cnt + (yr.project.monthsExplicit | length) %}{% else %}{% set cnt = cnt + (yr.project.months | length) %}{% endif -%}
-    {%- endif -%}
-    <div class="year-block" id="y{{ yr.year }}" data-year="{{ yr.year }}">
-      <div class="list-header">
-        <h2>{{ yr.year }}</h2>
-        <span class="count">{{ cnt }} 份報告</span>
-      </div>
-      {%- if yr.annual %}
-      <div class="rg">
-        <div class="rg-title">年度徵信</div>
-        <ul class="rlist">
-          {%- for it in yr.annual %}
-          <li><a href="pdfs/audit/{{ it.f | urlencode }}" target="_blank" rel="noopener">{{ it.l }}</a></li>
+    <h2>徵信查詢</h2>
+    <div class="query-bar">
+      <div class="query-field">
+        <label for="qYear">年度</label>
+        <select id="qYear">
+          <option value="all">全部</option>
+          {%- for yr in years %}
+          <option value="{{ yr.year }}">{{ yr.year }}</option>
           {%- endfor %}
-        </ul>
+        </select>
       </div>
-      {%- endif %}
-      {%- if yr.project %}
-      <div class="rg">
-        <div class="rg-title">真愛多多！興建伯利恆早療暨融合教育中心</div>
-        <ul class="rlist">
+      <div class="query-field">
+        <label for="qType">徵信報告</label>
+        <select id="qType">
+          <option value="all">全部</option>
+          <option value="donor">捐款人名單</option>
+          <option value="gov">政府補助案明細</option>
+          <option value="unit">本會捐助單位名單</option>
+          <option value="project">真愛多多系列</option>
+        </select>
+      </div>
+      <button class="query-btn" id="qBtn" type="button">查詢</button>
+    </div>
+
+    <p class="result-hint">查詢結果呈現如下，點擊後另開視窗 PDF 檔。</p>
+    <table class="result-table">
+      <thead>
+        <tr><th class="col-name">徵信報告</th><th class="col-date">日期</th></tr>
+      </thead>
+      <tbody id="resultBody">
+        {%- for yr in years %}
+        {%- if yr.annual %}{% for it in yr.annual %}
+        <tr data-year="{{ yr.year }}" data-type="{{ it.t }}">
+          <td class="r-name"><a href="pdfs/audit/{{ it.f | urlencode }}" target="_blank" rel="noopener">{{ it.l }}</a><span class="r-yr">{{ yr.year }}</span></td>
+          <td class="r-date">{{ it.d if it.d else "—" }}</td>
+        </tr>
+        {%- endfor %}{% endif %}
+        {%- if yr.project %}
           {%- for it in yr.project.summary %}
-          <li class="r-rep"><a href="pdfs/audit/{{ it.f | urlencode }}" target="_blank" rel="noopener">{{ it.l }}</a></li>
+        <tr data-year="{{ yr.year }}" data-type="project">
+          <td class="r-name"><a href="pdfs/audit/{{ it.f | urlencode }}" target="_blank" rel="noopener">{{ it.l }}</a><span class="r-yr">{{ yr.year }}・真愛多多</span></td>
+          <td class="r-date">{{ it.d if it.d else "—" }}</td>
+        </tr>
           {%- endfor %}
           {%- if yr.project.extra %}{% for it in yr.project.extra %}
-          <li class="r-rep"><a href="pdfs/audit/{{ it.f | urlencode }}" target="_blank" rel="noopener">{{ it.l }}</a></li>
+        <tr data-year="{{ yr.year }}" data-type="project">
+          <td class="r-name"><a href="pdfs/audit/{{ it.f | urlencode }}" target="_blank" rel="noopener">{{ it.l }}</a><span class="r-yr">{{ yr.year }}・真愛多多</span></td>
+          <td class="r-date">{{ it.d if it.d else "—" }}</td>
+        </tr>
           {%- endfor %}{% endif %}
           {%- if yr.project.monthsExplicit %}
             {%- for it in yr.project.monthsExplicit %}
-          <li><a href="pdfs/audit/{{ it.f | urlencode }}" target="_blank" rel="noopener">{{ it.l }}</a></li>
+        <tr data-year="{{ yr.year }}" data-type="project">
+          <td class="r-name"><a href="pdfs/audit/{{ it.f | urlencode }}" target="_blank" rel="noopener">{{ it.l }}</a><span class="r-yr">{{ yr.year }}・真愛多多</span></td>
+          <td class="r-date">{{ it.d if it.d else "—" }}</td>
+        </tr>
             {%- endfor %}
           {%- else %}
             {%- for m in yr.project.months %}
-          <li><a href="pdfs/audit/{{ (yr.project.yk + '年度' + m + '月' + projBase + '.pdf') | urlencode }}" target="_blank" rel="noopener">{{ m }} 月　捐款人名單徵信</a></li>
+        <tr data-year="{{ yr.year }}" data-type="project">
+          <td class="r-name"><a href="pdfs/audit/{{ (yr.project.yk + '年度' + m + '月' + projBase + '.pdf') | urlencode }}" target="_blank" rel="noopener">{{ m }} 月　捐款人名單徵信</a><span class="r-yr">{{ yr.year }}・真愛多多</span></td>
+          <td class="r-date">—</td>
+        </tr>
             {%- endfor %}
           {%- endif %}
-        </ul>
-      </div>
-      {%- endif %}
-    </div>
-    {%- endfor %}
+        {%- endif %}
+        {%- endfor %}
+      </tbody>
+    </table>
+    <div class="q-empty" id="qEmpty" hidden>查無符合的徵信報告，請調整查詢條件。</div>
   </div>
 </section>
 {% endblock %}
 
 {% block scripts %}
 <script>
-  // 年度過濾：點 sub-nav → 顯示該年度區塊（「全部」顯示全部）。內容是靜態 HTML，這裡只切換 hidden。
-  const tabs = document.querySelectorAll('#yearNav .item');
-  const blocks = document.querySelectorAll('.year-block');
-  function setYear(y){
-    tabs.forEach(t => t.classList.toggle('on', t.dataset.year === y));
-    blocks.forEach(b => { b.hidden = !(y === 'all' || b.dataset.year === y); });
+  // 徵信查詢：依「年度 + 報告類型」篩選。內容是靜態 HTML，這裡只切換 hidden（沿用本站靜態渲染慣例）。
+  const yearSel = document.getElementById('qYear');
+  const typeSel = document.getElementById('qType');
+  const qBtn    = document.getElementById('qBtn');
+  const rows    = Array.from(document.querySelectorAll('#resultBody tr'));
+  const empty   = document.getElementById('qEmpty');
+  function applyQuery(){
+    const y = yearSel.value, t = typeSel.value;
+    let shown = 0;
+    rows.forEach(r => {
+      const ok = (y === 'all' || r.dataset.year === y) && (t === 'all' || r.dataset.type === t);
+      r.hidden = !ok;
+      if (ok) shown++;
+    });
+    empty.hidden = shown > 0;
   }
-  tabs.forEach(t => t.addEventListener('click', e => { e.preventDefault(); setYear(t.dataset.year); }));
-  setYear('all');
+  qBtn.addEventListener('click', applyQuery);
+  yearSel.addEventListener('change', applyQuery);
+  typeSel.addEventListener('change', applyQuery);
+  applyQuery();
 </script>
 {% endblock %}
