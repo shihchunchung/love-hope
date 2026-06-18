@@ -7,7 +7,7 @@ active: transparency
 
 {% block styles %}
 <style>
-  /* ============ 捐款徵信頁（slide 改版：跨頁 sub-nav + 下拉查詢 + 結果表格；靜態渲染，JS 只做篩選）============ */
+  /* ============ 捐款徵信頁（下拉查詢 + 結果表格；靜態渲染，JS 只做篩選。跨頁子選單已移進主導覽列「捐款徵信」下拉）============ */
   [hidden]{display:none !important}
   html{scroll-behavior:smooth}
 
@@ -25,13 +25,6 @@ active: transparency
   .hero-notes{max-width:760px;margin:var(--sp-5) auto 0;text-align:left;padding-top:var(--sp-5);border-top:1px solid var(--line)}
   .hero-notes p{font-size:var(--t-body-s);color:var(--muted);line-height:1.85;text-wrap:pretty}
   .hero-notes p+p{margin-top:var(--sp-3)}
-
-  /* ---- 跨頁 SUB-NAV（徵信查詢 / 捐款方式與管道 / 捐款FAQ）---- */
-  .trans-nav{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;justify-content:center;flex-wrap:wrap;font-family:"IBM Plex Serif",sans-serif}
-  .trans-nav a{padding:var(--sp-4) var(--sp-6);font-size:var(--t-body-s);letter-spacing:1.5px;color:#666;font-weight:500;position:relative;text-decoration:none;transition:color .18s}
-  .trans-nav a:hover{color:var(--brand)}
-  .trans-nav a.on{color:var(--brand);font-weight:700}
-  .trans-nav a.on::after{content:"";position:absolute;left:var(--sp-6);right:var(--sp-6);bottom:-1px;height:2px;background:var(--brand)}
 
   /* ---- 徵信查詢區 ---- */
   .query-section{padding:var(--sp-8) 0 var(--sp-10);background:#fff}
@@ -64,8 +57,6 @@ active: transparency
     .wrap{padding:0 var(--sp-4)}
     .page-hero{padding:var(--sp-7) 0 var(--sp-5)}
     .page-hero .lead{font-size:var(--t-body);line-height:1.85}
-    .trans-nav a{padding:var(--sp-3) var(--sp-4);letter-spacing:1px}
-    .trans-nav a.on::after{left:var(--sp-4);right:var(--sp-4)}
     .query-field{flex:1 1 100%}
     .query-field select{min-width:0;width:100%}
     .query-btn{width:100%}
@@ -193,13 +184,6 @@ active: transparency
     </div>
   </div>
 </section>
-
-<!-- ===== 跨頁 SUB-NAV ===== -->
-<nav class="trans-nav" aria-label="捐款徵信">
-  <a class="on" href="transparency.html" aria-current="page">徵信查詢（捐款徵信主頁）</a>
-  <a href="donate.html">捐款方式與管道</a>
-  <a href="donate.html#faq">捐款ＦＡＱ</a>
-</nav>
 
 <!-- ===== 徵信查詢 ===== -->
 <section class="query-section">

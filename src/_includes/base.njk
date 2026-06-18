@@ -19,6 +19,13 @@
   { href: "actions.html",   label: "公益行動", key: "actions" },
   { href: "true-love.html", label: "真愛多多", key: "true-love" },
   { href: "news.html",      label: "最新消息", key: "news" },
+  { href: "transparency.html", label: "捐款徵信", key: "donation",
+    match: ["donation", "transparency", "donate", "donate-faq"],
+    children: [
+      { href: "transparency.html", label: "徵信查詢",       key: "transparency" },
+      { href: "donate.html",       label: "捐款方式與管道", key: "donate" },
+      { href: "donate.html#faq",   label: "捐款ＦＡＱ",      key: "donate-faq" }
+    ] },
   { href: "shop.html",      label: "公益小舖", key: "shop" },
   { href: "https://www.facebook.com/LoveHopeYLC/", label: "搖籃咖啡", key: "cafe", external: true },
   { href: "venue.html",     label: "場地租借", key: "venue" }
@@ -53,7 +60,16 @@
 <nav class="app-nav">
   <div class="row">
     {%- for item in navItems %}
-    {%- if item.external %}
+    {%- if item.children %}
+    <div class="nav-item has-sub">
+      <a href="{{ item.href }}"{% if active in item.match %} class="active"{% endif %} aria-haspopup="true">{{ item.label }} <span class="sub-mark">▾</span></a>
+      <div class="subnav" role="menu" aria-label="{{ item.label }}">
+        {%- for c in item.children %}
+        <a href="{{ c.href }}"{% if active == c.key %} class="active"{% endif %} role="menuitem">{{ c.label }}</a>
+        {%- endfor %}
+      </div>
+    </div>
+    {%- elif item.external %}
     <a href="{{ item.href }}" class="is-external" target="_blank" rel="noopener">{{ item.label }} <span class="ext-mark">↗</span></a>
     {%- else %}
     <a href="{{ item.href }}"{% if active == item.key %} class="active"{% endif %}>{{ item.label }}</a>
@@ -111,7 +127,16 @@
   </div>
   <nav class="drawer-nav">
     {%- for item in navItems %}
-    {%- if item.external %}
+    {%- if item.children %}
+    <div class="drawer-sub{% if active in item.match %} is-open{% endif %}">
+      <button class="drawer-sub-toggle" type="button" aria-expanded="{{ 'true' if active in item.match else 'false' }}">{{ item.label }} <span class="sub-mark">▾</span></button>
+      <div class="drawer-sub-panel"><div class="drawer-sub-inner">
+        {%- for c in item.children %}
+        <a href="{{ c.href }}"{% if active == c.key %} class="active"{% endif %}>{{ c.label }}</a>
+        {%- endfor %}
+      </div></div>
+    </div>
+    {%- elif item.external %}
     <a href="{{ item.href }}" class="is-external" target="_blank" rel="noopener">{{ item.label }} <span class="ext-mark">↗</span></a>
     {%- else %}
     <a href="{{ item.href }}"{% if active == item.key %} class="active"{% endif %}>{{ item.label }}</a>

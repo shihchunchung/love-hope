@@ -7,19 +7,18 @@ active: donate
 
 {% block styles %}
 <style>
-  /* ============ 捐款頁（沿用全站紅卡 donate-band 當頁首，下方補完整資訊）============ */
+  /* ============ 捐款頁（白底頁首 + 捐款方式格 + 稅務 + FAQ + 頁尾紅卡 CTA）============ */
   html{scroll-behavior:smooth}
 
-  /* 頁首紅卡：直接沿用 app.css 的 .donate-band / .donate-card，僅做兩處頁面專屬調整 */
-  .dn-hero-band{padding:var(--sp-9) 0 var(--sp-8)}
-  .dn-hero-band .donate-text .btn-w::after{content:"↓"}   /* 此頁的「其他捐款方式」是往下捲，箭頭改朝下 */
-  /* 紅卡內「劃撥單範例」小連結（白底紅卡上的半透明白字，hover 轉純白）*/
-  .donate-method .giro-sample{display:inline-flex;align-items:center;gap:var(--sp-2);margin-top:var(--sp-3);font-size:var(--t-caption);letter-spacing:1px;color:rgba(255,255,255,.7);font-weight:600;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:2px;transition:color .2s,border-color .2s}
-  .donate-method .giro-sample::after{content:"↗"}
-  .donate-method .giro-sample:hover{color:#fff;border-color:#fff}
+  /* ---- 頁首（白底置中，與徵信頁同款）---- */
+  .page-hero{padding:var(--sp-9) 0 var(--sp-7);background:#fff;text-align:center}
+  .page-hero .label{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:3px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:var(--sp-4);display:inline-flex;align-items:center;gap:var(--sp-3)}
+  .page-hero .label::before,.page-hero .label::after{content:"";width:24px;height:1px;background:var(--brand)}
+  .page-hero h1{font-size:var(--t-display-l);letter-spacing:2px;font-weight:700;color:var(--brand);line-height:1.25;margin-bottom:var(--sp-5)}
+  .page-hero .lead{font-size:var(--t-body);color:var(--body);font-weight:500;line-height:1.95;max-width:760px;margin:0 auto;text-align:left;text-wrap:pretty}
 
-  /* ---- 其他捐款方式（2×2 緊湊小卡）---- */
-  .dn-methods{padding:var(--sp-8) 0 var(--sp-9);scroll-margin-top:160px}
+  /* ---- 捐款方式（2×n 卡片）---- */
+  .dn-methods{padding:var(--sp-8) 0 var(--sp-9);scroll-margin-top:140px}
   .methods-head{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:3px;color:var(--brand);font-weight:600;margin-bottom:var(--sp-5);display:flex;align-items:center;gap:var(--sp-3)}
   .methods-head::before{content:"";width:24px;height:1px;background:var(--brand)}
   .method-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-5)}
@@ -27,7 +26,10 @@ active: donate
   .method-card .m-en{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:var(--sp-2)}
   .method-card h3{font-size:var(--t-title-s);color:var(--ink);letter-spacing:1px;margin-bottom:var(--sp-3);font-weight:700}
   .method-card .m-desc{font-size:var(--t-body-s);color:var(--body);line-height:1.8;text-wrap:pretty}
-  .method-card .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:var(--sp-3);flex-wrap:wrap;padding-top:var(--sp-4);margin-top:var(--sp-5);border-top:1px solid var(--line)}
+  .method-card .giro-sample{align-self:flex-start;display:inline-flex;align-items:center;gap:var(--sp-2);margin-top:var(--sp-4);font-size:var(--t-caption);letter-spacing:1px;color:var(--brand);font-weight:600;border-bottom:1px solid var(--brand);padding-bottom:2px;transition:opacity .2s}
+  .method-card .giro-sample::after{content:"↗"}
+  .method-card .giro-sample:hover{opacity:.7}
+  .method-card .foot{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-3);flex-wrap:wrap;padding-top:var(--sp-4);margin-top:auto;border-top:1px solid var(--line)}
   .fee{font-size:var(--t-caption);letter-spacing:.5px;color:var(--body)}
   .fee b{color:var(--brand-dark);font-weight:700}
   .m-link{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);font-weight:600;display:inline-flex;align-items:center;gap:var(--sp-2);transition:gap .2s,color .2s}
@@ -66,15 +68,18 @@ active: donate
   .acc-panel p{font-size:var(--t-body-s);color:var(--body);line-height:1.95;padding:0 0 var(--sp-5);max-width:760px;letter-spacing:.3px;text-wrap:pretty}
   .acc-panel a{color:var(--brand);font-weight:600}
 
+  /* ---- 頁尾紅卡 CTA：沿用全站 .donate-band（app.css），此頁無專屬覆寫 ---- */
+
   /* ---- RESPONSIVE ---- */
   @media (max-width:1100px){
-    /* 紅卡手機版收合（與其他用到 donate-band 的頁面一致）*/
+    /* 頁尾紅卡手機版收合（與其他用到 donate-band 的頁面一致）*/
     .donate-card{grid-template-columns:1fr;gap:var(--sp-7);padding:var(--sp-7)}
     .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:var(--sp-6)}
     .tax-grid{grid-template-columns:1fr;gap:var(--sp-6)}
   }
   @media (max-width:720px){
     .wrap{padding:0 var(--sp-4)}
+    .page-hero{padding:var(--sp-7) 0 var(--sp-5)}
     .method-grid{grid-template-columns:1fr}
     .dn-methods,.dn-faq{padding:var(--sp-8) 0}
   }
@@ -82,42 +87,34 @@ active: donate
 {% endblock %}
 
 {% block content %}
-<!-- ===== 頁首紅卡（沿用全站 donate-band 元件）===== -->
-<section class="donate-band dn-hero-band">
+<!-- ===== 頁首 ===== -->
+<section class="page-hero">
   <div class="wrap">
-    <div class="donate-card">
-      <div class="donate-text">
-        <div class="label">Donate</div>
-        <h1>捐款支持<br>愛與希望的延續</h1>
-        <p>每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
-        <div class="actions">
-          <a class="btn-w" href="#more-methods">其他捐款方式</a>
-          <a class="btn-wo" href="transparency.html">捐款徵信</a>
-        </div>
-      </div>
-      <div class="donate-stats" aria-label="主要捐款管道">
-        <div class="donate-method">
-          <span class="method-label">Bank Transfer</span>
-          <h3>銀行匯款 / ATM 轉帳</h3>
-          <p>國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
-        </div>
-        <div class="donate-method">
-          <span class="method-label">Postal Giro</span>
-          <h3>郵局劃撥</h3>
-          <p>帳號 <b>50067771</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
-          <a class="giro-sample" href="pdfs/postal-giro-slip.pdf" target="_blank" rel="noopener">劃撥單範例</a>
-        </div>
-      </div>
-    </div>
+    <div class="label">Donate</div>
+    <h1>捐款支持<br>愛與希望的延續</h1>
+    <p class="lead">每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
   </div>
 </section>
 
-<!-- ===== 其他捐款方式 ===== -->
-<section class="dn-methods" id="more-methods">
+<!-- ===== 捐款方式 ===== -->
+<section class="dn-methods" id="methods">
   <div class="wrap">
-    <div class="methods-head">其他捐款方式</div>
+    <div class="methods-head">捐款方式</div>
 
     <div class="method-grid">
+      <div class="method-card">
+        <span class="m-en">Bank Transfer</span>
+        <h3>銀行匯款 / ATM 轉帳</h3>
+        <p class="m-desc">國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b><br>戶名 財團法人薛伯輝基金會</p>
+      </div>
+
+      <div class="method-card">
+        <span class="m-en">Postal Giro</span>
+        <h3>郵局劃撥</h3>
+        <p class="m-desc">帳號 <b>50067771</b><br>戶名 財團法人薛伯輝基金會</p>
+        <a class="giro-sample" href="pdfs/postal-giro-slip.pdf" target="_blank" rel="noopener">劃撥單範例</a>
+      </div>
+
       <div class="method-card">
         <span class="m-en">ACH · 定期捐款</span>
         <h3>銀行自動轉帳</h3>
@@ -235,6 +232,40 @@ active: donate
       <div class="acc-item">
         <button class="acc-q" aria-expanded="false">我要如何知道基金會的捐款執行狀況？<span class="mk"></span></button>
         <div class="acc-panel"><div><p>您可以至本會的<a href="transparency.html">「捐款徵信」</a>頁面查閱歷年捐款人名單、捐助單位、政府補助與專案收支等報告。</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 頁尾紅卡 CTA（紅色大塊移到此處，沿用全站標準紅卡文案；僅按鈕連結因身在本頁而調整）===== -->
+<section class="donate-band">
+  <div class="wrap">
+    <div class="donate-card">
+      <div class="donate-text">
+        <div class="label">Donate</div>
+        <h2>捐款支持<br>愛與希望的延續</h2>
+        <p>每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
+        <div class="actions">
+          <a class="btn-w" href="#methods">捐款方式</a>
+          <a class="btn-wo" href="transparency.html">捐款徵信</a>
+        </div>
+      </div>
+      <div class="donate-stats" aria-label="捐款方式摘要">
+        <div class="donate-method">
+          <span class="method-label">Bank Transfer</span>
+          <h3>銀行匯款 / ATM 轉帳</h3>
+          <p>國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Postal Giro</span>
+          <h3>郵局劃撥</h3>
+          <p>帳號 <b>50067771</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Other Ways</span>
+          <h3>信用卡、支票與現場捐款</h3>
+          <p>歡迎透過信用卡授權書、支票或親臨基金會現場捐款，捐款徵信定期公開。</p>
+        </div>
       </div>
     </div>
   </div>

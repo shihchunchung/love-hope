@@ -44,12 +44,22 @@ ul,ol{list-style:none}
 .app-nav{border-top:1px solid var(--brand);border-bottom:1px solid var(--brand);background:#fff;position:sticky;top:86px;z-index:49}
 .app-nav .row{display:flex;justify-content:center;align-items:stretch;height:54px}
 .app-nav a{display:flex;align-items:center;padding:0 var(--sp-5);font-size:var(--t-body);font-weight:500;color:var(--ink);position:relative;letter-spacing:0;transition:color .15s,background .2s}
-.app-nav a:not(:last-child)::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:14px;background:var(--line)}
+.app-nav .row > a:not(:last-child)::after,.app-nav .nav-item:not(:last-child)::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:14px;background:var(--line)}
 .app-nav a:hover,.app-nav a.active{color:var(--brand)}
 .app-nav a.is-external{color:#6B4423;gap:var(--sp-2)}
 .app-nav a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-body-s);font-weight:400;display:inline-block;transition:transform .25s,opacity .2s;line-height:1;opacity:.6}
 .app-nav a.is-external:hover{color:#6B4423;background:#F4EDE0}
 .app-nav a.is-external:hover .ext-mark{transform:translate(2px,-2px);opacity:1}
+/* 下拉子選單（捐款徵信）：桌機 hover / 鍵盤 focus 展開，純 CSS */
+.app-nav .nav-item{position:relative;display:flex;align-items:stretch}
+.app-nav .nav-item > a{gap:var(--sp-2)}
+.app-nav .sub-mark{font-size:var(--t-caption);line-height:1;opacity:.6;transition:transform .2s,opacity .2s}
+.app-nav .nav-item:hover .sub-mark,.app-nav .nav-item:focus-within .sub-mark{transform:rotate(180deg);opacity:1}
+.app-nav .subnav{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);min-width:210px;background:#fff;border:1px solid var(--line);box-shadow:0 12px 32px rgba(0,0,0,.1);display:flex;flex-direction:column;padding:var(--sp-2) 0;opacity:0;visibility:hidden;transition:opacity .18s,transform .18s;z-index:60}
+.app-nav .nav-item:hover .subnav,.app-nav .nav-item:focus-within .subnav{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.app-nav .subnav a{padding:var(--sp-3) var(--sp-5);font-size:var(--t-body-s);color:var(--ink);white-space:nowrap;justify-content:flex-start;letter-spacing:.5px}
+.app-nav .subnav a::after{display:none}
+.app-nav .subnav a:hover,.app-nav .subnav a.active{color:var(--brand);background:var(--brand-tint)}
 
 /* ============ DONATE BAND ============ */
 .donate-band{padding:var(--sp-9) 0;background:#fff}
@@ -125,6 +135,16 @@ ul,ol{list-style:none}
 .drawer-nav a.is-external{color:#F4EDE0;gap:var(--sp-3)}
 .drawer-nav a.is-external .ext-mark{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-body);font-weight:400;opacity:.7;transition:transform .25s,opacity .2s;line-height:1;margin-left:auto;padding-right:var(--sp-2)}
 .drawer-nav a.is-external:hover .ext-mark,.drawer-nav a.is-external.active .ext-mark{transform:translate(2px,-2px);opacity:1}
+/* 抽屜可展開子選單（捐款徵信）：點父項展開，子頁時預設展開 */
+.drawer-sub{border-bottom:1px solid rgba(255,255,255,.1)}
+.drawer-sub-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;padding:var(--sp-4) 0;font-size:var(--t-body-l);color:#fff;letter-spacing:1px;font-weight:500;text-align:left}
+.drawer-sub-toggle .sub-mark{font-size:var(--t-body);opacity:.7;transition:transform .25s,opacity .2s}
+.drawer-sub.is-open .drawer-sub-toggle .sub-mark{transform:rotate(180deg);opacity:1}
+.drawer-sub-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.drawer-sub.is-open .drawer-sub-panel{grid-template-rows:1fr}
+.drawer-sub-inner{overflow:hidden;display:flex;flex-direction:column}
+.drawer-sub-inner a{padding-left:var(--sp-4);font-size:var(--t-body);color:rgba(255,255,255,.85)}
+.drawer-sub-inner a:last-child{border-bottom:none}
 .drawer-foot{padding:var(--sp-5) var(--sp-6) var(--sp-6);border-top:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;gap:var(--sp-4)}
 .drawer-donate{display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-3);padding:var(--sp-4);background:#fff;color:var(--brand);font-size:var(--t-body-s);letter-spacing:2.5px;font-weight:600;transition:background .2s}
 .drawer-donate::after{content:"→"}
