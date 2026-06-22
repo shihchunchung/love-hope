@@ -55,3 +55,20 @@
     a.addEventListener('click', shut);
   });
 })();
+
+// ============ COOKIE CONSENT ============
+// 僅初次到訪顯示；按「同意並關閉」後存 localStorage，往後（重整／換頁／再訪）都不再出現。
+(function () {
+  const banner = document.getElementById('cookieBanner');
+  if (!banner) return;
+  const KEY = 'lhf-cookie-consent';
+  let agreed = false;
+  try { agreed = localStorage.getItem(KEY) === '1'; } catch (e) {}
+  if (agreed) return;                 // 已同意 → 維持隱藏
+  banner.hidden = false;              // 初次到訪 → 顯示
+  const btn = document.getElementById('cookieAccept');
+  btn && btn.addEventListener('click', () => {
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+    banner.hidden = true;
+  });
+})();
