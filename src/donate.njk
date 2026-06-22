@@ -7,7 +7,7 @@ active: donate
 
 {% block styles %}
 <style>
-  /* ============ 捐款頁（白底頁首 + 捐款方式格 + 稅務 + FAQ + 頁尾紅卡 CTA）============ */
+  /* ============ 捐款頁（白底頁首 + 捐款方式格 + 收據相關 + FAQ + 頁尾紅卡 CTA）============ */
   html{scroll-behavior:smooth}
 
   /* ---- 頁首（白底置中，與徵信頁同款）---- */
@@ -37,7 +37,7 @@ active: donate
   .m-link:hover{color:var(--brand);gap:var(--sp-3)}
   .method-note{margin-top:var(--sp-6);font-size:var(--t-body-s);color:var(--muted);letter-spacing:.3px;padding-top:var(--sp-5);border-top:1px solid var(--line)}
 
-  /* ---- 稅務與收據 ---- */
+  /* ---- 收據相關 ---- */
   .dn-tax{padding:var(--sp-9) 0;background:var(--line-soft);border-top:1px solid var(--line)}
   .section-head{border-bottom:1px solid var(--ink);padding-bottom:var(--sp-5);margin-bottom:var(--sp-7)}
   .section-head .subtitle{font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);letter-spacing:3.5px;color:var(--brand);font-weight:600;text-transform:uppercase;display:flex;align-items:center;gap:var(--sp-4);margin-bottom:var(--sp-3)}
@@ -102,6 +102,7 @@ active: donate
 <nav class="sub-nav" aria-label="捐款徵信">
   <a class="item"    href="transparency.html">徵信查詢</a>
   <a class="item on" href="donate.html">捐款方式與管道</a>
+  <a class="item"    href="donate.html#receipt">收據相關</a>
   <a class="item"    href="donate.html#faq">捐款ＦＡＱ</a>
 </nav>
 
@@ -170,12 +171,12 @@ active: donate
   </div>
 </section>
 
-<!-- ===== 稅務與收據 ===== -->
-<section class="dn-tax">
+<!-- ===== 收據相關 ===== -->
+<section class="dn-tax" id="receipt">
   <div class="wrap">
     <div class="section-head">
       <div class="subtitle">Tax &amp; Receipt</div>
-      <h2>稅務與收據</h2>
+      <h2>收據相關</h2>
     </div>
     <div class="tax-grid">
       <div class="tax-block">

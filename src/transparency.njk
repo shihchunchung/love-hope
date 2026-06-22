@@ -37,11 +37,9 @@ active: transparency
   .query-btn{padding:var(--sp-3) var(--sp-7);background:var(--brand);color:#fff;border:0;border-radius:4px;font-size:var(--t-body-s);letter-spacing:2px;font-weight:600;cursor:pointer;transition:background .18s;font-family:inherit}
   .query-btn:hover{background:var(--brand-dark)}
 
-  /* ---- 結果表格（點擊另開視窗 PDF）---- */
-  .result-hint{font-size:var(--t-body-s);color:var(--muted);margin-bottom:var(--sp-4);line-height:1.7}
+  /* ---- 結果表格（單欄「徵信報告」；點擊另開視窗 PDF；按「查詢」前整塊隱藏）---- */
   .result-table{width:100%;border-collapse:collapse}
   .result-table th{text-align:left;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:2px;color:var(--brand);font-weight:600;padding:var(--sp-3) var(--sp-4);border-bottom:2px solid var(--brand)}
-  .result-table th.col-date{text-align:right}
   .result-table td{padding:var(--sp-3) var(--sp-4);border-bottom:1px solid var(--line-soft);vertical-align:baseline}
   .result-table tr:hover td{background:var(--brand-tint)}
   .r-name a{color:var(--body);font-size:var(--t-body-s);line-height:1.55;text-decoration:none;transition:color .18s}
@@ -49,7 +47,6 @@ active: transparency
   .r-name a:hover{color:var(--brand)}
   .r-name a:hover::after{color:var(--brand)}
   .r-yr{display:inline-block;margin-left:var(--sp-3);font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-caption);letter-spacing:1px;color:var(--muted)}
-  .r-date{text-align:right;white-space:nowrap;font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-body-s);color:var(--muted)}
   .q-empty{padding:var(--sp-7) 0;text-align:center;color:var(--muted);font-size:var(--t-body-s)}
 
   /* ---- SUB-NAV (捐款徵信跨頁 tabs；視覺同 news/venue/actions) ---- */
@@ -73,7 +70,6 @@ active: transparency
     .query-field{flex:1 1 100%}
     .query-field select{min-width:0;width:100%}
     .query-btn{width:100%}
-    .result-table th.col-date,.r-date{font-size:var(--t-caption)}
   }
 </style>
 {% endblock %}
@@ -185,6 +181,7 @@ active: transparency
 <nav class="sub-nav" aria-label="捐款徵信">
   <a class="item on" href="transparency.html">徵信查詢</a>
   <a class="item"    href="donate.html">捐款方式與管道</a>
+  <a class="item"    href="donate.html#receipt">收據相關</a>
   <a class="item"    href="donate.html#faq">捐款ＦＡＱ</a>
 </nav>
 
@@ -232,44 +229,35 @@ active: transparency
       <button class="query-btn" id="qBtn" type="button">查詢</button>
     </div>
 
-    <p class="result-hint">查詢結果呈現如下，點擊後另開視窗 PDF 檔。</p>
-    <table class="result-table">
+    <div id="results" hidden>
+    <table class="result-table" id="resultTable">
       <thead>
-        <tr><th class="col-name">徵信報告</th><th class="col-date">日期</th></tr>
+        <tr><th class="col-name">徵信報告</th></tr>
       </thead>
       <tbody id="resultBody">
         {%- for yr in years %}
         {%- if yr.annual %}{% for it in yr.annual %}
         <tr data-year="{{ yr.year }}" data-type="{{ it.t }}">
-          <td class="r-name"><a href="pdfs/audit/{{ it.f | urlencode }}" target="_blank" rel="noopener">{{ it.l }}</a><span class="r-yr">{{ yr.year }}</span></td>
-          <td class="r-date">{{ it.d if it.d else "—" }}</td>
-        </tr>
+          <td class="r-name"><a href="pdfs/audit/{{ it.f | urlencode }}" target="_blank" rel="noopener">{{ it.l }}</a><span class="r-yr">{{ yr.year }}</span></td>        </tr>
         {%- endfor %}{% endif %}
         {%- if yr.project %}
           {%- for it in yr.project.summary %}
         <tr data-year="{{ yr.year }}" data-type="project">
-          <td class="r-name"><a href="pdfs/audit/{{ it.f | urlencode }}" target="_blank" rel="noopener">{{ it.l }}</a><span class="r-yr">{{ yr.year }}・真愛多多</span></td>
-          <td class="r-date">{{ it.d if it.d else "—" }}</td>
-        </tr>
+          <td class="r-name"><a href="pdfs/audit/{{ it.f | urlencode }}" target="_blank" rel="noopener">{{ it.l }}</a><span class="r-yr">{{ yr.year }}・真愛多多</span></td>        </tr>
           {%- endfor %}
           {%- if yr.project.extra %}{% for it in yr.project.extra %}
         <tr data-year="{{ yr.year }}" data-type="project">
-          <td class="r-name"><a href="pdfs/audit/{{ it.f | urlencode }}" target="_blank" rel="noopener">{{ it.l }}</a><span class="r-yr">{{ yr.year }}・真愛多多</span></td>
-          <td class="r-date">{{ it.d if it.d else "—" }}</td>
-        </tr>
+          <td class="r-name"><a href="pdfs/audit/{{ it.f | urlencode }}" target="_blank" rel="noopener">{{ it.l }}</a><span class="r-yr">{{ yr.year }}・真愛多多</span></td>        </tr>
           {%- endfor %}{% endif %}
           {%- if yr.project.monthsExplicit %}
             {%- for it in yr.project.monthsExplicit %}
         <tr data-year="{{ yr.year }}" data-type="project">
-          <td class="r-name"><a href="pdfs/audit/{{ it.f | urlencode }}" target="_blank" rel="noopener">{{ it.l }}</a><span class="r-yr">{{ yr.year }}・真愛多多</span></td>
-          <td class="r-date">{{ it.d if it.d else "—" }}</td>
-        </tr>
+          <td class="r-name"><a href="pdfs/audit/{{ it.f | urlencode }}" target="_blank" rel="noopener">{{ it.l }}</a><span class="r-yr">{{ yr.year }}・真愛多多</span></td>        </tr>
             {%- endfor %}
           {%- else %}
             {%- for m in yr.project.months %}
         <tr data-year="{{ yr.year }}" data-type="project">
           <td class="r-name"><a href="pdfs/audit/{{ (yr.project.yk + '年度' + m + '月' + projBase + '.pdf') | urlencode }}" target="_blank" rel="noopener">{{ m }} 月　捐款人名單徵信</a><span class="r-yr">{{ yr.year }}・真愛多多</span></td>
-          <td class="r-date">—</td>
         </tr>
             {%- endfor %}
           {%- endif %}
@@ -278,17 +266,20 @@ active: transparency
       </tbody>
     </table>
     <div class="q-empty" id="qEmpty" hidden>查無符合的徵信報告，請調整查詢條件。</div>
+    </div>
   </div>
 </section>
 {% endblock %}
 
 {% block scripts %}
 <script>
-  // 徵信查詢：依「年度 + 報告類型」篩選。內容是靜態 HTML，這裡只切換 hidden（沿用本站靜態渲染慣例）。
+  // 徵信查詢：按下「查詢」才篩選並顯示結果；未查詢前整塊隱藏。內容是靜態 HTML，這裡只切換 hidden（沿用本站靜態渲染慣例）。
   const yearSel = document.getElementById('qYear');
   const typeSel = document.getElementById('qType');
   const qBtn    = document.getElementById('qBtn');
   const rows    = Array.from(document.querySelectorAll('#resultBody tr'));
+  const results = document.getElementById('results');
+  const table   = document.getElementById('resultTable');
   const empty   = document.getElementById('qEmpty');
   function applyQuery(){
     const y = yearSel.value, t = typeSel.value;
@@ -298,11 +289,10 @@ active: transparency
       r.hidden = !ok;
       if (ok) shown++;
     });
+    results.hidden = false;
+    table.hidden = shown === 0;
     empty.hidden = shown > 0;
   }
   qBtn.addEventListener('click', applyQuery);
-  yearSel.addEventListener('change', applyQuery);
-  typeSel.addEventListener('change', applyQuery);
-  applyQuery();
 </script>
 {% endblock %}
