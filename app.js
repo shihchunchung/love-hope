@@ -54,12 +54,4 @@
   drawer.querySelectorAll('.drawer-nav a').forEach(a => {
     a.addEventListener('click', shut);
   });
-  // 可展開子選單（捐款徵信）：點父項切換展開，不跳頁
-  drawer.querySelectorAll('.drawer-sub-toggle').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const sub = btn.closest('.drawer-sub');
-      const open = sub.classList.toggle('is-open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-  });
 })();
