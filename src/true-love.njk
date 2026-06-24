@@ -24,13 +24,7 @@ active: true-love
   .story-title .meta .sep{opacity:.4}
   .story-title .story-h1{
     font-size:var(--t-display-l);letter-spacing:1.5px;line-height:1.25;
-    color:var(--ink);margin-bottom:var(--sp-5);font-weight:700;max-width:900px;
-  }
-  .story-title .story-sub{
-    font-size:var(--t-title-l);line-height:1.6;
-    color:var(--body);letter-spacing:1px;font-weight:500;
-    padding-left:var(--sp-4);border-left:2px solid var(--brand);
-    max-width:680px;
+    color:var(--ink);margin-bottom:0;font-weight:700;max-width:900px;
   }
 
   /* ============ STORY BODY（編輯閱讀區）============ */
@@ -85,7 +79,7 @@ active: true-love
   .gallery-grid figure{display:block;margin:0}
   .gallery-grid figure.wide{grid-column:1 / -1}
   .gallery-grid .g-image{
-    aspect-ratio:4/3;margin-bottom:var(--sp-4);position:relative;overflow:hidden;background:#1a1010;
+    aspect-ratio:4/3;position:relative;overflow:hidden;background:#1a1010;
   }
   .gallery-grid figure.wide .g-image{aspect-ratio:21/9}
   .gallery-grid .g-image img{
@@ -93,10 +87,6 @@ active: true-love
     transition:transform .55s cubic-bezier(.25,.46,.45,.94);
   }
   .gallery-grid figure:hover .g-image img{transform:scale(1.04)}
-  .gallery-grid figcaption{
-    font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);
-    color:var(--muted);letter-spacing:0;line-height:1.85;max-width:92%;
-  }
 
   /* ============ DONATE BAND RWD（chrome 樣式在 app.css，RWD 仍由頁面帶）============ */
   @media (max-width: 1100px){
@@ -112,7 +102,6 @@ active: true-love
     .story-hero{height:280px}
     .story-title{padding:var(--sp-7) 0 var(--sp-6)}
     .story-title .story-h1{font-size:var(--t-display);letter-spacing:1.5px}
-    .story-title .story-sub{font-size:var(--t-title-s);letter-spacing:0}
     .story-body{padding:var(--sp-6) 0 var(--sp-8)}
     .story-body p{font-size:var(--t-body);line-height:1.9}
     .story-body .sec-h{margin:var(--sp-6) 0 var(--sp-4);font-size:var(--t-title-s)}
@@ -130,7 +119,7 @@ active: true-love
 {% block content %}
 <!-- ===== STORY HERO（純圖）===== -->
 <section class="story-hero">
-  <div class="hero-image" role="img" aria-label="「愛的講堂」系列講座現場，燭光與書牆間的演出"></div>
+  <div class="hero-image" role="img" aria-label="「愛的講堂」系列講座現場"></div>
 </section>
 
 <!-- ===== STORY TITLE ===== -->
@@ -139,12 +128,9 @@ active: true-love
     <div class="meta">
       <span class="loc">台南學甲</span>
       <span class="sep">·</span>
-      <span>2014 – 2018</span>
-      <span class="sep">·</span>
       <span>真愛多多系列活動</span>
     </div>
     <h1 class="story-h1">「真愛多多」系列活動，用愛打造伯利恆融合教育中心</h1>
-    <p class="story-sub">耗時五年、凝聚逾 3,600 位善心人士，承接甘惠忠神父一生懸念的心願。</p>
   </div>
 </section>
 
@@ -193,24 +179,19 @@ active: true-love
 
     <div class="gallery-grid">
       <figure class="wide">
-        <div class="g-image"><img src="images/true-love/salon-01.jpg" alt="古典吉他演奏於愛的講堂，投影前方為「真愛多多」系列主視覺" loading="lazy"></div>
-        <figcaption>古典吉他演奏於「愛的講堂」獻藝，投影前方正是「真愛多多」系列主視覺。</figcaption>
+        <div class="g-image"><img src="images/true-love/salon-01.jpg" alt="「愛的講堂」系列講座現場" loading="lazy"></div>
       </figure>
       <figure>
-        <div class="g-image"><img src="images/true-love/salon-02.jpg" alt="講者與聽眾在燭光講堂中歡笑相聚" loading="lazy"></div>
-        <figcaption>講者與聽眾在燭光講堂中歡笑相聚，分享生命與共融的故事。</figcaption>
+        <div class="g-image"><img src="images/true-love/salon-02.jpg" alt="「愛的講堂」系列講座現場" loading="lazy"></div>
       </figure>
       <figure>
-        <div class="g-image"><img src="images/true-love/salon-03.jpg" alt="音樂人於講堂以歌聲傳唱" loading="lazy"></div>
-        <figcaption>音樂人於講堂以歌聲傳唱土地與愛的故事。</figcaption>
+        <div class="g-image"><img src="images/true-love/salon-03.jpg" alt="「愛的講堂」系列講座現場" loading="lazy"></div>
       </figure>
       <figure>
-        <div class="g-image"><img src="images/true-love/salon-04.jpg" alt="跨界演出，邀請大眾一同關注伯利恆的心願" loading="lazy"></div>
-        <figcaption>一場場跨界演出，邀請大眾一同關注伯利恆的心願。</figcaption>
+        <div class="g-image"><img src="images/true-love/salon-04.jpg" alt="「愛的講堂」系列講座現場" loading="lazy"></div>
       </figure>
       <figure>
-        <div class="g-image"><img src="images/true-love/salon-05.jpg" alt="愛的講堂現場，書牆與燭光間滿室善意" loading="lazy"></div>
-        <figcaption>「愛的講堂」現場，書牆與燭光間流動著滿室的善意。</figcaption>
+        <div class="g-image"><img src="images/true-love/salon-05.jpg" alt="「愛的講堂」系列講座現場" loading="lazy"></div>
       </figure>
     </div>
   </div>
