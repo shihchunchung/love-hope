@@ -1,0 +1,252 @@
+---
+permalink: true-love.html
+title: "真愛多多 — 用愛打造伯利恆早療暨融合教育中心｜薛伯輝基金會"
+active: true-love
+---
+{% extends "base.njk" %}
+
+{% block styles %}
+<style>
+  /* ============ STORY HERO（純圖、底部漸層）============ */
+  .story-hero{position:relative;height:clamp(360px,52vh,560px);background:#0f0f0f;overflow:hidden}
+  .story-hero .hero-image{position:absolute;inset:0;background:url("images/true-love/hero.jpg") center 38%/cover no-repeat}
+  .story-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0,transparent 28%,transparent 60%,rgba(0,0,0,.45) 100%);pointer-events:none}
+
+  /* ============ STORY TITLE（hero 下方白底標題區）============ */
+  .story-title{padding:var(--sp-8) 0 var(--sp-7);background:#fff;border-bottom:1px solid var(--line-soft)}
+  .story-title .meta{
+    display:inline-flex;align-items:center;gap:var(--sp-4);flex-wrap:wrap;
+    font-family:"IBM Plex Serif",sans-serif;
+    font-size:var(--t-meta);letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--muted);font-weight:600;margin-bottom:var(--sp-4);
+  }
+  .story-title .meta .loc{color:var(--brand);font-weight:700;letter-spacing:2.5px}
+  .story-title .meta .sep{opacity:.4}
+  .story-title .story-h1{
+    font-size:var(--t-display-l);letter-spacing:1.5px;line-height:1.25;
+    color:var(--ink);margin-bottom:var(--sp-5);font-weight:700;max-width:900px;
+  }
+  .story-title .story-sub{
+    font-size:var(--t-title-l);line-height:1.6;
+    color:var(--body);letter-spacing:1px;font-weight:500;
+    padding-left:var(--sp-4);border-left:2px solid var(--brand);
+    max-width:680px;
+  }
+
+  /* ============ STORY BODY（編輯閱讀區）============ */
+  .story-body{padding:var(--sp-8) 0 var(--sp-9);background:#fff}
+  .story-body .body-col{max-width:760px}
+  .story-body p{
+    font-size:var(--t-body-l);line-height:1.95;color:var(--body);
+    margin-bottom:1.4em;letter-spacing:0;
+  }
+  .story-body .lead-p{font-size:var(--t-title-s);color:var(--ink);font-weight:500;line-height:1.9}
+  .story-body .sec-h{
+    font-size:var(--t-title);letter-spacing:1px;color:var(--ink);
+    margin:var(--sp-8) 0 var(--sp-5);display:flex;align-items:center;gap:var(--sp-4);font-weight:700;
+  }
+  .story-body .sec-h::before{content:"";width:32px;height:1px;background:var(--brand);flex-shrink:0}
+  /* 條列（愛的講堂講者 / 建築特色）：品牌色 marker，襯線冒號前詞 */
+  .story-body ul.s-list{margin:0 0 1.4em;display:flex;flex-direction:column;gap:var(--sp-4)}
+  .story-body ul.s-list li{
+    position:relative;padding-left:var(--sp-6);
+    font-size:var(--t-body);line-height:1.85;color:var(--body);
+  }
+  .story-body ul.s-list li::before{
+    content:"";position:absolute;left:0;top:.7em;width:7px;height:7px;
+    background:var(--brand);border-radius:50%;
+  }
+  .story-body ul.s-list li b{color:var(--ink);font-weight:700}
+
+  /* ============ SECTION HEAD（Gallery）============ */
+  .section-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:1px solid var(--ink);padding-bottom:var(--sp-6);margin-bottom:var(--sp-7);
+  }
+  .section-head .titles{display:flex;flex-direction:column;gap:var(--sp-3)}
+  .section-head .subtitle{
+    font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);
+    letter-spacing:3.5px;color:var(--brand);font-weight:600;
+    text-transform:uppercase;display:flex;align-items:center;gap:var(--sp-4);
+  }
+  .section-head .subtitle::before{content:"";width:24px;height:1px;background:var(--brand)}
+  .section-head h2.section-title{
+    font-size:var(--t-section);font-weight:700;color:var(--ink);
+    letter-spacing:1.5px;line-height:1.25;
+  }
+  .section-head .head-note{
+    font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);
+    color:var(--muted);letter-spacing:1.5px;
+  }
+
+  /* ============ GALLERY（1 寬 + 2×2）============ */
+  .gallery-section{padding:var(--sp-10) 0;background:var(--line-soft);border-top:1px solid var(--line-soft)}
+  .gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-7) var(--sp-6)}
+  .gallery-grid figure{display:block;margin:0}
+  .gallery-grid figure.wide{grid-column:1 / -1}
+  .gallery-grid .g-image{
+    aspect-ratio:4/3;margin-bottom:var(--sp-4);position:relative;overflow:hidden;background:#1a1010;
+  }
+  .gallery-grid figure.wide .g-image{aspect-ratio:21/9}
+  .gallery-grid .g-image img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    transition:transform .55s cubic-bezier(.25,.46,.45,.94);
+  }
+  .gallery-grid figure:hover .g-image img{transform:scale(1.04)}
+  .gallery-grid figcaption{
+    font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);
+    color:var(--muted);letter-spacing:0;line-height:1.85;max-width:92%;
+  }
+
+  /* ============ DONATE BAND RWD（chrome 樣式在 app.css，RWD 仍由頁面帶）============ */
+  @media (max-width: 1100px){
+    .story-hero{height:clamp(320px,45vh,460px)}
+    .story-title{padding:var(--sp-7) 0 var(--sp-6)}
+    .story-body{padding:var(--sp-7) 0 var(--sp-9)}
+    .donate-card{grid-template-columns:1fr;gap:var(--sp-7);padding:var(--sp-7);border-radius:4px}
+    .donate-text{padding:0}
+    .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:var(--sp-6)}
+  }
+  @media (max-width: 720px){
+    .wrap{padding:0 var(--sp-4)}
+    .story-hero{height:280px}
+    .story-title{padding:var(--sp-7) 0 var(--sp-6)}
+    .story-title .story-h1{font-size:var(--t-display);letter-spacing:1.5px}
+    .story-title .story-sub{font-size:var(--t-title-s);letter-spacing:0}
+    .story-body{padding:var(--sp-6) 0 var(--sp-8)}
+    .story-body p{font-size:var(--t-body);line-height:1.9}
+    .story-body .sec-h{margin:var(--sp-6) 0 var(--sp-4);font-size:var(--t-title-s)}
+    .gallery-section{padding:var(--sp-8) 0}
+    .gallery-grid{grid-template-columns:1fr;gap:var(--sp-6)}
+    .gallery-grid figure.wide .g-image{aspect-ratio:4/3}
+    .section-head{flex-direction:column;align-items:flex-start;gap:var(--sp-4)}
+    .donate-band{padding:var(--sp-7) var(--sp-4)}
+    .donate-card{padding:var(--sp-6) var(--sp-5);gap:var(--sp-6)}
+    .donate-stats{padding-top:var(--sp-5)}
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ===== STORY HERO（純圖）===== -->
+<section class="story-hero">
+  <div class="hero-image" role="img" aria-label="「愛的講堂」系列講座現場，燭光與書牆間的演出"></div>
+</section>
+
+<!-- ===== STORY TITLE ===== -->
+<section class="story-title">
+  <div class="wrap">
+    <div class="meta">
+      <span class="loc">台南學甲</span>
+      <span class="sep">·</span>
+      <span>2014 – 2018</span>
+      <span class="sep">·</span>
+      <span>真愛多多系列活動</span>
+    </div>
+    <h1 class="story-h1">「真愛多多」系列活動，用愛打造伯利恆融合教育中心</h1>
+    <p class="story-sub">耗時五年、凝聚逾 3,600 位善心人士，承接甘惠忠神父一生懸念的心願。</p>
+  </div>
+</section>
+
+<!-- ===== STORY BODY（內文，逐字使用原始文案）===== -->
+<article class="story-body">
+  <div class="wrap">
+    <div class="body-col">
+      <p class="lead-p">一個進步的社會，取決於我們如何對待最脆弱的生命。當我們遇見了「特教之父」甘惠忠神父，看見他為台灣慢飛天使奉獻半世紀的身影，觸動我們的，是他一生懸念的特教融合教育大樓的心願。</p>
+
+      <p>為了讓這個理念化為現實，薛伯輝基金會發起「真愛多多！」系列活動，耗時五年，不僅凝聚了超過 3,600 位善心人士的力量，成功讓「伯利恆早療暨融合教育中心」於 2018 年 3 月順利落成啟用，更承接了甘神父的宏願，成為特教共融理念的傳愛種子。</p>
+
+      <h2 class="sec-h">為什麼是「特教共融」？薛伯輝基金會與甘神父的理念共鳴</h2>
+      <p>在早期台灣傳統社會的觀念中，身心障礙或發展遲緩的兒童往往被隔離在特殊的機構中，與主流社會切斷了連結。然而，甘惠忠神父卻有著超越時代與信仰的態度認為：「每一個孩子都是一樣的，特殊的孩子不需要被隔離，他們需要的是共融。」</p>
+      <p>薛伯輝基金會對此理念深感認同。我們所理解的特教共融，不是施捨，而是彼此接納、兼容——在融合教育的環境中，一般幼兒從小與慢飛天使一起生活、遊戲、學習，他們學會的不是同情，而是真正的「同理心」與對生命多樣性的包容。而慢飛天使的黃金蛻變，是把握 3 歲前的早療黃金期，讓他們在普通環境中擁有更多模仿、社交與互動的機會，激發潛能，為將來獨立自理生活打下基石。走出歧見、學習共融，正是薛伯輝基金會「愛與希望慈善版圖」中最核心的拼圖。</p>
+
+      <h2 class="sec-h">「真愛多多！」系列勸募活動五年長跑</h2>
+      <p>為了籌措龐大的建築工程款，薛伯輝基金會特別舉辦「愛的講堂」系列講座，邀請各界大師跨界分享，以音樂、演講等多類型藝術表演，引發大眾對此案的關注，活動包括：</p>
+      <ul class="s-list">
+        <li><b>李家同教授</b>　深入探討《大量閱讀的重要性》，為偏鄉與弱勢教育指引文化扎根的方向。</li>
+        <li><b>洪蘭老師</b>　以《大腦與學習》為題，從腦科學角度解讀孩子的天賦與早期療育的關鍵。</li>
+        <li><b>跨界美學大師</b>　音樂人林生祥主講《我庄愛恨歌》、作家劉軒主講《跳痛人生》、倒立先生黃明正主講《翻轉魯蛇》、鄭治桂老師帶領讀者《穿梭羅浮宮與大英博物館》。</li>
+      </ul>
+      <p>這股善意迅速在校園與企業間蔓延。公益界指標人物孫越、紀政、徐乃麟紛紛響應「大天使·小天使計劃」；文學大師余光中更在慶祝鑽石婚的珍貴時刻響應傳愛；甚至有熱血的邱鈞評同學，用「徒步環島集愛」的方式為甘神父圓夢。就是這些凝聚大大小小的力量，成就了「伯利恆早療暨融合教育中心」上的一磚一瓦。</p>
+
+      <h2 class="sec-h">在希望版圖上，用愛打造建築</h2>
+      <p>這一棟位於台南學甲、被賴清德總統譽為「一棟用愛打造的建築」，由九典團隊與龔書章老師設計、耗資上億元。這棟綠建築完全為「共融」而生：</p>
+      <ul class="s-list">
+        <li>這裡沒有冰冷的隔離欄杆，只有開闊的五感探索圖書館與生活小廚房。</li>
+        <li>這裡是一般孩子與慢飛天使共同奔跑的喜樂空間，也是社區家長與特教專業交流的溫暖據點。</li>
+      </ul>
+      <p>當薛伯輝基金會將這棟綠建築交付予甘神父所創立的「伯利恆社會福利基金會」時，同時也寫下台灣特教歷史中最溫暖的一頁。</p>
+    </div>
+  </div>
+</article>
+
+<!-- ===== GALLERY（愛的講堂現場）===== -->
+<section class="gallery-section">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="titles">
+        <span class="subtitle">Gallery</span>
+        <h2 class="section-title">愛的講堂・影像紀錄</h2>
+      </div>
+      <span class="head-note">影像由薛伯輝基金會提供</span>
+    </header>
+
+    <div class="gallery-grid">
+      <figure class="wide">
+        <div class="g-image"><img src="images/true-love/salon-01.jpg" alt="古典吉他演奏於愛的講堂，投影前方為「真愛多多」系列主視覺" loading="lazy"></div>
+        <figcaption>古典吉他演奏於「愛的講堂」獻藝，投影前方正是「真愛多多」系列主視覺。</figcaption>
+      </figure>
+      <figure>
+        <div class="g-image"><img src="images/true-love/salon-02.jpg" alt="講者與聽眾在燭光講堂中歡笑相聚" loading="lazy"></div>
+        <figcaption>講者與聽眾在燭光講堂中歡笑相聚，分享生命與共融的故事。</figcaption>
+      </figure>
+      <figure>
+        <div class="g-image"><img src="images/true-love/salon-03.jpg" alt="音樂人於講堂以歌聲傳唱" loading="lazy"></div>
+        <figcaption>音樂人於講堂以歌聲傳唱土地與愛的故事。</figcaption>
+      </figure>
+      <figure>
+        <div class="g-image"><img src="images/true-love/salon-04.jpg" alt="跨界演出，邀請大眾一同關注伯利恆的心願" loading="lazy"></div>
+        <figcaption>一場場跨界演出，邀請大眾一同關注伯利恆的心願。</figcaption>
+      </figure>
+      <figure>
+        <div class="g-image"><img src="images/true-love/salon-05.jpg" alt="愛的講堂現場，書牆與燭光間滿室善意" loading="lazy"></div>
+        <figcaption>「愛的講堂」現場，書牆與燭光間流動著滿室的善意。</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DONATE BAND（沿用 app.css）===== -->
+<section class="donate-band">
+  <div class="wrap">
+    <div class="donate-card">
+      <div class="donate-text">
+        <div class="label">Donate</div>
+        <h2>捐款支持<br>愛與希望的延續</h2>
+        <p>每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
+        <div class="actions">
+          <a class="btn-w" href="donate.html">捐款方式</a>
+          <a class="btn-wo" href="transparency.html">捐款徵信</a>
+        </div>
+      </div>
+      <div class="donate-stats" aria-label="捐款方式摘要">
+        <div class="donate-method">
+          <span class="method-label">Bank Transfer</span>
+          <h3>銀行匯款 / ATM 轉帳</h3>
+          <p>國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Postal Giro</span>
+          <h3>郵局劃撥</h3>
+          <p>帳號 <b>50067771</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Other Ways</span>
+          <h3>信用卡、支票與現場捐款</h3>
+          <p>歡迎透過信用卡授權書、支票或親臨基金會現場捐款，捐款徵信定期公開。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
