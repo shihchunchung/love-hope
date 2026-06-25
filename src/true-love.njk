@@ -7,10 +7,15 @@ active: true-love
 
 {% block styles %}
 <style>
-  /* ============ STORY HERO（純圖、底部漸層）============ */
+  /* ============ HERO CAROUSEL（愛的講堂・淡入淡出）============ */
   .story-hero{position:relative;height:clamp(360px,52vh,560px);background:#0f0f0f;overflow:hidden}
-  .story-hero .hero-image{position:absolute;inset:0;background:url("images/true-love/hero.jpg") center 38%/cover no-repeat}
-  .story-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0,transparent 28%,transparent 60%,rgba(0,0,0,.45) 100%);pointer-events:none}
+  .story-hero .hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%;opacity:0;transition:opacity .8s ease}
+  .story-hero .hero-slide.on{opacity:1}
+  .story-hero::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(0,0,0,.15) 0,transparent 28%,transparent 60%,rgba(0,0,0,.45) 100%);pointer-events:none}
+  .story-hero .hero-dots{position:absolute;bottom:18px;left:0;right:0;z-index:3;display:flex;gap:10px;justify-content:center}
+  .story-hero .hero-dots button{width:9px;height:9px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.45);cursor:pointer;transition:background .2s,transform .2s}
+  .story-hero .hero-dots button:hover{background:rgba(255,255,255,.75)}
+  .story-hero .hero-dots button.on{background:#fff;transform:scale(1.25)}
 
   /* ============ STORY TITLE（hero 下方白底標題區）============ */
   .story-title{padding:var(--sp-8) 0 var(--sp-7);background:#fff;border-bottom:1px solid var(--line-soft)}
@@ -52,42 +57,6 @@ active: true-love
   }
   .story-body ul.s-list li b{color:var(--ink);font-weight:700}
 
-  /* ============ SECTION HEAD（Gallery）============ */
-  .section-head{
-    display:flex;justify-content:space-between;align-items:flex-end;
-    border-bottom:1px solid var(--ink);padding-bottom:var(--sp-6);margin-bottom:var(--sp-7);
-  }
-  .section-head .titles{display:flex;flex-direction:column;gap:var(--sp-3)}
-  .section-head .subtitle{
-    font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);
-    letter-spacing:3.5px;color:var(--brand);font-weight:600;
-    text-transform:uppercase;display:flex;align-items:center;gap:var(--sp-4);
-  }
-  .section-head .subtitle::before{content:"";width:24px;height:1px;background:var(--brand)}
-  .section-head h2.section-title{
-    font-size:var(--t-section);font-weight:700;color:var(--ink);
-    letter-spacing:1.5px;line-height:1.25;
-  }
-  .section-head .head-note{
-    font-family:"IBM Plex Serif",sans-serif;font-size:var(--t-meta);
-    color:var(--muted);letter-spacing:1.5px;
-  }
-
-  /* ============ GALLERY（1 寬 + 2×2）============ */
-  .gallery-section{padding:var(--sp-10) 0;background:var(--line-soft);border-top:1px solid var(--line-soft)}
-  .gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-7) var(--sp-6)}
-  .gallery-grid figure{display:block;margin:0}
-  .gallery-grid figure.wide{grid-column:1 / -1}
-  .gallery-grid .g-image{
-    aspect-ratio:4/3;position:relative;overflow:hidden;background:#1a1010;
-  }
-  .gallery-grid figure.wide .g-image{aspect-ratio:21/9}
-  .gallery-grid .g-image img{
-    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-    transition:transform .55s cubic-bezier(.25,.46,.45,.94);
-  }
-  .gallery-grid figure:hover .g-image img{transform:scale(1.04)}
-
   /* ============ DONATE BAND RWD（chrome 樣式在 app.css，RWD 仍由頁面帶）============ */
   @media (max-width: 1100px){
     .story-hero{height:clamp(320px,45vh,460px)}
@@ -105,10 +74,6 @@ active: true-love
     .story-body{padding:var(--sp-6) 0 var(--sp-8)}
     .story-body p{font-size:var(--t-body);line-height:1.9}
     .story-body .sec-h{margin:var(--sp-6) 0 var(--sp-4);font-size:var(--t-title-s)}
-    .gallery-section{padding:var(--sp-8) 0}
-    .gallery-grid{grid-template-columns:1fr;gap:var(--sp-6)}
-    .gallery-grid figure.wide .g-image{aspect-ratio:4/3}
-    .section-head{flex-direction:column;align-items:flex-start;gap:var(--sp-4)}
     .donate-band{padding:var(--sp-7) var(--sp-4)}
     .donate-card{padding:var(--sp-6) var(--sp-5);gap:var(--sp-6)}
     .donate-stats{padding-top:var(--sp-5)}
@@ -117,9 +82,15 @@ active: true-love
 {% endblock %}
 
 {% block content %}
-<!-- ===== STORY HERO（純圖）===== -->
-<section class="story-hero">
-  <div class="hero-image" role="img" aria-label="「愛的講堂」系列講座現場"></div>
+<!-- ===== HERO CAROUSEL（愛的講堂・淡入淡出）===== -->
+<section class="story-hero" id="tlHero" aria-label="「愛的講堂」系列講座影像輪播">
+  <img class="hero-slide on" src="images/true-love/hero.jpg" alt="「愛的講堂」系列講座現場" fetchpriority="high">
+  <img class="hero-slide" src="images/true-love/salon-01.jpg" alt="「愛的講堂」系列講座現場" loading="lazy">
+  <img class="hero-slide" src="images/true-love/salon-02.jpg" alt="「愛的講堂」系列講座現場" loading="lazy">
+  <img class="hero-slide" src="images/true-love/salon-03.jpg" alt="「愛的講堂」系列講座現場" loading="lazy">
+  <img class="hero-slide" src="images/true-love/salon-04.jpg" alt="「愛的講堂」系列講座現場" loading="lazy">
+  <img class="hero-slide" src="images/true-love/salon-05.jpg" alt="「愛的講堂」系列講座現場" loading="lazy">
+  <div class="hero-dots" id="tlDots" aria-label="輪播控制"></div>
 </section>
 
 <!-- ===== STORY TITLE ===== -->
@@ -166,37 +137,6 @@ active: true-love
   </div>
 </article>
 
-<!-- ===== GALLERY（愛的講堂現場）===== -->
-<section class="gallery-section">
-  <div class="wrap">
-    <header class="section-head">
-      <div class="titles">
-        <span class="subtitle">Gallery</span>
-        <h2 class="section-title">愛的講堂・影像紀錄</h2>
-      </div>
-      <span class="head-note">影像由薛伯輝基金會提供</span>
-    </header>
-
-    <div class="gallery-grid">
-      <figure class="wide">
-        <div class="g-image"><img src="images/true-love/salon-01.jpg" alt="「愛的講堂」系列講座現場" loading="lazy"></div>
-      </figure>
-      <figure>
-        <div class="g-image"><img src="images/true-love/salon-02.jpg" alt="「愛的講堂」系列講座現場" loading="lazy"></div>
-      </figure>
-      <figure>
-        <div class="g-image"><img src="images/true-love/salon-03.jpg" alt="「愛的講堂」系列講座現場" loading="lazy"></div>
-      </figure>
-      <figure>
-        <div class="g-image"><img src="images/true-love/salon-04.jpg" alt="「愛的講堂」系列講座現場" loading="lazy"></div>
-      </figure>
-      <figure>
-        <div class="g-image"><img src="images/true-love/salon-05.jpg" alt="「愛的講堂」系列講座現場" loading="lazy"></div>
-      </figure>
-    </div>
-  </div>
-</section>
-
 <!-- ===== DONATE BAND（沿用 app.css）===== -->
 <section class="donate-band">
   <div class="wrap">
@@ -230,4 +170,38 @@ active: true-love
     </div>
   </div>
 </section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // ============ HERO 輪播（淡入淡出 + 圓點 + 自動 5s，無箭頭，滑入暫停）============
+  (function(){
+    var hero = document.getElementById('tlHero');
+    if (!hero) return;
+    var slides = hero.querySelectorAll('.hero-slide');
+    var dotsBox = document.getElementById('tlDots');
+    if (slides.length < 2 || !dotsBox) return;
+    var idx = 0, timer;
+    var dots = Array.prototype.map.call(slides, function(_, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', '第 ' + (i + 1) + ' 張');
+      if (i === 0) b.className = 'on';
+      b.addEventListener('click', function(){ go(i); reset(); });
+      dotsBox.appendChild(b);
+      return b;
+    });
+    function go(n){
+      idx = (n + slides.length) % slides.length;
+      for (var i = 0; i < slides.length; i++){
+        slides[i].classList.toggle('on', i === idx);
+        dots[i].classList.toggle('on', i === idx);
+      }
+    }
+    function reset(){ clearInterval(timer); timer = setInterval(function(){ go(idx + 1); }, 5000); }
+    hero.addEventListener('mouseenter', function(){ clearInterval(timer); });
+    hero.addEventListener('mouseleave', reset);
+    reset();
+  })();
+</script>
 {% endblock %}
