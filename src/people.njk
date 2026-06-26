@@ -1,0 +1,166 @@
+---
+permalink: people.html
+title: "薛伯輝先生｜慈善身影 — 薛伯輝基金會"
+active: people
+---
+{% extends "base.njk" %}
+
+{% block styles %}
+<style>
+  /* ============ HERO CAROUSEL（淡入淡出，比照真愛多多人物頁）============ */
+  .story-hero{position:relative;height:clamp(360px,52vh,560px);background:#0f0f0f;overflow:hidden}
+  .story-hero .hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:0;transition:opacity .8s ease}
+  .story-hero .hero-slide.on{opacity:1}
+  .story-hero::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(0,0,0,.15) 0,transparent 28%,transparent 60%,rgba(0,0,0,.45) 100%);pointer-events:none}
+  .story-hero .hero-dots{position:absolute;bottom:18px;left:0;right:0;z-index:3;display:flex;gap:10px;justify-content:center}
+  .story-hero .hero-dots button{width:9px;height:9px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.45);cursor:pointer;transition:background .2s,transform .2s}
+  .story-hero .hero-dots button:hover{background:rgba(255,255,255,.75)}
+  .story-hero .hero-dots button.on{background:#fff;transform:scale(1.25)}
+
+  /* ============ STORY TITLE ============ */
+  .story-title{padding:var(--sp-8) 0 var(--sp-7);background:#fff;border-bottom:1px solid var(--line-soft)}
+  .story-title .story-h1{
+    font-size:var(--t-display-l);letter-spacing:1.5px;line-height:1.25;
+    color:var(--ink);margin-bottom:0;font-weight:700;max-width:900px;
+  }
+
+  /* ============ STORY BODY（編輯閱讀區）============ */
+  .story-body{padding:var(--sp-8) 0 var(--sp-9);background:#fff}
+  .story-body .body-col{max-width:760px}
+  .story-body p{
+    font-size:var(--t-body-l);line-height:1.95;color:var(--body);
+    margin-bottom:1.4em;letter-spacing:0;
+  }
+  .story-body .sec-h{
+    font-size:var(--t-title);letter-spacing:1px;color:var(--ink);
+    margin:var(--sp-8) 0 var(--sp-5);display:flex;align-items:center;gap:var(--sp-4);font-weight:700;
+  }
+  .story-body .sec-h:first-child{margin-top:0}
+  .story-body .sec-h::before{content:"";width:32px;height:1px;background:var(--brand);flex-shrink:0}
+
+  /* ============ DONATE BAND RWD（chrome 樣式在 app.css，RWD 仍由頁面帶）============ */
+  @media (max-width: 1100px){
+    .story-hero{height:clamp(320px,45vh,460px)}
+    .story-title{padding:var(--sp-7) 0 var(--sp-6)}
+    .story-body{padding:var(--sp-7) 0 var(--sp-9)}
+    .donate-card{grid-template-columns:1fr;gap:var(--sp-7);padding:var(--sp-7);border-radius:4px}
+    .donate-text{padding:0}
+    .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:var(--sp-6)}
+  }
+  @media (max-width: 720px){
+    .wrap{padding:0 var(--sp-4)}
+    .story-hero{height:280px}
+    .story-title{padding:var(--sp-7) 0 var(--sp-6)}
+    .story-title .story-h1{font-size:var(--t-display);letter-spacing:1.5px}
+    .story-body{padding:var(--sp-6) 0 var(--sp-8)}
+    .story-body p{font-size:var(--t-body);line-height:1.9}
+    .story-body .sec-h{margin:var(--sp-6) 0 var(--sp-4);font-size:var(--t-title-s)}
+    .donate-band{padding:var(--sp-7) var(--sp-4)}
+    .donate-card{padding:var(--sp-6) var(--sp-5);gap:var(--sp-6)}
+    .donate-stats{padding-top:var(--sp-5)}
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ===== HERO CAROUSEL（薛伯輝先生・淡入淡出）===== -->
+<section class="story-hero" id="phHero" aria-label="薛伯輝先生影像輪播">
+  <img class="hero-slide on" src="images/people/founder-01.jpg" alt="薛伯輝先生" fetchpriority="high">
+  <img class="hero-slide" src="images/people/founder-02.jpg" alt="薛伯輝先生與夫人陳惠如女士" loading="lazy">
+  <div class="hero-dots" id="phDots" aria-label="輪播控制"></div>
+</section>
+
+<!-- ===== STORY TITLE ===== -->
+<section class="story-title">
+  <div class="wrap">
+    <h1 class="story-h1">薛伯輝先生</h1>
+  </div>
+</section>
+
+<!-- ===== STORY BODY（內文逐字照原始文案）===== -->
+<article class="story-body">
+  <div class="wrap">
+    <div class="body-col">
+      <h2 class="sec-h">早年即嶄露長才，一生縱橫台灣商場</h2>
+      <p>薛伯輝先生，名永華，1929 年生於江蘇省海門縣三陽鎮。後因戰亂，隨長輩遷居上海，學習經商之道。青壯年時期，即展露精明幹練，雄才大略之氣度，普受大眾稱許。</p>
+      <p>1949 年從上海來到台灣，協助父親薛頌留先生創辦了在台灣出版界頗負盛名的「大中國圖書公司」。</p>
+      <p>薛伯輝先生任職六年「新光標準內衣染織整理廠股份有限公司」的總經理，1964 年看準了台灣合成纖維的前景，他創辦了「國華化學工業股份有限公司」，生產尼龍絲，這為台灣第一條尼龍生產線。兩年後，他成立了另一間公司「中華化學纖維股份有限公司」，負責彈性尼龍紗的製造。1970 年代，更將企業擴展至泰國與中國等地。現今台灣化學纖維工業的興盛，薛伯輝先生功不可沒。</p>
+      <p>除化學纖維的發展外，薛伯輝先生與「新光證券」、「美亞鋼管」、「國華碳纖維」、「國際票券金融」、「聯成石油化學」、「中國建築經理」、「世界先進積體電路」……等公司的創立高度相關，縱橫於台灣商場。</p>
+
+      <h2 class="sec-h">紳士企業家</h2>
+      <p>讀者文摘 1975 年專訪中形容，話不多的薛伯輝先生為人誠實、嚴謹、親和幽默、樂觀開朗。平日除了聽音樂及於周末打打高爾夫球，他大部分的時間在家中閱讀，見多識廣、知識淵博，他所有的成就歸咎於他嚴格的自我訓練。他既不吸菸也不碰酒精。稱他為紳士企業家非常合適，舉手投足皆展現翩翩君子風範。他具有中國傳統文人的品德，但不是保守或是過時的那種。</p>
+      <p>薛伯輝先生一生熱心公益，長期支持爸爸創立的「薛氏文教基金會」，幫助清寒子弟。對於家鄉海門的建設極為關注，提供獎助學金，幫助老舊校舍的修復。</p>
+      <p>薛伯輝先生除了是一位極成功的企業家外，在「家庭」裡，更是一位好丈夫、好爸爸。與陳惠如女士於 1949 年共結連理，夫妻兩人鶼鰈情深、夫唱夫隨，共同撫育三個兒女。</p>
+      <p>薛伯輝先生於 1986 年加入「仁愛扶輪社」後，協同夫人參與公益不遺餘力，卻在 2004 年參加國際扶輪社於日本大阪舉行的年度大會時，不幸因故喪生，夫人陳惠如為延續他的精神與遺志，創立了薛伯輝基金會，至今「愛與希望」的慈善版圖持續擴大。</p>
+    </div>
+  </div>
+</article>
+
+<!-- ===== DONATE BAND（沿用 app.css）===== -->
+<section class="donate-band">
+  <div class="wrap">
+    <div class="donate-card">
+      <div class="donate-text">
+        <div class="label">Donate</div>
+        <h2>捐款支持<br>愛與希望的延續</h2>
+        <p>每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
+        <div class="actions">
+          <a class="btn-w" href="donate.html">捐款方式</a>
+          <a class="btn-wo" href="transparency.html">捐款徵信</a>
+        </div>
+      </div>
+      <div class="donate-stats" aria-label="捐款方式摘要">
+        <div class="donate-method">
+          <span class="method-label">Bank Transfer</span>
+          <h3>銀行匯款 / ATM 轉帳</h3>
+          <p>國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Postal Giro</span>
+          <h3>郵局劃撥</h3>
+          <p>帳號 <b>50067771</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Other Ways</span>
+          <h3>信用卡、支票與現場捐款</h3>
+          <p>歡迎透過信用卡授權書、支票或親臨基金會現場捐款，捐款徵信定期公開。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // ============ HERO 輪播（淡入淡出 + 圓點 + 自動 5s，無箭頭，滑入暫停）============
+  (function(){
+    var hero = document.getElementById('phHero');
+    if (!hero) return;
+    var slides = hero.querySelectorAll('.hero-slide');
+    var dotsBox = document.getElementById('phDots');
+    if (slides.length < 2 || !dotsBox) return;
+    var idx = 0, timer;
+    var dots = Array.prototype.map.call(slides, function(_, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', '第 ' + (i + 1) + ' 張');
+      if (i === 0) b.className = 'on';
+      b.addEventListener('click', function(){ go(i); reset(); });
+      dotsBox.appendChild(b);
+      return b;
+    });
+    function go(n){
+      idx = (n + slides.length) % slides.length;
+      for (var i = 0; i < slides.length; i++){
+        slides[i].classList.toggle('on', i === idx);
+        dots[i].classList.toggle('on', i === idx);
+      }
+    }
+    function reset(){ clearInterval(timer); timer = setInterval(function(){ go(idx + 1); }, 5000); }
+    hero.addEventListener('mouseenter', function(){ clearInterval(timer); });
+    hero.addEventListener('mouseleave', reset);
+    reset();
+  })();
+</script>
+{% endblock %}
