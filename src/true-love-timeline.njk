@@ -1,0 +1,176 @@
+---
+permalink: true-love-timeline.html
+title: "系列大事記 — 伯利恆融合教育中心勸募與建築｜真愛多多 — 薛伯輝基金會"
+active: true-love
+---
+{% extends "base.njk" %}
+
+{% block styles %}
+<style>
+  /* ============ SUB-NAV（真愛多多 cluster・跨頁，比照徵信頁）============ */
+  .sub-nav{background:#fff;position:sticky;top:140px;z-index:48;display:flex;justify-content:center;align-items:stretch;padding:var(--sp-3) var(--sp-6);flex-wrap:wrap;border-bottom:1px solid var(--line);font-family:"IBM Plex Serif",sans-serif}
+  .sub-nav .item{padding:var(--sp-3) var(--sp-5);font-size:var(--t-body-s);letter-spacing:2px;color:#666;font-weight:500;position:relative;cursor:pointer;transition:color .18s;background:none;border:0;font-family:inherit;text-decoration:none}
+  .sub-nav .item:hover{color:var(--brand)}
+  .sub-nav .item.todo{color:#BBB;cursor:default}
+  .sub-nav .item.todo:hover{color:#BBB}
+  .sub-nav .item.on{color:var(--brand);font-weight:700}
+  .sub-nav .item.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-1px;width:24px;height:2px;background:var(--brand)}
+
+  /* ============ STORY TITLE（標題區）============ */
+  .story-title{padding:var(--sp-8) 0 var(--sp-7);background:#fff;border-bottom:1px solid var(--line-soft)}
+  .story-title .story-h1{
+    font-size:var(--t-display-l);letter-spacing:1.5px;line-height:1.25;
+    color:var(--ink);margin-bottom:0;font-weight:700;max-width:900px;
+  }
+
+  /* ============ TIMELINE（直式大事記）============ */
+  .tl-wrap{padding:var(--sp-8) 0 var(--sp-9);background:#fff}
+  .timeline{max-width:820px;margin:0 auto;position:relative}
+  .tl-item{position:relative;padding:0 0 var(--sp-8) var(--sp-7);border-left:2px solid var(--line)}
+  .tl-item:last-child{border-left-color:transparent;padding-bottom:0}
+  .tl-item::before{
+    content:"";position:absolute;left:-9px;top:5px;width:16px;height:16px;border-radius:50%;
+    background:#fff;border:3px solid var(--brand);box-sizing:content-box;
+  }
+  .tl-head{display:flex;align-items:baseline;gap:var(--sp-4);margin-bottom:var(--sp-4);flex-wrap:wrap}
+  .tl-head .yr{font-size:var(--t-display);line-height:1;color:var(--brand);font-weight:700;letter-spacing:1px}
+  .tl-head .phase{font-size:var(--t-title-s);color:var(--ink);font-weight:700;letter-spacing:3px}
+  .tl-item p{
+    font-size:var(--t-body-l);line-height:1.95;color:var(--body);
+    margin:0;letter-spacing:0;
+  }
+
+  /* ============ CLOSING（結尾標語 + 相關報導）============ */
+  .tl-closing{padding:var(--sp-8) 0 var(--sp-9);background:var(--brand-tint);text-align:center}
+  .tl-closing .slogan{
+    font-size:var(--t-title);letter-spacing:2px;color:var(--brand-dark);
+    font-weight:700;margin:0 0 var(--sp-6);line-height:1.4;
+  }
+  .tl-closing .report-label{
+    font-size:var(--t-meta);letter-spacing:3px;color:#999;font-weight:700;
+    text-transform:uppercase;margin-bottom:var(--sp-3);
+  }
+  .tl-closing .report{font-size:var(--t-body);color:var(--body);margin:0;letter-spacing:.5px}
+
+  /* ============ RWD（chrome 響應式在 app.css，頁面樣式 RWD 自帶）============ */
+  @media (max-width: 1100px){
+    .sub-nav{padding:var(--sp-3) var(--sp-4);position:static}
+    .sub-nav .item{padding:var(--sp-3) var(--sp-4);letter-spacing:1.5px}
+    .sub-nav .item.on::after{width:20px}
+    .story-title{padding:var(--sp-7) 0 var(--sp-6)}
+    .tl-wrap{padding:var(--sp-7) 0 var(--sp-9)}
+    .donate-card{grid-template-columns:1fr;gap:var(--sp-7);padding:var(--sp-7);border-radius:4px}
+    .donate-text{padding:0}
+    .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:var(--sp-6)}
+  }
+  @media (max-width: 720px){
+    .sub-nav{padding:var(--sp-2) var(--sp-3)}
+    .sub-nav .item{padding:var(--sp-2) var(--sp-3);font-size:var(--t-meta);letter-spacing:1px}
+    .wrap{padding:0 var(--sp-4)}
+    .story-title{padding:var(--sp-7) 0 var(--sp-6)}
+    .story-title .story-h1{font-size:var(--t-display);letter-spacing:1px}
+    .tl-wrap{padding:var(--sp-6) 0 var(--sp-8)}
+    .tl-item{padding-left:var(--sp-6)}
+    .tl-head .yr{font-size:var(--t-title)}
+    .tl-head .phase{font-size:var(--t-body-s);letter-spacing:2px}
+    .tl-item p{font-size:var(--t-body);line-height:1.9}
+    .tl-closing{padding:var(--sp-7) 0 var(--sp-8)}
+    .tl-closing .slogan{font-size:var(--t-title-s)}
+    .donate-band{padding:var(--sp-7) var(--sp-4)}
+    .donate-card{padding:var(--sp-6) var(--sp-5);gap:var(--sp-6)}
+    .donate-stats{padding-top:var(--sp-5)}
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ===== SUB-NAV（真愛多多 4 子頁・跨頁）===== -->
+<nav class="sub-nav" aria-label="真愛多多子頁">
+  <a class="item" href="true-love.html">簡介</a>
+  <a class="item" href="true-love-gan.html">想念甘惠忠神父</a>
+  <a class="item on" href="true-love-timeline.html">系列大事記</a>
+  <a class="item" href="true-love-bethlehem.html">伯利恆中心</a>
+</nav>
+
+<!-- ===== STORY TITLE ===== -->
+<section class="story-title">
+  <div class="wrap">
+    <h1 class="story-h1">伯利恆融合教育中心勸募與建築大事記</h1>
+  </div>
+</section>
+
+<!-- ===== TIMELINE（內文逐字照原始文案）===== -->
+<section class="tl-wrap">
+  <div class="wrap">
+    <ol class="timeline">
+      <li class="tl-item">
+        <div class="tl-head"><span class="yr">2013</span><span class="phase">籌備期</span></div>
+        <p>天主教台南教區林吉男主教拜訪薛昌煥董事長，奠定合作基石；華樂、龍華扶輪社募款餐會相繼起跑。</p>
+      </li>
+      <li class="tl-item">
+        <div class="tl-head"><span class="yr">2014</span><span class="phase">遍地開花</span></div>
+        <p>取得衛福部勸募許可。「真愛多多進校園」前進寶仁國小、德光中學與實踐大學；洪蘭代表基金會帶頭捐贈 1000 萬元，年底台南市長賴清德帶領企業家慨捐 2100 萬元。</p>
+      </li>
+      <li class="tl-item">
+        <div class="tl-head"><span class="yr">2015</span><span class="phase">動工興建</span></div>
+        <p>美國天主教瑪利諾修會跨海捐款 15 萬美金；邱鈞評同學完成徒步環島集愛；7 月 7 日隆重舉行「伯利恆早療暨融合教育中心」開工典禮。</p>
+      </li>
+      <li class="tl-item">
+        <div class="tl-head"><span class="yr">2016</span><span class="phase">上樑大典</span></div>
+        <p>工程順利推進，10 月 17 日舉行「永恆的印記」上樑大典，薛伯輝基金會董事長與董事多次親臨工地勘察工程品質。試辦「愛的小廚房」課程。</p>
+      </li>
+      <li class="tl-item">
+        <div class="tl-head"><span class="yr">2017</span><span class="phase">設備進駐</span></div>
+        <p>和泰大金空調設備抵達工地；林堉璘宏泰教育文化公益基金支持「多感官教室」硬體設備，讓早療資源臻至完美。</p>
+      </li>
+      <li class="tl-item">
+        <div class="tl-head"><span class="yr">2018</span><span class="phase">圓滿移交</span></div>
+        <p>1 月 10 日正式取得建築使用執照；3 月 17 日在行政院賴清德院長見證下，薛伯輝基金會代表正式將大樓捐贈移交予伯利恆文教基金會。12 月 31 日基金會宣告圓滿完成階段性任務。</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===== CLOSING（結尾標語 + 相關報導）===== -->
+<section class="tl-closing">
+  <div class="wrap">
+    <p class="slogan">愛與希望，守護慢飛天使的未來</p>
+    <p class="report-label">相關報導</p>
+    <p class="report">甘惠忠神父生前夢想　賴清德為伯利恆兒童發展中心揭牌</p>
+  </div>
+</section>
+
+<!-- ===== DONATE BAND（沿用 app.css）===== -->
+<section class="donate-band">
+  <div class="wrap">
+    <div class="donate-card">
+      <div class="donate-text">
+        <div class="label">Donate</div>
+        <h2>捐款支持<br>愛與希望的延續</h2>
+        <p>每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
+        <div class="actions">
+          <a class="btn-w" href="donate.html">捐款方式</a>
+          <a class="btn-wo" href="transparency.html">捐款徵信</a>
+        </div>
+      </div>
+      <div class="donate-stats" aria-label="捐款方式摘要">
+        <div class="donate-method">
+          <span class="method-label">Bank Transfer</span>
+          <h3>銀行匯款 / ATM 轉帳</h3>
+          <p>國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Postal Giro</span>
+          <h3>郵局劃撥</h3>
+          <p>帳號 <b>50067771</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Other Ways</span>
+          <h3>信用卡、支票與現場捐款</h3>
+          <p>歡迎透過信用卡授權書、支票或親臨基金會現場捐款，捐款徵信定期公開。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
