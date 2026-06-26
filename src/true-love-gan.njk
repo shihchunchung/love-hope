@@ -1,0 +1,210 @@
+---
+permalink: true-love-gan.html
+title: "想念甘惠忠神父｜真愛多多 — 薛伯輝基金會"
+active: true-love
+---
+{% extends "base.njk" %}
+
+{% block styles %}
+<style>
+  /* ============ SUB-NAV（真愛多多 cluster・跨頁，比照徵信頁）============ */
+  .sub-nav{background:#fff;position:sticky;top:140px;z-index:48;display:flex;justify-content:center;align-items:stretch;padding:var(--sp-3) var(--sp-6);flex-wrap:wrap;border-bottom:1px solid var(--line);font-family:"IBM Plex Serif",sans-serif}
+  .sub-nav .item{padding:var(--sp-3) var(--sp-5);font-size:var(--t-body-s);letter-spacing:2px;color:#666;font-weight:500;position:relative;cursor:pointer;transition:color .18s;background:none;border:0;font-family:inherit;text-decoration:none}
+  .sub-nav .item:hover{color:var(--brand)}
+  .sub-nav .item.todo{color:#BBB;cursor:default}
+  .sub-nav .item.todo:hover{color:#BBB}
+  .sub-nav .item.on{color:var(--brand);font-weight:700}
+  .sub-nav .item.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-1px;width:24px;height:2px;background:var(--brand)}
+
+  /* ============ HERO CAROUSEL（淡入淡出）============ */
+  .story-hero{position:relative;height:clamp(360px,52vh,560px);background:#0f0f0f;overflow:hidden}
+  .story-hero .hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%;opacity:0;transition:opacity .8s ease}
+  .story-hero .hero-slide.on{opacity:1}
+  .story-hero::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(0,0,0,.15) 0,transparent 28%,transparent 60%,rgba(0,0,0,.45) 100%);pointer-events:none}
+  .story-hero .hero-dots{position:absolute;bottom:18px;left:0;right:0;z-index:3;display:flex;gap:10px;justify-content:center}
+  .story-hero .hero-dots button{width:9px;height:9px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.45);cursor:pointer;transition:background .2s,transform .2s}
+  .story-hero .hero-dots button:hover{background:rgba(255,255,255,.75)}
+  .story-hero .hero-dots button.on{background:#fff;transform:scale(1.25)}
+
+  /* ============ STORY TITLE ============ */
+  .story-title{padding:var(--sp-8) 0 var(--sp-7);background:#fff;border-bottom:1px solid var(--line-soft)}
+  .story-title .meta{
+    display:inline-flex;align-items:center;gap:var(--sp-4);flex-wrap:wrap;
+    font-family:"IBM Plex Serif",sans-serif;
+    font-size:var(--t-meta);letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--muted);font-weight:600;margin-bottom:var(--sp-4);
+  }
+  .story-title .meta .loc{color:var(--brand);font-weight:700;letter-spacing:2.5px}
+  .story-title .meta .sep{opacity:.4}
+  .story-title .story-h1{
+    font-size:var(--t-display-l);letter-spacing:1.5px;line-height:1.25;
+    color:var(--ink);margin-bottom:0;font-weight:700;max-width:900px;
+  }
+
+  /* ============ STORY BODY（編輯閱讀區）============ */
+  .story-body{padding:var(--sp-8) 0 var(--sp-9);background:#fff}
+  .story-body .body-col{max-width:760px}
+  .story-body p{
+    font-size:var(--t-body-l);line-height:1.95;color:var(--body);
+    margin-bottom:1.4em;letter-spacing:0;
+  }
+  .story-body .sec-h{
+    font-size:var(--t-title);letter-spacing:1px;color:var(--ink);
+    margin:var(--sp-8) 0 var(--sp-5);display:flex;align-items:center;gap:var(--sp-4);font-weight:700;
+  }
+  .story-body .sec-h::before{content:"";width:32px;height:1px;background:var(--brand);flex-shrink:0}
+
+  /* ============ DONATE BAND RWD（chrome 樣式在 app.css，RWD 仍由頁面帶）============ */
+  @media (max-width: 1100px){
+    .sub-nav{padding:var(--sp-3) var(--sp-4);position:static}
+    .sub-nav .item{padding:var(--sp-3) var(--sp-4);letter-spacing:1.5px}
+    .sub-nav .item.on::after{width:20px}
+    .story-hero{height:clamp(320px,45vh,460px)}
+    .story-title{padding:var(--sp-7) 0 var(--sp-6)}
+    .story-body{padding:var(--sp-7) 0 var(--sp-9)}
+    .donate-card{grid-template-columns:1fr;gap:var(--sp-7);padding:var(--sp-7);border-radius:4px}
+    .donate-text{padding:0}
+    .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:var(--sp-6)}
+  }
+  @media (max-width: 720px){
+    .sub-nav{padding:var(--sp-2) var(--sp-3)}
+    .sub-nav .item{padding:var(--sp-2) var(--sp-3);font-size:var(--t-meta);letter-spacing:1px}
+    .wrap{padding:0 var(--sp-4)}
+    .story-hero{height:280px}
+    .story-title{padding:var(--sp-7) 0 var(--sp-6)}
+    .story-title .story-h1{font-size:var(--t-display);letter-spacing:1.5px}
+    .story-body{padding:var(--sp-6) 0 var(--sp-8)}
+    .story-body p{font-size:var(--t-body);line-height:1.9}
+    .story-body .sec-h{margin:var(--sp-6) 0 var(--sp-4);font-size:var(--t-title-s)}
+    .donate-band{padding:var(--sp-7) var(--sp-4)}
+    .donate-card{padding:var(--sp-6) var(--sp-5);gap:var(--sp-6)}
+    .donate-stats{padding-top:var(--sp-5)}
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ===== SUB-NAV（真愛多多 4 子頁・跨頁）===== -->
+<nav class="sub-nav" aria-label="真愛多多子頁">
+  <a class="item" href="true-love.html">簡介</a>
+  <a class="item on" href="true-love-gan.html">想念甘惠忠神父</a>
+  <span class="item todo">系列大事記</span>
+  <a class="item" href="true-love-bethlehem.html">伯利恆中心</a>
+</nav>
+
+<!-- ===== HERO CAROUSEL（甘神父・淡入淡出）===== -->
+<section class="story-hero" id="tlHero" aria-label="甘惠忠神父影像輪播">
+  <img class="hero-slide on" src="images/true-love-gan/gan-01.jpg" alt="甘惠忠神父" fetchpriority="high">
+  <img class="hero-slide" src="images/true-love-gan/gan-02.jpg" alt="甘惠忠神父與孩子" loading="lazy">
+  <img class="hero-slide" src="images/true-love-gan/gan-03.jpg" alt="甘惠忠神父與孩子" loading="lazy">
+  <img class="hero-slide" src="images/true-love-gan/gan-04.jpg" alt="甘惠忠神父與家庭" loading="lazy">
+  <img class="hero-slide" src="images/true-love-gan/gan-05.jpg" alt="甘惠忠神父" loading="lazy">
+  <img class="hero-slide" src="images/true-love-gan/gan-06.jpg" alt="甘惠忠神父" loading="lazy">
+  <img class="hero-slide" src="images/true-love-gan/gan-07.jpg" alt="甘惠忠神父" loading="lazy">
+  <img class="hero-slide" src="images/true-love-gan/gan-08.jpg" alt="甘惠忠神父" loading="lazy">
+  <div class="hero-dots" id="tlDots" aria-label="輪播控制"></div>
+</section>
+
+<!-- ===== STORY TITLE ===== -->
+<section class="story-title">
+  <div class="wrap">
+    <div class="meta">
+      <span class="loc">真愛多多系列</span>
+    </div>
+    <h1 class="story-h1">想念甘惠忠神父</h1>
+  </div>
+</section>
+
+<!-- ===== STORY BODY（內文逐字照原始文案）===== -->
+<article class="story-body">
+  <div class="wrap">
+    <div class="body-col">
+      <h2 class="sec-h">關於慢飛天使，他是永遠的父親</h2>
+      <p>1960 年代初期，台灣剛擺脫戰爭，休養生息。美籍的甘惠忠神父於此時奉派來台，懷著服務人群的天主大愛，走入苗栗泰安山區，希望能幫助窮人，卻看到許多家庭因家中的遲緩兒，背負著不能言說的傷痛。</p>
+      <p>對此，甘神父並不陌生；神父的二妹在出生後確診為唐氏症，當時美國特殊教育也才在發展。妹妹六歲時，想到公立小學申請就讀啟智班，前頭卻有三百多位遲緩兒等待入學。妹妹的狀況、媽媽的心痛，重新在台灣的許多家庭裡上演，特殊孩子的父母往往因自責和絕望而自絕於外界，甚至打算放棄孩子的生命。</p>
+      <p>當時，甘神父告訴家長們：學習遲緩的孩子，需要接受特殊的教育，將來才能自理生活，照顧自己，才不會成為家庭的負擔。</p>
+      <p>但神父的努力，在當時並沒有得到迴響。他曾請社工到台南所有婦產科醫院，介紹瑞復益智中心如何幫助心智障礙兒，「卻沒有任何一個孩子因此來到這裡，一個都沒有。」一直到成大小兒科朱曉慧醫師上門求助，才開始出現轉機。朱曉慧一年診斷出至少三百名遲緩兒，除了醫療協助，及早教育才能真正幫助這些慢飛天使。家長總是比較願意聽取醫師的專業建議，台灣的早期療育就這樣慢慢發展起來。</p>
+
+      <h2 class="sec-h">登記立案台灣第一所特教日托中心與成立第一個啟智協會</h2>
+      <p>甘惠忠神父在 1974 年時返美進修特殊教育，隔年取得特殊教育碩士學位後，立刻返台。1976 年神父接任台南市瑞復益智中心主任，也因有熱心人士的幫忙，讓瑞復登記立案成為台灣最早的心智障礙兒日間托育機構，那時政府的法令也因有瑞復的開始才漸漸完備。至此神父開啟一生奉獻特殊教育的志業，並於 1983 年成立第一個啟智協會—中華民國啟智協會，擔任第一任理事長。</p>
+      <p>直至 1994 年，甘惠忠神父一心為台灣的特殊兒童全心付出，在他的世界裡，台灣就是他的家，台灣的孩子就是他的孩子，任何一個孩子在他眼裡都是一樣的。</p>
+
+      <h2 class="sec-h">甘惠忠神父的融合教育</h2>
+      <p>1997 年 3 月，甘惠忠神父再創辦「財團法人天主教伯利恆文教基金會」，除了僅收發展遲緩及身心障礙幼兒的「溪北區嬰幼兒發展中心」外，他所經營的“慈母幼兒園”更進行一般幼兒與特殊幼兒的融合教育，積極把握遲緩兒三歲前的黃金時期進行“早期療育”，並推動一般幼兒與遲緩兒共同學習、共同遊戲，讓一般幼兒培養同理心，也讓遲緩兒有更多學習模仿的機會。</p>
+      <p>曾有位三歲女孩來到伯利恆，一開始眼神呆滯，連頭都不願意抬起來，接受早療幾年後，竟能進入小學普通班。當甘惠忠神父去學校探望時，小女孩倒杯水，用小小的雙手捧過來，輕輕說了聲謝謝。</p>
+
+      <h2 class="sec-h">一生奉獻台灣</h2>
+      <p>在獲得 2012 年醫療奉獻獎的肯定之前，甘惠忠神父已將生命中的五十年，全數奉獻給天主與台灣早療教育。2018 年在參加 3 月 17 日的伯利恆早療暨融合教育中心落成典禮後，再赴美養病，並於美國時間 2020 年 4 月 16 日清晨 1 點，在紐約州離世。</p>
+      <p>半個世紀以來，他會說國、台、客甚至泰雅族語，在這個島國家鄉，也有了一大群孩子、孫子；天主大愛，讓他一路崎嶇卻從不放棄照亮台灣早期療育教育的荒野。那個出生在美國紐約，1963 年那個從舊金山渡海至太平洋另一端的青年神父，最愛黏著伯利恆孩子聊天的他，心心念念要給孩子們更多教育資源，「讓他們能夠抬起頭來，看看這美麗的世界。」為此心願，神父努力了一輩子，留下一個像山一樣的身影。</p>
+    </div>
+  </div>
+</article>
+
+<!-- ===== DONATE BAND（沿用 app.css）===== -->
+<section class="donate-band">
+  <div class="wrap">
+    <div class="donate-card">
+      <div class="donate-text">
+        <div class="label">Donate</div>
+        <h2>捐款支持<br>愛與希望的延續</h2>
+        <p>每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
+        <div class="actions">
+          <a class="btn-w" href="donate.html">捐款方式</a>
+          <a class="btn-wo" href="transparency.html">捐款徵信</a>
+        </div>
+      </div>
+      <div class="donate-stats" aria-label="捐款方式摘要">
+        <div class="donate-method">
+          <span class="method-label">Bank Transfer</span>
+          <h3>銀行匯款 / ATM 轉帳</h3>
+          <p>國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Postal Giro</span>
+          <h3>郵局劃撥</h3>
+          <p>帳號 <b>50067771</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Other Ways</span>
+          <h3>信用卡、支票與現場捐款</h3>
+          <p>歡迎透過信用卡授權書、支票或親臨基金會現場捐款，捐款徵信定期公開。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // ============ HERO 輪播（淡入淡出 + 圓點 + 自動 5s，無箭頭，滑入暫停）============
+  (function(){
+    var hero = document.getElementById('tlHero');
+    if (!hero) return;
+    var slides = hero.querySelectorAll('.hero-slide');
+    var dotsBox = document.getElementById('tlDots');
+    if (slides.length < 2 || !dotsBox) return;
+    var idx = 0, timer;
+    var dots = Array.prototype.map.call(slides, function(_, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', '第 ' + (i + 1) + ' 張');
+      if (i === 0) b.className = 'on';
+      b.addEventListener('click', function(){ go(i); reset(); });
+      dotsBox.appendChild(b);
+      return b;
+    });
+    function go(n){
+      idx = (n + slides.length) % slides.length;
+      for (var i = 0; i < slides.length; i++){
+        slides[i].classList.toggle('on', i === idx);
+        dots[i].classList.toggle('on', i === idx);
+      }
+    }
+    function reset(){ clearInterval(timer); timer = setInterval(function(){ go(idx + 1); }, 5000); }
+    hero.addEventListener('mouseenter', function(){ clearInterval(timer); });
+    hero.addEventListener('mouseleave', reset);
+    reset();
+  })();
+</script>
+{% endblock %}

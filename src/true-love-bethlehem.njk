@@ -1,0 +1,232 @@
+---
+permalink: true-love-bethlehem.html
+title: "伯利恆早療暨融合教育中心｜真愛多多 — 薛伯輝基金會"
+active: true-love
+---
+{% extends "base.njk" %}
+
+{% block styles %}
+<style>
+  /* ============ SUB-NAV（真愛多多 cluster・跨頁，比照徵信頁）============ */
+  .sub-nav{background:#fff;position:sticky;top:140px;z-index:48;display:flex;justify-content:center;align-items:stretch;padding:var(--sp-3) var(--sp-6);flex-wrap:wrap;border-bottom:1px solid var(--line);font-family:"IBM Plex Serif",sans-serif}
+  .sub-nav .item{padding:var(--sp-3) var(--sp-5);font-size:var(--t-body-s);letter-spacing:2px;color:#666;font-weight:500;position:relative;cursor:pointer;transition:color .18s;background:none;border:0;font-family:inherit;text-decoration:none}
+  .sub-nav .item:hover{color:var(--brand)}
+  .sub-nav .item.todo{color:#BBB;cursor:default}
+  .sub-nav .item.todo:hover{color:#BBB}
+  .sub-nav .item.on{color:var(--brand);font-weight:700}
+  .sub-nav .item.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-1px;width:24px;height:2px;background:var(--brand)}
+
+  /* ============ HERO CAROUSEL（淡入淡出）============ */
+  .story-hero{position:relative;height:clamp(360px,52vh,560px);background:#0f0f0f;overflow:hidden}
+  .story-hero .hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;opacity:0;transition:opacity .8s ease}
+  .story-hero .hero-slide.on{opacity:1}
+  .story-hero::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(0,0,0,.15) 0,transparent 28%,transparent 60%,rgba(0,0,0,.45) 100%);pointer-events:none}
+  .story-hero .hero-dots{position:absolute;bottom:18px;left:0;right:0;z-index:3;display:flex;gap:10px;justify-content:center}
+  .story-hero .hero-dots button{width:9px;height:9px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.45);cursor:pointer;transition:background .2s,transform .2s}
+  .story-hero .hero-dots button:hover{background:rgba(255,255,255,.75)}
+  .story-hero .hero-dots button.on{background:#fff;transform:scale(1.25)}
+
+  /* ============ STORY TITLE ============ */
+  .story-title{padding:var(--sp-8) 0 var(--sp-7);background:#fff;border-bottom:1px solid var(--line-soft)}
+  .story-title .meta{
+    display:inline-flex;align-items:center;gap:var(--sp-4);flex-wrap:wrap;
+    font-family:"IBM Plex Serif",sans-serif;
+    font-size:var(--t-meta);letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--muted);font-weight:600;margin-bottom:var(--sp-4);
+  }
+  .story-title .meta .loc{color:var(--brand);font-weight:700;letter-spacing:2.5px}
+  .story-title .meta .sep{opacity:.4}
+  .story-title .story-h1{
+    font-size:var(--t-display-l);letter-spacing:1.5px;line-height:1.25;
+    color:var(--ink);margin-bottom:0;font-weight:700;max-width:900px;
+  }
+
+  /* ============ STORY BODY（編輯閱讀區）============ */
+  .story-body{padding:var(--sp-8) 0 var(--sp-9);background:#fff}
+  .story-body .body-col{max-width:760px}
+  .story-body p{
+    font-size:var(--t-body-l);line-height:1.95;color:var(--body);
+    margin-bottom:1.4em;letter-spacing:0;
+  }
+  .story-body .sec-h{
+    font-size:var(--t-title);letter-spacing:1px;color:var(--ink);
+    margin:var(--sp-8) 0 var(--sp-5);display:flex;align-items:center;gap:var(--sp-4);font-weight:700;
+  }
+  .story-body .sec-h::before{content:"";width:32px;height:1px;background:var(--brand);flex-shrink:0}
+  /* 建築概要：key-value 規格表 */
+  .story-body dl.spec-list{
+    margin:0 0 1.4em;display:grid;grid-template-columns:max-content 1fr;
+    gap:0;border-top:1px solid var(--line);
+  }
+  .story-body dl.spec-list dt{
+    color:var(--brand);font-weight:700;letter-spacing:1px;white-space:nowrap;
+    font-size:var(--t-body);padding:var(--sp-3) var(--sp-6) var(--sp-3) 0;
+    border-bottom:1px solid var(--line);
+  }
+  .story-body dl.spec-list dd{
+    color:var(--ink);margin:0;font-size:var(--t-body);line-height:1.7;
+    padding:var(--sp-3) 0;border-bottom:1px solid var(--line);
+  }
+
+  /* ============ DONATE BAND RWD（chrome 樣式在 app.css，RWD 仍由頁面帶）============ */
+  @media (max-width: 1100px){
+    .sub-nav{padding:var(--sp-3) var(--sp-4);position:static}
+    .sub-nav .item{padding:var(--sp-3) var(--sp-4);letter-spacing:1.5px}
+    .sub-nav .item.on::after{width:20px}
+    .story-hero{height:clamp(320px,45vh,460px)}
+    .story-title{padding:var(--sp-7) 0 var(--sp-6)}
+    .story-body{padding:var(--sp-7) 0 var(--sp-9)}
+    .donate-card{grid-template-columns:1fr;gap:var(--sp-7);padding:var(--sp-7);border-radius:4px}
+    .donate-text{padding:0}
+    .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:var(--sp-6)}
+  }
+  @media (max-width: 720px){
+    .sub-nav{padding:var(--sp-2) var(--sp-3)}
+    .sub-nav .item{padding:var(--sp-2) var(--sp-3);font-size:var(--t-meta);letter-spacing:1px}
+    .wrap{padding:0 var(--sp-4)}
+    .story-hero{height:280px}
+    .story-title{padding:var(--sp-7) 0 var(--sp-6)}
+    .story-title .story-h1{font-size:var(--t-display);letter-spacing:1.5px}
+    .story-body{padding:var(--sp-6) 0 var(--sp-8)}
+    .story-body p{font-size:var(--t-body);line-height:1.9}
+    .story-body .sec-h{margin:var(--sp-6) 0 var(--sp-4);font-size:var(--t-title-s)}
+    .story-body dl.spec-list{grid-template-columns:1fr;gap:0}
+    .story-body dl.spec-list dt{border-bottom:0;padding-bottom:0;padding-top:var(--sp-4)}
+    .story-body dl.spec-list dd{padding-top:2px}
+    .donate-band{padding:var(--sp-7) var(--sp-4)}
+    .donate-card{padding:var(--sp-6) var(--sp-5);gap:var(--sp-6)}
+    .donate-stats{padding-top:var(--sp-5)}
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ===== SUB-NAV（真愛多多 4 子頁・跨頁）===== -->
+<nav class="sub-nav" aria-label="真愛多多子頁">
+  <a class="item" href="true-love.html">簡介</a>
+  <a class="item" href="true-love-gan.html">想念甘惠忠神父</a>
+  <span class="item todo">系列大事記</span>
+  <a class="item on" href="true-love-bethlehem.html">伯利恆中心</a>
+</nav>
+
+<!-- ===== HERO CAROUSEL（伯利恆中心・淡入淡出）===== -->
+<section class="story-hero" id="tlHero" aria-label="伯利恆早療暨融合教育中心影像輪播">
+  <img class="hero-slide on" src="images/true-love-bethlehem/bethlehem-01.jpg" alt="伯利恆早療暨融合教育中心外觀" fetchpriority="high">
+  <img class="hero-slide" src="images/true-love-bethlehem/bethlehem-02.jpg" alt="伯利恆早療暨融合教育中心入口" loading="lazy">
+  <img class="hero-slide" src="images/true-love-bethlehem/bethlehem-03.jpg" alt="愛的圖書館" loading="lazy">
+  <img class="hero-slide" src="images/true-love-bethlehem/bethlehem-04.jpg" alt="中心空間" loading="lazy">
+  <img class="hero-slide" src="images/true-love-bethlehem/bethlehem-05.jpg" alt="中心活動" loading="lazy">
+  <div class="hero-dots" id="tlDots" aria-label="輪播控制"></div>
+</section>
+
+<!-- ===== STORY TITLE ===== -->
+<section class="story-title">
+  <div class="wrap">
+    <div class="meta">
+      <span class="loc">台南學甲</span>
+      <span class="sep">·</span>
+      <span>真愛多多系列</span>
+    </div>
+    <h1 class="story-h1">伯利恆早療暨融合教育中心</h1>
+  </div>
+</section>
+
+<!-- ===== STORY BODY（內文逐字照原始文案）===== -->
+<article class="story-body">
+  <div class="wrap">
+    <div class="body-col">
+      <h2 class="sec-h">心願與使命的交匯—伯利恆早療暨融合教育中心</h2>
+      <p>0 歲到 3 歲的特殊幼兒在 1 年間的學習，若在 3 歲之後，需要花 10 年的時間才能完成，0 歲至 3 歲因此被稱為早療的黃金時期。</p>
+      <p>神父心中最期盼的是在台南市學甲區華宗路上慈母幼兒園的後方，興建「伯利恆早療暨融合教育中心」。</p>
+      <p>未來，「伯利恆早療暨融合教育中心」滿足了時段療育、專業教室(保健室、職能治療室、物理治療室、語言治療室、多感官教室) 日間托育…… 等需要，解決早療教室不足的問題外，更期盼藉著融合中心的興建，推動南台灣正確「融合教育」的觀念，並重視師資的培訓，成為政府與民間的橋樑。</p>
+
+      <h2 class="sec-h">「伯利恆早療暨融合教育中心」建築概要</h2>
+      <dl class="spec-list">
+        <dt>建築設計</dt><dd>龔書章(交大) &amp; 九典聯合建築師事務所</dd>
+        <dt>室內設計</dt><dd>龍采設計＆龔書章(交大)</dd>
+        <dt>燈光設計</dt><dd>月河燈光設計</dd>
+        <dt>興建地點</dt><dd>台南市學甲區中學路</dd>
+        <dt>土地所有人</dt><dd>財團法人天主教會台南教區</dd>
+        <dt>基地面積</dt><dd>1203㎡</dd>
+        <dt>建築層</dt><dd>地上四層</dd>
+        <dt>樓地板面積</dt><dd>2400㎡</dd>
+      </dl>
+
+      <h2 class="sec-h">愛的圖書館，成就愛的家庭教育！</h2>
+      <p>「伯利恆早療暨融合教育中心」除了專業的早期療育教室、融合教室外，還有一個「愛的圖書館」！</p>
+      <p>這不只是一個借書還書的圖書館！</p>
+      <p>分布於 2、3 樓；275 平方公尺的空間中，我們將由「生活」出發，透過小廚房活動課程，進行孩童五感教育，讓孩子透過顏色、氣味、手感…等刺激學習。並邀請專家，每周提供家長個別諮詢，解決家庭、教養問題。</p>
+      <p>「愛的圖書館」也將結合社區、貼近社區，成為社區的關懷據點。用心的推動家庭活動，舉辦各類親職講座、融合教育講座，成立家長及老師交流與互動平台，解決家庭教育問題。成為家長與孩子的後盾。</p>
+      <p>這是一個陪伴孩子與家長共同成長的空間！</p>
+    </div>
+  </div>
+</article>
+
+<!-- ===== DONATE BAND（沿用 app.css）===== -->
+<section class="donate-band">
+  <div class="wrap">
+    <div class="donate-card">
+      <div class="donate-text">
+        <div class="label">Donate</div>
+        <h2>捐款支持<br>愛與希望的延續</h2>
+        <p>每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
+        <div class="actions">
+          <a class="btn-w" href="donate.html">捐款方式</a>
+          <a class="btn-wo" href="transparency.html">捐款徵信</a>
+        </div>
+      </div>
+      <div class="donate-stats" aria-label="捐款方式摘要">
+        <div class="donate-method">
+          <span class="method-label">Bank Transfer</span>
+          <h3>銀行匯款 / ATM 轉帳</h3>
+          <p>國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Postal Giro</span>
+          <h3>郵局劃撥</h3>
+          <p>帳號 <b>50067771</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Other Ways</span>
+          <h3>信用卡、支票與現場捐款</h3>
+          <p>歡迎透過信用卡授權書、支票或親臨基金會現場捐款，捐款徵信定期公開。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // ============ HERO 輪播（淡入淡出 + 圓點 + 自動 5s，無箭頭，滑入暫停）============
+  (function(){
+    var hero = document.getElementById('tlHero');
+    if (!hero) return;
+    var slides = hero.querySelectorAll('.hero-slide');
+    var dotsBox = document.getElementById('tlDots');
+    if (slides.length < 2 || !dotsBox) return;
+    var idx = 0, timer;
+    var dots = Array.prototype.map.call(slides, function(_, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', '第 ' + (i + 1) + ' 張');
+      if (i === 0) b.className = 'on';
+      b.addEventListener('click', function(){ go(i); reset(); });
+      dotsBox.appendChild(b);
+      return b;
+    });
+    function go(n){
+      idx = (n + slides.length) % slides.length;
+      for (var i = 0; i < slides.length; i++){
+        slides[i].classList.toggle('on', i === idx);
+        dots[i].classList.toggle('on', i === idx);
+      }
+    }
+    function reset(){ clearInterval(timer); timer = setInterval(function(){ go(idx + 1); }, 5000); }
+    hero.addEventListener('mouseenter', function(){ clearInterval(timer); });
+    hero.addEventListener('mouseleave', reset);
+    reset();
+  })();
+</script>
+{% endblock %}
