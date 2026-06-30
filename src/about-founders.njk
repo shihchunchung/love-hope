@@ -1,0 +1,248 @@
+---
+permalink: about-founders.html
+title: "創辦人與董事長｜關於我們 — 薛伯輝基金會"
+active: about
+---
+{% extends "base.njk" %}
+
+{% block styles %}
+<style>
+  /* ============ SUB-NAV（關於我們 cluster・跨頁，比照真愛多多）============ */
+  .sub-nav{background:#fff;position:sticky;top:140px;z-index:48;display:flex;justify-content:center;align-items:stretch;padding:var(--sp-3) var(--sp-6);flex-wrap:wrap;border-bottom:1px solid var(--line);font-family:"IBM Plex Serif",sans-serif}
+  .sub-nav .item{padding:var(--sp-3) var(--sp-5);font-size:var(--t-body-s);letter-spacing:2px;color:#666;font-weight:500;position:relative;cursor:pointer;transition:color .18s;background:none;border:0;font-family:inherit;text-decoration:none}
+  .sub-nav .item:hover{color:var(--brand)}
+  .sub-nav .item.todo{color:#BBB;cursor:default}
+  .sub-nav .item.todo:hover{color:#BBB}
+  .sub-nav .item.on{color:var(--brand);font-weight:700}
+  .sub-nav .item.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-1px;width:24px;height:2px;background:var(--brand)}
+
+  /* ============ HERO（單張・薛氏家庭）============ */
+  .story-hero{position:relative;height:clamp(360px,52vh,560px);background:#0f0f0f;overflow:hidden}
+  .story-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%}
+  .story-hero::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(0,0,0,.15) 0,transparent 30%,transparent 60%,rgba(0,0,0,.5) 100%);pointer-events:none}
+
+  /* ============ STORY TITLE ============ */
+  .story-title{padding:var(--sp-8) 0 var(--sp-7);background:#fff;border-bottom:1px solid var(--line-soft)}
+  .story-title .story-h1{
+    font-size:var(--t-display-l);letter-spacing:1.5px;line-height:1.25;
+    color:var(--ink);margin-bottom:0;font-weight:700;max-width:900px;
+  }
+
+  /* ============ PEOPLE（創辦人 / 董事長 人物區塊）============ */
+  .people{background:#fff;padding:var(--sp-8) 0 var(--sp-9)}
+  .person{display:grid;grid-template-columns:minmax(0,360px) 1fr;gap:clamp(var(--sp-6),5vw,var(--sp-8));align-items:start;padding:var(--sp-8) 0}
+  .person + .person{border-top:1px solid var(--line-soft)}
+  .person.rev{grid-template-columns:1fr minmax(0,360px)}
+  .person.rev .ph{order:2}
+  .person .ph{margin:0}
+  .person .ph img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;border-radius:4px}
+  .person .ph figcaption{margin-top:var(--sp-3);font-size:var(--t-meta);color:#999;letter-spacing:1.5px;text-align:center}
+
+  .person .who{margin-bottom:var(--sp-6)}
+  .person .who .role{display:block;font-family:"IBM Plex Serif",serif;color:var(--brand);letter-spacing:4px;font-size:var(--t-body-s);margin-bottom:var(--sp-2)}
+  .person .who .name{font-size:var(--t-display);letter-spacing:3px;color:var(--ink);font-weight:700;line-height:1.2}
+
+  .bio-row{display:grid;grid-template-columns:max-content 1fr;gap:var(--sp-5);padding:var(--sp-4) 0;border-bottom:1px dashed var(--line)}
+  .bio-row .k{font-weight:700;color:var(--ink);font-size:var(--t-body);letter-spacing:3px;white-space:nowrap;font-family:"IBM Plex Serif",serif}
+  .bio-row .v{color:var(--body);font-size:var(--t-body);line-height:1.85}
+  .bio-row .v p{margin:0 0 .7em}
+  .bio-row .v p:last-child{margin-bottom:0}
+
+  .bio-sub{font-size:var(--t-title-s);color:var(--ink);font-weight:700;letter-spacing:1px;margin:var(--sp-6) 0 var(--sp-4);display:flex;align-items:center;gap:var(--sp-3)}
+  .bio-sub::before{content:"";width:24px;height:1px;background:var(--brand);flex-shrink:0}
+  .person .prose p{font-size:var(--t-body-l);line-height:1.95;color:var(--body);margin-bottom:1.3em}
+  .person .prose p:last-child{margin-bottom:0}
+
+  /* ============ 董事長的話（引言區）============ */
+  .creed{background:var(--brand-tint);padding:var(--sp-9) 0}
+  .creed .creed-col{max-width:780px}
+  .creed .creed-h{font-size:var(--t-title);letter-spacing:1px;color:var(--brand-dark);font-weight:700;margin-bottom:var(--sp-6);display:flex;align-items:center;gap:var(--sp-4)}
+  .creed .creed-h::before{content:"";width:32px;height:1px;background:var(--brand)}
+  .creed .creed-lead{font-size:var(--t-title);color:var(--brand);font-weight:700;letter-spacing:1px;margin-bottom:var(--sp-5);font-family:"IBM Plex Serif",serif}
+  .creed .creed-body p{font-size:var(--t-body-l);line-height:1.9;color:var(--ink);margin:0 0 .55em;font-family:"IBM Plex Serif",serif}
+  .creed .creed-body p:last-child{margin-bottom:0}
+
+  /* ============ RWD ============ */
+  @media (max-width: 1100px){
+    .sub-nav{padding:var(--sp-3) var(--sp-4);position:static}
+    .sub-nav .item{padding:var(--sp-3) var(--sp-4);letter-spacing:1.5px}
+    .sub-nav .item.on::after{width:20px}
+    .story-hero{height:clamp(320px,45vh,460px)}
+    .story-title{padding:var(--sp-7) 0 var(--sp-6)}
+    .people{padding:var(--sp-7) 0 var(--sp-9)}
+    .donate-card{grid-template-columns:1fr;gap:var(--sp-7);padding:var(--sp-7);border-radius:4px}
+    .donate-text{padding:0}
+    .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:var(--sp-6)}
+  }
+  @media (max-width: 720px){
+    .sub-nav{padding:var(--sp-2) var(--sp-3)}
+    .sub-nav .item{padding:var(--sp-2) var(--sp-3);font-size:var(--t-meta);letter-spacing:1px}
+    .wrap{padding:0 var(--sp-4)}
+    .story-hero{height:260px}
+    .story-title{padding:var(--sp-7) 0 var(--sp-6)}
+    .story-title .story-h1{font-size:var(--t-display);letter-spacing:1.5px}
+    .people{padding:var(--sp-6) 0 var(--sp-8)}
+    /* 手機：照片置頂、單欄 */
+    .person,.person.rev{grid-template-columns:1fr;gap:var(--sp-6)}
+    .person.rev .ph{order:0}
+    .person .ph img{aspect-ratio:3/2;max-height:60vh}
+    .person .who .name{font-size:var(--t-title)}
+    .bio-row{grid-template-columns:1fr;gap:var(--sp-2);padding:var(--sp-3) 0}
+    .person .prose p{font-size:var(--t-body);line-height:1.9}
+    .creed{padding:var(--sp-7) 0}
+    .creed .creed-body p{font-size:var(--t-body);line-height:1.85}
+    .donate-band{padding:var(--sp-7) var(--sp-4)}
+    .donate-card{padding:var(--sp-6) var(--sp-5);gap:var(--sp-6)}
+    .donate-stats{padding-top:var(--sp-5)}
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ===== SUB-NAV（關於我們 3 子頁・跨頁；董事會成員待建）===== -->
+<nav class="sub-nav" aria-label="關於我們子頁">
+  <a class="item" href="about.html">簡介</a>
+  <a class="item on" href="about-founders.html">創辦人與董事長</a>
+  <span class="item todo" aria-disabled="true">董事會成員</span>
+</nav>
+
+<!-- ===== HERO（薛氏家庭）===== -->
+<section class="story-hero" aria-label="薛氏家庭">
+  <img src="images/about/family.jpg" alt="薛氏家庭合影" fetchpriority="high">
+</section>
+
+<!-- ===== STORY TITLE ===== -->
+<section class="story-title">
+  <div class="wrap">
+    <h1 class="story-h1">創辦人與董事長</h1>
+  </div>
+</section>
+
+<!-- ===== PEOPLE（內文逐字照原始文案）===== -->
+<section class="people">
+  <div class="wrap">
+
+    <!-- 創辦人 陳惠如 -->
+    <article class="person">
+      <figure class="ph">
+        <img src="images/about/founder.jpg" alt="創辦人陳惠如女士與孩子們" style="object-position:center;">
+        <figcaption>創辦人 陳惠如女士</figcaption>
+      </figure>
+      <div class="txt">
+        <header class="who">
+          <span class="role">創辦人</span>
+          <span class="name">陳惠如</span>
+        </header>
+        <div class="bio-row">
+          <span class="k">學歷</span>
+          <div class="v"><p>上海光華大學商學院</p></div>
+        </div>
+        <div class="bio-row">
+          <span class="k">經歷</span>
+          <div class="v"><p>中華化學纖維股份有限公司 董事長</p></div>
+        </div>
+        <h2 class="bio-sub">對基金會的期許</h2>
+        <div class="prose">
+          <p>1949 年 1 月 9 日陳惠如女士與薛伯輝先生在上海結為連理，自此鶼鰈情深、患難與共、夫唱婦隨、同創基業。</p>
+          <p>1986 年，薛伯輝先生加入臺北仁愛扶輪社，熱心社務，參與公益活動不遺餘力，每有扶輪公益活動，夫婦永遠是加入行動的第一人。對於家鄉海門的建設更是投入許多精力，提供孩子們獎助學金，幫助老舊校舍的修復。</p>
+          <p>2004 年，薛伯輝先生因意外而離開了摯親、摯愛，陳惠如女士為紀念丈夫，延續這份愛，讓愛遍及更多有需要的人，將「薛氏文教基金會」更名為「財團法人薛伯輝基金會」。</p>
+          <p>期許基金會送愛到偏鄉，讓年輕的下一代都能夠有平等接受教育的機會，發揮個人所長。高齡 80 幾歲的陳惠如女士，堅持每年至少兩次到基金會支持的特教中心與三地國小關心孩子們的狀況，與孩子們說說話。孩子臉上綻放自信光采是基金會持續向前的動力。</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 董事長 薛昌煥 -->
+    <article class="person rev">
+      <figure class="ph">
+        <img src="images/about/chair.jpg" alt="董事長薛昌煥先生" style="object-position:center 20%;">
+        <figcaption>董事長 薛昌煥先生</figcaption>
+      </figure>
+      <div class="txt">
+        <header class="who">
+          <span class="role">董事長</span>
+          <span class="name">薛昌煥</span>
+        </header>
+        <div class="bio-row">
+          <span class="k">學歷</span>
+          <div class="v">
+            <p>美國猶他州州立大學會計系碩士</p>
+            <p>中興大學法商學院合作系學士</p>
+          </div>
+        </div>
+        <div class="bio-row">
+          <span class="k">經歷</span>
+          <div class="v">
+            <p>1976 年,在美國完成碩士學位後,開始發展個人的事業,主要事業包含國際貿易、房地產開發、銀行金融、科技風險投資等。</p>
+            <p>除了事業的盡力之外,他更積極致力於公益志業。</p>
+            <p>至今持續一個習慣,那就是登高山,每次到高山上他總喜歡做一件事,那就是讓許多朋友為他的登山捐款,去幫助需要的人。</p>
+          </div>
+        </div>
+        <h2 class="bio-sub">對基金會的期許</h2>
+        <div class="prose">
+          <p>父親薛伯輝先生在世時,早已積極投入公益慈善事業。逝世前的三年,與家人不遺餘力的回饋家鄉江蘇省海門市,提供清寒子弟獎學金。後更將版圖擴大,於寧夏省改建校舍、學校圖書室的整建...等。</p>
+          <p>為追隨父親薛伯輝先生,董事長薛昌煥參與王建煊先生在大陸的「撿回珍珠計畫」,讓貧窮的孩子從山邊海邊走到城市就學,成就了這些孩子遠大的前程,這項計畫仍在持續中。</p>
+          <p>為紀念父親薛伯輝先生,接下母親為紀念父親的「薛伯輝基金會」董事長一職,延續這份希望、這份愛。在教育上,期待基金會能夠幫助弱勢中的弱勢教育並發展完善;並積極鼓勵基金會重視文創的發展,保留與協助更多美好的台灣文化。這份「愛與希望」在董事長薛昌煥積極的帶領下,期待從台灣出發,未來可以服務於海峽兩岸。</p>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===== 董事長的話 ===== -->
+<section class="creed">
+  <div class="wrap">
+    <div class="creed-col">
+      <h2 class="creed-h">董事長的話</h2>
+      <p class="creed-lead">我相信，我能夠。</p>
+      <div class="creed-body">
+        <p>父親出生在大陸，成長在大陸，事業在台灣；</p>
+        <p>我出生在台灣，成長在台灣，讀書也在台灣，事業在美國。</p>
+        <p>台灣 給了我們兩代人最重要的養分，我對她充滿著感恩，並有非常的期待！</p>
+        <p>期待她 是一個充滿 愛和希望 的地方 ！</p>
+        <p>希望弱勢獲得照顧，給他們一個 公平競爭的機會；甚至，僅僅是 生而為人的尊嚴。</p>
+        <p>也希望貧窮不會打擊孩子們的信心，知道未來仍充滿著機會與希望。</p>
+        <p>以先父薛伯輝為名的基金會，就是擔任這樣的角色；或者說這是天主的派遣，給我們一個神聖而光榮的任命！</p>
+        <p>當我走訪偏鄉，從孩子純潔無瑕的歌聲，和充滿著愉悅與希望的眼神中，讀到他們的信心。</p>
+        <p>當我走訪各特教中心，從社工人員，這些矢志奉獻的天使的笑容中，讀到她們工作與生命的意義；</p>
+        <p>我相信基金會所有的付出，都是值得的！</p>
+        <p>我相信基金會所立下的志業，都能達成！</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DONATE BAND（沿用 app.css）===== -->
+<section class="donate-band">
+  <div class="wrap">
+    <div class="donate-card">
+      <div class="donate-text">
+        <div class="label">Donate</div>
+        <h2>捐款支持<br>愛與希望的延續</h2>
+        <p>每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
+        <div class="actions">
+          <a class="btn-w" href="donate.html">捐款方式</a>
+          <a class="btn-wo" href="transparency.html">捐款徵信</a>
+        </div>
+      </div>
+      <div class="donate-stats" aria-label="捐款方式摘要">
+        <div class="donate-method">
+          <span class="method-label">Bank Transfer</span>
+          <h3>銀行匯款 / ATM 轉帳</h3>
+          <p>國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Postal Giro</span>
+          <h3>郵局劃撥</h3>
+          <p>帳號 <b>50067771</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Other Ways</span>
+          <h3>信用卡、支票與現場捐款</h3>
+          <p>歡迎透過信用卡授權書、支票或親臨基金會現場捐款，捐款徵信定期公開。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

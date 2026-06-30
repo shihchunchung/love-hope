@@ -1,0 +1,172 @@
+---
+permalink: about.html
+title: "簡介｜關於我們 — 薛伯輝基金會"
+active: about
+---
+{% extends "base.njk" %}
+
+{% block styles %}
+<style>
+  /* ============ SUB-NAV（關於我們 cluster・跨頁，比照真愛多多）============ */
+  .sub-nav{background:#fff;position:sticky;top:140px;z-index:48;display:flex;justify-content:center;align-items:stretch;padding:var(--sp-3) var(--sp-6);flex-wrap:wrap;border-bottom:1px solid var(--line);font-family:"IBM Plex Serif",sans-serif}
+  .sub-nav .item{padding:var(--sp-3) var(--sp-5);font-size:var(--t-body-s);letter-spacing:2px;color:#666;font-weight:500;position:relative;cursor:pointer;transition:color .18s;background:none;border:0;font-family:inherit;text-decoration:none}
+  .sub-nav .item:hover{color:var(--brand)}
+  .sub-nav .item.todo{color:#BBB;cursor:default}
+  .sub-nav .item.todo:hover{color:#BBB}
+  .sub-nav .item.on{color:var(--brand);font-weight:700}
+  .sub-nav .item.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-1px;width:24px;height:2px;background:var(--brand)}
+
+  /* ============ HERO（單張・愛的講堂燈箱）============ */
+  .story-hero{position:relative;height:clamp(360px,52vh,560px);background:#0f0f0f;overflow:hidden}
+  .story-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%}
+  .story-hero::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(0,0,0,.15) 0,transparent 28%,transparent 58%,rgba(0,0,0,.5) 100%);pointer-events:none}
+
+  /* ============ STORY TITLE ============ */
+  .story-title{padding:var(--sp-8) 0 var(--sp-7);background:#fff;border-bottom:1px solid var(--line-soft)}
+  .story-title .story-h1{
+    font-size:var(--t-display-l);letter-spacing:1.5px;line-height:1.25;
+    color:var(--ink);margin-bottom:0;font-weight:700;max-width:900px;
+  }
+
+  /* ============ STORY BODY（編輯閱讀區）============ */
+  .story-body{padding:var(--sp-8) 0 var(--sp-9);background:#fff}
+  .story-body .body-col{max-width:760px}
+  .story-body p{
+    font-size:var(--t-body-l);line-height:1.95;color:var(--body);
+    margin-bottom:1.4em;letter-spacing:0;
+  }
+  .story-body .sec-h{
+    font-size:var(--t-title);letter-spacing:1px;color:var(--ink);
+    margin:var(--sp-8) 0 var(--sp-5);display:flex;align-items:center;gap:var(--sp-4);font-weight:700;
+  }
+  .story-body .sec-h::before{content:"";width:32px;height:1px;background:var(--brand);flex-shrink:0}
+
+  /* ============ 簡史 TIMELINE ============ */
+  .history{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--sp-5)}
+  .history li{position:relative;padding-left:var(--sp-6);font-size:var(--t-body-l);line-height:1.95;color:var(--body)}
+  .history li::before{content:"";position:absolute;left:0;top:.62em;width:11px;height:11px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px var(--brand-tint)}
+  .history li::after{content:"";position:absolute;left:5px;top:1.5em;height:calc(100% + var(--sp-5));width:1px;background:var(--line)}
+  .history li:last-child::after{display:none}
+  .history .yr{color:var(--ink);font-weight:700}
+
+  /* ============ 宗旨 主要業務（編號）============ */
+  .aims{list-style:none;margin:0;padding:0;counter-reset:aim;display:flex;flex-direction:column;gap:var(--sp-4)}
+  .aims li{position:relative;padding-left:calc(var(--sp-6) + 12px);font-size:var(--t-body-l);line-height:1.9;color:var(--body)}
+  .aims li::before{
+    counter-increment:aim;content:counter(aim);
+    position:absolute;left:0;top:.1em;width:28px;height:28px;border-radius:50%;
+    background:var(--brand-tint);color:var(--brand);font-weight:700;font-size:var(--t-body-s);
+    display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Serif",serif;
+  }
+
+  /* ============ RWD（chrome donate-band 樣式在 app.css，RWD 仍由頁面帶）============ */
+  @media (max-width: 1100px){
+    .sub-nav{padding:var(--sp-3) var(--sp-4);position:static}
+    .sub-nav .item{padding:var(--sp-3) var(--sp-4);letter-spacing:1.5px}
+    .sub-nav .item.on::after{width:20px}
+    .story-hero{height:clamp(320px,45vh,460px)}
+    .story-title{padding:var(--sp-7) 0 var(--sp-6)}
+    .story-body{padding:var(--sp-7) 0 var(--sp-9)}
+    .donate-card{grid-template-columns:1fr;gap:var(--sp-7);padding:var(--sp-7);border-radius:4px}
+    .donate-text{padding:0}
+    .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:var(--sp-6)}
+  }
+  @media (max-width: 720px){
+    .sub-nav{padding:var(--sp-2) var(--sp-3)}
+    .sub-nav .item{padding:var(--sp-2) var(--sp-3);font-size:var(--t-meta);letter-spacing:1px}
+    .wrap{padding:0 var(--sp-4)}
+    .story-hero{height:260px}
+    .story-title{padding:var(--sp-7) 0 var(--sp-6)}
+    .story-title .story-h1{font-size:var(--t-display);letter-spacing:1.5px}
+    .story-body{padding:var(--sp-6) 0 var(--sp-8)}
+    .story-body p{font-size:var(--t-body);line-height:1.9}
+    .story-body .sec-h{margin:var(--sp-6) 0 var(--sp-4);font-size:var(--t-title-s)}
+    .donate-band{padding:var(--sp-7) var(--sp-4)}
+    .donate-card{padding:var(--sp-6) var(--sp-5);gap:var(--sp-6)}
+    .donate-stats{padding-top:var(--sp-5)}
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ===== SUB-NAV（關於我們 3 子頁・跨頁；董事會成員待建）===== -->
+<nav class="sub-nav" aria-label="關於我們子頁">
+  <a class="item on" href="about.html">簡介</a>
+  <a class="item" href="about-founders.html">創辦人與董事長</a>
+  <span class="item todo" aria-disabled="true">董事會成員</span>
+</nav>
+
+<!-- ===== HERO（愛的講堂燈箱）===== -->
+<section class="story-hero" aria-label="薛伯輝基金會・愛的講堂">
+  <img src="images/about/intro-hero.jpg" alt="「薛伯輝基金會 愛的講堂」燈箱" fetchpriority="high">
+</section>
+
+<!-- ===== STORY TITLE ===== -->
+<section class="story-title">
+  <div class="wrap">
+    <h1 class="story-h1">財團法人薛伯輝基金會</h1>
+  </div>
+</section>
+
+<!-- ===== STORY BODY（內文逐字照原始文案）===== -->
+<article class="story-body">
+  <div class="wrap">
+    <div class="body-col">
+      <h2 class="sec-h">緣起</h2>
+      <p>2004 年，薛伯輝先生與陳惠如女士一同出席國際扶輪社在日本大阪市召開的年度大會。前往和歌山縣那智勝浦瀑布遊覽區遊玩，因一場意外的車禍，薛伯輝先生永遠的離開了最摯愛的親人與朋友……</p>
+      <p>他的夫人陳惠如女士與孩子們，為了紀念他，延續對於他的愛，2008 年將「財團法人薛氏文教基金會」更名為「財團法人薛伯輝基金會」。並選擇他事業的起點，做為基金會的所在地，播種希望、散播愛。</p>
+
+      <h2 class="sec-h">簡史</h2>
+      <ul class="history">
+        <li><span class="yr">1975 年 1 月 30 日</span>，「財團法人薛氏文教基金會」成立，以提倡文化教育，發揚倫理孝道為宗旨，隸屬於台北市教育局。</li>
+        <li><span class="yr">2008 年 8 月 22 日</span>，陳惠如女士為紀念先生，「財團法人薛氏文教基金會」更名為「財團法人薛伯輝基金會」。</li>
+        <li><span class="yr">2013 年 11 月 7 日</span>，為將愛傳遞的更遠、更廣，「財團法人薛伯輝基金會」從「台北市教育局」轉隸於「教育部」。</li>
+      </ul>
+
+      <h2 class="sec-h">宗旨與理念</h2>
+      <p>提倡文化教育，發揚倫理孝道，主要業務如下：</p>
+      <ol class="aims">
+        <li>捐贈文化教育之圖書。</li>
+        <li>設立獎學金獎勵優秀學生。</li>
+        <li>舉辦文化教育有關活動。</li>
+        <li>捐贈興建文化教育之相關設施或機構。</li>
+        <li>捐贈或辦理特殊教育活動經費。</li>
+      </ol>
+    </div>
+  </div>
+</article>
+
+<!-- ===== DONATE BAND（沿用 app.css）===== -->
+<section class="donate-band">
+  <div class="wrap">
+    <div class="donate-card">
+      <div class="donate-text">
+        <div class="label">Donate</div>
+        <h2>捐款支持<br>愛與希望的延續</h2>
+        <p>每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
+        <div class="actions">
+          <a class="btn-w" href="donate.html">捐款方式</a>
+          <a class="btn-wo" href="transparency.html">捐款徵信</a>
+        </div>
+      </div>
+      <div class="donate-stats" aria-label="捐款方式摘要">
+        <div class="donate-method">
+          <span class="method-label">Bank Transfer</span>
+          <h3>銀行匯款 / ATM 轉帳</h3>
+          <p>國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Postal Giro</span>
+          <h3>郵局劃撥</h3>
+          <p>帳號 <b>50067771</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Other Ways</span>
+          <h3>信用卡、支票與現場捐款</h3>
+          <p>歡迎透過信用卡授權書、支票或親臨基金會現場捐款，捐款徵信定期公開。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
