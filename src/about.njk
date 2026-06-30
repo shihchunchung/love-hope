@@ -41,13 +41,14 @@ active: about
   }
   .story-body .sec-h::before{content:"";width:32px;height:1px;background:var(--brand);flex-shrink:0}
 
-  /* ============ 簡史 TIMELINE ============ */
-  .history{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--sp-5)}
-  .history li{position:relative;padding-left:var(--sp-6);font-size:var(--t-body-l);line-height:1.95;color:var(--body)}
-  .history li::before{content:"";position:absolute;left:0;top:.62em;width:11px;height:11px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px var(--brand-tint)}
-  .history li::after{content:"";position:absolute;left:5px;top:1.5em;height:calc(100% + var(--sp-5));width:1px;background:var(--line)}
-  .history li:last-child::after{display:none}
-  .history .yr{color:var(--ink);font-weight:700}
+  /* ============ 簡史 TIMELINE（沿用 true-love-timeline 的 .tl-item）============ */
+  .timeline{position:relative;margin:var(--sp-2) 0 0;padding-left:6px}
+  .tl-item{position:relative;padding:0 0 var(--sp-8) var(--sp-7);border-left:2px solid var(--line)}
+  .tl-item:last-child{border-left-color:transparent;padding-bottom:0}
+  .tl-item::before{content:"";position:absolute;left:-9px;top:5px;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--brand);box-sizing:content-box}
+  .tl-head{display:flex;align-items:baseline;gap:var(--sp-4);margin-bottom:var(--sp-4);flex-wrap:wrap}
+  .tl-head .yr{font-size:var(--t-display);line-height:1;color:var(--brand);font-weight:700;letter-spacing:1px}
+  .tl-item p{font-size:var(--t-body-l);line-height:1.95;color:var(--body);margin:0;letter-spacing:0}
 
   /* ============ 宗旨 主要業務（編號）============ */
   .aims{list-style:none;margin:0;padding:0;counter-reset:aim;display:flex;flex-direction:column;gap:var(--sp-4)}
@@ -81,6 +82,9 @@ active: about
     .story-body{padding:var(--sp-6) 0 var(--sp-8)}
     .story-body p{font-size:var(--t-body);line-height:1.9}
     .story-body .sec-h{margin:var(--sp-6) 0 var(--sp-4);font-size:var(--t-title-s)}
+    .tl-item{padding-left:var(--sp-6)}
+    .tl-head .yr{font-size:var(--t-title)}
+    .tl-item p{font-size:var(--t-body);line-height:1.9}
     .donate-band{padding:var(--sp-7) var(--sp-4)}
     .donate-card{padding:var(--sp-6) var(--sp-5);gap:var(--sp-6)}
     .donate-stats{padding-top:var(--sp-5)}
@@ -117,11 +121,20 @@ active: about
       <p>他的夫人陳惠如女士與孩子們，為了紀念他，延續對於他的愛，2008 年將「財團法人薛氏文教基金會」更名為「財團法人薛伯輝基金會」。並選擇他事業的起點，做為基金會的所在地，播種希望、散播愛。</p>
 
       <h2 class="sec-h">簡史</h2>
-      <ul class="history">
-        <li><span class="yr">1975 年 1 月 30 日</span>，「財團法人薛氏文教基金會」成立，以提倡文化教育，發揚倫理孝道為宗旨，隸屬於台北市教育局。</li>
-        <li><span class="yr">2008 年 8 月 22 日</span>，陳惠如女士為紀念先生，「財團法人薛氏文教基金會」更名為「財團法人薛伯輝基金會」。</li>
-        <li><span class="yr">2013 年 11 月 7 日</span>，為將愛傳遞的更遠、更廣，「財團法人薛伯輝基金會」從「台北市教育局」轉隸於「教育部」。</li>
-      </ul>
+      <ol class="timeline">
+        <li class="tl-item">
+          <div class="tl-head"><span class="yr">1975 年 1 月 30 日</span></div>
+          <p>「財團法人薛氏文教基金會」成立，以提倡文化教育，發揚倫理孝道為宗旨，隸屬於台北市教育局。</p>
+        </li>
+        <li class="tl-item">
+          <div class="tl-head"><span class="yr">2008 年 8 月 22 日</span></div>
+          <p>陳惠如女士為紀念先生，「財團法人薛氏文教基金會」更名為「財團法人薛伯輝基金會」。</p>
+        </li>
+        <li class="tl-item">
+          <div class="tl-head"><span class="yr">2013 年 11 月 7 日</span></div>
+          <p>為將愛傳遞的更遠、更廣，「財團法人薛伯輝基金會」從「台北市教育局」轉隸於「教育部」。</p>
+        </li>
+      </ol>
 
       <h2 class="sec-h">宗旨與理念</h2>
       <p>提倡文化教育，發揚倫理孝道，主要業務如下：</p>
