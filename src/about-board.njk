@@ -1,0 +1,266 @@
+---
+permalink: about-board.html
+title: "董事會成員｜關於我們 — 薛伯輝基金會"
+active: about
+---
+{% extends "base.njk" %}
+
+{% block styles %}
+<style>
+  /* ============ SUB-NAV（關於我們 cluster・跨頁，比照真愛多多）============ */
+  .sub-nav{background:#fff;position:sticky;top:140px;z-index:48;display:flex;justify-content:center;align-items:stretch;padding:var(--sp-3) var(--sp-6);flex-wrap:wrap;border-bottom:1px solid var(--line);font-family:"IBM Plex Serif",sans-serif}
+  .sub-nav .item{padding:var(--sp-3) var(--sp-5);font-size:var(--t-body-s);letter-spacing:2px;color:#666;font-weight:500;position:relative;cursor:pointer;transition:color .18s;background:none;border:0;font-family:inherit;text-decoration:none}
+  .sub-nav .item:hover{color:var(--brand)}
+  .sub-nav .item.todo{color:#BBB;cursor:default}
+  .sub-nav .item.todo:hover{color:#BBB}
+  .sub-nav .item.on{color:var(--brand);font-weight:700}
+  .sub-nav .item.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-1px;width:24px;height:2px;background:var(--brand)}
+
+  /* ============ TITLE BAND（純標題，無 hero 照片）============ */
+  .story-title{padding:var(--sp-8) 0 var(--sp-7);background:#fff;border-bottom:1px solid var(--line-soft)}
+  .story-title .story-eyebrow{display:block;font-family:"IBM Plex Serif",serif;color:var(--brand);letter-spacing:4px;font-size:var(--t-body-s);margin-bottom:var(--sp-3)}
+  .story-title .story-h1{font-size:var(--t-display-l);letter-spacing:1.5px;line-height:1.25;color:var(--ink);margin-bottom:0;font-weight:700;max-width:900px}
+  .story-title .story-sub{margin-top:var(--sp-4);font-size:var(--t-body);color:#666;letter-spacing:1.5px}
+
+  /* ============ BOARD ============ */
+  .board{background:#fff;padding:var(--sp-8) 0 var(--sp-9)}
+
+  /* 董事長 feature */
+  .chair-feature{display:grid;grid-template-columns:minmax(0,300px) 1fr;gap:clamp(var(--sp-6),5vw,var(--sp-8));align-items:center;padding-bottom:var(--sp-8);border-bottom:1px solid var(--line-soft)}
+  .chair-feature .ph{margin:0}
+  .chair-feature .ph img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 20%;display:block;border-radius:4px}
+  .chair-feature .role{display:block;font-family:"IBM Plex Serif",serif;color:var(--brand);letter-spacing:4px;font-size:var(--t-body-s);margin-bottom:var(--sp-2)}
+  .chair-feature .name{font-size:var(--t-display);letter-spacing:3px;color:var(--ink);font-weight:700;line-height:1.2;margin-bottom:var(--sp-4)}
+  .chair-feature .titles{list-style:none;padding:0;margin:0 0 var(--sp-5)}
+  .chair-feature .titles li{font-size:var(--t-body-l);line-height:1.9;color:var(--body)}
+  .chair-feature .more{display:inline-block;font-size:var(--t-body-s);letter-spacing:1.5px;color:var(--brand);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
+  .chair-feature .more:hover{color:var(--brand-dark)}
+
+  /* 董事 group heading */
+  .board-group-h{font-size:var(--t-title-s);color:var(--ink);font-weight:700;letter-spacing:2px;margin:var(--sp-8) 0 var(--sp-6);display:flex;align-items:center;gap:var(--sp-3)}
+  .board-group-h::before{content:"";width:24px;height:1px;background:var(--brand);flex-shrink:0}
+
+  /* 有照片董事：卡片格 */
+  .member-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(var(--sp-5),3vw,var(--sp-6))}
+  .member .ph{margin:0}
+  .member .ph img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;border-radius:4px}
+  .member .m-role{display:block;font-family:"IBM Plex Serif",serif;color:var(--brand);letter-spacing:2px;font-size:var(--t-meta);margin:var(--sp-4) 0 var(--sp-1)}
+  .member .m-name{font-size:var(--t-title-s);letter-spacing:2px;color:var(--ink);font-weight:700;margin-bottom:var(--sp-3)}
+  .member .m-titles{list-style:none;padding:0;margin:0}
+  .member .m-titles li{font-size:var(--t-body-s);line-height:1.7;color:var(--body)}
+
+  /* 無照片董事：名單 */
+  .roster{margin-top:var(--sp-7);border-top:1px solid var(--line-soft)}
+  .roster .r-row{display:grid;grid-template-columns:9em 1fr;gap:var(--sp-5);padding:var(--sp-5) 0;border-bottom:1px dashed var(--line);align-items:baseline}
+  .roster .r-name{font-family:"IBM Plex Serif",serif;font-size:var(--t-title-s);letter-spacing:3px;color:var(--ink);font-weight:700}
+  .roster .r-role{color:var(--brand);font-size:var(--t-meta);letter-spacing:2px;font-family:"IBM Plex Serif",serif;margin-bottom:var(--sp-1)}
+  .roster .r-titles{list-style:none;padding:0;margin:0}
+  .roster .r-titles li{font-size:var(--t-body);line-height:1.8;color:var(--body)}
+
+  /* ============ RWD ============ */
+  @media (max-width: 1100px){
+    .sub-nav{padding:var(--sp-3) var(--sp-4);position:static}
+    .sub-nav .item{padding:var(--sp-3) var(--sp-4);letter-spacing:1.5px}
+    .sub-nav .item.on::after{width:20px}
+    .story-title{padding:var(--sp-7) 0 var(--sp-6)}
+    .board{padding:var(--sp-7) 0 var(--sp-9)}
+    .member-grid{grid-template-columns:repeat(2,1fr);gap:var(--sp-6) var(--sp-5)}
+    .donate-card{grid-template-columns:1fr;gap:var(--sp-7);padding:var(--sp-7);border-radius:4px}
+    .donate-text{padding:0}
+    .donate-stats{border-left:none;border-top:1px solid rgba(255,255,255,.2);padding-left:0;padding-top:var(--sp-6)}
+  }
+  @media (max-width: 720px){
+    .sub-nav{padding:var(--sp-2) var(--sp-3)}
+    .sub-nav .item{padding:var(--sp-2) var(--sp-3);font-size:var(--t-meta);letter-spacing:1px}
+    .wrap{padding:0 var(--sp-4)}
+    .story-title{padding:var(--sp-7) 0 var(--sp-6)}
+    .story-title .story-h1{font-size:var(--t-display);letter-spacing:1.5px}
+    .board{padding:var(--sp-6) 0 var(--sp-8)}
+    .chair-feature{grid-template-columns:1fr;gap:var(--sp-6)}
+    .chair-feature .ph img{aspect-ratio:3/2;max-height:60vh;object-position:center 22%}
+    .chair-feature .name{font-size:var(--t-title)}
+    .member-grid{gap:var(--sp-6) var(--sp-5)}
+    .roster .r-row{grid-template-columns:1fr;gap:var(--sp-2);padding:var(--sp-4) 0}
+    .donate-band{padding:var(--sp-7) var(--sp-4)}
+    .donate-card{padding:var(--sp-6) var(--sp-5);gap:var(--sp-6)}
+    .donate-stats{padding-top:var(--sp-5)}
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ===== SUB-NAV（關於我們 3 子頁・跨頁）===== -->
+<nav class="sub-nav" aria-label="關於我們子頁">
+  <a class="item" href="about.html">簡介</a>
+  <a class="item" href="about-founders.html">創辦人與董事長</a>
+  <a class="item on" href="about-board.html">董事會成員</a>
+</nav>
+
+<!-- ===== TITLE BAND ===== -->
+<section class="story-title">
+  <div class="wrap">
+    <span class="story-eyebrow">第十屆董事會</span>
+    <h1 class="story-h1">董事會成員</h1>
+    <p class="story-sub">任期：113 年 3 月 8 日 起 至 116 年 3 月 7 日 止</p>
+  </div>
+</section>
+
+<!-- ===== BOARD（內文逐字照原始文案）===== -->
+<section class="board">
+  <div class="wrap">
+
+    <!-- 董事長 薛昌煥 -->
+    <article class="chair-feature">
+      <figure class="ph">
+        <img src="images/about/chair.jpg" alt="董事長薛昌煥先生">
+      </figure>
+      <div class="txt">
+        <span class="role">董事長</span>
+        <h2 class="name">薛昌煥</h2>
+        <ul class="titles">
+          <li>現任 薛伯輝基金會董事長</li>
+        </ul>
+        <a class="more" href="about-founders.html">詳見 創辦人與董事長 →</a>
+      </div>
+    </article>
+
+    <!-- 董事 -->
+    <h2 class="board-group-h">董事</h2>
+
+    <!-- 有照片者 -->
+    <div class="member-grid">
+
+      <article class="member">
+        <figure class="ph">
+          <img src="images/about/board-honglan.jpg" alt="董事洪蘭女士" style="object-position:center 30%;">
+        </figure>
+        <span class="m-role">現任</span>
+        <h3 class="m-name">洪蘭</h3>
+        <ul class="m-titles">
+          <li>作家</li>
+          <li>中央大學認知神經科學研究所講座教授</li>
+          <li>台北醫學大學講座教授</li>
+        </ul>
+      </article>
+
+      <article class="member">
+        <figure class="ph">
+          <img src="images/about/board-gongshuzhang.jpg" alt="董事龔書章先生" style="object-position:center 22%;">
+        </figure>
+        <span class="m-role">現任</span>
+        <h3 class="m-name">龔書章</h3>
+        <ul class="m-titles">
+          <li>陽明交通大學建築研究所教授</li>
+          <li>文化部財團法人台灣生活美學基金會董事</li>
+          <li>台灣設計研究院「公共服務委員會」召集人</li>
+        </ul>
+      </article>
+
+      <article class="member">
+        <figure class="ph">
+          <img src="images/about/board-chenlerong.jpg" alt="董事陳樂融先生" style="object-position:center 18%;">
+        </figure>
+        <span class="m-role">現任</span>
+        <h3 class="m-name">陳樂融</h3>
+        <ul class="m-titles">
+          <li>作家、作詞人、文化評論家</li>
+          <li>中華音樂著作權協會董事</li>
+        </ul>
+      </article>
+
+      <article class="member">
+        <figure class="ph">
+          <img src="images/about/board-chenhaili.jpg" alt="董事陳海莉女士" style="object-position:center 15%;">
+        </figure>
+        <span class="m-role">現任</span>
+        <h3 class="m-name">陳海莉</h3>
+        <ul class="m-titles">
+          <li>中華化學纖維股份有限公司監察人</li>
+        </ul>
+      </article>
+
+    </div>
+
+    <!-- 名單（無照片者）-->
+    <div class="roster">
+
+      <div class="r-row">
+        <div class="r-name">吳玥玢</div>
+        <div>
+          <div class="r-role">曾任</div>
+          <ul class="r-titles">
+            <li>蒙特梭利教師協會理事長</li>
+            <li>蒙特梭利理想園幼兒園創辦人</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="r-row">
+        <div class="r-name">王小珍</div>
+        <div>
+          <div class="r-role">現任</div>
+          <ul class="r-titles">
+            <li>社團法人台灣美國商會常務副理事長</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="r-row">
+        <div class="r-name">周筱玲</div>
+        <div>
+          <div class="r-role">現任</div>
+          <ul class="r-titles">
+            <li>元大銀行副董事長</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="r-row">
+        <div class="r-name">薛昌煒</div>
+        <div>
+          <div class="r-role">現任</div>
+          <ul class="r-titles">
+            <li>中華化學纖維股份有限公司董事長</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== DONATE BAND（沿用 app.css）===== -->
+<section class="donate-band">
+  <div class="wrap">
+    <div class="donate-card">
+      <div class="donate-text">
+        <div class="label">Donate</div>
+        <h2>捐款支持<br>愛與希望的延續</h2>
+        <p>每一份支持，都將化為文化教育、特殊教育與公益行動的力量。基金會持續公開捐款徵信，讓愛與希望被妥善託付。</p>
+        <div class="actions">
+          <a class="btn-w" href="donate.html">捐款方式</a>
+          <a class="btn-wo" href="transparency.html">捐款徵信</a>
+        </div>
+      </div>
+      <div class="donate-stats" aria-label="捐款方式摘要">
+        <div class="donate-method">
+          <span class="method-label">Bank Transfer</span>
+          <h3>銀行匯款 / ATM 轉帳</h3>
+          <p>國泰世華 台北分行（銀行代碼 <b>013</b>）<br>帳號 <b>007-03-603896-3</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Postal Giro</span>
+          <h3>郵局劃撥</h3>
+          <p>帳號 <b>50067771</b><br>戶名 <b>財團法人薛伯輝基金會</b></p>
+        </div>
+        <div class="donate-method">
+          <span class="method-label">Other Ways</span>
+          <h3>信用卡、支票與現場捐款</h3>
+          <p>歡迎透過信用卡授權書、支票或親臨基金會現場捐款，捐款徵信定期公開。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
