@@ -16,13 +16,12 @@ active: about
   .sub-nav .item.on{color:var(--brand);font-weight:700}
   .sub-nav .item.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-1px;width:24px;height:2px;background:var(--brand)}
 
-  /* ============ HERO（單張・薛氏家庭）============ */
-  .story-hero{position:relative;height:clamp(360px,52vh,560px);background:#0f0f0f;overflow:hidden}
-  .story-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%}
-  .story-hero::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(0,0,0,.15) 0,transparent 30%,transparent 60%,rgba(0,0,0,.5) 100%);pointer-events:none}
+  /* ============ HERO（薛氏家庭・原圖比例，不裁切，比照簡介）============ */
+  .story-hero{padding:var(--sp-4) 0 var(--sp-2);background:#fff}
+  .story-hero img{display:block;width:100%;height:auto;border-radius:4px}
 
   /* ============ STORY TITLE ============ */
-  .story-title{padding:var(--sp-8) 0 var(--sp-7);background:#fff;border-bottom:1px solid var(--line-soft)}
+  .story-title{padding:var(--sp-8) 0 var(--sp-5);background:#fff}
   .story-title .story-h1{
     font-size:var(--t-display-l);letter-spacing:1.5px;line-height:1.25;
     color:var(--ink);margin-bottom:0;font-weight:700;max-width:900px;
@@ -67,7 +66,6 @@ active: about
     .sub-nav{padding:var(--sp-3) var(--sp-4);position:static}
     .sub-nav .item{padding:var(--sp-3) var(--sp-4);letter-spacing:1.5px}
     .sub-nav .item.on::after{width:20px}
-    .story-hero{height:clamp(320px,45vh,460px)}
     .story-title{padding:var(--sp-7) 0 var(--sp-6)}
     .people{padding:var(--sp-7) 0 var(--sp-9)}
     .donate-card{grid-template-columns:1fr;gap:var(--sp-7);padding:var(--sp-7);border-radius:4px}
@@ -78,7 +76,6 @@ active: about
     .sub-nav{padding:var(--sp-2) var(--sp-3)}
     .sub-nav .item{padding:var(--sp-2) var(--sp-3);font-size:var(--t-meta);letter-spacing:1px}
     .wrap{padding:0 var(--sp-4)}
-    .story-hero{height:260px}
     .story-title{padding:var(--sp-7) 0 var(--sp-6)}
     .story-title .story-h1{font-size:var(--t-display);letter-spacing:1.5px}
     .people{padding:var(--sp-6) 0 var(--sp-8)}
@@ -106,15 +103,17 @@ active: about
   <a class="item" href="about-board.html">董事會成員</a>
 </nav>
 
-<!-- ===== HERO（薛氏家庭）===== -->
-<section class="story-hero" aria-label="薛氏家庭">
-  <img src="images/about/family.jpg" alt="薛氏家庭合影" fetchpriority="high">
-</section>
-
 <!-- ===== STORY TITLE ===== -->
 <section class="story-title">
   <div class="wrap">
     <h1 class="story-h1">創辦人與董事長</h1>
+  </div>
+</section>
+
+<!-- ===== HERO（薛氏家庭・原圖比例，不裁切）===== -->
+<section class="story-hero" aria-label="薛氏家庭">
+  <div class="wrap">
+    <img src="images/about/family.jpg" alt="薛氏家庭合影" fetchpriority="high">
   </div>
 </section>
 
