@@ -40,22 +40,15 @@ active: about
   .board-group-h{font-size:var(--t-title-s);color:var(--ink);font-weight:700;letter-spacing:2px;margin:var(--sp-8) 0 var(--sp-6);display:flex;align-items:center;gap:var(--sp-3)}
   .board-group-h::before{content:"";width:24px;height:1px;background:var(--brand);flex-shrink:0}
 
-  /* 有照片董事：卡片格 */
+  /* 董事：卡片格（無照片者用中性淺灰色塊預留）*/
   .member-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(var(--sp-5),3vw,var(--sp-6))}
   .member .ph{margin:0}
   .member .ph img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;border-radius:4px}
+  .member .ph-empty{width:100%;aspect-ratio:4/5;border-radius:4px;background:var(--line)}
   .member .m-role{display:block;font-family:"IBM Plex Serif",serif;color:var(--brand);letter-spacing:2px;font-size:var(--t-meta);margin:var(--sp-4) 0 var(--sp-1)}
   .member .m-name{font-size:var(--t-title-s);letter-spacing:2px;color:var(--ink);font-weight:700;margin-bottom:var(--sp-3)}
   .member .m-titles{list-style:none;padding:0;margin:0}
   .member .m-titles li{font-size:var(--t-body-s);line-height:1.7;color:var(--body)}
-
-  /* 無照片董事：名單 */
-  .roster{margin-top:var(--sp-7);border-top:1px solid var(--line-soft)}
-  .roster .r-row{display:grid;grid-template-columns:9em 1fr;gap:var(--sp-5);padding:var(--sp-5) 0;border-bottom:1px dashed var(--line);align-items:baseline}
-  .roster .r-name{font-family:"IBM Plex Serif",serif;font-size:var(--t-title-s);letter-spacing:3px;color:var(--ink);font-weight:700}
-  .roster .r-role{color:var(--brand);font-size:var(--t-meta);letter-spacing:2px;font-family:"IBM Plex Serif",serif;margin-bottom:var(--sp-1)}
-  .roster .r-titles{list-style:none;padding:0;margin:0}
-  .roster .r-titles li{font-size:var(--t-body);line-height:1.8;color:var(--body)}
 
   /* ============ RWD ============ */
   @media (max-width: 1100px){
@@ -80,7 +73,6 @@ active: about
     .chair-feature .ph img{aspect-ratio:3/2;max-height:60vh;object-position:center 22%}
     .chair-feature .name{font-size:var(--t-title)}
     .member-grid{gap:var(--sp-6) var(--sp-5)}
-    .roster .r-row{grid-template-columns:1fr;gap:var(--sp-2);padding:var(--sp-4) 0}
     .donate-band{padding:var(--sp-7) var(--sp-4)}
     .donate-card{padding:var(--sp-6) var(--sp-5);gap:var(--sp-6)}
     .donate-stats{padding-top:var(--sp-5)}
@@ -127,7 +119,6 @@ active: about
     <!-- 董事 -->
     <h2 class="board-group-h">董事</h2>
 
-    <!-- 有照片者 -->
     <div class="member-grid">
 
       <article class="member">
@@ -169,6 +160,43 @@ active: about
       </article>
 
       <article class="member">
+        <div class="ph ph-empty" aria-hidden="true"></div>
+        <span class="m-role">曾任</span>
+        <h3 class="m-name">吳玥玢</h3>
+        <ul class="m-titles">
+          <li>蒙特梭利教師協會理事長</li>
+          <li>蒙特梭利理想園幼兒園創辦人</li>
+        </ul>
+      </article>
+
+      <article class="member">
+        <div class="ph ph-empty" aria-hidden="true"></div>
+        <span class="m-role">現任</span>
+        <h3 class="m-name">王小珍</h3>
+        <ul class="m-titles">
+          <li>社團法人台灣美國商會常務副理事長</li>
+        </ul>
+      </article>
+
+      <article class="member">
+        <div class="ph ph-empty" aria-hidden="true"></div>
+        <span class="m-role">現任</span>
+        <h3 class="m-name">周筱玲</h3>
+        <ul class="m-titles">
+          <li>元大銀行副董事長</li>
+        </ul>
+      </article>
+
+      <article class="member">
+        <div class="ph ph-empty" aria-hidden="true"></div>
+        <span class="m-role">現任</span>
+        <h3 class="m-name">薛昌煒</h3>
+        <ul class="m-titles">
+          <li>中華化學纖維股份有限公司董事長</li>
+        </ul>
+      </article>
+
+      <article class="member">
         <figure class="ph">
           <img src="images/about/board-chenhaili.jpg" alt="董事陳海莉女士" style="object-position:center 15%;">
         </figure>
@@ -178,52 +206,6 @@ active: about
           <li>中華化學纖維股份有限公司監察人</li>
         </ul>
       </article>
-
-    </div>
-
-    <!-- 名單（無照片者）-->
-    <div class="roster">
-
-      <div class="r-row">
-        <div class="r-name">吳玥玢</div>
-        <div>
-          <div class="r-role">曾任</div>
-          <ul class="r-titles">
-            <li>蒙特梭利教師協會理事長</li>
-            <li>蒙特梭利理想園幼兒園創辦人</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="r-row">
-        <div class="r-name">王小珍</div>
-        <div>
-          <div class="r-role">現任</div>
-          <ul class="r-titles">
-            <li>社團法人台灣美國商會常務副理事長</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="r-row">
-        <div class="r-name">周筱玲</div>
-        <div>
-          <div class="r-role">現任</div>
-          <ul class="r-titles">
-            <li>元大銀行副董事長</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="r-row">
-        <div class="r-name">薛昌煒</div>
-        <div>
-          <div class="r-role">現任</div>
-          <ul class="r-titles">
-            <li>中華化學纖維股份有限公司董事長</li>
-          </ul>
-        </div>
-      </div>
 
     </div>
 
